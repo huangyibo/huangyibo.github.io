@@ -1,0 +1,462 @@
+<!DOCTYPE HTML>
+<html lang="">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Bobo Huang写字的地方">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>RDMA-Driven Paxos Consistent Algorithm | Bobo Huang写字的地方</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Bobo Huang写字的地方" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?cd77d5931f412f9cfa483dcfc5fc7ce3";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    
+
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='Bob Huang'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 从未如此简单有趣～ </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Bobo Huang写字的地方</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa fa-home"></i>  Home</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/算法/"><i class="fa fa-tasks"></i>  算法</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/闲思碎语/"><i class="fa fa-tags"></i>  闲思碎语</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/每周技术分享/"><i class="fa fa-share"></i>  每周技术分享</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/About"><i class="fa fa-user"></i>  About Me</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="RDMA-Driven Paxos Consistent Algorithm">
+            
+	            RDMA-Driven Paxos Consistent Algorithm
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/每周技术分享">
+            每周技术分享
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/算法" title='算法'>
+                        算法
+                    </a>
+                
+                    <a href="/tags/RDMA" title='RDMA'>
+                        RDMA
+                    </a>
+                
+                    <a href="/tags/Paxos" title='Paxos'>
+                        Paxos
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/10/23</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="摘-要"><a href="#摘-要" class="headerlink" title="摘 要"></a>摘 要</h2><blockquote>
+<p>本文主要介绍Paxos算法及其在SMR中的应用，并使用RDMA加速Paxos算法。Paxos算法是一种基于不可靠通信的强一致性算法，即在延迟不定的信道上，各节点提供一组互不相同的输入，经过该算法后，得出一个一致的输出，且所有节点最终都可达成共识。该算法可以保证状态机各副本的输入一致，以达到容错的目的。该算法使用TCP协议进行传输，本文将TCP实现替换为RDMA实现，改变节点数量，测试了网络吞吐量及响应时间，发现性能有明显的提升。</p>
+</blockquote>
+<h2 id="算法概述"><a href="#算法概述" class="headerlink" title="算法概述"></a>算法概述</h2><h3 id="SMR：带有容错机制的状态机"><a href="#SMR：带有容错机制的状态机" class="headerlink" title="SMR：带有容错机制的状态机"></a>SMR：带有容错机制的状态机</h3><p><strong>状态机(State Machine, SM)的定义：</strong>给定一组输入I，经过一组顺序的预设操作，改变I的状态，并输出其最终状态O。</p>
+<center><img src="https://i.imgur.com/dDB47BD.jpg" alt="state machine"></center>
+
+<p><strong>容错性：</strong>若仅使用一台状态机，则该状态机是唯一的容错节点，其容错性能差，即无法观测到该状态机是否出现异常。为了增加其容错性，保证其正确性，复制状态机(State Machine Replication, SMR)这一概念被提出。</p>
+<p>若使用三台相同的状态机，给定三组相同的输入，则三台状态机的输出在理论上是完全相同的。这些相同的状态机称为副本，假设三个副本的输出为output1, output2和output3。</p>
+<p>正常情况下：<br><center><strong>output1 = output2 = output3</strong></center><br>此时，若任意一个副本的输出出现错误，则必然与其他两个副本的输出不相同，即：<br></p>
+<center><br><strong>output1 ≠ output2<br><br>output1 ≠ output3<br><br>output2 = output3</strong><br><br></center><br>因此，可认定output1出现问题，对应的状态机副本出错，正确的输出应该是output2或output3。<br><br>然而，若其中任意两个副本出错，则使用三个副本的状态机仍然无法区分正确与错误。因此，三个副本的状态机仅支持1个容错。欲观察到多个错误，则至少需要两倍以上的副本，用于区分哪些是正确的副本，哪些是错误的副本。因此，可以得出结论：欲观察到N个错误，则至少需要2N+1个副本。即：支持N个容错的状态机，需要2N+1个副本。<br><br>由此可见，SMR的核心思想是：<em>用冗余换健壮</em>。<br><br><strong>容错性的前提条件：所有副本拥有完全相同的输入</strong><br><br>让我们重新审视容错机制。复制状态机(SMR)之所以能够观察到错误，是因为至少有一半以上的副本保持相同的输出，而判定另外的不到一半的拥有不相同输出的副本出现异常。即各副本的输出是判定的唯一条件。其理论依据为：一组相同的输入，经过相同的状态机，将会得到相同的输出。因此，支持N个容错的状态机，必须保证其2N+1个副本的输入是完全相同的，否则，即使得到不相同的输出，也无法判断究竟是状态机本身出错，还是由于输入不相同而导致的输出不同。因此，需要一种算法来保证输入的一致性。这就是Paxos算法。<br><br>### Paxos算法<br>Paxos算法是目前最好的强一致性算法。开始时，多个节点提供不同的值，经过该算法后，各个节点将会产生共识，最终得出一个一致的值。且该算法致力于不稳定的网络通信，即基于延迟不定的信道，依然可以最终达成节点间共识的结果。目前的一致性算法，基本可分为两类：基于共享内存的，以及基于消息传递的，Paxos算法则是后者。<br><br>Paxos算法具有四个要素和两个阶段。<br><br><strong>四要素：</strong>决策学习者learner，产生提议者client，提议者proposer，决策者acceptor。<br><br><strong>两阶段：</strong>申请通信阶段，提交决策阶段。<br><br>图1为两个节点竞争提交值，最终达成共识的模型。<br><br><center><img src="https://i.imgur.com/C8822oe.jpg" alt="Paxos算法实例"></center>
+
+<p>在宏观上，client将自己的值v交给proposer，由proposer给值加上序号n，形成键值对{n,v}(此序号n是acceptor做决定的重要依据)。键值对形成后，proposer将{n,v}上交给所有acceptor，由acceptor决定最终的值v(acceptor更加倾向于接受拥有更大序号n的节点)，上交给learner。此时，所有的proposer将就该值v达成共识。</p>
+<p><strong>几个原则：</strong></p>
+<ol>
+<li>仅当proposer获得超过半数的acceptor通信许可时，才有发言权。</li>
+<li>acceptor会选择与拥有最大序号的proposer通信，而忽略其他的proposer。</li>
+<li>acceptor与proposer通信时，会将其之前收到的值告知proposer。</li>
+<li>仅当acceptor告知proposer的值为空时，proposer才能自主选择值；否则，proposer必须同意超过半数acceptor同意的值，或最新的值。</li>
+<li>仅当proposer提交的值获得超过半数acceptor的同意时，才视为达成共识。</li>
+</ol>
+<p>在第一阶段，两个节点向acceptor发送通信申请，acceptor更加倾向于同意与序号n较大的节点通信，当acceptor同意与某一节点通信时，会向该节点发送确认信息，并且把当前acceptor的值v发送给该节点(这个值v可能是其他节点之前传递给acceptor的，也可能为空，表示之前没有节点与该acceptor通信过)。当其中一个节点得到了半数以上的acceptor的通信许可，则该节点进入第二阶段。</p>
+<p>在第二阶段，该节点会发送自己的值v给所有acceptor(值v从接收到的值中选，如果没有，则发送自己预先定义的值)。如果在此过程中，没有出现竞争，则acceptor会接受该值v。若超过一半的acceptor都接受该值v，则算法结束，所有节点都终将就值v达成共识。</p>
+<h2 id="基本原理与实现"><a href="#基本原理与实现" class="headerlink" title="基本原理与实现"></a>基本原理与实现</h2><p>算法主要运行于proposer和acceptor，其中proposer向acceptor提交值v，acceptor进行决策。算法原则：<em>少数服从多数，新值覆盖旧值</em>。</p>
+<h3 id="proposer算法逻辑"><a href="#proposer算法逻辑" class="headerlink" title="proposer算法逻辑"></a>proposer算法逻辑</h3><center><img src="https://i.imgur.com/NCyyQC2.jpg" alt="proposer算法流程图"></center>
+
+<h3 id="acceptor算法逻辑"><a href="#acceptor算法逻辑" class="headerlink" title="acceptor算法逻辑"></a>acceptor算法逻辑</h3><center><img src="https://i.imgur.com/t6t7ZEh.jpg" alt="acceptor算法流程图"></center>
+
+<h3 id="RDMA逻辑"><a href="#RDMA逻辑" class="headerlink" title="RDMA逻辑"></a>RDMA逻辑</h3><ul>
+<li>概述</li>
+</ul>
+<p>香港大学在论文《APUS: Fast and Scalable Paxos on RDMA》中提到，Paxos算法的瓶颈在于操作系统内核。原文如下：</p>
+<center><strong><em>Our evaluation found that the scalability problem in traditional consensus protocols mainly stem from OS kernels.</em></strong></center>
+
+<p>他们测试了4个不同的一致性协议，在他们把节点的个数从3个增加到9个的过程中，消耗的时间增加了105.4%到168.3%，而其中36.5%到63.7%的增量都在操作系统内核中。因此，尽可能减少操作系统内核的使用率，可以大大提升Paxos算法的效率。于是，能够完美避开操作系统内核的RDMA技术被引入到Paxos算法中。</p>
+<p>传统的Paxos算法，使用TCP/IP协议通信，导致操作系统内核成为性能瓶颈。香港大学使用RDMA通信的方法，取代了传统的TCP通信，加速了proposer和acceptor之间的消息传递，在节点个数不变的情况下，大大加快了Paxos算法的收敛速度。</p>
+<p>RDMA是在通信层面上加速Paxos算法的，并没有改变Paxos算法本身的机制。</p>
+<ul>
+<li>实现</li>
+</ul>
+<p>传统的Paxos算法使用TCP通信，利用libevent库中的bufferevent提供接口(表1)，实现底层网络传输。其中，bufferevent基于socket通信。</p>
+<center><img src="https://i.imgur.com/tM4IXcd.jpg" alt="bufferevent接口"></center>
+
+<p>将Paxos的通信接口替换为使用RDMA实现，即调用RDMA的通信接口，取代libevent库，以达到利用RDMA加速Paxos的目的。</p>
+<h2 id="算法评估"><a href="#算法评估" class="headerlink" title="算法评估"></a>算法评估</h2><h3 id="Paxos的优点"><a href="#Paxos的优点" class="headerlink" title="Paxos的优点"></a>Paxos的优点</h3><ol>
+<li>对网络信道可靠性的要求低。</li>
+</ol>
+<p>Paxos算法基于消息传递，但对于网络信道的要求并不高。在通讯过程中，可以接受任意不超过一半的信道出现丢包、延迟等现象。Paxos算法仅需保证超过一半的信道可靠，即可达到收敛的效果。Paoxs算法本就是设计用来在不可靠信道上达到可靠的一致性的算法。</p>
+<ol start="2">
+<li>对参与决策的节点的要求低。</li>
+</ol>
+<p>在进行决策的过程中，Paxos算法不规定所有节点都必须参与讨论，即使某些节点(甚至大部分节点)都出现了死机、断网等现象，剩余的节点依然可以完成决策，且这些异常节点在恢复正常运行后，依然可以就该决策达成共识。</p>
+<ol start="3">
+<li>任意不超过半数的节点不形成性能瓶颈。</li>
+</ol>
+<p>相比其他基于共享内存的一致性算法，一旦共享内存区出现异常，一致性算法就面临崩溃。因此，需要付出巨大的代价来保护共享内存。而Paxos算法基于消息传递，且对某几个节点的通讯要求很低，其着眼于整个系统的总体决策。因此，即使很多节点出现异常，只要不超过半数，就不会因为这些异常的节点而出现性能瓶颈。</p>
+<ol start="4">
+<li>保证强一致性。</li>
+</ol>
+<p>所有节点经过Paxos算法后都可以达成共识(即不存在不知道最终决策的孤立节点)。</p>
+<h3 id="Paxos的缺点"><a href="#Paxos的缺点" class="headerlink" title="Paxos的缺点"></a>Paxos的缺点</h3><ol>
+<li>收敛速度慢</li>
+</ol>
+<p>在大规模的节点决策过程中，同一时刻仅一个节点拥有发言权，且所有节点在任意时刻都可以竞争发言权，导致决策过程慢，最终的收敛速度缓慢。</p>
+<ol start="2">
+<li>节点申请发言权的时间间隔影响算法效率</li>
+</ol>
+<p>若两个节点连续、快速地申请发言权，会出现一个节点在提交决策前，被另一个节点抢夺发言权的现象，导致最终这两个节点都无法提交决策；若两个节点缓慢地申请发言权，可能在提交自己的决策前，就已经被其他节点的决策所影响，导致无法提交自己的决策。因此，节点申请发言权的时间间隔需要进行设计。</p>
+<ol start="3">
+<li>消耗在通信的时间较长。</li>
+</ol>
+<p>在正常情况下，一个proposer要和所有acceptor通信，一个acceptor也要和所有proposer通信，需要通信的数量P，是proposer的数量M，乘以acceptor的数量N，即P=M×N。通信过程的代价较大。</p>
+<h3 id="RDMA加速Paxos的性能评估"><a href="#RDMA加速Paxos的性能评估" class="headerlink" title="RDMA加速Paxos的性能评估"></a>RDMA加速Paxos的性能评估</h3><p>香港大学在使用RDMA加速Paxos算法后，运行了9个主流的服务端程序(包括MySQL、MongoDB等)，测试了传统Paxos算法和基于RDMA的Paxos算法的性能，在增加线程数量的过程中，从网络吞吐量和响应时间两方面对比了两者的性能差距(图4、图5)。<br></p>
+<font size="2">注：香港大学将基于RDMA的Paxos算法命名为APUS。</font>
+
+<center><img src="https://i.imgur.com/PyeWgxi.jpg" alt="网络吞吐量对比"></center>
+
+<center><img src="https://i.imgur.com/YTTsy8N.jpg" alt="响应时间对比"></center>
+
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><h3 id="在状态机复制-SMR-中的应用"><a href="#在状态机复制-SMR-中的应用" class="headerlink" title="在状态机复制(SMR)中的应用"></a>在状态机复制(SMR)中的应用</h3><p><em>本内容在第一部分算法概述中，引出Paxos算法时已经详尽叙述，此处不再赘述。</em></p>
+<h3 id="在数据库集群中的应用"><a href="#在数据库集群中的应用" class="headerlink" title="在数据库集群中的应用"></a>在数据库集群中的应用</h3><p>以一个分布式数据库为例，假设数据库集群是空的，客户端将要发送Put请求(图6)。</p>
+<center><img src="https://i.imgur.com/Ry2szc0.jpg" alt="数据库集群"></center>
+
+<ul>
+<li>单个客户端对集群发送请求。</li>
+</ul>
+<p>首先，假设Client1向集群发送了<strong>Put(“a”, 1)</strong>，这个请求虽然是发给集群的，但实际上最后肯定会落实到某一个具体的server，假设这个请求发到了server1。这时server1是空的，所以它查询自己的状态表，发现sequence1没有对应的操作，按理说他可以将今天的第一个操作确定为<strong>Put(“a”, 1)</strong>，但由于它是集群中的一份子，必须要协商一下。这个协商的过程，就是Paxos。他需要协商的问题是：</p>
+<blockquote>
+<center>第1个操作是否可以为<strong>Put(“a”, 1)</strong>?</center>
+</blockquote>
+<p>由于只有一个Client提出的操作请求，不存在竞争，所以协商很顺利，当server1调用这个协商函数的时候，返回的值就是它传入的值，此时我们就可以认为集群中的3台server达成了一个共识，即集群的第一个操作为<strong>Put(“a”, 1)</strong>。</p>
+<p>需要注意的是，在协商的过程中，server2与server3也将自己的状态表改为<strong>Put(“a”, 1)</strong>。这个状态表同步的过程就是Learning阶段。</p>
+<ul>
+<li>多个客户端对集群发送请求。</li>
+</ul>
+<p>其次，假设出现了两个客户端，Client2和Client3。Client2向集群发送了请求<strong>Put(“b”, 2)</strong>，假设这个请求最终到了server1上。同时，Client3向集群发送了请求<strong>Put(“c”, 3)</strong>，假设这个请求发到了server2上。此时server1和server2的状态表是一样的，不同之处在于：</p>
+<ol>
+<li>server1的数据和server2不同。即server1里面包含一条数据，就是刚刚Client1请求的<strong>Put(“a”, 1)</strong>，但是server2是空的。</li>
+<li>server1的sequence为2, 但是server2的sequence仍然为1。原因是server1已经做了一次Put操作，但是server2什么都没有做。</li>
+</ol>
+<p>由于server1和server2的不同，因此他们处理各自请求的方式也不同。server2从1开始遍历自己的状态表，发现1号操作非空，说明这是他遗漏的操作，于是server2也执行了操作<strong>Put(“a”, 1)</strong>，此时server2与server1的状态完全一样了。在此之后，server2调用Paxos函数进行协商：、</p>
+<blockquote>
+<center>第2个操作能否为<strong>Put(“c”, 3)</strong>?</center>
+</blockquote>
+<p>但就在此时，server1也调用了Paxos进行协商：</p>
+<blockquote>
+<center>第2个操作能否为<strong>Put(“b”, 2)</strong>?</center>
+</blockquote>
+<p>这里集群中两个server提出了不同的议题，Paxos保证了最终会选出一个大家都同意的议题。假设server1的议题最终被通过了。于是，集群中所有server都执行<strong>Put(“b”, 2)</strong>。并且server1向自己的database中插入(“b”, 2),并将自己的sequence更新为3。</p>
+<p>而此时server2发现自己的状态表中sequence2有了对应的操作，但很可惜不是自己提出的那个操作。这条信息表明集群其实已经做了第2个操作了，自己想要提出的这个操作<strong>Put(“c”, 3)</strong>已经不能作为集群的第2个操作了。于是server2对自己的database进行<strong>Put(“b”, 2)</strong>操作, 然后将自己的sequence更新为3。再次调用Paxos进行协商，试图将自己的操作作为集群的第3个操作。此时由于只有一个提议，所以协商很顺利。</p>
+<p>此时，整个集群完成了所有的请求，且保证了所有server状态一致。</p>
+<h2 id="参考文献及链接"><a href="#参考文献及链接" class="headerlink" title="参考文献及链接"></a>参考文献及链接</h2><p><a href="https://dl.acm.org/citation.cfm?id=3128609" target="_blank" rel="noopener">Wang C, Jiang J, Chen X, et al. APUS: Fast and scalable Paxos on RDMA</a><br><br><a href="https://bitbucket.org/sciascid/libpaxos" target="_blank" rel="noopener">Paxos源码下载及编译</a><br><br><a href="https://www.cnblogs.com/endsock/p/3480093.html" target="_blank" rel="noopener">Paxos算法举例1</a><br><br><a href="https://www.cnblogs.com/esingchan/p/3917718.html" target="_blank" rel="noopener">Paxos算法举例2</a><br><br><a href="https://www.jianshu.com/p/dbb7da189b51" target="_blank" rel="noopener">Paxos应用场景</a><br><br><a href="https://blog.csdn.net/brighlee/article/details/78691666" target="_blank" rel="noopener">SMR概述</a><br><br><a href="https://blog.csdn.net/u012658346/article/details/44983957" target="_blank" rel="noopener">bufferevent部分接口及作用</a><br></p>
+<hr>
+<p>分享人： 金力 周鑫 黄博博 （复旦大学NiSL）</p>
+
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="/img/alipay.jpeg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="/img/wepay.jpeg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Bobo Huang</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2018/10/22/System-Primitive-系统原语-的基本原理与实践/" class="next-post btn btn-default" title='System Primitive(系统原语)的基本原理与实践'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">System Primitive(系统原语)的基本原理与实践</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'DL5693uIDX7fHtjctmTjGuis-gzGzoHsz',
+            appKey: 'OheW0MamYu8xrN4Qw5MJxcIa',
+            placeholder: '说点什么吧',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: ''.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">Table of Contents</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#摘-要"><span class="toc-number">1.</span> <span class="toc-text">摘 要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法概述"><span class="toc-number">2.</span> <span class="toc-text">算法概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SMR：带有容错机制的状态机"><span class="toc-number">2.1.</span> <span class="toc-text">SMR：带有容错机制的状态机</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本原理与实现"><span class="toc-number">3.</span> <span class="toc-text">基本原理与实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#proposer算法逻辑"><span class="toc-number">3.1.</span> <span class="toc-text">proposer算法逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#acceptor算法逻辑"><span class="toc-number">3.2.</span> <span class="toc-text">acceptor算法逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RDMA逻辑"><span class="toc-number">3.3.</span> <span class="toc-text">RDMA逻辑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法评估"><span class="toc-number">4.</span> <span class="toc-text">算法评估</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Paxos的优点"><span class="toc-number">4.1.</span> <span class="toc-text">Paxos的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Paxos的缺点"><span class="toc-number">4.2.</span> <span class="toc-text">Paxos的缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RDMA加速Paxos的性能评估"><span class="toc-number">4.3.</span> <span class="toc-text">RDMA加速Paxos的性能评估</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用场景"><span class="toc-number">5.</span> <span class="toc-text">应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在状态机复制-SMR-中的应用"><span class="toc-number">5.1.</span> <span class="toc-text">在状态机复制(SMR)中的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在数据库集群中的应用"><span class="toc-number">5.2.</span> <span class="toc-text">在数据库集群中的应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献及链接"><span class="toc-number">6.</span> <span class="toc-text">参考文献及链接</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2019
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>
