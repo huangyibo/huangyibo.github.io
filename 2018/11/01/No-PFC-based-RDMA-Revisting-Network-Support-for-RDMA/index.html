@@ -289,12 +289,18 @@
 </ul>
 <h4 id="IRN实现细节"><a href="#IRN实现细节" class="headerlink" title="IRN实现细节"></a>IRN实现细节</h4><ul>
 <li>Receiver处理无序Packets<ul>
-<li>消息的第一个Packet 关键信息：<pre><code>* 需要在其他Packets上重复拷贝
-</code></pre></li>
-<li>消息的最后一个Packet关键信息：<pre><code>* 需要存储在Sender/Receiver两个End-points端上
-</code></pre></li>
-<li>需要Packet和WQE(Work Queue Element)之间的隐式匹配<pre><code>* 显式的在Packets上携带WQE序列信息。
-</code></pre></li>
+<li>消息的第一个Packet 关键信息：<ul>
+<li>需要在其他Packets上重复拷贝</li>
+</ul>
+</li>
+<li>消息的最后一个Packet关键信息：<ul>
+<li>需要存储在Sender/Receiver两个End-points端上</li>
+</ul>
+</li>
+<li>需要Packet和WQE(Work Queue Element)之间的隐式匹配<ul>
+<li>显式的在Packets上携带WQE序列信息。</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>需要显式的发送Read Acks (SACK/NACK/ACK)。</li>
