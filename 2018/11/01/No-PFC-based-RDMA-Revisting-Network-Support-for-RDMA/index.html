@@ -1,0 +1,480 @@
+<!DOCTYPE HTML>
+<html lang="">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Bobo Huang写字的地方">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>No-PFC based RDMA (Revisting Network Support for RDMA) | Bobo Huang写字的地方</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Bobo Huang写字的地方" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?cd77d5931f412f9cfa483dcfc5fc7ce3";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    
+
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='Bob Huang'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 从未如此简单有趣～ </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Bobo Huang写字的地方</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa fa-home"></i>  Home</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/算法/"><i class="fa fa-tasks"></i>  算法</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/闲思碎语/"><i class="fa fa-tags"></i>  闲思碎语</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/每周技术分享/"><i class="fa fa-share"></i>  每周技术分享</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/About"><i class="fa fa-user"></i>  About Me</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="No-PFC based RDMA (Revisting Network Support for RDMA)">
+            
+	            No-PFC based RDMA (Revisting Network Support for RDMA)
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/ ">
+             
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/11/01</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><blockquote>
+<p>RoCE(RDMA over Converged Ethernet)作为RDMA的一种技术实现，已经大规模应用于许多基于以太网的数据中心网络中。RoCE通过PFC(Priority Flow Control)保证无损网络环境，从而达到高性能。但是PFC本身引入了许多问题，如head-of-the-line blocking, unfairness, congestion spreading, network deadlock等。那么本文提出了IRN(Improved RDMA NIC)设计，<strong><em>证明了基于PFC的无损网络不是保证RDMA高性能的必要条件</em></strong>。针对丢包处理和流控，IRN主要包括：<strong>(1)选择性丢包恢复机制(Selective Loss Recovery)</strong>;<strong>(2)基于BDP的流量控制(BDP-based Flow Control)</strong>。本文主要介绍了基于No-PFC的RDMA的基本原理、性能提升和存在问题。</p>
+</blockquote>
+<h3 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h3><h4 id="RDMA"><a href="#RDMA" class="headerlink" title="RDMA"></a>RDMA</h4><p>为了达到更低的CPU利用率、低时延、高吞吐量，许多数据中心采用RDMA作为基础网络栈，RDMA是通过旁路传统网络协议栈来支持远程内存的直接访问，如图1所示。RDMA技术主要分为Infiniband RDMA/RoCE(RDMA over Converged Ethernet)/iWARP三种实现方式，其中RoCE由于对以太网的支持和高性价比，已被广泛地应用在数据中心网络。RDMA网络采用PFC来保证无损网络环境；由于在Infiniband RDMA下，丢包率基本为0，因此丢包恢复机制采用<strong>go-back-N重传机制</strong>。而RoCE采用与Infiniband RDMA同样的机制来处理丢包、实现无损网络。</p>
+<center><br><img src="http://pgyk6f9gp.bkt.clouddn.com/RDMA_NET.png" alt="图1 传统网络协议栈与RDMA对比"><br></center>
+
+<h4 id="PFC-Priority-Flow-Control"><a href="#PFC-Priority-Flow-Control" class="headerlink" title="PFC (Priority Flow Control)"></a>PFC (Priority Flow Control)</h4><p> 基于优先级的流量控制（PFC）是对暂停机制的一种增强（如下图2）。当前以太网暂停选择（IEEE 802.3 Annex 31B）也能达到无丢包的要求，但它会阻止一条链路上的所有流量，本质上来讲，它会暂停整条链路。PFC 允许在一条以太网链路上创建 8 个虚拟通道，并为每条虚拟通道指定一个 IEEE 802.1P 优先等级，允许单独暂停和重启其中任意一条虚拟通道，同时允许其它虚拟通道的流量无中断通过。这一方法使网络能够为单个虚拟链路创建无丢包类别的服务，使其能够与同一接口上的其它流量类型共存。</p>
+<center><br><img src="http://pgyk6f9gp.bkt.clouddn.com/PFC.png" alt="图2 Priority Flow Control"><br> </center>
+
+<h5 id="PFC运行过程："><a href="#PFC运行过程：" class="headerlink" title="PFC运行过程："></a>PFC运行过程：</h5><ul>
+<li>当出现链路拥塞时，即网络数据平面节点设备的某Port队列缓存消耗较快，并超过预设阈值时，该设备向数据流入方向(upstream stream，Switch/NIC)发送X-OFF暂停帧，上游设备(upstream data plane node)接收到X-OFF暂停帧时，会停止发送或延迟发送数据，并将数据存储在本地端口缓冲区(Port Buffer)，如果Port Buffer消耗超过预设阈值(该阈值可设定为Port队列的1/2、3/4等比例)，则继续向上发送X-OFF暂停帧，如此一级级反馈，直到网络终端设备(End Point)，从而消除网络节点因拥塞导致的丢包。</li>
+<li>当链路拥塞消除时，即网络数据平面设备节点的某Port缓存队列恢复到预设阈值时，该设备向Upstream设备发送X-ON报文；Upstream链路的设备接收到X-ON报文后，会把相应Port队列缓存中的报文转发出去，并解除了拥塞，同时该上游设备会继续向其Upstream Link Devices发送X-ON报文，直至终端节点接收到X-ON报文，并重新发送数据流。</li>
+</ul>
+<p>上述PFC运行过程可以保证无损网络。</p>
+<h5 id="引入问题"><a href="#引入问题" class="headerlink" title="引入问题"></a>引入问题</h5><p>PFC保证了无损网络，但是PFC的拥塞控制策略和导致拥塞的Flow并没有联系，没有从原因上解决问题。同时，PFC引入了复杂的网络管理和性能问题，如head-of-the-line-blocking（如图3）, unfairness（如图3）, congestion spreading, deadlocks。</p>
+<ul>
+<li><p>head-of-the-line-blocking(HOL blocking, 队头阻塞)：一个发送队列的第一个数据包(队头)由于目的端口正忙而受阻，导致整个队列的数据包受阻(Blocked)。如果一个缓存式输入的Switch在输入端口使用了FIFO策略，最有最先进入的数据包可以被处理，此时最先进入的数据包由于目标输出端口正忙而延迟转发或无法被处理，那么更晚达到的数据包就无法被处理(即使更晚达到的数据包的目标输出端口并没有处于忙碌状态)。输出端口正忙的情况包括：(1)存在输出的竞态关系；(2)输出缓存已满，从而导致阻塞现象(如多个输入的传输速率超过输出的传输速率)。优化方法有：</p>
+<ul>
+<li>使用window，即队列前面的n个packet而不是一个packet参与输出端口的竞争，以降低blocking的概率。但是，如果这n个packet的目的地址相同，也会造成blocking。</li>
+<li>采用virtual input/output queue, 每次从n个input队列中选择一个队列，然后转发这个队列的首个packet，这样每个队列后面的packet倍blocked的概率会大大降低。</li>
+</ul>
+</li>
+<li><p>unfairness: PFC会导致不公平降速问题，即当某个Flow导致的链路拥塞发生时，该Flow的相关上游链路设备节点会降速，但是与该Flow无关的上游链路设备节点也会降速，从而引发Unfairness。</p>
+</li>
+<li><p>congestion spreading: 数据平面某一节点设备发生拥塞(Congestion)，PFC机制会使得与该拥塞无关的上游设备都会接收到拥塞信号，并进行降速。</p>
+</li>
+<li><p>PFC deadlocks: PFC死锁是由于数据平面上的转发节点的转发流表(Flow Table)出现了table miss问题，从而导致了转发节点发送广播包，进入引入了通道依赖的闭环中。通常解决方法是利用经典的虚拟通道方法，即把数据包和广播包分配到不同的虚拟通道，从而消除了Link链路依赖中的环。</p>
+</li>
+<li><p>RDMA活锁：由于RDMA网卡实现了很初级的go back 0算法，一旦发生丢包，网卡会重传整个消息，在重传过程中又会发生丢包，周而复始，网卡一直发送同一消息。解决方法：将网卡重传机制改进为go-back-N算法，更进一步，为了避免丢包和PFC扩散导致的拥塞树问题，微软还提出了新的拥塞控制算法–DCQCN(基于ECN, 微软的工作)。</p>
+</li>
+</ul>
+<center><br><img src="http://pgyk6f9gp.bkt.clouddn.com/PFC_HOL_Unfairness.jpeg" alt="图3 PFC运行及性能问题"><br></center>
+
+
+<h4 id="go-back-N-算法"><a href="#go-back-N-算法" class="headerlink" title="go-back-N 算法"></a>go-back-N 算法</h4><p>链路通信过程中，发送端在等待确认ACK的时候多发送一些数据帧(Packet)，可以提高链路效率，允许发送窗口包含多个违背确认的Packet，这种技术是”管道化”(Pipelining)，Pipelining适用于信号传播时延远大于Packet的传输时间的场景。当Pipelining技术在不可靠的传输信道上时，如果Packet Flow的某一Packet丢包或者损坏，大量后继Packets会达到接收方，而损坏的Packet会被接收方丢弃。这种问题可以使用Go-Back-N协议，即接收方(接受窗口为1)丢弃所有的后继Packets，并且不通知发送方；当发送方超时后，必须从发生超时的Packet开始重发发送窗口内地所有Packet。其具体过程如图4所示。这种方法会浪费很多带宽资源，但是对终端内存需求不大。</p>
+<center><br><img src="http://pgyk6f9gp.bkt.clouddn.com/go-back-n.png" alt="图4 go-back-N算法"><br></center>
+
+<h4 id="iWARP-vs-RoCE"><a href="#iWARP-vs-RoCE" class="headerlink" title="iWARP vs RoCE"></a>iWARP vs RoCE</h4><p>iWARP和RoCE都是在以太网上的RDMA实现技术，iWARP在NIC硬件上实现了整个TCP协议栈，并在RDMA和TCP上进行多次翻译转换，导致iWARP更复杂昂贵，且仅取得很少的性能提升。如图5是iWARP和RoCE的对比。但是iWARP的设计理念和思想是对的：在NIC上处理丢包比无损网络得到更好的性能。其实iWARP的实现架构不需要再NIC上实现整个TCP协议栈，针对丢包问题进行选择重传，更加简单。</p>
+<center><br><img src="http://pgyk6f9gp.bkt.clouddn.com/iWarp_vs_RoCE.png" alt="图5 iWARP vs RoCE"><br></center>
+
+<h3 id="基本原理与实现"><a href="#基本原理与实现" class="headerlink" title="基本原理与实现"></a>基本原理与实现</h3><p>本文针对PFC机制的性能问题提出了基于No-PFC的RDMA–IRN(Improved RoCE NIC)。IRN针对丢包恢复机制和流控策略提出了：</p>
+<ul>
+<li>选择重传算法替代go-back-N算法(selective restransmission for loss recovery)</li>
+<li>基于BDP的流量控制(BDP-based Flow Control)</li>
+</ul>
+<p>IRN将Loss Recovery和Congestion Control解耦，并且没有涉及到TCP拥塞窗口控制的任何概念。同时区别于iWARP，IRN直接操作RDMA Segments而不是TCP字节流抽象，避免了多层转义引入的复杂性，简化了选择重传和Loss Tracking 过程。</p>
+<h4 id="Selective-Restransmission-for-Loss-Recovery"><a href="#Selective-Restransmission-for-Loss-Recovery" class="headerlink" title="Selective Restransmission for Loss Recovery"></a>Selective Restransmission for Loss Recovery</h4><p>丢包恢复的触发条件包括：(1)Sender接收到NACK; (2)Sender等待超时[ACK Timeout]。传统的丢包恢复算法是go-back-N，即重传自发生超时的Packet到发送窗口的其他Packets，带宽占用很高且耗时。本文提出的选择性重传方法不丢弃乱序的Packets，并选择性发送ACK(SACK)，仅仅重传丢弃或损坏的Packet，利用<a href="https://huangyibo.github.io/2018/10/16/Bitmap算法-一种基于bit位的数据排序、查重艺术/" target="_blank" rel="noopener">Bitmap技术</a>跟踪记录Lost Packets。</p>
+<p><strong>选择性丢包重传运行过程如下(发送方为Sender, 接收方为Receiver)：</strong></p>
+<ol>
+<li>IRN Receiver接收到无序Packets(out-of-order packet)时，即当到达的Packet序列号(Sequence Number)大于或不等于期望的Packet序列号时，如图6所示，Receiver期望接收到Packet 2,但是接收到了Packet 3、4、5，此时会发送NACK 2(包括期望Packet Sequence No和出发NACK的Packet Sequence No);</li>
+<li>当接收到NACK或等待超时后，IRN Sender停止发送新的Packet，并根据bitmap定位的Lost Packets(即当高序列号的Packet已经ACK，而低序列号的Packet尚未ACK，则该地序列号的Packet为丢包)，选择性重新发送丢弃/损坏的Packets。</li>
+<li>当没有重传的丢包时，IRN Sender继续发送新的Packets。</li>
+<li>当收到的累积ACK数量(ACK不包括SACK)大于Recovery Sequence No时(Recovery Sequence对应于Lost Packet之前的已经发送成功的相邻数据包，图6中ACK数量为2，Recevory Sequence No为1)，IRN Sender退出Loss Recovery模式。</li>
+</ol>
+<p>当带宽资源利用率高的时候，选择性丢包重传机制带宽占用小，性能更佳。</p>
+<center><br><img src="http://pgyk6f9gp.bkt.clouddn.com/IRN_Loss_Recovery.png" width="25%" height="25%"> <br><br>图 6 Selective Restransmission for Loss Recovery<br></center>
+
+<center><br><img src="http://pgyk6f9gp.bkt.clouddn.com/IRN_Bitmap.png" width="35%" height="35%"> <br><br>图 7 Selective Restransmission for Loss Recovery<br></center>
+
+<p><strong>IRN Timeout 超时取值</strong></p>
+<p>对于Timeout触发的Selective Retransmission，存在问题：</p>
+<ul>
+<li>当Timeout Value太大时，增加了短消息(short message)的尾时延(Tail Latency)；</li>
+<li>当Timeout Value大小时，会造成许多伪重传，即RTT &gt; Timeout，许多事实上已经ACK的Packet由于Timeout被认为丢包；</li>
+</ul>
+<p>IRN Timeout取值策略：</p>
+<ul>
+<li>RTO<sub>low</sub>: 当前链路上传输(in flight)的Packets数量 &lt; N packets in flight.</li>
+<li>RTO<sub>high</sub>: 否则，当前链路上传输(in flight)的Packets数量 &gt;= N packets in flight.</li>
+<li>阈值N通常取值为  BDP/Packet_Size ，其中BDP为带宽时延点积(BDP = Bottleneck Link Bandwidth * RTT)。</li>
+</ul>
+<h4 id="BDP-FC-BDP-based-Flow-Control"><a href="#BDP-FC-BDP-based-Flow-Control" class="headerlink" title="BDP-FC: BDP based Flow Control"></a>BDP-FC: BDP based Flow Control</h4><ul>
+<li>使用瓶颈链路的BDP作为正在传输的(In Flight)Packets的数量上限(BDP cap = BDP/Packet_MTU_Size)，通常RoCE NIC MTU大小为1KB。仅仅当In-Flight Packets数量小于BDP Cap时，IRN Sender继续发送Packet。</li>
+<li>发送端减少不必要的队列等待。</li>
+<li>在IRN Receiver端严格限制Out-of-Ofder Packets的数量，减少RoCE NIC上跟踪记录Lost Packet所需要的Bitmap大小。</li>
+</ul>
+<h4 id="IRN实现细节"><a href="#IRN实现细节" class="headerlink" title="IRN实现细节"></a>IRN实现细节</h4><ul>
+<li>Receiver处理无序Packets<ul>
+<li>消息的第一个Packet 关键信息：<pre><code>* 需要在其他Packets上重复拷贝
+</code></pre></li>
+<li>消息的最后一个Packet关键信息：<pre><code>* 需要存储在Sender/Receiver两个End-points端上
+</code></pre></li>
+<li>需要Packet和WQE(Work Queue Element)之间的隐式匹配<pre><code>* 显式的在Packets上携带WQE序列信息。
+</code></pre></li>
+</ul>
+</li>
+<li>需要显式的发送Read Acks (SACK/NACK/ACK)。</li>
+</ul>
+<h4 id="IRN实现Overheads"><a href="#IRN实现Overheads" class="headerlink" title="IRN实现Overheads"></a>IRN实现Overheads</h4><ul>
+<li>新的Packet类型和Packet头部扩展<ul>
+<li>Packet Header增加了16个字节</li>
+</ul>
+</li>
+<li>总共个的内存消耗增加了3%–10%</li>
+<li>FPGA套件向RDMA NIC上的设备发送Message:<ul>
+<li>减少了4%的资源利用率</li>
+<li>45.45Mpps throughput (without pipelining).  </li>
+</ul>
+</li>
+</ul>
+<h3 id="性能评估"><a href="#性能评估" class="headerlink" title="性能评估"></a>性能评估</h3><h4 id="度量Metrics"><a href="#度量Metrics" class="headerlink" title="度量Metrics"></a>度量Metrics</h4><ol>
+<li><p>Average slowdown:</p>
+<p>Flow Slowdown Time = FCT / (RTT/2); 即流完成时间除以无拥塞网络下线速end-to-end所需时间。</p>
+</li>
+<li><p>Average Flow Completion Time (平均流完成时间);</p>
+</li>
+<li><p>99%ile / Tail FCT (尾流完成时间):<br>即同样的链路网络下，由于一些因素导致的耗时很长的Flow的FCT称为Tail FCT。</p>
+</li>
+</ol>
+<h4 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h4><ul>
+<li>Mellanox Sumulator模拟ConnectX4 NICs: Extended from Omnet/Inet；</li>
+<li>三层Fat-Tree网络拓扑；</li>
+<li>通信链路瓶颈带宽为40Gbps，时延为2us;</li>
+<li>带宽资源利用率分布在70%上下(Heavy-tailed distribution at 70% utilization);</li>
+<li>Port Buffer(NIC和Switch端口缓冲区)为: 2 * BDP .</li>
+</ul>
+<h4 id="评估结果与分析"><a href="#评估结果与分析" class="headerlink" title="评估结果与分析"></a>评估结果与分析</h4><h5 id="平均流完成时间-Average-FCT"><a href="#平均流完成时间-Average-FCT" class="headerlink" title="平均流完成时间(Average FCT)"></a>平均流完成时间(Average FCT)</h5><ul>
+<li>基于No-PFC的IRN的FCT要比基于PFC的RoCE更短；</li>
+<li>IRN不依赖于PFC；</li>
+<li>RoCE依赖于PFC。</li>
+</ul>
+<center><br><img src="http://pgyk6f9gp.bkt.clouddn.com/IRN_AVE_FCT.png" width="60%" height="60%"> <br><br>图 8 平均流完成时间(Average FCT)对比<br></center>
+
+<h5 id="尾流完成时间-Tail-FCT"><a href="#尾流完成时间-Tail-FCT" class="headerlink" title="尾流完成时间(Tail FCT)"></a>尾流完成时间(Tail FCT)</h5><center><br><img src="http://pgyk6f9gp.bkt.clouddn.com/IRN_TAIL_FCT.png" width="60%" height="60%"> <br><br>图 9 尾流完成时间(Tail FCT)对比<br></center>
+
+<h5 id="Average-slowdown"><a href="#Average-slowdown" class="headerlink" title="Average slowdown"></a>Average slowdown</h5><center><br><img src="http://pgyk6f9gp.bkt.clouddn.com/IRN_AVE_slowdown.png" width="60%" height="60%"> <br><br>图 10 Average slowdown对比<br></center>
+
+<h5 id="With-ECN-平均流完成时间-Average-FCT"><a href="#With-ECN-平均流完成时间-Average-FCT" class="headerlink" title="[With ECN]平均流完成时间(Average FCT)"></a>[With ECN]平均流完成时间(Average FCT)</h5><ul>
+<li>ECN环境下，基于No-PFC的IRN的FCT要比基于PFC的RoCE更短；</li>
+<li>ECN环境下，IRN不依赖于PFC；</li>
+<li>ECN环境下，RoCE依赖于PFC。</li>
+</ul>
+<center><br><img src="http://pgyk6f9gp.bkt.clouddn.com/IRN_AVE_slowdown.png" width="60%" height="60%"> <br><br>图 11 平均流完成时间(Average FCT) with ECN<br></center>
+
+<h5 id="With-ECN-尾流完成时间-Tail-FCT"><a href="#With-ECN-尾流完成时间-Tail-FCT" class="headerlink" title="[With ECN]尾流完成时间(Tail FCT)"></a>[With ECN]尾流完成时间(Tail FCT)</h5><center><br><img src="http://pgyk6f9gp.bkt.clouddn.com/IRN_AVE_slowdown.png" width="60%" height="60%"> <br><br>图 12 尾流完成时间(Tail FCT) with ECN<br></center>
+
+<h5 id="With-ECN-Average-slowdown"><a href="#With-ECN-Average-slowdown" class="headerlink" title="[With ECN]Average slowdown"></a>[With ECN]Average slowdown</h5><center><br><img src="http://pgyk6f9gp.bkt.clouddn.com/IRN_AVE_slowdown.png" width="60%" height="60%"> <br><br>图 13 Average slowdown with ECN<br></center>
+
+<h3 id="存在问题与思考"><a href="#存在问题与思考" class="headerlink" title="存在问题与思考"></a>存在问题与思考</h3><p>本文实验环境是在人工设定BDP的网络环境下进行的实验验证，那么针对实际环境或者生产环境下，针对BDP中瓶颈带宽和往返时延RTT的探测没有考虑，这种BDP的探测计量所需要的链路资源、NIC Memory占用率是否会影响No-PFC RDMA – IRN的设计？如果影响，应该如何重新设计IRN？什么时候(触发条件)触发这种BDP的探测过程？</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="https://arxiv.org/abs/1806.08159" target="_blank" rel="noopener">Mittal, R., Shpiner, A., Panda, A., Zahavi, E., Krishnamurthy, A., Ratnasamy, S., &amp; Shenker, S. (2018). Revisiting Network Support for RDMA. arXiv preprint arXiv:1806.08159.</a></p>
+<p><a href="http://delivery.acm.org/10.1145/2790000/2787484/p523-zhu.pdf?ip=202.120.234.222&amp;id=2787484&amp;acc=PUBLIC&amp;key=BF85BBA5741FDC6E%2E88014DC677A1F2C3%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&amp;__acm__=1541051443_c40727dff1df418c0c92c2adfb9bbce4" target="_blank" rel="noopener">Zhu, Y., Eran, H., Firestone, D., Guo, C., Lipshteyn, M., Liron, Y., … &amp; Zhang, M. (2015, August). Congestion control for large-scale RDMA deployments. In ACM SIGCOMM Computer Communication Review (Vol. 45, No. 4, pp. 523-536). ACM.</a></p>
+<p><a href="https://conferences.sigcomm.org/events/apnet2017/slides/cx.pdf" target="_blank" rel="noopener">RDMA in Data Centers: Looking Back and Looking Forward</a></p>
+<p><a href="https://github.com/NetSys/irn-vivado-hl" target="_blank" rel="noopener">IRN OpenSource – Github Code</a></p>
+
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="/img/alipay.jpeg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="/img/wepay.jpeg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Bobo Huang</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2018/10/23/RDMA-Driven-Paxos-Consistent-Algorithm/" class="next-post btn btn-default" title='RDMA-Driven Paxos Consistent Algorithm'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">RDMA-Driven Paxos Consistent Algorithm</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'DL5693uIDX7fHtjctmTjGuis-gzGzoHsz',
+            appKey: 'OheW0MamYu8xrN4Qw5MJxcIa',
+            placeholder: '说点什么吧',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: ''.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">Table of Contents</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#摘要"><span class="toc-number">1.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#研究现状"><span class="toc-number">2.</span> <span class="toc-text">研究现状</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RDMA"><span class="toc-number">2.1.</span> <span class="toc-text">RDMA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PFC-Priority-Flow-Control"><span class="toc-number">2.2.</span> <span class="toc-text">PFC (Priority Flow Control)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#PFC运行过程："><span class="toc-number">2.2.1.</span> <span class="toc-text">PFC运行过程：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#引入问题"><span class="toc-number">2.2.2.</span> <span class="toc-text">引入问题</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#go-back-N-算法"><span class="toc-number">2.3.</span> <span class="toc-text">go-back-N 算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#iWARP-vs-RoCE"><span class="toc-number">2.4.</span> <span class="toc-text">iWARP vs RoCE</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本原理与实现"><span class="toc-number">3.</span> <span class="toc-text">基本原理与实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Selective-Restransmission-for-Loss-Recovery"><span class="toc-number">3.1.</span> <span class="toc-text">Selective Restransmission for Loss Recovery</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BDP-FC-BDP-based-Flow-Control"><span class="toc-number">3.2.</span> <span class="toc-text">BDP-FC: BDP based Flow Control</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IRN实现细节"><span class="toc-number">3.3.</span> <span class="toc-text">IRN实现细节</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IRN实现Overheads"><span class="toc-number">3.4.</span> <span class="toc-text">IRN实现Overheads</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性能评估"><span class="toc-number">4.</span> <span class="toc-text">性能评估</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#度量Metrics"><span class="toc-number">4.1.</span> <span class="toc-text">度量Metrics</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实验环境"><span class="toc-number">4.2.</span> <span class="toc-text">实验环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#评估结果与分析"><span class="toc-number">4.3.</span> <span class="toc-text">评估结果与分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#平均流完成时间-Average-FCT"><span class="toc-number">4.3.1.</span> <span class="toc-text">平均流完成时间(Average FCT)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#尾流完成时间-Tail-FCT"><span class="toc-number">4.3.2.</span> <span class="toc-text">尾流完成时间(Tail FCT)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Average-slowdown"><span class="toc-number">4.3.3.</span> <span class="toc-text">Average slowdown</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#With-ECN-平均流完成时间-Average-FCT"><span class="toc-number">4.3.4.</span> <span class="toc-text">[With ECN]平均流完成时间(Average FCT)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#With-ECN-尾流完成时间-Tail-FCT"><span class="toc-number">4.3.5.</span> <span class="toc-text">[With ECN]尾流完成时间(Tail FCT)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#With-ECN-Average-slowdown"><span class="toc-number">4.3.6.</span> <span class="toc-text">[With ECN]Average slowdown</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#存在问题与思考"><span class="toc-number">5.</span> <span class="toc-text">存在问题与思考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文献"><span class="toc-number">6.</span> <span class="toc-text">参考文献</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2019
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>
