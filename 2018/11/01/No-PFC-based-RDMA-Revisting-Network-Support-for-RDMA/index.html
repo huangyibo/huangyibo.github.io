@@ -211,14 +211,9 @@
     </div>
     
     <div class="post-body post-content">
-        <ul>
-<li>RDMA</li>
-<li>Paxos</li>
-<li>算法<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><blockquote>
+        <h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><blockquote>
 <p>RoCE(RDMA over Converged Ethernet)作为RDMA的一种技术实现，已经大规模应用于许多基于以太网的数据中心网络中。RoCE通过PFC(Priority Flow Control)保证无损网络环境，从而达到高性能。但是PFC本身引入了许多问题，如head-of-the-line blocking, unfairness, congestion spreading, network deadlock等。那么本文提出了IRN(Improved RDMA NIC)设计，<strong><em>证明了基于PFC的无损网络不是保证RDMA高性能的必要条件</em></strong>。针对丢包处理和流控，IRN主要包括：<strong>(1)选择性丢包恢复机制(Selective Loss Recovery)</strong>;<strong>(2)基于BDP的流量控制(BDP-based Flow Control)</strong>。本文主要介绍了基于No-PFC的RDMA的基本原理、性能提升和存在问题。</p>
 </blockquote>
-</li>
-</ul>
 <h3 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h3><h4 id="RDMA"><a href="#RDMA" class="headerlink" title="RDMA"></a>RDMA</h4><p>为了达到更低的CPU利用率、低时延、高吞吐量，许多数据中心采用RDMA作为基础网络栈，RDMA是通过旁路传统网络协议栈来支持远程内存的直接访问，如图1所示。RDMA技术主要分为Infiniband RDMA/RoCE(RDMA over Converged Ethernet)/iWARP三种实现方式，其中RoCE由于对以太网的支持和高性价比，已被广泛地应用在数据中心网络。RDMA网络采用PFC来保证无损网络环境；由于在Infiniband RDMA下，丢包率基本为0，因此丢包恢复机制采用<strong>go-back-N重传机制</strong>。而RoCE采用与Infiniband RDMA同样的机制来处理丢包、实现无损网络。</p>
 <center><br><img src="http://pgyk6f9gp.bkt.clouddn.com/RDMA_NET.png" alt="图1 传统网络协议栈与RDMA对比"><br></center>
 
