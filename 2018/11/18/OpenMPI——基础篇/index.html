@@ -1,0 +1,832 @@
+<!DOCTYPE HTML>
+<html lang="">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Bobo Huang写字的地方">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>OpenMPI——基础篇 | Bobo Huang写字的地方</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Bobo Huang写字的地方" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?cd77d5931f412f9cfa483dcfc5fc7ce3";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    
+
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='Bob Huang'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 从未如此简单有趣～ </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Bobo Huang写字的地方</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa fa-home"></i>  Home</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/算法/"><i class="fa fa-tasks"></i>  算法</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/闲思碎语/"><i class="fa fa-tags"></i>  闲思碎语</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/每周技术分享/"><i class="fa fa-share"></i>  每周技术分享</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/About"><i class="fa fa-user"></i>  About Me</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="OpenMPI——基础篇">
+            
+	            OpenMPI——基础篇
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/每周技术分享">
+            每周技术分享
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/OpenMPI" title='OpenMPI'>
+                        OpenMPI
+                    </a>
+                
+                    <a href="/tags/进程间通信" title='进程间通信'>
+                        进程间通信
+                    </a>
+                
+                    <a href="/tags/编程API" title='编程API'>
+                        编程API
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/11/18</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="摘-要"><a href="#摘-要" class="headerlink" title="摘  要"></a>摘  要</h2><blockquote>
+<p>本文主要介绍了OpenMPI的概念、架构、编译运行方式、编程定式和基础的、常用的编程API及其用法。最后使用一个简单的Demo来实操这些API，并加深对OpenMPI编程和用途的理解。本文是OpenMPI的基础篇，主要介绍一些基础操作。</p>
+</blockquote>
+<h2 id="0x01-初识OpenMPI"><a href="#0x01-初识OpenMPI" class="headerlink" title="0x01 初识OpenMPI"></a>0x01 初识OpenMPI</h2><p>OpenMPI是消息传递接口(Message Passing Interface,MPI)的一种全新的、开源的实现。它可以提供包括单机中进程与进程间、网络中主机与主机间的高性能消息传递。这种高性能主要体现在三个方面:</p>
+<ol>
+<li>高带宽利用率</li>
+<li>低丢包率</li>
+<li>低误码率</li>
+</ol>
+<p>OpenMPI可以完美支持并行的、多线程的应用，在消息传递过程中可以检查数据的完整性，能够为应用提供最大化的可用带宽，也可以动态地解决通信过程中设备出现故障的问题。</p>
+<p>总之，OpenMPI适用于需要使用多进程处理，且各进程间需要大量通信的环境中。</p>
+<h2 id="0x02-OpenMPI的架构及编程定式"><a href="#0x02-OpenMPI的架构及编程定式" class="headerlink" title="0x02 OpenMPI的架构及编程定式"></a>0x02 OpenMPI的架构及编程定式</h2><p>OpenMPI的架构可以分为三层(图1)：</p>
+<ol>
+<li>MCA</li>
+<li>组件框架(Component frameworks)</li>
+<li>模块(Modules)</li>
+</ol>
+<center><img src="https://i.imgur.com/W6IRaBX.jpg" alt="OpenMPI的架构"><br><br>图2.1 OpenMPI的架构</center>
+
+<ul>
+<li>MCA： 是整个OpenMPI的骨干，主要负责与上层应用交互，根据应用的规定，开启N个进程(其中，N由应用指定)，并将执行的结果返回给应用。</li>
+<li>组件框架：由MCA指定，一个组件框架可以视为对应一个进程，实现一项具体的功能或逻辑。根据任务量的不同，组件框架会自动调用(对用户透明)不同数量的模块来完成这一项任务。</li>
+<li>模块：真正实现功能的部分，自己实现的功能可以供其他模块调用，每个模块都是相互独立的，属于同一个组件框架的模块实现各自的功能后，由组件框架进行整合，视为完成对应的任务，上交给MCA。</li>
+</ul>
+<p>下面让我们用一个例子来理解这个架构是怎么工作的。</p>
+<p>首先，我们要写一段代码，用来告诉OpenMPI要干什么：</p>
+<pre><code>//test.c
+#include “mpi.h”    //OpenMPI的头文件
+#include &lt;stdio.h&gt;
+int main(int argc, char**argv){
+    MPI_Init(&amp;argc, &amp;argv);     //openMPI的初始化函数
+    /*
+     * 业务逻辑部分；
+     * 在初始化函数与结束函数之间的代码段，将视作由
+     * OpenMPI执行的代码；
+     * 此部分代码将被创建为多个进程，并发执行；
+     * 具体的进程数量由执行时应用指定；
+    */
+    MPI_Finalize();    //openMPI的结束函数
+    return 0;
+}
+</code></pre><p>这段代码中，MPI_Init()函数和MPI_Finalize()函数是编程定式，在这两个函数之间的代码就是要通过OpenMPI运行的代码，根据应用指定的进程数量并发执行。</p>
+<p>其次，我们通过命令行来编译执行这段代码：</p>
+<pre><code>$ mpicc -o test test.c
+$ mpirun -n 4 test
+</code></pre><p>这里，-n后面的参数表示需要的进程数量，此处指定了4个进程。</p>
+<p>让我们结合上面的框架来看，命令行相当于顶层的应用，当敲入“-n 4”的时候，它就告诉MCA，我现在要4个进程为我工作。然后MCA会找来4个组件框架，把我们写好的代码交给他们，组件框架们收到代码之后，明白了工作任务，根据任务量，组件框架们又找来了很多模块们，把任务再细分给他们。模块们接到任务之后，就开始哼哧哼哧地工作了。等模块们都工作完，汇报给组件框架后，组件框架把他们的工作整合起来，上交给MCA。最后MCA把所有4个组件框架的工作结果返回给顶层的应用。图2为此过程的示意图。</p>
+<center><img src="https://i.imgur.com/4IGlNGW.jpg" alt="工作过程简图"><br><br>图2.2 工作流程简图</center>
+
+<h2 id="0x03-OpenMPI的HelloWorld"><a href="#0x03-OpenMPI的HelloWorld" class="headerlink" title="0x03 OpenMPI的HelloWorld!"></a>0x03 OpenMPI的HelloWorld!</h2><p>在编写我们的第一个OpenMPI程序之前，我们先要来认识两个重要的函数：MPI_Comm_size()和MPI_Comm_rank()。</p>
+<p>MPI_Comm_size()用于获取总进程数量，其用法如下：</p>
+<blockquote>
+<p>int world_size；</p>
+<p>MPI_Comm_size(MPI_COMM_WORLD, &amp;world_size);</p>
+</blockquote>
+<p>运行上述代码之后，变量world_size存储的就是总进程数，若我们敲入“-n 4”的运行指令，运行结果就是world_size = 4。</p>
+<p>MPI_Comm_rank()用于获取当前进程号，进程号从0开始，到我们指定的进程数-1。比如4个进程，那他们的进程号就是0、1、2、3。这个函数的用法如下：</p>
+<blockquote>
+<p>int wrank；</p>
+<p>MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank); </p>
+</blockquote>
+<p>考虑到进程是并发运行的，所以对于每一个进程而言，变量wrank为他们的进程号。</p>
+<p>总结一下，MPI_Comm_size()是用来获取总进程数的，而MPI_Comm_rank()是获取当前进程号的，这两个函数在后面的章节中很常用。</p>
+<p>那么接下来就让我们就开始写HelloWorld吧。</p>
+<pre><code>//HelloWorld.c
+#include &quot;mpi.h&quot;
+#include &lt;stdio.h&gt;
+int main(int argc, char**argv) {
+    MPI_Init(&amp;argc, &amp;argv); //openMPI的初始化函数
+    int world_size, wrank;
+    MPI_Comm_size(MPI_COMM_WORLD, &amp;world_size); //获取总进程数
+    MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank); //获取当前进程标识
+    printf(&quot;Hello world. I&apos;m the process %d, we are %d process in total\n&quot;, wrank,world_size);
+    MPI_Finalize(); //openMPI的结束函数
+    return 0;
+}
+</code></pre><p>编程框架在0x02章节已经说明过了，我们主要看看HelloWorld的内容。首先定义了两个变量world_size和wrank，在通过两个函数MPI_Comm_size()和MPI_Comm_rank()给这两个变量赋值，分别为总进程数和当前进程号，最后打印出HelloWorld、当前进程号以及总进程数。考虑到OpenMPI是多进程并发执行，所以当我们指定多进程后，一定会打印出多个HelloWorld。</p>
+<p>让我们来编译运行HelloWorld.c源文件，在命令行敲入如下命令：</p>
+<blockquote>
+<p>mpicc -o HelloWorld HelloWorld.c</p>
+<p>mpirun -n 4 HelloWorld</p>
+</blockquote>
+<p>使用4个进程运行HelloWorld，其结果如图3所示。</p>
+<center><img src="https://i.imgur.com/lnv0FZY.jpg" alt="HelloWorld"><br><br>图3.1 HelloWorld</center>
+
+<p>可以看到，当我们使用4个进程运行时，同一段代码被运行了4次，每次运行时打印的常量“HelloWorld”都一样，每次的总进程数也都一样(无论哪个进程在运行，总进程数总是4个)，但是每次运行的当前进程号是不同的，由此可见，每个进程都运行了一次该代码，而变量wrank就对应每一次运行时的进程号。同时可以注意到，进程的并发执行是无序的。</p>
+<h2 id="0x04-进程间通信基础"><a href="#0x04-进程间通信基础" class="headerlink" title="0x04 进程间通信基础"></a>0x04 进程间通信基础</h2><p>OpenMPI是消息传递接口的一种实现，所以通信是其核心功能。本章节将介绍进程间通信的基础操作，之所以强调基础，是因为还有很多高阶操作，以及不同的通信模式，在一篇文章中写不完……因此，本文先做基础介绍，在接下来的更新中再做高阶的通信介绍。（本章引用的图片均引自<a href="https://www.cnblogs.com/yanwenliqjl/p/8857620.html" target="_blank" rel="noopener">OpenMPI学习笔记</a>）</p>
+<h3 id="1、点对点通信"><a href="#1、点对点通信" class="headerlink" title="1、点对点通信"></a>1、点对点通信</h3><p>点对点通信用于将一组数据从一个进程发送到另一个进程。</p>
+<pre><code>//点对点通信函数API
+int MPI_Ssend(
+    const void *buf,        //要发送的内容，即发送缓冲
+    int count,              //发送的数据数量
+    MPI_Datatype datatype,  //发送的数据类型    
+    int dest,                 //目标进程号，要发给哪个进程
+    int tag,                //消息标签，与接收方必须对应相同
+    MPI_Comm comm           //一般写MPI_COMM_WORLD
+);
+
+int MPI_Recv(
+    void *buf,              //要接收的内容，即接收缓冲
+    int count,              //接收的数据数量
+    MPI_Datatype datatype,  //接收的数据类型
+    int source,             //源进程号，接收的是哪个进程的数据
+    int tag,                //消息标签，与发送方必须对应相同
+    MPI_Comm comm,          //一般写MPI_COMM_WORLD
+    MPI_Status *status      //一般写MPI_STATUS_IGNORE
+);
+</code></pre><p>其中数据类型与C语言的数据类型可以对应(图4)</p>
+<center><img src="https://i.imgur.com/deaYiwh.jpg" alt="OpenMPI数据类型"><br><br>图4.1 OpenMPI的数据类型</center>
+
+<p>让我们看一个例子：(为了节省篇幅，以下的所有例子都只给出OpenMPI中的内容，有些部分也可能出现伪代码)</p>
+<pre><code>//Example for Transmit
+MPI_Init(&amp;argc, &amp;argv);
+int wrank;
+MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank); //获取当前进程号
+int witness[] = { 0, 0 };  //接收缓冲
+if (wrank == 2) {
+    int modifier[] = { 1, 1 };  //发送缓冲
+    MPI_Ssend(modifier, 2, MPI_INT, 3, 28, MPI_COMM_WORLD); //发送
+}
+else if (wrank == 3)
+    MPI_Recv(witness, 2, MPI_INT, 2, 28, MPI_COMM_WORLD, MPI_STATUS_IGNORE); //接收
+printf(&quot;Rang %d, witness {%d,%d}.\n&quot;, wrank, witness[0], witness[1]); //输出进程号和接收缓冲
+MPI_Finalize();
+</code></pre><p>上述代码中，使用if语句块，指定2号进程发送数据，3号进程接收数据，而0、1号两个进程不做操作。在实际编程中，可以根据需要，使用if语句块或switch语句块，分配给不同进程不同的任务，若某一代码段没有指定进程，则该代码段所有进程都需要运行(如所有进程都初始化了接收缓冲)。</p>
+<p>运行结果如下：</p>
+<p><img src="https://i.imgur.com/Ct6Wgod.jpg" alt="点对点通信运行结果"></p>
+<p>由于所有进程都初始化了接收缓冲，而只有3号进程接收了数据，所以0、1、2号进程的接收缓冲都是{0,0}，而3号进程的接收缓冲是接收到的{1,1}。</p>
+<h3 id="2、全局进程同步"><a href="#2、全局进程同步" class="headerlink" title="2、全局进程同步"></a>2、全局进程同步</h3><p>当某个进程遇到全局同步语句后，会等待所有其他进程都运行到该语句，再继续运行其他语句，以达到同步的目的。</p>
+<center><img src="https://i.imgur.com/T5I8DKx.jpg" alt="全局进程同步"><br><br>图4.2 全局进程同步</center>
+
+<pre><code>//全局同步函数API
+MPI_Barrier(MPI_COMM_WORLD);
+</code></pre><p>下面我们来看一个例子：</p>
+<pre><code>//Example for Barrier
+MPI_Init(&amp;argc, &amp;argv);
+int wrank;
+MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);  //获取当前进程号
+if (wrank == 0) {  //进程0写文件
+    FILE* f = fopen(&quot;outin&quot;, &quot;w&quot;);
+    long int seconds = time(NULL);
+    fprintf(f, &quot;%ld&quot;, seconds);
+    fclose(f);
+}
+MPI_Barrier(MPI_COMM_WORLD);  //全局同步点
+long int witness = 0;
+FILE* f = fopen(&quot;outin&quot;, &quot;r&quot;);  //所有进程读文件
+fscanf(f, &quot;%d&quot;, &amp;witness);
+printf(&quot;Rang %d, witness %ld.\n&quot;, wrank,     witness);
+fclose(f);
+MPI_Finalize();
+</code></pre><p>运行结果：</p>
+<p><img src="https://i.imgur.com/m4r1ljR.jpg" alt="全局进程同步"></p>
+<p>在0进程写文件后，进行同步，以保证所有进程等待0号进程写完文件后再读文件，从结果中可见，所有进程读到的结果都相同。如果不进行同步，结果是下面这样的：</p>
+<p><img src="https://i.imgur.com/Ne86kHO.jpg" alt="全局进程同步误解"></p>
+<p>进程2和进程3在进程0写文件之前就读到了文件，所以读到的值不相同。</p>
+<h3 id="3、广播"><a href="#3、广播" class="headerlink" title="3、广播"></a>3、广播</h3><p>广播用于将一个进程的数据发送给包括自己在内的全部进程。</p>
+<center><img src="https://i.imgur.com/NkExg2Q.jpg" alt="广播示意图"><br><br>图4.3 广播</center>
+
+<pre><code>//广播API
+int MPI_Bcast(
+    void *buffer,          //要广播的数据，即发送缓冲
+    int count,             //广播的数据数量
+    MPI_Datatype datatype, //广播的数据类型
+    int root,              //从哪个进程广播
+    MPI_Comm comm          //一般写MPI_COMM_WORLD
+);
+</code></pre><p>例子：</p>
+<pre><code>//Example for Broadcast
+MPI_Init(&amp;argc, &amp;argv);
+int wrank;
+MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);  //获取当前进程号
+int witness = wrank;  //发送缓冲，要发送的数据为进程号，所有进程都需要这个缓冲区用于收发数据
+MPI_Bcast(&amp;witness, 1, MPI_INT, 2, MPI_COMM_WORLD);  //使用2号进程进行广播，注意到发送缓冲和接收缓冲是一致的
+printf(&quot;Rang %d, witness %d.\n&quot;, wrank, witness);  //输出进程号及接收缓冲
+MPI_Finalize();
+</code></pre><p>运行结果：</p>
+<p><img src="https://i.imgur.com/9nMyLMo.jpg" alt="广播"></p>
+<p>2号进程广播的内容是它的进程号，即数字2。因此，所有进程均收到广播数据2。</p>
+<h3 id="4、平均分配"><a href="#4、平均分配" class="headerlink" title="4、平均分配"></a>4、平均分配</h3><p>平均分配用于将一个进程的缓冲区中的数据平均发送给包括自己在内的所有进程。</p>
+<center><img src="https://i.imgur.com/CtqlwCp.jpg" alt="平均分配"><br><br>图4.4 平均分配</center>
+
+<pre><code>//平均分配API
+int MPI_Scatter(
+    const void *sendbuf,     //要分配的数据，即发送缓冲  
+    int sendcount,           //分配给每一个进程的数据数量
+    MPI_Datatype sendtype,   //分配的数据类型
+    void *recvbuf,           //接收缓冲
+    int recvcount,           //每一个进程接收到的数据数量
+    MPI_Datatype recvtype,   //接收的数据类型
+    int root,                //进行分配的进程，哪个进程要发送数据
+    MPI_Comm comm            //一般写MPI_COMM_WORLD
+);
+</code></pre><p>例子：</p>
+<pre><code>//Example for Scatter
+MPI_Init(NULL, NULL);
+int wrank;
+MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);  //获取当前进程号
+int array[] = { wrank, 2 * wrank, 3 * wrank, 4 * wrank };  //发送缓冲
+int witness = 0;  //接收缓冲
+MPI_Scatter(array, 1, MPI_INT, &amp;witness, 1, MPI_INT, 2, MPI_COMM_WORLD);  //进行分配
+printf(&quot;Rang %d, witness %d.\n&quot;, wrank, witness);  //输出进程号及接收缓冲
+MPI_Finalize();
+</code></pre><p>运行结果：</p>
+<p><img src="https://i.imgur.com/9OiMJDF.jpg" alt="平均分配"></p>
+<p>对于0号进程而言，发送缓冲是{0，0，0，0};对于1号进程而言，发送缓冲是{1，2，3，4}……以此类推。由于指定2号进程发送数据，因此发送的数据是2号进程的{2，4，6，8}，此时进行平均分配，得到如上结果。</p>
+<h3 id="5、平均收集"><a href="#5、平均收集" class="headerlink" title="5、平均收集"></a>5、平均收集</h3><p>平均收集是平均分配的逆向操作，用于将所有进程的数据汇总到一个进程。</p>
+<center><img src="https://i.imgur.com/BNuP7YD.jpg" alt="平均收集"><br><br>图4.5 平均收集</center>
+
+<pre><code>//平均收集API
+int MPI_Gather(
+    const void *sendbuf,    //要收集的数据，即每个进程的发送缓冲
+    int sendcount,          //每个进程要发送的数据量
+    MPI_Datatype sendtype,  //发送的数据类型
+    void *recvbuf,          //某一个进程的接收缓冲
+    int recvcount,          //从每个进程接收的数据量
+    MPI_Datatype recvtype,  //接收的数据类型
+    int root,               //哪个进程进行接收
+    MPI_Comm comm           //一般写MPI_COMM_WORLD
+);
+</code></pre><p>例子：</p>
+<pre><code>//Example for Gather
+MPI_Init(NULL, NULL);
+int wrank;
+MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);  //获取当前进程号
+int witness[] = { 0, 0, 0, 0 };   //接收缓冲，每一个进程都创建并初始化
+MPI_Gather(&amp;wrank, 1, MPI_INT, witness, 1, MPI_INT, 2, MPI_COMM_WORLD);  //进行平均收集
+printf(&quot;Rang %d, witness&quot;, wrank);  //输出进程号及接收缓冲
+for (int i = 0; i &lt; 4; ++i)
+    printf(&quot; %d&quot;, witness[i]);
+printf(&quot;.\n&quot;);
+MPI_Finalize();
+</code></pre><p>运行结果：</p>
+<p><img src="https://i.imgur.com/PS6AB8b.jpg" alt="平均收集"></p>
+<p>可以看到，我们把进程号作为要发送的数据，2号进程进行收集，所以0、1、3号进程的接收缓冲没有变动，都是初始化时的{0，0，0，0}，而2号进程的接收缓冲是收集到的{0，1，2，3}。</p>
+<h3 id="6、普遍收集"><a href="#6、普遍收集" class="headerlink" title="6、普遍收集"></a>6、普遍收集</h3><p>普遍收集用于将所有进程发送的数据收集给包括自己在内的所有进程，相当于平均收集和广播的结合。</p>
+<center><img src="https://i.imgur.com/hX6KZsI.jpg" alt="普遍收集"><br><br>图4.6 普遍收集</center>
+
+<pre><code>//普遍收集API
+int MPI_Allgather(
+    const void *sendbuf,    //要收集的数据，即发送缓冲
+    int sendcount,          //每一个进程要发送的数据数量
+    MPI_Datatype sendtype,  //发送的数据类型
+    void *recvbuf,          //接收的数据，即接收缓冲
+    int recvcount,          //从每一个进程接收的数据数量
+    MPI_Datatype recvtype,  //接收的数据类型
+    MPI_Comm comm           //一般写MPI_COMM_WORLD
+);
+</code></pre><p>例子：</p>
+<pre><code>//Example for Allgather
+MPI_Init(NULL, NULL);
+int wrank;
+MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);  //获取当前进程号
+int witness[] = { 0, 0, 0, 0 };  //接收缓冲
+MPI_Allgather(&amp;wrank, 1, MPI_INT, witness, 1, MPI_INT, MPI_COMM_WORLD);  //进行普遍收集
+printf(&quot;Rang %d, witness&quot;, wrank);  //输出进程号及接收缓冲
+for (int i = 0; i &lt; 4; ++i)
+    printf(&quot; %d&quot;, witness[i]);
+printf(&quot;.\n&quot;);
+MPI_Finalize();
+</code></pre><p>运行结果：</p>
+<p><img src="https://i.imgur.com/QLnEzOM.jpg" alt="普遍收集"></p>
+<p>可以看出，相比上一节的平均收集，普遍收集会将结果收集到包括自己在内的所有进程。</p>
+<h3 id="7、选择性分配"><a href="#7、选择性分配" class="headerlink" title="7、选择性分配"></a>7、选择性分配</h3><p>平均分配要求分配的数量必须相同，而对于选择性分配，分配的数量可以不同。因此，平均分配可以视为选择性分配的一种特殊情况。</p>
+<center><img src="https://i.imgur.com/jfQEKn8.jpg" alt="选择性分配"><br><br>图4.7 选择性分配</center>
+
+<pre><code>//选择性分配API
+int MPI_Scatterv( 
+    const void *sendbuf,     //发送缓冲
+    const int sendcounts[],  //要发送给各个进程的数据数量，注意是一个数组
+    const int displs[],      //要发送给各个进程的数据所在缓冲区的起始位置，也是一个数组
+    MPI_Datatype sendtype,   //发送的数据类型
+    void *recvbuf,           //接收缓冲
+    int recvcount,           //接收的数据数量
+    MPI_Datatype recvtype,   //接收的数据类型
+    int root,                //哪一个进程进行分配
+    MPI_Comm comm            //一般写MPI_COMM_WORLD
+); 
+</code></pre><p>看代码之前，先来了解两个重要的数组：sendcounts[] 和 displs[]。</p>
+<ul>
+<li><p>sendcounts[]用于表示从0号进程开始，要分配给各个进程的数据数量。如图4.7所示，对应的sendcounts[] = {1,2,1,2}，表示0号进程发送一个，1号进程发送两个，2号进程发送一个，3号进程发送两个。</p>
+</li>
+<li><p>displs[]用于表示从0号进程开始，要发送给各个进程的数据所在缓冲区的起始位置。如图4.7所示，对应的displs[] = {0,1,3,4}，表示分配给0号进程的数据起始在0位置，分配给1号进程的数据起始在1位置，分配给2号进程的数据起始在3位置，分配给3号进程的数据起始在4位置。</p>
+</li>
+</ul>
+<p>利用sendcounts[]和displs[]两个数组，相当于标定了发送给各进程的数据所在缓冲区的起始位置及长度，由此可以确定需要发送的数据内容。</p>
+<p>理解了这两个数组的作用，就可以来看例子了(获取当前进程号的语句已经省略)：</p>
+<pre><code>//Example for Scatterv
+MPI_Init(NULL, NULL);
+int recvbuf[] = { wrank, wrank };  //接收缓冲，初始化为两个当前进程号
+int recvcount = (wrank % 2) + 1;   //接收数据的数量，偶数号进程接收1个，奇数号进程接收两个
+int sendcounts[] = { 1, 2, 1, 2 }, //发送的数据数量
+int displs[] = { 0, 1, 3, 4 };     //发送的数据所在缓冲区的起始位置
+int total = 6;                     //发送的数据总数
+if (wrank == 2) sendbuf[] = {1000 to 1005};  //伪代码，手动设置要发送的数据内容
+MPI_Scatterv(sendbuf, sendcounts, displs, MPI_INT,     recvbuf, recvcount, MPI_INT, 2, MPI_COMM_WORLD);  //进行选择性分配
+printf(&quot;Rang %d, recvbuf %d %d.\n&quot;, wrank, recvbuf[0],     recvbuf[1]); //输出进程号及接收缓冲
+MPI_Finalize();
+</code></pre><p>运行结果：</p>
+<p><img src="https://i.imgur.com/A68wtic.jpg" alt="选择性收集"></p>
+<p>从结果可以看出，1、3号进程接收了两个数据；而0、2号进程仅接收一个数据，从而第二个位置的数据没有变动，是初始化时的当前进程号。每个进程接收到的数据的顺序也和代码中一致。</p>
+<h3 id="8、选择性收集"><a href="#8、选择性收集" class="headerlink" title="8、选择性收集"></a>8、选择性收集</h3><p>选择性收集是选择性分配的逆向操作，用于将不同数量的数据收集到某个进程。平均收集是选择性收集的一种特殊情况。</p>
+<center><img src="https://i.imgur.com/nA74OpQ.jpg" alt="选择性收集"><br><br>图4.8 选择性收集</center>
+
+<pre><code>//选择性收集API
+int MPI_Gatherv( 
+    const void *sendbuf,     //发送缓冲
+    int sendcount,           //每一个进程要发送的数据数量
+    MPI_Datatype sendtype,   //发送的数据类型
+    void *recvbuf,           //接收缓冲
+    const int recvcounts[],  //接收的数量，类比上一节的sendcounts[]
+    const int displs[],      //接收的起始位置，类比上一节的displs[]
+    MPI_Datatype recvtype,   //接收的数据类型
+    int root,                //哪一个进程接收
+    MPI_Comm comm            //一般写MPI_COMM_WORLD
+); 
+</code></pre><p>recvcounts[]和displs[]两个数组可以参考上一节，这里不再赘述，直接看例子：</p>
+<pre><code>//Example for Gatherv
+MPI_Init(NULL, NULL);
+int sendbuf[] = { wrank, wrank };  //发送缓冲，要发送的数据为当前进程号
+int sendcount = (wrank % 2) + 1;   //发送的数据数量，偶数号进程发送一个，奇数号进程发送两个
+int *recvbuf, recvcounts[] = { 1,2,1,2 }, displs = { 0,1,3,4 };  //接收缓冲及接收信息
+int total = 6;  //接收的总数据量
+if (wrank == 2)
+    recvbuf = (int*)calloc(total, sizeof(int));  //分配一块内存给接收缓冲
+    MPI_Gatherv(sendbuf, sendcount, MPI_INT, recvbuf, recvcounts, displs, MPI_INT, 2, MPI_COMM_WORLD);  //进行选择性收集
+if (wrank == 2)
+    //打印出recvbuf[i]
+MPI_Finalize();
+</code></pre><p>运行结果：</p>
+<p><img src="https://i.imgur.com/zmxvdL9.jpg" alt="选择性收集"></p>
+<p>0号进程的发送缓冲为{0，0}，要发送的数据量是一个，因此仅发送一个数字0；1号进程的发送缓冲为{1，1}，要发送的数据量是两个，因此发送了两个数字1，1……以此类推。2号进程接收到的数据根据recvcounts[]和displs[]两个数组决定，由此得出上述结果。</p>
+<h3 id="9、行列互换"><a href="#9、行列互换" class="headerlink" title="9、行列互换"></a>9、行列互换</h3><p>行列互换用于将每一个进程的数据平均分发给包括自己在内的所有进程，宏观上看就相当于行与列相互交换。</p>
+<center><img src="https://i.imgur.com/VFPGvtD.jpg" alt="行列互换"><br><br>图4.9 行列互换</center>
+
+<pre><code>//行列互换API
+int MPI_Alltoall( 
+    const void *sendbuf,     //发送缓冲
+    int sendcount,           //发送的数量
+    MPI_Datatype sendtype,   //发送的类型
+    void *recvbuf,           //接收缓冲
+    int recvcount,           //接收的数量
+    MPI_Datatype recvtype,   //接收类型
+    MPI_Comm comm            //一般写MPI_COMM_WORLD
+);
+</code></pre><p>例子：</p>
+<pre><code>//Example for Alltoall
+MPI_Init(NULL, NULL);
+int power = 10 * wrank + 10;   //生成与当前进程号有关的数据
+int sendbuf[] = {power,power+1,power+2,power+3};  //发送缓冲
+int recvbuf[] = { 0, 0, 0, 0 };   //接收缓冲
+MPI_Alltoall(sendbuf, 1, MPI_INT, recvbuf, 1, MPI_INT, MPI_COMM_WORLD);  //进行行列互换
+//打印每个进程的发送缓冲和接收缓冲
+MPI_Finalize();
+</code></pre><p>运行结果：</p>
+<p><img src="https://i.imgur.com/UiZBUO0.jpg" alt="行列互换"></p>
+<p>观察进程号、发送缓冲及接收缓冲后可以发现，如果将进程号按照0、1、2、3的顺序排列，则相当于做了一次矩阵的行列互换。其本质是0号进程做了一次平均分配，然后1号进程再做平均分配……以此类推。</p>
+<h2 id="0x05-简单Demo"><a href="#0x05-简单Demo" class="headerlink" title="0x05 简单Demo"></a>0x05 简单Demo</h2><p>第四章介绍了基础的、常用的进程间通信函数，本章通过一个简单的综合性例子，来看看如何使用这些函数。</p>
+<p>现在要求：由一个进程生成一组数列，要求计算这组数列的第1-5项平均值及差，第6-8项的最大值，第9-12项的最小值，以及第13-14项的乘积，将结果保存到一个新的数组中，将该数组告知所有进程。</p>
+<p>一个简单的思路，是由0号进程(哪个进程都无所谓)生成一组数列，使用选择性分配，将这个数列分配给包括自己在内的其他进程；由于第1-5项需要求平均值和差两项内容，所以可以由0号进程将1-5项通过点对点的方式发给另一个进程；当所有进程并发计算完成后，将结果通过平均收集的方式收集到0号进程(同样，哪个进程都无所谓)，最终使用广播的方式告知所有进程。</p>
+<p>整个过程参考图5.1</p>
+<center><img src="https://i.imgur.com/nyzgfk3.jpg" alt="Demo"><br><br>图5.1 计算过程</center>
+
+<p>完整代码如下：</p>
+<pre><code>//simpleDemo.c
+#include &lt;mpi.h&gt; 
+#include &lt;stdio.h&gt; 
+#include &lt;stdlib.h&gt;
+int main(int argc, char **argv) {
+    MPI_Init(NULL, NULL);
+    int world_size, wrank;
+    MPI_Comm_size(MPI_COMM_WORLD, &amp;world_size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);
+
+    /* 1、选择性分配阶段 */
+    const int total = 14;               //要发送的总数据量
+    int recvbuf[5] = { 0,0,0,0,0 };     //接收缓存
+    int recvcount = 5;                  //接收的数据量
+    int sendcounts[] = { 5, 3, 4, 2 };  //发送的数据量
+    int displs[] = { 0, 5, 8, 12 };     //要发送的数据所在的起始位置
+    int sendbuf[total];                 //发送缓存
+    if (wrank == 0) {
+        /* 生成发送序列 */
+        for (int i = 0; i &lt; total; i++) {
+            if (i &lt; 5) sendbuf[i] = 100 + i;
+            else if (i &lt; 8) sendbuf[i] = 1000 + 2 * i;
+            else if (i &lt; 12)sendbuf[i] = 10 + 10 * i;
+            else sendbuf[i] = 11;
+        }
+        /* 显示发送序列 */
+        printf(&quot;Rang %d, sendbuf &quot;, wrank);
+        for (int i = 0; i &lt; total; i++) {
+            printf(&quot;%d &quot;, sendbuf[i]);
+        }
+        printf(&quot;\n&quot;);
+        //sendbuf[] = { 100 101 102 103 104 1010 1012 1014 90 100 110 120 11 11 };
+    }
+    MPI_Scatterv(sendbuf, sendcounts, displs, MPI_INT, recvbuf, recvcount, MPI_INT, 0, MPI_COMM_WORLD);
+
+    /* 显示发送的结果 */
+    printf(&quot;Rang %d, recvbuf &quot;, wrank);
+    for (int i = 0; i &lt; 5; i++) {
+        printf(&quot;%d &quot;, recvbuf[i]);
+    }
+    printf(&quot;\n&quot;);
+
+    MPI_Barrier(MPI_COMM_WORLD);
+
+    /* 2、数据处理阶段 */
+    int sendbuff, sum, max, min, diff;
+    int receivebuff[5];
+    switch (wrank) {
+    case 0:
+        MPI_Ssend(recvbuf, 5, MPI_INT, 4, 28, MPI_COMM_WORLD);  //将同样的数据发送给4号进程
+        sum = 0;
+        for (int i = 0; i &lt; 5; i++) sum += recvbuf[i];
+        int avg = sum / 5;
+        sendbuff = avg;
+        break;
+    case 1:
+        max = recvbuf[0];
+        for (int i = 1; i &lt; 3; i++)
+            if (max &lt; recvbuf[i]) max = recvbuf[i];
+        sendbuff = max;
+        break;
+    case 2:
+        min = recvbuf[0];
+        for (int i = 1; i &lt; 4; i++)
+            if (min &gt; recvbuf[i]) min = recvbuf[i];
+        sendbuff = min;
+        break;
+    case 3:
+        sendbuff = recvbuf[0] * recvbuf[1];
+        break;
+    case 4:
+        MPI_Recv(recvbuf, 5, MPI_INT, 0, 28, MPI_COMM_WORLD, MPI_STATUS_IGNORE);  //接收0号进程的数据
+        diff = recvbuf[0];
+        for (int i = 1; i &lt; 5; i++)
+            diff -= recvbuf[i];
+        sendbuff = diff;
+        break;
+    default:
+        break;
+    }
+    printf(&quot;Rang %d, sendbuff %d\n&quot;, wrank, sendbuff);
+
+    /* 平均收集阶段 */
+    MPI_Gather(&amp;sendbuff, 1, MPI_INT, receivebuff, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    if (wrank == 0) {
+        printf(&quot;Rang %d, recvbuff &quot;, wrank);
+        for (int i = 0; i &lt; 5; i++) {
+            printf(&quot;%d &quot;, receivebuff[i]);
+        }
+        printf(&quot;\n&quot;);
+    }
+
+    /* 广播阶段 */
+    MPI_Bcast(receivebuff, 5, MPI_INT, 0, MPI_COMM_WORLD);
+    printf(&quot;Rang %d, receivebuff &quot;, wrank);
+    for (int i = 0; i &lt; 5; i++) {
+        printf(&quot;%d &quot;, receivebuff[i]);
+    }
+    printf(&quot;\n&quot;);
+
+    MPI_Finalize();
+    return 0;
+}
+</code></pre><p>输入编译运行指令：</p>
+<pre><code>$ mpicc -o simpleDemo simpleDemo.c
+$ mpirun -n 5 simpleDemo
+</code></pre><p>运行结果如下：</p>
+<p><img src="https://i.imgur.com/25Hzrhw.jpg" alt="Demo_result"></p>
+<p>由于进程是并发执行的，因此输出的结果并不是有序的。</p>
+<p>本实例还有更加简便的方式实现，也是完全基于上述通信函数的实现方法，这里留给读者自行思考。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://www.open-mpi.org/" target="_blank" rel="noopener">OpenMPI官网</a></p>
+<p><a href="https://blog.csdn.net/wanger2014/article/details/51635209" target="_blank" rel="noopener">OpenMPI安装</a></p>
+<p><a href="https://blog.csdn.net/wanger2014/article/details/51635211" target="_blank" rel="noopener">OpenMPI HelloWorld</a></p>
+<p><a href="https://www.cnblogs.com/yanwenliqjl/p/8857547.html" target="_blank" rel="noopener">OpenMPI点对点通信</a></p>
+<p><a href="https://www.cnblogs.com/yanwenliqjl/p/8857620.html" target="_blank" rel="noopener">OpenMPI集体通信</a></p>
+<p><a href="https://baike.baidu.com/item/OpenMPI/7895111" target="_blank" rel="noopener">百度百科</a></p>
+<p><a href="https://link.springer.com/chapter/10.1007%2F978-3-540-30218-6_19" target="_blank" rel="noopener">论文——Open MPI: Goals, Concept, and Design of a Next Generation MPI Implementation</a></p>
+<hr>
+<p>分享人： 金力 黄博博 周鑫 (复旦大学NiSL）</p>
+
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="/img/alipay.jpeg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="/img/wepay.jpeg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Bobo Huang</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2018/11/10/OpenCL-HelloWorld/" class="next-post btn btn-default" title='OpenCL（一） -- HelloWorld'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">OpenCL（一） -- HelloWorld</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'DL5693uIDX7fHtjctmTjGuis-gzGzoHsz',
+            appKey: 'OheW0MamYu8xrN4Qw5MJxcIa',
+            placeholder: '说点什么吧',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: ''.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">Table of Contents</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#摘-要"><span class="toc-number">1.</span> <span class="toc-text">摘  要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-初识OpenMPI"><span class="toc-number">2.</span> <span class="toc-text">0x01 初识OpenMPI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-OpenMPI的架构及编程定式"><span class="toc-number">3.</span> <span class="toc-text">0x02 OpenMPI的架构及编程定式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-OpenMPI的HelloWorld"><span class="toc-number">4.</span> <span class="toc-text">0x03 OpenMPI的HelloWorld!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-进程间通信基础"><span class="toc-number">5.</span> <span class="toc-text">0x04 进程间通信基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、点对点通信"><span class="toc-number">5.1.</span> <span class="toc-text">1、点对点通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、全局进程同步"><span class="toc-number">5.2.</span> <span class="toc-text">2、全局进程同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、广播"><span class="toc-number">5.3.</span> <span class="toc-text">3、广播</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、平均分配"><span class="toc-number">5.4.</span> <span class="toc-text">4、平均分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、平均收集"><span class="toc-number">5.5.</span> <span class="toc-text">5、平均收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、普遍收集"><span class="toc-number">5.6.</span> <span class="toc-text">6、普遍收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7、选择性分配"><span class="toc-number">5.7.</span> <span class="toc-text">7、选择性分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8、选择性收集"><span class="toc-number">5.8.</span> <span class="toc-text">8、选择性收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9、行列互换"><span class="toc-number">5.9.</span> <span class="toc-text">9、行列互换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-简单Demo"><span class="toc-number">6.</span> <span class="toc-text">0x05 简单Demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">7.</span> <span class="toc-text">参考链接</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2019
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>
