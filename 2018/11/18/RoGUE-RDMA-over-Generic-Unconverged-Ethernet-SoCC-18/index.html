@@ -1,0 +1,483 @@
+<!DOCTYPE HTML>
+<html lang="">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Bobo Huang写字的地方">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>RoGUE_RDMA over Generic Unconverged Ethernet(SoCC&#39;18)笔记 | Bobo Huang写字的地方</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Bobo Huang写字的地方" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?cd77d5931f412f9cfa483dcfc5fc7ce3";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    
+
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='Bob Huang'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 从未如此简单有趣～ </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Bobo Huang写字的地方</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa fa-home"></i>  Home</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/算法/"><i class="fa fa-tasks"></i>  算法</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/闲思碎语/"><i class="fa fa-tags"></i>  闲思碎语</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/每周技术分享/"><i class="fa fa-share"></i>  每周技术分享</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/About"><i class="fa fa-user"></i>  About Me</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="RoGUE_RDMA over Generic Unconverged Ethernet(SoCC&#39;18)笔记">
+            
+	            RoGUE_RDMA over Generic Unconverged Ethernet(SoCC&#39;18)笔记
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/科研论文笔记">
+            科研论文笔记
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/RDMA" title='RDMA'>
+                        RDMA
+                    </a>
+                
+                    <a href="/tags/论文阅读笔记" title='论文阅读笔记'>
+                        论文阅读笔记
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/11/18</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>版权声明：本文为 Jiawei Xu 于2018年11月15日所写，未经允许不得转载。</p>
+<h3 id="1-问题描述和论文概括"><a href="#1-问题描述和论文概括" class="headerlink" title="1. 问题描述和论文概括"></a>1. 问题描述和论文概括</h3><p>RDMA为用户态提供了直接访问、在应用程序的buffer中传输数据的能力。RDMA旁路了开销较高的系统调用，在硬件上进行组包和包解析操作。允许单向操作，凭借一边的连接可以在硬件上完全处理而不需要主机软件的参与。因此RDMA相比于TCP/IP网络提高了端到端的时延和CPU占用。</p>
+<p>RNIC：RDMA网卡</p>
+<p>PFC：使用backpressure-based congestion control来给RDMA提供无损网络。PFC是的交换机或者主机当他们的buffer占用超过一定的阀值产生pause frame，然后让发送方节流。有了PFC之后，丢包只会发生在少见的bit损坏上，RNIC就可以用简单的硬件重传方案来恢复。</p>
+<p>RoCE的优势：低延迟、低CPU利用率，场景：DC云基础设施服务。</p>
+<p>目前RoCE、FPC的缺点：影响网络稳定性、复杂的网络管理、HOL Blocking问题、设备故障和不正确的路由可能导致整个网络死锁、Bufferbloat问题、unfair packet scheduling。</p>
+<p>关于FPC问题的相关进展：</p>
+<ol>
+<li><p>DCQCN缓解了一部分风险，但是没有完全解决这些问题。</p>
+</li>
+<li><p>最近的研究关于数据中心拥塞控制，DCQCN，缓解了PFC被唤醒的频率。但是还是有问题：从其接收队列停止读取的慢速或恶意主机可以生成暂停帧并拒绝其他租户访问网络。</p>
+</li>
+<li><p>深入的监控通过识别是否有这样的问题会发生来解决这个问题，但是监控是有限的、不准确的、不能大规模部署。</p>
+</li>
+</ol>
+<p>和SIGCOMM’18的思路一样：不去修复以上这些问题，而是去掉RoCE中的PFC，用新的拥塞控制和新的拥塞导致的丢包恢复方案代替。</p>
+<p>该论文提出的RoGUE（RDMA over Generic Unconverged Ethernet)的理念和贡献：不需要依靠PFC。重新思考RDMA拥塞控制和恢复机制，寻找一种保持低延时低CPU优点、但是还能够容忍由于拥塞导致的丢包的方式。（从降低能耗角度），并且增加了UC的丢包恢复。</p>
+<h3 id="2-设计难点和挑战"><a href="#2-设计难点和挑战" class="headerlink" title="2. 设计难点和挑战"></a>2. 设计难点和挑战</h3><p>那么问题来了，在哪里和如何实现所想要的（拥塞控制）功能？</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>想法一</th>
+<th>想法二</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>在哪里实现</td>
+<td>完全用RNIC硬件实现</td>
+<td>完全用软件实现</td>
+</tr>
+<tr>
+<td>pros</td>
+<td>1、管理者，特别是本地或者私有云的小规模，不能依靠RNIC提供商来推行硬件改变，因此他们需要了解传统RNIC；大的云比如google和Microsoft可以和提供商推广自定义的交换机网卡特性比如结合了拥塞控制的改进，但是对于企业小中型私有数据中心和云。他们就只能用不灵活的通用的硬件。2、刻在硬件上的方法不能处理交换机上非标准协议实现，也不能处理交换机功能的升级或者端系统拥塞控制协议；3、不利于各种算法的快速实现应用，不利于向下兼容和网络升级。数据中心拥塞控制是快速发展的，每年都有一些新的拥塞控制算法提出来。在硬件上实现拥塞控制算法会降低阻碍这些新算法的应用。4、现有的RNIC丢包恢复机制是设计用来在低错包的情况下工作的。当时PFC关掉时，在有新建连接的burst时流丢包严重，但是RNIC硬件机制恢复这些丢包时效率很低，它花几百毫秒来检测丢包然后恢复。</td>
+<td>1、基于包层面的拥塞信号对软件是透明的，传统方案利用的拥塞信号例如丢包和ECN比特都是被RNIC接收，软件无法得到；2、无差别的使用软件驱动的控制（比如使用软件来调整数据包速度使其达到一个合适的速率，或者识别和恢复丢包）会严重破坏RDMA cpu和时延的效益；</td>
+</tr>
+<tr>
+<td>cons</td>
+<td>低时延、低CPU利用率、性能高</td>
+<td>易于实现</td>
+</tr>
+</tbody>
+</table>
+<p>子结论一：需要平衡好硬件和软件的工作范围</p>
+<p>RoGUE的实现方式：OpenFabrics Enterprise Distribution(OFED) 用户层面API之上一个中介层，它把RDMA的拥塞控制和丢包恢复功能提到了软件上，利用现有的硬件来协助软件加速性能。</p>
+<h3 id="3-RoGUE设计"><a href="#3-RoGUE设计" class="headerlink" title="3. RoGUE设计"></a>3. RoGUE设计</h3><p><strong>软硬件具体分工：</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>拥塞控制功能</th>
+<th>丢包恢复功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>软件</td>
+<td>1、拥塞控制逻辑（依靠时延来估计和响应拥塞，而不是用丢包和ECN bits。原因是：ECN标记只是表示网络拥塞，而时延表示RNIC和网络的拥塞。并且RNIC消耗ECN标记，使得它们对软件是透明的）；2、Segmentation；3、TCP Vegas算法来做拥塞响应调整拥塞窗口（RoGUE软件上使用一个拥塞窗口，结合硬件速率限制器来调整RNIC的数据包，用这两个方法一起保证稳定的拥塞控制行为）</td>
+<td>当硬件重传无效的时候，响应慢就会影响吞吐率（burst流丢包），RoGUE使用一个软件上的shadow queue pair来进行重传</td>
+</tr>
+<tr>
+<td>RNIC</td>
+<td>1、高性能通信；2、精准时间戳；3、速率限制</td>
+<td>当偶尔有丢包发生的时候，RoGUE首先依靠RNIC的硬件重传机制</td>
+</tr>
+</tbody>
+</table>
+<p>RoGUE在OFED用户层API上加了一层。把来自应用程序的一个很大的verb集合作为输入。</p>
+<p><strong>RoGUE如何实现拥塞控制呢？</strong></p>
+<ol>
+<li><p>对输入数据进行segmentation</p>
+</li>
+<li><p>使用RTT和丢包来估算拥塞，用一个窗口来记录verbs</p>
+</li>
+<li><p>在硬件上进行速率限制来pace out packets</p>
+</li>
+</ol>
+<hr>
+<p><strong>为了提供低开销、高性能、拥塞控制和可靠性，需要解决以下问题</strong>：</p>
+<p>Q1: 如何取segments的大小？</p>
+<p>Q2: 拥塞如何估计和根据现有RNIC的能力和限制有效控制？</p>
+<p>Q3: 如何适应不同的底层（RC vs UC）？</p>
+<p>Q4: 对由拥塞导致的丢包如何恢复？</p>
+<p><strong>A1:</strong></p>
+<p>RDMA的一个主要优点是使用大segments并卸载分组化并解析到RNIC可以最大限度地减少CPU的参与和负载。 但是，大的segments还会降低来自网络的反馈的粒度，从而影响拥塞控制。</p>
+<p>设计的两个重点考虑：segmentation（RoGUE传输的一个verb有多大）、signaling（RNIC通知软件一个verb完成的频率）。</p>
+<p>解决方法：通过实验测试，考虑两个不同的网卡RNICs：10 Gbps ConnectX-3 Pro和100 Gbps ConnectX-4 RNIC，使用ib_read_bw OFED RDMA基准测试工具来做到线速使用不同大小的READs 用dstat工具来测量cpu利用率。此设计优先考虑CPU效率而不是更快的响应。<br>结论：综合考虑拥塞信号频率和CPU，Segmentation大小是64KB（10Gbps），256KB（100bps），每一个batch发送一次拥塞信号给软件层，这里batch就取segmentation的大小。</p>
+<p>对于饥饿问题的考虑： RoGUE使用类似于TCP的拥塞窗口来避免过快地发送数据。 因此，在接收器确认先前的发送之前，不会发送新数据。 在高速网络上，拥塞窗口可能小到16KB。 当batch大小超过拥塞窗口时，如果只有一个批次入队，RNIC将会饿死，因为RoGUE在从下一batch中放进队列verbs之前等待先前batch完成的信号，并且直到最后一个数据包发送一个RTT之后才接收到这些信号。为了避免饥饿，RoGUE因此确保在仍有应用程序数据要发送时<strong>至少有2个batch入队</strong>。</p>
+<p><strong>A2：</strong></p>
+<p>为了控制发送速率，RoGUE依靠（1）基于RTT的拥塞控制窗口（2）硬件限速</p>
+<p>因为丢包信号软件不能很快得到，所以用时延作为拥塞信号。使用了一个拥塞窗口，限制了数据包的总数，允许RoGUE ack计时一个batch中的数据包避免拥塞崩溃。但是一个segments中传输的包都以线速传输，因此RoGUE暂时可能会产生一个burst导致丢包，所以RoGUE设置了硬件限速器。综合以上来控制发送速率。</p>
+<p>RTT测量方法：跟论文Timely中的一样，对于RC来说，第i个verb的RTT=收到ack的时间戳-开始传输时间戳（=max{入队时间，上一个verb收到ack的时间戳}）-传输时延（=verb的字节数/限速器的配置设置速率）</p>
+<p>拥塞窗口调整方法：TCP Vegas（加性增，加性减），简单来说就是在每个batch的最后，用上面得到的当前RTT用来估计预期和实际拥塞窗口的差。</p>
+<p><strong>A3：</strong></p>
+<p>特定传输设计</p>
+<p>RoGUE is the first approach to offer congestion control for the UC transport type. </p>
+<p>支持UC传输类型非常重要，因为最近的工作表明它比RC更具可扩展性，因为UC流量可能会影响其他拥塞控制的流量，如RC或TCP流量。</p>
+<ul>
+<li>RC传输：对于RC上的WRITE和SEND动词，RoGUE严格遵循上述设计。 RC中的主要问题是由READ动词引起的。 首先，保持拥塞窗口是复杂的，因为在相反方向上引起WRITE和READ的拥塞。 为了克服这个问题，RoGUE为单个RC QP维护独立的READ和WRITE拥塞窗口。 其次，READ需要在远程主机上设置速率限制。 RoGUE使用一个接收器端库，该接收器端异步地将限制应用于QP，并在每次更改时使用READ速率限制将WRITE_IMM发送到远程主机。</li>
+<li>UC传输：与RC传输不同，RNIC不在UC传输中生成ACK。 因此，不可能立即使用信号来计算网络RTT。 UC传输中的信号仅指示消息已在网络上发送，而不是已由远程RNIC确认。计算RTT的时候完成时间就是一个Verb中最后一个包发送的时间，这篇论文忽略这个误差。</li>
+<li>不处理RD传输</li>
+</ul>
+<p>RoGUE必须能够在UC传输中的RTT测量期间处理分组丢失。 在批次i的测量之前到达的批次j &gt; i的RTT测量被解释为批次i中的分组丢失，并且拥塞窗口积性减小。 当所有未完成的RTT测量都被丢弃时，RoGUE使用超时来重试RTT的采样。 超时后，RoGUE将拥塞窗口重置为其初始大小，并且在成功对RTT进行采样之前不会将新批次排入队列。</p>
+<p><strong>A4:</strong></p>
+<p>当QP发生error state，使用shadow QP mechanism</p>
+<h3 id="4-实验"><a href="#4-实验" class="headerlink" title="4. 实验"></a>4. 实验</h3><p>32台servers，用10Gbps的RNIC相连。</p>
+<ol>
+<li>测量CPU利用率。同时使用QP或TCP流来驱动测试平台中两台机器之间的线速流量（“客户端”发送到“服务器”），比较DCTCP、RoCE和RoGUE、RC和UC传输类型、比较 READ 和WRITE verb的情况。 对于READ，服务器将数据发送到客户端。 我们使用dstat来测量客户端和服务器上每10秒（平均5次运行）的CPU利用率。并且还对DCTCP先进行了优化。</li>
+<li>从一个长时间运行的流开始，单独发送，然后添加/删除最多4个额外的流，一次一个。 测量10Gbps网络中RoGUE平均1s间隔的所有五个流的瞬时吞吐量，以及40Gbps网络中RoGUE模拟器的0.1s间隔的瞬时吞吐量。</li>
+</ol>
+<h3 id="5-实验结果和结论"><a href="#5-实验结果和结论" class="headerlink" title="5. 实验结果和结论"></a>5. 实验结果和结论</h3><p>角度是低能耗（低CPU）+去PFC，对性能的要求是较RoCE持平</p>
+<p>没有讨论实现上的开销；忽略了UC的RTT测量时延</p>
+<h3 id="最后：背景知识"><a href="#最后：背景知识" class="headerlink" title="最后：背景知识"></a>最后：背景知识</h3><p>使用RDMA，用户空间应用程序调用内核来分配NIC队列，然后建立与远程计算机的连接。 应用程序使用客户端库直接与RNIC连接，以将RDMA verbs发送到队列。</p>
+<p>最常用的verb是READ，WRITE，SEND和RECV。 READ从远程主机的内存中获取数据，WRITE将数据传输到远程主机的内存中。 READ和WRITE被认为是“单方面的”，因为它们只需要发送端的主机活动：接收方的RNIC在没有软件参与的情况下处理请求。SEND是“双面的”：它们将消息传送到远程主机，其中软件将RECV verbs排入队列以接收消息。 verbs中的数据大小通常可达2GB。 WRITE_WITH_IMM和SEND_WITH_IMM是WRITE和SEND的变体，它们携带额外的4字节的立即数据，可由远程主机上的软件读取。</p>
+<p>READ，WRITE和SEND被发布到发送队列。 RNIC还在建立连接时创建接收队列。 对于READ和WRITE，不需要接收队列，而对于SEND，软件必须将相应的RECV发布给它们。 所有发送和接收队列都配对，每个队列对（QP）与完成队列相关联，该完成队列表示事件完成并提供即时数据。 用户空间应用程序可以使用中断或轮询完成队列。</p>
+<p>RDMA支持三种传输类型：可靠连接（RC），不可靠连接（UC）和不可靠数据报（UD）。 所有传输都支持SEND / RECV，因为它们的要求最低。 RC和UC支持WRITE，但只有RC支持READ。 在RC中，RNIC负责丢失后的重传。 相反，UC和UD中的RNIC忽略了数据包丢弃。 RNIC可以通过事件对verb的完成申请发出信号。 如果在verb完成时不需要通知应用程序，则它可以禁用信号，这会降低CPU利用率。</p>
+<p>RC的workflow：</p>
+<p>1、发送端主机软件将verb放进队列</p>
+<p>2、发送端RNIC使用DMA从主机内存中获取要写入的数据，并通过网络以一个或多个数据包发送数据。</p>
+<p>4、接收端RNIC把数据写入内存，等到收到最后一个包了之后，就发回一个ACK，发送的RNIC接收ACK</p>
+<p>6、发送端选择性产生一个信号通知应用程序WRITE完成了</p>
+<p>UC verb类似，除了接收端不会有ack并且信号是当verb最后一个包发送的时候会发出而不是收到ack的时候。</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ol>
+<li><em>RoGUE: RDMA over Generic Unconverged Ethernet</em>, Yanfang Le (UW-Madison), Brent Stephens (UW-Madison), Arjun Singhvi (UW-Madison), Aditya Akella (UW-Madison), Michael Swift (UW-Madison), <em>SoCC‘18</em></li>
+<li><em>Revisiting Network Support for RDMA</em>, Radhika Mittal (Berkeley, USA), Alexander Shpiner (Mellanox, Israel), Aurojit Panda (ICSI and NYU, USA), Eitan Zahavi (Mellanox, Israel), Arvind Krishnamurthy (UW, USA), Sylvia Ratnasamy (Berkeley, USA), Scott Shenker (ICSI and Berkeley, USA), <em>SIGCOMM‘18</em></li>
+<li><p><a href="https://dl.acm.org/citation.cfm?doid=190314.190317" target="_blank" rel="noopener">TCP Vegas Algorithm</a></p>
+</li>
+<li><p><a href="https://conferences.sigcomm.org/sigcomm/2015/pdf/papers/p537.pdf" target="_blank" rel="noopener"><em>TIMELY: RTT-based Congestion Control for the Datacenter</em></a>, Radhika Mittal(UC Berkeley), Vinh The Lam, Nandita Dukkipati, Emily Blem, Hassan Wassel,Monia Ghobadi(Microsoft), Amin Vahdat, Yaogong Wang, David Wetherall, David Zats, <em>SIGCOMM’2015</em></p>
+</li>
+</ol>
+<hr>
+<p>分享人： 徐佳玮 黄博博 金力 周鑫 (复旦大学NiSL）</p>
+
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="/img/alipay.jpeg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="/img/wepay.jpeg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Bobo Huang</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2018/11/18/OpenMPI——基础篇/" class="pre-post btn btn-default" title='OpenMPI——基础篇'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">OpenMPI——基础篇</span>
+        </a>
+    
+    
+        <a href="/2018/11/10/OpenCL-HelloWorld/" class="next-post btn btn-default" title='OpenCL（一） -- HelloWorld'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">OpenCL（一） -- HelloWorld</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'DL5693uIDX7fHtjctmTjGuis-gzGzoHsz',
+            appKey: 'OheW0MamYu8xrN4Qw5MJxcIa',
+            placeholder: '说点什么吧',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: ''.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">Table of Contents</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-问题描述和论文概括"><span class="toc-number">1.</span> <span class="toc-text">1. 问题描述和论文概括</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-设计难点和挑战"><span class="toc-number">2.</span> <span class="toc-text">2. 设计难点和挑战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-RoGUE设计"><span class="toc-number">3.</span> <span class="toc-text">3. RoGUE设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-实验"><span class="toc-number">4.</span> <span class="toc-text">4. 实验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-实验结果和结论"><span class="toc-number">5.</span> <span class="toc-text">5. 实验结果和结论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最后：背景知识"><span class="toc-number">6.</span> <span class="toc-text">最后：背景知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference"><span class="toc-number">7.</span> <span class="toc-text">Reference</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2019
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>
