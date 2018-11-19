@@ -260,20 +260,8 @@ $ mpirun -n 4 test
 </blockquote>
 <p>考虑到进程是并发运行的，所以对于每一个进程而言，变量wrank为他们的进程号。</p>
 <p>总结一下，MPI_Comm_size()是用来获取总进程数的，而MPI_Comm_rank()是获取当前进程号的，这两个函数在后面的章节中很常用。</p>
-<p>那么接下来就让我们就开始写HelloWorld吧。</p>
-<pre><code>//HelloWorld.c
-#include &quot;mpi.h&quot;
-#include &lt;stdio.h&gt;
-int main(int argc, char**argv) {
-    MPI_Init(&amp;argc, &amp;argv); //openMPI的初始化函数
-    int world_size, wrank;
-    MPI_Comm_size(MPI_COMM_WORLD, &amp;world_size); //获取总进程数
-    MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank); //获取当前进程标识
-    printf(&quot;Hello world. I&apos;m the process %d, we are %d process in total\n&quot;, wrank,world_size);
-    MPI_Finalize(); //openMPI的结束函数
-    return 0;
-}
-</code></pre><p>编程框架在0x02章节已经说明过了，我们主要看看HelloWorld的内容。首先定义了两个变量world_size和wrank，在通过两个函数MPI_Comm_size()和MPI_Comm_rank()给这两个变量赋值，分别为总进程数和当前进程号，最后打印出HelloWorld、当前进程号以及总进程数。考虑到OpenMPI是多进程并发执行，所以当我们指定多进程后，一定会打印出多个HelloWorld。</p>
+<p>那么接下来就让我们就开始写HelloWorld吧。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//HelloWorld.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"mpi.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>**argv)</span> </span>&#123;</span><br><span class="line">	MPI_Init(&amp;argc, &amp;argv); <span class="comment">//openMPI的初始化函数</span></span><br><span class="line">	<span class="keyword">int</span> world_size, wrank;</span><br><span class="line">	MPI_Comm_size(MPI_COMM_WORLD, &amp;world_size); <span class="comment">//获取总进程数</span></span><br><span class="line">	MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank); <span class="comment">//获取当前进程标识</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Hello world. I'm the process %d, we are %d process in total\n"</span>, wrank,world_size);</span><br><span class="line">	MPI_Finalize(); <span class="comment">//openMPI的结束函数</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>编程框架在0x02章节已经说明过了，我们主要看看HelloWorld的内容。首先定义了两个变量world_size和wrank，在通过两个函数MPI_Comm_size()和MPI_Comm_rank()给这两个变量赋值，分别为总进程数和当前进程号，最后打印出HelloWorld、当前进程号以及总进程数。考虑到OpenMPI是多进程并发执行，所以当我们指定多进程后，一定会打印出多个HelloWorld。</p>
 <p>让我们来编译运行HelloWorld.c源文件，在命令行敲入如下命令：</p>
 <blockquote>
 <p>mpicc -o HelloWorld HelloWorld.c</p>
@@ -284,44 +272,12 @@ int main(int argc, char**argv) {
 
 <p>可以看到，当我们使用4个进程运行时，同一段代码被运行了4次，每次运行时打印的常量“HelloWorld”都一样，每次的总进程数也都一样(无论哪个进程在运行，总进程数总是4个)，但是每次运行的当前进程号是不同的，由此可见，每个进程都运行了一次该代码，而变量wrank就对应每一次运行时的进程号。同时可以注意到，进程的并发执行是无序的。</p>
 <h2 id="0x04-进程间通信基础"><a href="#0x04-进程间通信基础" class="headerlink" title="0x04 进程间通信基础"></a>0x04 进程间通信基础</h2><p>OpenMPI是消息传递接口的一种实现，所以通信是其核心功能。本章节将介绍进程间通信的基础操作，之所以强调基础，是因为还有很多高阶操作，以及不同的通信模式，在一篇文章中写不完……因此，本文先做基础介绍，在接下来的更新中再做高阶的通信介绍。（本章引用的图片均引自<a href="https://www.cnblogs.com/yanwenliqjl/p/8857620.html" target="_blank" rel="noopener">OpenMPI学习笔记</a>）</p>
-<h3 id="1、点对点通信"><a href="#1、点对点通信" class="headerlink" title="1、点对点通信"></a>1、点对点通信</h3><p>点对点通信用于将一组数据从一个进程发送到另一个进程。</p>
-<pre><code>//点对点通信函数API
-int MPI_Ssend(
-    const void *buf,        //要发送的内容，即发送缓冲
-    int count,              //发送的数据数量
-    MPI_Datatype datatype,  //发送的数据类型    
-    int dest,                 //目标进程号，要发给哪个进程
-    int tag,                //消息标签，与接收方必须对应相同
-    MPI_Comm comm           //一般写MPI_COMM_WORLD
-);
-
-int MPI_Recv(
-    void *buf,              //要接收的内容，即接收缓冲
-    int count,              //接收的数据数量
-    MPI_Datatype datatype,  //接收的数据类型
-    int source,             //源进程号，接收的是哪个进程的数据
-    int tag,                //消息标签，与发送方必须对应相同
-    MPI_Comm comm,          //一般写MPI_COMM_WORLD
-    MPI_Status *status      //一般写MPI_STATUS_IGNORE
-);
-</code></pre><p>其中数据类型与C语言的数据类型可以对应(图4)</p>
+<h3 id="1、点对点通信"><a href="#1、点对点通信" class="headerlink" title="1、点对点通信"></a>1、点对点通信</h3><p>点对点通信用于将一组数据从一个进程发送到另一个进程。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//点对点通信函数API</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MPI_Ssend</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	<span class="keyword">const</span> <span class="keyword">void</span> *buf,        <span class="comment">//要发送的内容，即发送缓冲</span></span></span></span><br><span class="line"><span class="function"><span class="params">	<span class="keyword">int</span> count,              <span class="comment">//发送的数据数量</span></span></span></span><br><span class="line"><span class="function"><span class="params">	MPI_Datatype datatype,  <span class="comment">//发送的数据类型	</span></span></span></span><br><span class="line"><span class="function"><span class="params">	<span class="keyword">int</span> dest, 			    <span class="comment">//目标进程号，要发给哪个进程</span></span></span></span><br><span class="line"><span class="function"><span class="params">	<span class="keyword">int</span> tag,                <span class="comment">//消息标签，与接收方必须对应相同</span></span></span></span><br><span class="line"><span class="function"><span class="params">	MPI_Comm comm           <span class="comment">//一般写MPI_COMM_WORLD</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">MPI_Recv</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	<span class="keyword">void</span> *buf,              <span class="comment">//要接收的内容，即接收缓冲</span></span></span></span><br><span class="line"><span class="function"><span class="params">	<span class="keyword">int</span> count,              <span class="comment">//接收的数据数量</span></span></span></span><br><span class="line"><span class="function"><span class="params">	MPI_Datatype datatype,  <span class="comment">//接收的数据类型</span></span></span></span><br><span class="line"><span class="function"><span class="params">	<span class="keyword">int</span> source,             <span class="comment">//源进程号，接收的是哪个进程的数据</span></span></span></span><br><span class="line"><span class="function"><span class="params">	<span class="keyword">int</span> tag,                <span class="comment">//消息标签，与发送方必须对应相同</span></span></span></span><br><span class="line"><span class="function"><span class="params">	MPI_Comm comm,          <span class="comment">//一般写MPI_COMM_WORLD</span></span></span></span><br><span class="line"><span class="function"><span class="params">	MPI_Status *status      <span class="comment">//一般写MPI_STATUS_IGNORE</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p>其中数据类型与C语言的数据类型可以对应(图4)</p>
 <center><img src="https://i.imgur.com/deaYiwh.jpg" alt="OpenMPI数据类型"><br><br>图4.1 OpenMPI的数据类型</center>
 
-<p>让我们看一个例子：(为了节省篇幅，以下的所有例子都只给出OpenMPI中的内容，有些部分也可能出现伪代码)</p>
-<pre><code>//Example for Transmit
-MPI_Init(&amp;argc, &amp;argv);
-int wrank;
-MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank); //获取当前进程号
-int witness[] = { 0, 0 };  //接收缓冲
-if (wrank == 2) {
-    int modifier[] = { 1, 1 };  //发送缓冲
-    MPI_Ssend(modifier, 2, MPI_INT, 3, 28, MPI_COMM_WORLD); //发送
-}
-else if (wrank == 3)
-    MPI_Recv(witness, 2, MPI_INT, 2, 28, MPI_COMM_WORLD, MPI_STATUS_IGNORE); //接收
-printf(&quot;Rang %d, witness {%d,%d}.\n&quot;, wrank, witness[0], witness[1]); //输出进程号和接收缓冲
-MPI_Finalize();
-</code></pre><p>上述代码中，使用if语句块，指定2号进程发送数据，3号进程接收数据，而0、1号两个进程不做操作。在实际编程中，可以根据需要，使用if语句块或switch语句块，分配给不同进程不同的任务，若某一代码段没有指定进程，则该代码段所有进程都需要运行(如所有进程都初始化了接收缓冲)。</p>
+<p>让我们看一个例子：(为了节省篇幅，以下的所有例子都只给出OpenMPI中的内容，有些部分也可能出现伪代码)<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Example for Transmit</span></span><br><span class="line">MPI_Init(&amp;argc, &amp;argv);</span><br><span class="line"><span class="keyword">int</span> wrank;</span><br><span class="line">MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank); <span class="comment">//获取当前进程号</span></span><br><span class="line"><span class="keyword">int</span> witness[] = &#123; <span class="number">0</span>, <span class="number">0</span> &#125;;  <span class="comment">//接收缓冲</span></span><br><span class="line"><span class="keyword">if</span> (wrank == <span class="number">2</span>) &#123;</span><br><span class="line">	<span class="keyword">int</span> modifier[] = &#123; <span class="number">1</span>, <span class="number">1</span> &#125;;  <span class="comment">//发送缓冲</span></span><br><span class="line">	MPI_Ssend(modifier, <span class="number">2</span>, MPI_INT, <span class="number">3</span>, <span class="number">28</span>, MPI_COMM_WORLD); <span class="comment">//发送</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (wrank == <span class="number">3</span>)</span><br><span class="line">	MPI_Recv(witness, <span class="number">2</span>, MPI_INT, <span class="number">2</span>, <span class="number">28</span>, MPI_COMM_WORLD, MPI_STATUS_IGNORE); <span class="comment">//接收</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Rang %d, witness &#123;%d,%d&#125;.\n"</span>, wrank, witness[<span class="number">0</span>], witness[<span class="number">1</span>]); <span class="comment">//输出进程号和接收缓冲</span></span><br><span class="line">MPI_Finalize();</span><br></pre></td></tr></table></figure></p>
+<p>上述代码中，使用if语句块，指定2号进程发送数据，3号进程接收数据，而0、1号两个进程不做操作。在实际编程中，可以根据需要，使用if语句块或switch语句块，分配给不同进程不同的任务，若某一代码段没有指定进程，则该代码段所有进程都需要运行(如所有进程都初始化了接收缓冲)。</p>
 <p>运行结果如下：</p>
 <p><img src="https://i.imgur.com/Ct6Wgod.jpg" alt="点对点通信运行结果"></p>
 <p>由于所有进程都初始化了接收缓冲，而只有3号进程接收了数据，所以0、1、2号进程的接收缓冲都是{0,0}，而3号进程的接收缓冲是接收到的{1,1}。</p>
@@ -330,25 +286,8 @@ MPI_Finalize();
 
 <pre><code>//全局同步函数API
 MPI_Barrier(MPI_COMM_WORLD);
-</code></pre><p>下面我们来看一个例子：</p>
-<pre><code>//Example for Barrier
-MPI_Init(&amp;argc, &amp;argv);
-int wrank;
-MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);  //获取当前进程号
-if (wrank == 0) {  //进程0写文件
-    FILE* f = fopen(&quot;outin&quot;, &quot;w&quot;);
-    long int seconds = time(NULL);
-    fprintf(f, &quot;%ld&quot;, seconds);
-    fclose(f);
-}
-MPI_Barrier(MPI_COMM_WORLD);  //全局同步点
-long int witness = 0;
-FILE* f = fopen(&quot;outin&quot;, &quot;r&quot;);  //所有进程读文件
-fscanf(f, &quot;%d&quot;, &amp;witness);
-printf(&quot;Rang %d, witness %ld.\n&quot;, wrank,     witness);
-fclose(f);
-MPI_Finalize();
-</code></pre><p>运行结果：</p>
+</code></pre><p>下面我们来看一个例子：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Example for Barrier</span></span><br><span class="line">MPI_Init(&amp;argc, &amp;argv);</span><br><span class="line"><span class="keyword">int</span> wrank;</span><br><span class="line">MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);  <span class="comment">//获取当前进程号</span></span><br><span class="line"><span class="keyword">if</span> (wrank == <span class="number">0</span>) &#123;  <span class="comment">//进程0写文件</span></span><br><span class="line">	FILE* f = fopen(<span class="string">"outin"</span>, <span class="string">"w"</span>);</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">int</span> seconds = time(<span class="literal">NULL</span>);</span><br><span class="line">	<span class="built_in">fprintf</span>(f, <span class="string">"%ld"</span>, seconds);</span><br><span class="line">	fclose(f);</span><br><span class="line">&#125;</span><br><span class="line">MPI_Barrier(MPI_COMM_WORLD);  <span class="comment">//全局同步点</span></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">int</span> witness = <span class="number">0</span>;</span><br><span class="line">FILE* f = fopen(<span class="string">"outin"</span>, <span class="string">"r"</span>);  <span class="comment">//所有进程读文件</span></span><br><span class="line"><span class="built_in">fscanf</span>(f, <span class="string">"%d"</span>, &amp;witness);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Rang %d, witness %ld.\n"</span>, wrank, 	witness);</span><br><span class="line">fclose(f);</span><br><span class="line">MPI_Finalize();</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：</p>
 <p><img src="https://i.imgur.com/m4r1ljR.jpg" alt="全局进程同步"></p>
 <p>在0进程写文件后，进行同步，以保证所有进程等待0号进程写完文件后再读文件，从结果中可见，所有进程读到的结果都相同。如果不进行同步，结果是下面这样的：</p>
 <p><img src="https://i.imgur.com/Ne86kHO.jpg" alt="全局进程同步误解"></p>
@@ -364,16 +303,8 @@ int MPI_Bcast(
     int root,              //从哪个进程广播
     MPI_Comm comm          //一般写MPI_COMM_WORLD
 );
-</code></pre><p>例子：</p>
-<pre><code>//Example for Broadcast
-MPI_Init(&amp;argc, &amp;argv);
-int wrank;
-MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);  //获取当前进程号
-int witness = wrank;  //发送缓冲，要发送的数据为进程号，所有进程都需要这个缓冲区用于收发数据
-MPI_Bcast(&amp;witness, 1, MPI_INT, 2, MPI_COMM_WORLD);  //使用2号进程进行广播，注意到发送缓冲和接收缓冲是一致的
-printf(&quot;Rang %d, witness %d.\n&quot;, wrank, witness);  //输出进程号及接收缓冲
-MPI_Finalize();
-</code></pre><p>运行结果：</p>
+</code></pre><p>例子：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Example for Broadcast</span></span><br><span class="line">MPI_Init(&amp;argc, &amp;argv);</span><br><span class="line"><span class="keyword">int</span> wrank;</span><br><span class="line">MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);  <span class="comment">//获取当前进程号</span></span><br><span class="line"><span class="keyword">int</span> witness = wrank;  <span class="comment">//发送缓冲，要发送的数据为进程号，所有进程都需要这个缓冲区用于收发数据</span></span><br><span class="line">MPI_Bcast(&amp;witness, <span class="number">1</span>, MPI_INT, <span class="number">2</span>, MPI_COMM_WORLD);  <span class="comment">//使用2号进程进行广播，注意到发送缓冲和接收缓冲是一致的</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Rang %d, witness %d.\n"</span>, wrank, witness);  <span class="comment">//输出进程号及接收缓冲</span></span><br><span class="line">MPI_Finalize();</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：</p>
 <p><img src="https://i.imgur.com/9nMyLMo.jpg" alt="广播"></p>
 <p>2号进程广播的内容是它的进程号，即数字2。因此，所有进程均收到广播数据2。</p>
 <h3 id="4、平均分配"><a href="#4、平均分配" class="headerlink" title="4、平均分配"></a>4、平均分配</h3><p>平均分配用于将一个进程的缓冲区中的数据平均发送给包括自己在内的所有进程。</p>
@@ -390,17 +321,8 @@ int MPI_Scatter(
     int root,                //进行分配的进程，哪个进程要发送数据
     MPI_Comm comm            //一般写MPI_COMM_WORLD
 );
-</code></pre><p>例子：</p>
-<pre><code>//Example for Scatter
-MPI_Init(NULL, NULL);
-int wrank;
-MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);  //获取当前进程号
-int array[] = { wrank, 2 * wrank, 3 * wrank, 4 * wrank };  //发送缓冲
-int witness = 0;  //接收缓冲
-MPI_Scatter(array, 1, MPI_INT, &amp;witness, 1, MPI_INT, 2, MPI_COMM_WORLD);  //进行分配
-printf(&quot;Rang %d, witness %d.\n&quot;, wrank, witness);  //输出进程号及接收缓冲
-MPI_Finalize();
-</code></pre><p>运行结果：</p>
+</code></pre><p>例子：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Example for Scatter</span></span><br><span class="line">MPI_Init(<span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line"><span class="keyword">int</span> wrank;</span><br><span class="line">MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);  <span class="comment">//获取当前进程号</span></span><br><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[] = &#123; wrank, <span class="number">2</span> * wrank, <span class="number">3</span> * wrank, <span class="number">4</span> * wrank &#125;;  <span class="comment">//发送缓冲</span></span><br><span class="line"><span class="keyword">int</span> witness = <span class="number">0</span>;  <span class="comment">//接收缓冲</span></span><br><span class="line">MPI_Scatter(<span class="built_in">array</span>, <span class="number">1</span>, MPI_INT, &amp;witness, <span class="number">1</span>, MPI_INT, <span class="number">2</span>, MPI_COMM_WORLD);  <span class="comment">//进行分配</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Rang %d, witness %d.\n"</span>, wrank, witness);  <span class="comment">//输出进程号及接收缓冲</span></span><br><span class="line">MPI_Finalize();</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：</p>
 <p><img src="https://i.imgur.com/9OiMJDF.jpg" alt="平均分配"></p>
 <p>对于0号进程而言，发送缓冲是{0，0，0，0};对于1号进程而言，发送缓冲是{1，2，3，4}……以此类推。由于指定2号进程发送数据，因此发送的数据是2号进程的{2，4，6，8}，此时进行平均分配，得到如上结果。</p>
 <h3 id="5、平均收集"><a href="#5、平均收集" class="headerlink" title="5、平均收集"></a>5、平均收集</h3><p>平均收集是平均分配的逆向操作，用于将所有进程的数据汇总到一个进程。</p>
@@ -417,19 +339,8 @@ int MPI_Gather(
     int root,               //哪个进程进行接收
     MPI_Comm comm           //一般写MPI_COMM_WORLD
 );
-</code></pre><p>例子：</p>
-<pre><code>//Example for Gather
-MPI_Init(NULL, NULL);
-int wrank;
-MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);  //获取当前进程号
-int witness[] = { 0, 0, 0, 0 };   //接收缓冲，每一个进程都创建并初始化
-MPI_Gather(&amp;wrank, 1, MPI_INT, witness, 1, MPI_INT, 2, MPI_COMM_WORLD);  //进行平均收集
-printf(&quot;Rang %d, witness&quot;, wrank);  //输出进程号及接收缓冲
-for (int i = 0; i &lt; 4; ++i)
-    printf(&quot; %d&quot;, witness[i]);
-printf(&quot;.\n&quot;);
-MPI_Finalize();
-</code></pre><p>运行结果：</p>
+</code></pre><p>例子：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Example for Gather</span></span><br><span class="line">MPI_Init(<span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line"><span class="keyword">int</span> wrank;</span><br><span class="line">MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);  <span class="comment">//获取当前进程号</span></span><br><span class="line"><span class="keyword">int</span> witness[] = &#123; <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> &#125;;   <span class="comment">//接收缓冲，每一个进程都创建并初始化</span></span><br><span class="line">MPI_Gather(&amp;wrank, <span class="number">1</span>, MPI_INT, witness, <span class="number">1</span>, MPI_INT, <span class="number">2</span>, MPI_COMM_WORLD);  <span class="comment">//进行平均收集</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Rang %d, witness"</span>, wrank);  <span class="comment">//输出进程号及接收缓冲</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">" %d"</span>, witness[i]);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">".\n"</span>);</span><br><span class="line">MPI_Finalize();</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：</p>
 <p><img src="https://i.imgur.com/PS6AB8b.jpg" alt="平均收集"></p>
 <p>可以看到，我们把进程号作为要发送的数据，2号进程进行收集，所以0、1、3号进程的接收缓冲没有变动，都是初始化时的{0，0，0，0}，而2号进程的接收缓冲是收集到的{0，1，2，3}。</p>
 <h3 id="6、普遍收集"><a href="#6、普遍收集" class="headerlink" title="6、普遍收集"></a>6、普遍收集</h3><p>普遍收集用于将所有进程发送的数据收集给包括自己在内的所有进程，相当于平均收集和广播的结合。</p>
@@ -445,19 +356,8 @@ int MPI_Allgather(
     MPI_Datatype recvtype,  //接收的数据类型
     MPI_Comm comm           //一般写MPI_COMM_WORLD
 );
-</code></pre><p>例子：</p>
-<pre><code>//Example for Allgather
-MPI_Init(NULL, NULL);
-int wrank;
-MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);  //获取当前进程号
-int witness[] = { 0, 0, 0, 0 };  //接收缓冲
-MPI_Allgather(&amp;wrank, 1, MPI_INT, witness, 1, MPI_INT, MPI_COMM_WORLD);  //进行普遍收集
-printf(&quot;Rang %d, witness&quot;, wrank);  //输出进程号及接收缓冲
-for (int i = 0; i &lt; 4; ++i)
-    printf(&quot; %d&quot;, witness[i]);
-printf(&quot;.\n&quot;);
-MPI_Finalize();
-</code></pre><p>运行结果：</p>
+</code></pre><p>例子：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Example for Allgather</span></span><br><span class="line">MPI_Init(<span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line"><span class="keyword">int</span> wrank;</span><br><span class="line">MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);  <span class="comment">//获取当前进程号</span></span><br><span class="line"><span class="keyword">int</span> witness[] = &#123; <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> &#125;;  <span class="comment">//接收缓冲</span></span><br><span class="line">MPI_Allgather(&amp;wrank, <span class="number">1</span>, MPI_INT, witness, <span class="number">1</span>, MPI_INT, MPI_COMM_WORLD);  <span class="comment">//进行普遍收集</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Rang %d, witness"</span>, wrank);  <span class="comment">//输出进程号及接收缓冲</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i)</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">" %d"</span>, witness[i]);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">".\n"</span>);</span><br><span class="line">MPI_Finalize();</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：</p>
 <p><img src="https://i.imgur.com/QLnEzOM.jpg" alt="普遍收集"></p>
 <p>可以看出，相比上一节的平均收集，普遍收集会将结果收集到包括自己在内的所有进程。</p>
 <h3 id="7、选择性分配"><a href="#7、选择性分配" class="headerlink" title="7、选择性分配"></a>7、选择性分配</h3><p>平均分配要求分配的数量必须相同，而对于选择性分配，分配的数量可以不同。因此，平均分配可以视为选择性分配的一种特殊情况。</p>
@@ -483,19 +383,8 @@ int MPI_Scatterv(
 </li>
 </ul>
 <p>利用sendcounts[]和displs[]两个数组，相当于标定了发送给各进程的数据所在缓冲区的起始位置及长度，由此可以确定需要发送的数据内容。</p>
-<p>理解了这两个数组的作用，就可以来看例子了(获取当前进程号的语句已经省略)：</p>
-<pre><code>//Example for Scatterv
-MPI_Init(NULL, NULL);
-int recvbuf[] = { wrank, wrank };  //接收缓冲，初始化为两个当前进程号
-int recvcount = (wrank % 2) + 1;   //接收数据的数量，偶数号进程接收1个，奇数号进程接收两个
-int sendcounts[] = { 1, 2, 1, 2 }, //发送的数据数量
-int displs[] = { 0, 1, 3, 4 };     //发送的数据所在缓冲区的起始位置
-int total = 6;                     //发送的数据总数
-if (wrank == 2) sendbuf[] = {1000 to 1005};  //伪代码，手动设置要发送的数据内容
-MPI_Scatterv(sendbuf, sendcounts, displs, MPI_INT,     recvbuf, recvcount, MPI_INT, 2, MPI_COMM_WORLD);  //进行选择性分配
-printf(&quot;Rang %d, recvbuf %d %d.\n&quot;, wrank, recvbuf[0],     recvbuf[1]); //输出进程号及接收缓冲
-MPI_Finalize();
-</code></pre><p>运行结果：</p>
+<p>理解了这两个数组的作用，就可以来看例子了(获取当前进程号的语句已经省略)：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Example for Scatterv</span></span><br><span class="line">MPI_Init(<span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line"><span class="keyword">int</span> recvbuf[] = &#123; wrank, wrank &#125;;  <span class="comment">//接收缓冲，初始化为两个当前进程号</span></span><br><span class="line"><span class="keyword">int</span> recvcount = (wrank % <span class="number">2</span>) + <span class="number">1</span>;   <span class="comment">//接收数据的数量，偶数号进程接收1个，奇数号进程接收两个</span></span><br><span class="line"><span class="keyword">int</span> sendcounts[] = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span> &#125;, <span class="comment">//发送的数据数量</span></span><br><span class="line"><span class="keyword">int</span> displs[] = &#123; <span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span> &#125;;     <span class="comment">//发送的数据所在缓冲区的起始位置</span></span><br><span class="line"><span class="keyword">int</span> total = <span class="number">6</span>;                     <span class="comment">//发送的数据总数</span></span><br><span class="line"><span class="keyword">if</span> (wrank == <span class="number">2</span>) sendbuf[] = &#123;<span class="number">1000</span> to <span class="number">1005</span>&#125;;  <span class="comment">//伪代码，手动设置要发送的数据内容</span></span><br><span class="line">MPI_Scatterv(sendbuf, sendcounts, displs, MPI_INT, 	recvbuf, recvcount, MPI_INT, <span class="number">2</span>, MPI_COMM_WORLD);  <span class="comment">//进行选择性分配</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Rang %d, recvbuf %d %d.\n"</span>, wrank, recvbuf[<span class="number">0</span>], 	recvbuf[<span class="number">1</span>]); <span class="comment">//输出进程号及接收缓冲</span></span><br><span class="line">MPI_Finalize();</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：</p>
 <p><img src="https://i.imgur.com/A68wtic.jpg" alt="选择性收集"></p>
 <p>从结果可以看出，1、3号进程接收了两个数据；而0、2号进程仅接收一个数据，从而第二个位置的数据没有变动，是初始化时的当前进程号。每个进程接收到的数据的顺序也和代码中一致。</p>
 <h3 id="8、选择性收集"><a href="#8、选择性收集" class="headerlink" title="8、选择性收集"></a>8、选择性收集</h3><p>选择性收集是选择性分配的逆向操作，用于将不同数量的数据收集到某个进程。平均收集是选择性收集的一种特殊情况。</p>
@@ -513,20 +402,8 @@ int MPI_Gatherv(
     int root,                //哪一个进程接收
     MPI_Comm comm            //一般写MPI_COMM_WORLD
 ); 
-</code></pre><p>recvcounts[]和displs[]两个数组可以参考上一节，这里不再赘述，直接看例子：</p>
-<pre><code>//Example for Gatherv
-MPI_Init(NULL, NULL);
-int sendbuf[] = { wrank, wrank };  //发送缓冲，要发送的数据为当前进程号
-int sendcount = (wrank % 2) + 1;   //发送的数据数量，偶数号进程发送一个，奇数号进程发送两个
-int *recvbuf, recvcounts[] = { 1,2,1,2 }, displs = { 0,1,3,4 };  //接收缓冲及接收信息
-int total = 6;  //接收的总数据量
-if (wrank == 2)
-    recvbuf = (int*)calloc(total, sizeof(int));  //分配一块内存给接收缓冲
-    MPI_Gatherv(sendbuf, sendcount, MPI_INT, recvbuf, recvcounts, displs, MPI_INT, 2, MPI_COMM_WORLD);  //进行选择性收集
-if (wrank == 2)
-    //打印出recvbuf[i]
-MPI_Finalize();
-</code></pre><p>运行结果：</p>
+</code></pre><p>recvcounts[]和displs[]两个数组可以参考上一节，这里不再赘述，直接看例子：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Example for Gatherv</span></span><br><span class="line">MPI_Init(<span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line"><span class="keyword">int</span> sendbuf[] = &#123; wrank, wrank &#125;;  <span class="comment">//发送缓冲，要发送的数据为当前进程号</span></span><br><span class="line"><span class="keyword">int</span> sendcount = (wrank % <span class="number">2</span>) + <span class="number">1</span>;   <span class="comment">//发送的数据数量，偶数号进程发送一个，奇数号进程发送两个</span></span><br><span class="line"><span class="keyword">int</span> *recvbuf, recvcounts[] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span> &#125;, displs = &#123; <span class="number">0</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span> &#125;;  <span class="comment">//接收缓冲及接收信息</span></span><br><span class="line"><span class="keyword">int</span> total = <span class="number">6</span>;  <span class="comment">//接收的总数据量</span></span><br><span class="line"><span class="keyword">if</span> (wrank == <span class="number">2</span>)</span><br><span class="line">	recvbuf = (<span class="keyword">int</span>*)<span class="built_in">calloc</span>(total, <span class="keyword">sizeof</span>(<span class="keyword">int</span>));  <span class="comment">//分配一块内存给接收缓冲</span></span><br><span class="line">	MPI_Gatherv(sendbuf, sendcount, MPI_INT, recvbuf, recvcounts, displs, MPI_INT, <span class="number">2</span>, MPI_COMM_WORLD);  <span class="comment">//进行选择性收集</span></span><br><span class="line"><span class="keyword">if</span> (wrank == <span class="number">2</span>)</span><br><span class="line">	<span class="comment">//打印出recvbuf[i]</span></span><br><span class="line">MPI_Finalize();</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：</p>
 <p><img src="https://i.imgur.com/zmxvdL9.jpg" alt="选择性收集"></p>
 <p>0号进程的发送缓冲为{0，0}，要发送的数据量是一个，因此仅发送一个数字0；1号进程的发送缓冲为{1，1}，要发送的数据量是两个，因此发送了两个数字1，1……以此类推。2号进程接收到的数据根据recvcounts[]和displs[]两个数组决定，由此得出上述结果。</p>
 <h3 id="9、行列互换"><a href="#9、行列互换" class="headerlink" title="9、行列互换"></a>9、行列互换</h3><p>行列互换用于将每一个进程的数据平均分发给包括自己在内的所有进程，宏观上看就相当于行与列相互交换。</p>
@@ -542,16 +419,8 @@ int MPI_Alltoall(
     MPI_Datatype recvtype,   //接收类型
     MPI_Comm comm            //一般写MPI_COMM_WORLD
 );
-</code></pre><p>例子：</p>
-<pre><code>//Example for Alltoall
-MPI_Init(NULL, NULL);
-int power = 10 * wrank + 10;   //生成与当前进程号有关的数据
-int sendbuf[] = {power,power+1,power+2,power+3};  //发送缓冲
-int recvbuf[] = { 0, 0, 0, 0 };   //接收缓冲
-MPI_Alltoall(sendbuf, 1, MPI_INT, recvbuf, 1, MPI_INT, MPI_COMM_WORLD);  //进行行列互换
-//打印每个进程的发送缓冲和接收缓冲
-MPI_Finalize();
-</code></pre><p>运行结果：</p>
+</code></pre><p>例子：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Example for Alltoall</span></span><br><span class="line">MPI_Init(<span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line"><span class="keyword">int</span> power = <span class="number">10</span> * wrank + <span class="number">10</span>;   <span class="comment">//生成与当前进程号有关的数据</span></span><br><span class="line"><span class="keyword">int</span> sendbuf[] = &#123;power,power+<span class="number">1</span>,power+<span class="number">2</span>,power+<span class="number">3</span>&#125;;  <span class="comment">//发送缓冲</span></span><br><span class="line"><span class="keyword">int</span> recvbuf[] = &#123; <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> &#125;;   <span class="comment">//接收缓冲</span></span><br><span class="line">MPI_Alltoall(sendbuf, <span class="number">1</span>, MPI_INT, recvbuf, <span class="number">1</span>, MPI_INT, MPI_COMM_WORLD);  <span class="comment">//进行行列互换</span></span><br><span class="line"><span class="comment">//打印每个进程的发送缓冲和接收缓冲</span></span><br><span class="line">MPI_Finalize();</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：</p>
 <p><img src="https://i.imgur.com/UiZBUO0.jpg" alt="行列互换"></p>
 <p>观察进程号、发送缓冲及接收缓冲后可以发现，如果将进程号按照0、1、2、3的顺序排列，则相当于做了一次矩阵的行列互换。其本质是0号进程做了一次平均分配，然后1号进程再做平均分配……以此类推。</p>
 <h2 id="0x05-简单Demo"><a href="#0x05-简单Demo" class="headerlink" title="0x05 简单Demo"></a>0x05 简单Demo</h2><p>第四章介绍了基础的、常用的进程间通信函数，本章通过一个简单的综合性例子，来看看如何使用这些函数。</p>
@@ -560,111 +429,8 @@ MPI_Finalize();
 <p>整个过程参考图5.1</p>
 <center><img src="https://i.imgur.com/nyzgfk3.jpg" alt="Demo"><br><br>图5.1 计算过程</center>
 
-<p>完整代码如下：</p>
-<pre><code>//simpleDemo.c
-#include &lt;mpi.h&gt; 
-#include &lt;stdio.h&gt; 
-#include &lt;stdlib.h&gt;
-int main(int argc, char **argv) {
-    MPI_Init(NULL, NULL);
-    int world_size, wrank;
-    MPI_Comm_size(MPI_COMM_WORLD, &amp;world_size);
-    MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);
-
-    /* 1、选择性分配阶段 */
-    const int total = 14;               //要发送的总数据量
-    int recvbuf[5] = { 0,0,0,0,0 };     //接收缓存
-    int recvcount = 5;                  //接收的数据量
-    int sendcounts[] = { 5, 3, 4, 2 };  //发送的数据量
-    int displs[] = { 0, 5, 8, 12 };     //要发送的数据所在的起始位置
-    int sendbuf[total];                 //发送缓存
-    if (wrank == 0) {
-        /* 生成发送序列 */
-        for (int i = 0; i &lt; total; i++) {
-            if (i &lt; 5) sendbuf[i] = 100 + i;
-            else if (i &lt; 8) sendbuf[i] = 1000 + 2 * i;
-            else if (i &lt; 12)sendbuf[i] = 10 + 10 * i;
-            else sendbuf[i] = 11;
-        }
-        /* 显示发送序列 */
-        printf(&quot;Rang %d, sendbuf &quot;, wrank);
-        for (int i = 0; i &lt; total; i++) {
-            printf(&quot;%d &quot;, sendbuf[i]);
-        }
-        printf(&quot;\n&quot;);
-        //sendbuf[] = { 100 101 102 103 104 1010 1012 1014 90 100 110 120 11 11 };
-    }
-    MPI_Scatterv(sendbuf, sendcounts, displs, MPI_INT, recvbuf, recvcount, MPI_INT, 0, MPI_COMM_WORLD);
-
-    /* 显示发送的结果 */
-    printf(&quot;Rang %d, recvbuf &quot;, wrank);
-    for (int i = 0; i &lt; 5; i++) {
-        printf(&quot;%d &quot;, recvbuf[i]);
-    }
-    printf(&quot;\n&quot;);
-
-    MPI_Barrier(MPI_COMM_WORLD);
-
-    /* 2、数据处理阶段 */
-    int sendbuff, sum, max, min, diff;
-    int receivebuff[5];
-    switch (wrank) {
-    case 0:
-        MPI_Ssend(recvbuf, 5, MPI_INT, 4, 28, MPI_COMM_WORLD);  //将同样的数据发送给4号进程
-        sum = 0;
-        for (int i = 0; i &lt; 5; i++) sum += recvbuf[i];
-        int avg = sum / 5;
-        sendbuff = avg;
-        break;
-    case 1:
-        max = recvbuf[0];
-        for (int i = 1; i &lt; 3; i++)
-            if (max &lt; recvbuf[i]) max = recvbuf[i];
-        sendbuff = max;
-        break;
-    case 2:
-        min = recvbuf[0];
-        for (int i = 1; i &lt; 4; i++)
-            if (min &gt; recvbuf[i]) min = recvbuf[i];
-        sendbuff = min;
-        break;
-    case 3:
-        sendbuff = recvbuf[0] * recvbuf[1];
-        break;
-    case 4:
-        MPI_Recv(recvbuf, 5, MPI_INT, 0, 28, MPI_COMM_WORLD, MPI_STATUS_IGNORE);  //接收0号进程的数据
-        diff = recvbuf[0];
-        for (int i = 1; i &lt; 5; i++)
-            diff -= recvbuf[i];
-        sendbuff = diff;
-        break;
-    default:
-        break;
-    }
-    printf(&quot;Rang %d, sendbuff %d\n&quot;, wrank, sendbuff);
-
-    /* 平均收集阶段 */
-    MPI_Gather(&amp;sendbuff, 1, MPI_INT, receivebuff, 1, MPI_INT, 0, MPI_COMM_WORLD);
-    if (wrank == 0) {
-        printf(&quot;Rang %d, recvbuff &quot;, wrank);
-        for (int i = 0; i &lt; 5; i++) {
-            printf(&quot;%d &quot;, receivebuff[i]);
-        }
-        printf(&quot;\n&quot;);
-    }
-
-    /* 广播阶段 */
-    MPI_Bcast(receivebuff, 5, MPI_INT, 0, MPI_COMM_WORLD);
-    printf(&quot;Rang %d, receivebuff &quot;, wrank);
-    for (int i = 0; i &lt; 5; i++) {
-        printf(&quot;%d &quot;, receivebuff[i]);
-    }
-    printf(&quot;\n&quot;);
-
-    MPI_Finalize();
-    return 0;
-}
-</code></pre><p>输入编译运行指令：</p>
+<p>完整代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//simpleDemo.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mpi.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt; </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span> </span>&#123;</span><br><span class="line">	MPI_Init(<span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">	<span class="keyword">int</span> world_size, wrank;</span><br><span class="line">	MPI_Comm_size(MPI_COMM_WORLD, &amp;world_size);</span><br><span class="line">	MPI_Comm_rank(MPI_COMM_WORLD, &amp;wrank);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 1、选择性分配阶段 */</span></span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">int</span> total = <span class="number">14</span>;               <span class="comment">//要发送的总数据量</span></span><br><span class="line">	<span class="keyword">int</span> recvbuf[<span class="number">5</span>] = &#123; <span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span> &#125;;     <span class="comment">//接收缓存</span></span><br><span class="line">	<span class="keyword">int</span> recvcount = <span class="number">5</span>;                  <span class="comment">//接收的数据量</span></span><br><span class="line">	<span class="keyword">int</span> sendcounts[] = &#123; <span class="number">5</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">2</span> &#125;;  <span class="comment">//发送的数据量</span></span><br><span class="line">	<span class="keyword">int</span> displs[] = &#123; <span class="number">0</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">12</span> &#125;;     <span class="comment">//要发送的数据所在的起始位置</span></span><br><span class="line">	<span class="keyword">int</span> sendbuf[total];                 <span class="comment">//发送缓存</span></span><br><span class="line">	<span class="keyword">if</span> (wrank == <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="comment">/* 生成发送序列 */</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; total; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (i &lt; <span class="number">5</span>) sendbuf[i] = <span class="number">100</span> + i;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (i &lt; <span class="number">8</span>) sendbuf[i] = <span class="number">1000</span> + <span class="number">2</span> * i;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (i &lt; <span class="number">12</span>)sendbuf[i] = <span class="number">10</span> + <span class="number">10</span> * i;</span><br><span class="line">			<span class="keyword">else</span> sendbuf[i] = <span class="number">11</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">/* 显示发送序列 */</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Rang %d, sendbuf "</span>, wrank);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; total; i++) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d "</span>, sendbuf[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">		<span class="comment">//sendbuf[] = &#123; 100 101 102 103 104 1010 1012 1014 90 100 110 120 11 11 &#125;;</span></span><br><span class="line">	&#125;</span><br><span class="line">	MPI_Scatterv(sendbuf, sendcounts, displs, MPI_INT, recvbuf, recvcount, MPI_INT, <span class="number">0</span>, MPI_COMM_WORLD);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 显示发送的结果 */</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Rang %d, recvbuf "</span>, wrank);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d "</span>, recvbuf[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line"></span><br><span class="line">	MPI_Barrier(MPI_COMM_WORLD);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 2、数据处理阶段 */</span></span><br><span class="line">	<span class="keyword">int</span> sendbuff, sum, max, min, diff;</span><br><span class="line">	<span class="keyword">int</span> receivebuff[<span class="number">5</span>];</span><br><span class="line">	<span class="keyword">switch</span> (wrank) &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">		MPI_Ssend(recvbuf, <span class="number">5</span>, MPI_INT, <span class="number">4</span>, <span class="number">28</span>, MPI_COMM_WORLD);  <span class="comment">//将同样的数据发送给4号进程</span></span><br><span class="line">		sum = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) sum += recvbuf[i];</span><br><span class="line">		<span class="keyword">int</span> avg = sum / <span class="number">5</span>;</span><br><span class="line">		sendbuff = avg;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">		max = recvbuf[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">3</span>; i++)</span><br><span class="line">			<span class="keyword">if</span> (max &lt; recvbuf[i]) max = recvbuf[i];</span><br><span class="line">		sendbuff = max;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">		min = recvbuf[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">4</span>; i++)</span><br><span class="line">			<span class="keyword">if</span> (min &gt; recvbuf[i]) min = recvbuf[i];</span><br><span class="line">		sendbuff = min;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">		sendbuff = recvbuf[<span class="number">0</span>] * recvbuf[<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">		MPI_Recv(recvbuf, <span class="number">5</span>, MPI_INT, <span class="number">0</span>, <span class="number">28</span>, MPI_COMM_WORLD, MPI_STATUS_IGNORE);  <span class="comment">//接收0号进程的数据</span></span><br><span class="line">		diff = recvbuf[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">5</span>; i++)</span><br><span class="line">			diff -= recvbuf[i];</span><br><span class="line">		sendbuff = diff;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Rang %d, sendbuff %d\n"</span>, wrank, sendbuff);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 平均收集阶段 */</span></span><br><span class="line">	MPI_Gather(&amp;sendbuff, <span class="number">1</span>, MPI_INT, receivebuff, <span class="number">1</span>, MPI_INT, <span class="number">0</span>, MPI_COMM_WORLD);</span><br><span class="line">	<span class="keyword">if</span> (wrank == <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Rang %d, recvbuff "</span>, wrank);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%d "</span>, receivebuff[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 广播阶段 */</span></span><br><span class="line">	MPI_Bcast(receivebuff, <span class="number">5</span>, MPI_INT, <span class="number">0</span>, MPI_COMM_WORLD);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Rang %d, receivebuff "</span>, wrank);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d "</span>, receivebuff[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line"></span><br><span class="line">	MPI_Finalize();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输入编译运行指令：</p>
 <pre><code>$ mpicc -o simpleDemo simpleDemo.c
 $ mpirun -n 5 simpleDemo
 </code></pre><p>运行结果如下：</p>
