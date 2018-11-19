@@ -237,22 +237,8 @@
 </ul>
 <p>下面让我们用一个例子来理解这个架构是怎么工作的。</p>
 <p>首先，我们要写一段代码，用来告诉OpenMPI要干什么：</p>
-<pre><code>//test.c
-#include “mpi.h”    //OpenMPI的头文件
-#include &lt;stdio.h&gt;
-int main(int argc, char**argv){
-    MPI_Init(&amp;argc, &amp;argv);     //openMPI的初始化函数
-    /*
-     * 业务逻辑部分；
-     * 在初始化函数与结束函数之间的代码段，将视作由
-     * OpenMPI执行的代码；
-     * 此部分代码将被创建为多个进程，并发执行；
-     * 具体的进程数量由执行时应用指定；
-    */
-    MPI_Finalize();    //openMPI的结束函数
-    return 0;
-}
-</code></pre><p>这段代码中，MPI_Init()函数和MPI_Finalize()函数是编程定式，在这两个函数之间的代码就是要通过OpenMPI运行的代码，根据应用指定的进程数量并发执行。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//test.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> “mpi.h”    <span class="comment">//OpenMPI的头文件</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>**argv)</span></span>&#123;</span><br><span class="line">    MPI_Init(&amp;argc, &amp;argv);     <span class="comment">//openMPI的初始化函数</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 业务逻辑部分；</span></span><br><span class="line"><span class="comment">     * 在初始化函数与结束函数之间的代码段，将视作由</span></span><br><span class="line"><span class="comment">     * OpenMPI执行的代码；</span></span><br><span class="line"><span class="comment">     * 此部分代码将被创建为多个进程，并发执行；</span></span><br><span class="line"><span class="comment">     * 具体的进程数量由执行时应用指定；</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    MPI_Finalize();    <span class="comment">//openMPI的结束函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码中，MPI_Init()函数和MPI_Finalize()函数是编程定式，在这两个函数之间的代码就是要通过OpenMPI运行的代码，根据应用指定的进程数量并发执行。</p>
 <p>其次，我们通过命令行来编译执行这段代码：</p>
 <pre><code>$ mpicc -o test test.c
 $ mpirun -n 4 test
