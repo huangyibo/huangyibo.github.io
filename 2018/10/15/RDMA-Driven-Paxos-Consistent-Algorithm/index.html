@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>About Me | Bobo Huang写字的地方</title>
+<title>RDMA-Driven Paxos Consistent Algorithm | Bobo Huang写字的地方</title>
 
 
     <link rel="alternate" href="/atom.xml" title="Bobo Huang写字的地方" type="application/atom+xml">
@@ -153,120 +153,157 @@
     <section class="content-wrap">
         <div class="container">
             <div class="row">
-                <main class="col-md-8 main-content ">
-                    <article class="post">
-    <h1 class="post-head">About Me</h1>
-    <div class="post-body">
-        <blockquote>
-<p>我荒废的今日，正式昨日殒身之人祈求的明日！</p>
-</blockquote>
-<p>I am <strong>Bob Huang</strong>, CS phd in Fudan University. Now I am interested in <strong>RDMA-based System Optimization and Application Innovation</strong>! Welcome to <em>My Blog Site</em>!</p>
-<hr>
-<p><a href="http://api.qrserver.com/v1/create-qr-code/?data=" target="_blank" rel="noopener">创建博客文章二维码</a></p>
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="RDMA-Driven Paxos Consistent Algorithm">
+            
+	            RDMA-Driven Paxos Consistent Algorithm
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/每周技术分享">
+            每周技术分享
+        </a>
+    </span>
+    
 
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/RDMA" title='RDMA'>
+                        RDMA
+                    </a>
+                
+                    <a href="/tags/Paxos" title='Paxos'>
+                        Paxos
+                    </a>
+                
+                    <a href="/tags/算法" title='算法'>
+                        算法
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2018/10/15</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>下周即将分享，敬请期待。<br>Hello WOlrd!</p>
+
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="/img/alipay.jpeg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="/img/wepay.jpeg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Bobo Huang</a>
+            
+        </div>
+        <div>
+            
+        </div>
     </div>
 </article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2018/10/16/Bitmap算法-一种基于bit位的数据排序、查重艺术/" class="pre-post btn btn-default" title='Bitmap算法:一种基于bit位的数据排序、查重艺术'>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">Bitmap算法:一种基于bit位的数据排序、查重艺术</span>
+        </a>
+    
+    
+        <a href="/2018/09/18/Google-Protocol-Buffer-实践/" class="next-post btn btn-default" title='Google Protocol Buffer 实践'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Google Protocol Buffer 实践</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'DL5693uIDX7fHtjctmTjGuis-gzGzoHsz',
+            appKey: 'OheW0MamYu8xrN4Qw5MJxcIa',
+            placeholder: '说点什么吧',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: ''.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
                 </main>
                 
-                    
-    <aside class="col-md-4 sidebar">
-        
-        
+                    <aside id="article-toc" role="navigation" class="col-md-4">
     <div class="widget">
-        <h3 class="title">Search</h3>
-        <div id="search-form">
-            <div id="result-mask" class="hide"></div>
-            <div class="search-area">
-                
-                    <input id="search-key" type="search" autocomplete="off" placeholder="Search What？">
-                    <!-- <button type="button" class="search-form-submit" id="search-local">localSearch</button> -->
-                    <button type="button" class="search-form-submit" id="search-local">站内检索</button>
-                
-                
-            </div>
-            <div id="result-wrap" class="hide">
-                <div id="search-result"></div>
-            </div>
-            <div class="hide">
-                <template id="search-tpl">
-                    <div class="item">
-                        <a href="/{path}" title="{title}">
-                            <div class="title">{title}</div>
-                            <div class="content">{content}</div>
-                        </a>
-                    </div>
-                </template>
-            </div>
-        </div>
-    </div>
-
-
+        <h3 class="title">Table of Contents</h3>
         
-        
-    <div class="widget">
-      <h3 class="title">Social</h3> 
-        <div class="content social">
-            
-	            <a href="//github.com/huangyibo" rel="external nofollow" title="Github" target="_blank">
-			    	<i class="git fa fa-git"></i>
-			    </a>
-            
-	            <a href="bobohuang.sun@qq.com" rel="external nofollow" title="邮箱" target="_blank">
-			    	<i class="envelope-o fa fa-envelope-o"></i>
-			    </a>
-            
-        </div>
-    </div>
-
-
-        
-        
-    <div class="widget">
-        <h3 class="title">Categories</h3>
-        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C-C-编程/"><i class="fa" aria-hidden="true">C/C++编程</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/"><i class="fa" aria-hidden="true">前端</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/"><i class="fa" aria-hidden="true">架构</i></a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/每周技术分享/"><i class="fa" aria-hidden="true">每周技术分享</i></a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/闲思碎语/"><i class="fa" aria-hidden="true">闲思碎语</i></a><span class="category-list-count">1</span></li></ul>
-    </div>
-
-
-        
-        
-    <div class="widget">
-        <h3 class="title">Archives</h3>
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">2018年11月</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/"><i class="fa" aria-hidden="true">2018年10月</i></a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">2018年09月</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">2018年06月</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/"><i class="fa" aria-hidden="true">2016年08月</i></a><span class="archive-list-count">3</span></li></ul>
-    </div>
-
-
-        
-        
-  <div class="widget">
-    <h3 class="title">Tag Cloud</h3>
-    <div class="content tag-cloud">
-        
-            <a href="/tags/API/" style="font-size: 10px;">API</a> <a href="/tags/Bitmap/" style="font-size: 10px;">Bitmap</a> <a href="/tags/C-C-编程/" style="font-size: 15px;">C/C++编程</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/JAVA-WEB/" style="font-size: 12.5px;">JAVA WEB</a> <a href="/tags/No-PFC/" style="font-size: 10px;">No-PFC</a> <a href="/tags/OpenCL/" style="font-size: 10px;">OpenCL</a> <a href="/tags/OpenMPI/" style="font-size: 10px;">OpenMPI</a> <a href="/tags/PFC/" style="font-size: 10px;">PFC</a> <a href="/tags/Paxos/" style="font-size: 12.5px;">Paxos</a> <a href="/tags/Producer-Customer/" style="font-size: 10px;">Producer-Customer</a> <a href="/tags/RDMA/" style="font-size: 17.5px;">RDMA</a> <a href="/tags/REST-API/" style="font-size: 10px;">REST API</a> <a href="/tags/Sort/" style="font-size: 10px;">Sort</a> <a href="/tags/System-Primitive/" style="font-size: 10px;">System Primitive</a> <a href="/tags/程序猿/" style="font-size: 12.5px;">程序猿</a> <a href="/tags/算法/" style="font-size: 20px;">算法</a> <a href="/tags/系统原语/" style="font-size: 10px;">系统原语</a> <a href="/tags/编程/" style="font-size: 10px;">编程</a> <a href="/tags/编程API/" style="font-size: 10px;">编程API</a> <a href="/tags/论文阅读笔记/" style="font-size: 10px;">论文阅读笔记</a> <a href="/tags/进程间通信/" style="font-size: 10px;">进程间通信</a>
+            <p>暂无目录</p>
         
     </div>
-  </div>
-
-
-        
-        
-    <div class="widget">
-        <h3 class="title">Friends</h3>
-        <div class="content friends-link">
-        
-            <a href="http://huangyibo.github.io" class="fa" target="_blank">Bob Huang的博客</a>
-        
-            <a href="https://www.github.com/huangyibo" class="fa" target="_blank">Bob Huang的Github</a>
-        
-            <a href="http://icestrawberryxjw.me" class="fa" target="_blank">Jiawei Xu的博客</a>
-        
-            <a href="http://codeshold.me/" class="fa" target="_blank">Wenfeng的博客</a>
-        
-        </div>
-    </div>
-
-
-        
-    </aside>
+</aside>
 
                 
             </div>
@@ -306,8 +343,6 @@
     </div>
 </div>
 
-
-	<script src="/js/search.js?rev=@@hash"></script>
 
 
 
