@@ -303,7 +303,7 @@
 <p>拥塞窗口调整方法：TCP Vegas（加性增，加性减），简单来说就是在每个batch的最后，用上面得到的当前RTT用来估计预期和实际拥塞窗口的差。</p>
 <p><strong>A3：</strong></p>
 <p>特定传输设计</p>
-<p>RoGUE is the first approach to offer congestion control for the UC transport type. </p>
+<p>RoGUE is the first approach to offer congestion control for the UC transport type.</p>
 <p>支持UC传输类型非常重要，因为最近的工作表明它比RC更具可扩展性，因为UC流量可能会影响其他拥塞控制的流量，如RC或TCP流量。</p>
 <ul>
 <li>RC传输：对于RC上的WRITE和SEND动词，RoGUE严格遵循上述设计。 RC中的主要问题是由READ动词引起的。 首先，保持拥塞窗口是复杂的，因为在相反方向上引起WRITE和READ的拥塞。 为了克服这个问题，RoGUE为单个RC QP维护独立的READ和WRITE拥塞窗口。 其次，READ需要在远程主机上设置速率限制。 RoGUE使用一个接收器端库，该接收器端异步地将限制应用于QP，并在每次更改时使用READ速率限制将WRITE_IMM发送到远程主机。</li>
