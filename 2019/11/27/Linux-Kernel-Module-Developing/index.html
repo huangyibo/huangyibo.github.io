@@ -1,0 +1,494 @@
+<!DOCTYPE HTML>
+<html lang="">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Bobo Huang写字的地方">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Linux 内核模块开发实践与内核编译 | Bobo Huang写字的地方</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Bobo Huang写字的地方" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?cd77d5931f412f9cfa483dcfc5fc7ce3";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    
+
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='Bob Huang'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 从未如此简单有趣～ </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Bobo Huang写字的地方</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa fa-home"></i>  Home</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/算法/"><i class="fa fa-tasks"></i>  算法</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/闲思碎语/"><i class="fa fa-tags"></i>  闲思碎语</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/每周技术分享/"><i class="fa fa-share"></i>  每周技术分享</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/About"><i class="fa fa-user"></i>  About Me</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Linux 内核模块开发实践与内核编译">
+            
+	            Linux 内核模块开发实践与内核编译
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/每周技术分享">
+            每周技术分享
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Linux Kernel" title='Linux Kernel'>
+                        Linux Kernel
+                    </a>
+                
+                    <a href="/tags/LKM" title='LKM'>
+                        LKM
+                    </a>
+                
+                    <a href="/tags/Kernel Module" title='Kernel Module'>
+                        Kernel Module
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/11/27</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h2 id="摘-要"><a href="#摘-要" class="headerlink" title="摘  要"></a>摘  要</h2><blockquote>
+<p>鉴于最近需要改进Linux内核协议栈的BBR协议，便针对Linux内核模块的运行开发过程、内核编译进行了探索性实践，记录一下具体的实践过程，希望对于想要入门Linux内核开发却因庞大的代码树望而却步的童鞋们一些入门实践性的建议。本文主要介绍了开发Linux内核模块的主要流程、Linux内核编译与安装、用户空间程序与内核模块之间基于device file的通信实践三个部分。</p>
+</blockquote>
+<h2 id="0x01-A-sample-for-Linux-Loadable-Kernel-Module-LKM"><a href="#0x01-A-sample-for-Linux-Loadable-Kernel-Module-LKM" class="headerlink" title="0x01. A sample for Linux Loadable Kernel Module (LKM)"></a>0x01. A sample for Linux Loadable Kernel Module (LKM)</h2><p>内核模块(Kernel Module)是可以按需加载到内核或从内核卸载的代码实现，在不需要重启系统的情况下扩展基础内核的功能。自定义内核模块可以通过两种方式加载到内核中：</p>
+<ul>
+<li>直接基于Linux内核源码树增加新的代码模块，并重新编译Linux内核；</li>
+<li>在Linux系统运行时增加新的内核模块，这种方式更方便有效。</li>
+</ul>
+<p>在第二种方式中，由于在Linux系统运行时加载新的内核模块代码(这些代码实现不是官方Linux Kernel所含有的)，这些新内核模块被称为”Loadable Kernel Module（LKM）”，不同于基内核(“Base Kernel”)。基内核<code>Base Kernel</code>位于<code>/boot</code>目录下，在系统启动引导过程中被加载；而<code>LKM</code>是在<code>Base Kernel</code>已经加载运行之后被加载的。尽管如此，<code>LKM</code>仍然是Linux内核的一部分，并与<code>Base Kernel</code>通信以完成其功能。</p>
+<p><code>LKMs</code>可以实现很多功能，主要归为三类：</p>
+<ul>
+<li>设备驱动(Device Driver)</li>
+<li>文件系统驱动(Filesystem driver)</li>
+<li>系统调用(System calls)</li>
+</ul>
+<p><code>LKMs</code>不是用户空间程序，而是内核的一部分。以下内容通过一个简单内核模块的实现来介绍如何开发一个内核模块。</p>
+<div align="center"><img src="/2019/11/27/Linux-Kernel-Module-Developing/userspace-kernelspace.png" alt="Linux user space and kernel space"></div>
+
+
+
+<h3 id="0x01-1-先决条件"><a href="#0x01-1-先决条件" class="headerlink" title="0x01.1 先决条件"></a>0x01.1 先决条件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum list | grep kernel-headers</span></span><br><span class="line"><span class="comment"># yum install kernel-headers</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># yum groupinstall "Development Tools"</span></span><br><span class="line"><span class="comment"># yum install -y gcc g++ kernel-devel</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># yum install elfutils-libelf-devel</span></span><br></pre></td></tr></table></figure>
+<h3 id="0x01-2-编写LKM"><a href="#0x01-2-编写LKM" class="headerlink" title="0x01.2 编写LKM"></a>0x01.2 编写LKM</h3><ul>
+<li><p>hello.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * @file    hello.c </span></span><br><span class="line"><span class="comment"> * @author  Bob Huang</span></span><br><span class="line"><span class="comment"> * @version 0.1 </span></span><br><span class="line"><span class="comment"> * @brief  An introductory "Hello World!" loadable kernel </span></span><br><span class="line"><span class="comment"> *  module (LKM) that can display a message in the /var/log/kern.log </span></span><br><span class="line"><span class="comment"> *  file when the module is loaded and removed. The module can accept </span></span><br><span class="line"><span class="comment"> *  an argument when it is loaded -- the name, which appears in the </span></span><br><span class="line"><span class="comment"> *  kernel log files. </span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/module.h&gt;     /* Needed by all modules */ </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/kernel.h&gt;     /* Needed for KERN_INFO */ </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/init.h&gt;       /* Needed for the macros */ </span></span></span><br><span class="line">  </span><br><span class="line"><span class="comment">///&lt; The license type -- this affects runtime behavior </span></span><br><span class="line">MODULE_LICENSE(<span class="string">"GPL"</span>); </span><br><span class="line">  </span><br><span class="line"><span class="comment">///&lt; The author -- visible when you use modinfo </span></span><br><span class="line">MODULE_AUTHOR(<span class="string">"Bob Huang"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">///&lt; The description -- see modinfo</span></span><br><span class="line">MODULE_DESCRIPTION(<span class="string">"A simple Hello world example for Linux Loadable Kernel Module!"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">///&lt; The version of the module</span></span><br><span class="line">MODULE_VERSION(<span class="string">"0.1"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function">init <span class="title">hello_start</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">"Loading hello module in kernel space... \n"</span>);</span><br><span class="line">    printk(KERN_INFO <span class="string">"Hello, Kernel World!\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __<span class="function"><span class="built_in">exit</span> <span class="title">hello_end</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">"Goodby Mr.Huang.\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">module_init(hello_start); </span><br><span class="line">module_exit(hello_end);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="0x01-3-编译、安装与卸载"><a href="#0x01-3-编译、安装与卸载" class="headerlink" title="0x01.3 编译、安装与卸载"></a>0x01.3 编译、安装与卸载</h3><ul>
+<li><p>编译</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[bobo@localhost hello-kernel]$ make</span><br><span class="line">make -C /lib/modules/4.18.0-80.el8.x86_64/build/ M=/home/bobo/repos/kernel/projects/hello-kernel modules</span><br><span class="line">make[1]: Entering directory <span class="string">'/usr/src/kernels/4.18.0-80.11.2.el8_0.x86_64'</span></span><br><span class="line">  CC [M]  /home/bobo/repos/kernel/projects/hello-kernel/hello.o</span><br><span class="line">  Building modules, stage 2.</span><br><span class="line">  MODPOST 1 modules</span><br><span class="line">  CC      /home/bobo/repos/kernel/projects/hello-kernel/hello.mod.o</span><br><span class="line">  LD [M]  /home/bobo/repos/kernel/projects/hello-kernel/hello.ko</span><br><span class="line">make[1]: Leaving directory <span class="string">'/usr/src/kernels/4.18.0-80.11.2.el8_0.x86_64'</span></span><br><span class="line"></span><br><span class="line">[bobo@localhost hello-kernel]$ ll</span><br><span class="line">total 444</span><br><span class="line">-rw-rw-r--. 1 bobo bobo    802 Nov 25 10:28 hello.c</span><br><span class="line">-rw-rw-r--. 1 bobo bobo 217016 Nov 25 10:34 hello.ko</span><br><span class="line">-rw-rw-r--. 1 bobo bobo    826 Nov 25 10:34 hello.mod.c</span><br><span class="line">-rw-rw-r--. 1 bobo bobo 108808 Nov 25 10:34 hello.mod.o</span><br><span class="line">-rw-rw-r--. 1 bobo bobo 109744 Nov 25 10:34 hello.o</span><br><span class="line">-rw-rw-r--. 1 bobo bobo    153 Nov 25 10:30 Makefile</span><br><span class="line">-rw-rw-r--. 1 bobo bobo     62 Nov 25 10:34 modules.order</span><br><span class="line">-rw-rw-r--. 1 bobo bobo      0 Nov 25 10:34 Module.symvers</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>insmod</code>加载LKM模块</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[bobo@localhost hello-kernel]$ sudo insmod hello.ko </span><br><span class="line"></span><br><span class="line">[bobo@localhost hello-kernel]$ dmesg </span><br><span class="line">...</span><br><span class="line">[13841.513803] hello: loading out-of-tree module taints kernel.</span><br><span class="line">[13841.513836] hello: module verification failed: signature and/or required key missing - tainting kernel</span><br><span class="line">[13841.513973] Loading hello module <span class="keyword">in</span> kernel space... </span><br><span class="line">[13841.513973] Hello, Kernel World!</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>测试模块</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[bobo@localhost hello-kernel]$ modinfo hello.ko</span><br><span class="line">filename:       /home/bobo/repos/kernel/projects/hello-kernel/hello.ko</span><br><span class="line">version:        0.1</span><br><span class="line">description:    A simple Hello world example <span class="keyword">for</span> Linux Loadable Kernel Module!</span><br><span class="line">author:         Bob Huang</span><br><span class="line">license:        GPL</span><br><span class="line">rhelversion:    8.0</span><br><span class="line">srcversion:     AC0944026AD9E1C136F38E8</span><br><span class="line">depends:        </span><br><span class="line">name:           hello</span><br><span class="line">vermagic:       4.18.0-80.11.2.el8_0.x86_64 SMP mod_unload modversions</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p><code>rmmod</code>卸载LKM模块</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[bobo@localhost hello-kernel]$ sudo rmmod hello</span><br><span class="line"></span><br><span class="line">[bobo@localhost hello-kernel]$ dmesg </span><br><span class="line">...</span><br><span class="line">[14173.997623] Goodby Mr.Huang.</span><br><span class="line"></span><br><span class="line">[bobo@localhost hello-kernel]$ dmesg | tail -5</span><br><span class="line">[13841.513803] hello: loading out-of-tree module taints kernel.</span><br><span class="line">[13841.513836] hello: module verification failed: signature and/or required key missing - tainting kernel</span><br><span class="line">[13841.513973] Loading hello module <span class="keyword">in</span> kernel space... </span><br><span class="line">[13841.513973] Hello, Kernel World!</span><br><span class="line">[14173.997623] Goodby Mr.Huang.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="0x01-4-References"><a href="#0x01-4-References" class="headerlink" title="0x01.4 References"></a>0x01.4 References</h3><p>[1] Linux Kernel Module Programming: Hello World Program.  <a href="https://www.geeksforgeeks.org/linux-kernel-module-programming-hello-world-program/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/linux-kernel-module-programming-hello-world-program/</a>.</p>
+<p>[2] Writing a Linux Kernel Module — Part 1: Introduction.  <a href="http://derekmolloy.ie/writing-a-linux-kernel-module-part-1-introduction/" target="_blank" rel="noopener">http://derekmolloy.ie/writing-a-linux-kernel-module-part-1-introduction/</a>.</p>
+<p>[3] Writing a Linux Kernel Module — Part 2: A Character Device.  <a href="http://derekmolloy.ie/writing-a-linux-kernel-module-part-2-a-character-device/" target="_blank" rel="noopener">http://derekmolloy.ie/writing-a-linux-kernel-module-part-2-a-character-device/</a>.</p>
+<p>[4] Writing a Linux Kernel Module — Part 3: Buttons and LEDs.  <a href="http://derekmolloy.ie/kernel-gpio-programming-buttons-and-leds/" target="_blank" rel="noopener">http://derekmolloy.ie/kernel-gpio-programming-buttons-and-leds/</a>.</p>
+<p>[5] How to Compile Linux Kernel from Source to Build Custom Kernel.  <a href="https://www.thegeekstuff.com/2013/06/compile-linux-kernel/" target="_blank" rel="noopener">https://www.thegeekstuff.com/2013/06/compile-linux-kernel/</a>.</p>
+<h2 id="0x02-编译Linux-Kernel"><a href="#0x02-编译Linux-Kernel" class="headerlink" title="0x02. 编译Linux Kernel"></a>0x02. 编译Linux Kernel</h2><h3 id="0x02-1-先决条件"><a href="#0x02-1-先决条件" class="headerlink" title="0x02.1 先决条件"></a>0x02.1 先决条件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install ncurses-devel openssl openssl-devel </span><br><span class="line"></span><br><span class="line">$ wget https://mirrors.edge.kernel.org/pub/linux/kernel/v5.x/linux-5.4.tar.xz</span><br><span class="line">$ tar -xvJf linux-5.4.tar.xz</span><br></pre></td></tr></table></figure>
+<h3 id="0x02-2-编译内核"><a href="#0x02-2-编译内核" class="headerlink" title="0x02.2 编译内核"></a>0x02.2 编译内核</h3><ul>
+<li><p>配置Kernel</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> linux-5.4</span><br><span class="line">$ make menuconfig </span><br><span class="line"><span class="comment"># 默认选项，会在当前目录下生成`.config`配置文件</span></span><br></pre></td></tr></table></figure>
+<p>默认的<code>.config</code>配置文件如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CONFIG_MMU=y</span><br><span class="line">CONFIG_NEED_DMA_MAP_STATE=y</span><br><span class="line">CONFIG_NEED_SG_DMA_LENGTH=y</span><br><span class="line">CONFIG_GENERIC_ISA_DMA=y</span><br><span class="line">CONFIG_GENERIC_BUG=y</span><br><span class="line">CONFIG_GENERIC_HWEIGHT=y</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译内核</p>
+<ul>
+<li><p>编译主核(Main Kernel)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译内核模块(Kernel Modules)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make modules</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装内核模块(Kernel Modules)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo make modules_install</span><br></pre></td></tr></table></figure>
+<p>该命令完成后，会生成<code>/lib/modules/5.4/</code>目录。</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>安装新内核</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># make headers_install</span></span><br><span class="line"><span class="comment"># make install</span></span><br></pre></td></tr></table></figure>
+<p>上述<code>make install</code>命令在<code>/boot</code>文件夹下创建如下文件：</p>
+<ul>
+<li><code>vmlinuz-5.4</code>  –  The actual kernel ;</li>
+<li><code>System.map-5.4</code>  –  The symbols exported by the kernel ;</li>
+<li><code>initrd.img-5.4</code>  –   <a href="https://www.thegeekstuff.com/2009/07/how-to-view-modify-and-recreate-initrd-img/" target="_blank" rel="noopener">initrd image</a> is temporary root file system used during boot process ;</li>
+<li><code>config-5.4</code>  – The kernel configuration file.</li>
+</ul>
+<p>上述命令<code>make install</code>默认更新<code>grub.cfg</code>，因此不需要手动更改<code>grub.cfg</code>。</p>
+</li>
+<li><p>引导Linux启用新内核 （Boot Linux to the new Kernel）</p>
+<p>重启系统以启用新内核</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># reboot</span></span><br></pre></td></tr></table></figure>
+<p>系统重启成功后，验证：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ uname -r</span><br><span class="line">5.4</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>注意：</strong></p>
+<ul>
+<li><p>Q1: </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make[4]: *** No rule to make target <span class="string">'debian/certs/test-signing-certs.pem'</span>, needed by <span class="string">'certs/x509_certificate_list'</span>.  Stop.</span><br><span class="line">make[4]: *** Waiting <span class="keyword">for</span> unfinished <span class="built_in">jobs</span>....</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Solution:  Alternatively, you can use the configuration from a Debian-built kernel that you already have installed by copying the <code>/boot/config-*</code> file to <code>.config</code> and then running <code>make oldconfig</code> to only answer new questions.   If you do this, ensure that you modify the configuration in <code>.config</code> to set: </p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONFIG_SYSTEM_TRUSTED_KEYS = <span class="string">""</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="0x02-3-References"><a href="#0x02-3-References" class="headerlink" title="0x02.3 References"></a>0x02.3 References</h3><p>[1] Compile Linux Kernel.  <a href="https://www.thegeekstuff.com/2013/06/compile-linux-kernel/" target="_blank" rel="noopener">https://www.thegeekstuff.com/2013/06/compile-linux-kernel/</a>.</p>
+<p>[2] BuildADebianKernelPackage.  <a href="https://wiki.debian.org/BuildADebianKernelPackage" target="_blank" rel="noopener">https://wiki.debian.org/BuildADebianKernelPackage</a>.</p>
+<h2 id="0x03-开发相对复杂的Linux内核模块"><a href="#0x03-开发相对复杂的Linux内核模块" class="headerlink" title="0x03. 开发相对复杂的Linux内核模块"></a>0x03. 开发相对复杂的Linux内核模块</h2><p>在第一节中我们介绍了一个简单的<code>Hello World</code>的内核模块的开发过程，下面会以一个相对复杂的案例介绍如何开发一个相对复杂的Linux内核模块。</p>
+<p>内核模块可以完成各种各样的任务，其中与用户空间的应用交互通信是最常见的场景之一。而由于用户空间应用没有直接访问内核空间内存的权限，它们需要通过使用API与内核空间模块交互。在技术实现上有多种可行的方法，最通用的方式是创建一个设备文件(Device file)。在Linux系统中，使用<code>/dev/null</code>、<code>/dev/zero</code>等类似的命令是与名为<code>zero</code>、<code>null</code>的设备(device)在交互通信，以获得期望得到的数据或响应。</p>
+<p>在我们的案例中，与我们实现的内核模块设备(Device)交互(主要是<code>read</code>操作)会返回<code>&quot;Hello World&quot;</code>，同时对于设备文件的<code>write</code>、<code>open</code>和<code>release</code>操作实现简单的<code>handler function</code>响应。我会尽可能的展示出通过<code>device file</code>响应用户空间应用的过程。</p>
+<p>代码目录如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[bobo@localhost char-device-lkm]$ tree</span><br><span class="line">.</span><br><span class="line">├── lkm_demo.c</span><br><span class="line">└── Makefile</span><br></pre></td></tr></table></figure>
+<h3 id="0x03-1-具体实现"><a href="#0x03-1-具体实现" class="headerlink" title="0x03.1 具体实现"></a>0x03.1 具体实现</h3><ul>
+<li><p><code>lkm_demo.c</code>文件:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;linux/init.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;linux/module.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;linux/kernel.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;linux/fs.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;asm/uaccess.h&gt;</span></span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">"GPL"</span>);</span><br><span class="line">MODULE_AUTHOR(<span class="string">"Bob Huang"</span>);</span><br><span class="line">MODULE_DESCRIPTION(<span class="string">"A sample Linux module of device file."</span>);</span><br><span class="line">MODULE_VERSION(<span class="string">"0.1"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">#define DEVICE_NAME "lkm_demo"</span></span><br><span class="line"><span class="comment">#define EXAMPLE_MSG "Hello, World!\n"</span></span><br><span class="line"><span class="comment">#define MSG_BUF_LEN 15</span></span><br><span class="line"></span><br><span class="line">/* Prototypes <span class="keyword">for</span> device <span class="built_in">functions</span> */</span><br><span class="line">static int device_open(struct inode *, struct file *);</span><br><span class="line">static int device_release(struct inode *, struct file *);</span><br><span class="line">static ssize_t device_read(struct file *, char *, size_t, loff_t *);</span><br><span class="line">static ssize_t device_write(struct file *, const char *, size_t, loff_t *);</span><br><span class="line"></span><br><span class="line">static int major_num;</span><br><span class="line">static int device_open_count = 0;</span><br><span class="line">static char msg_buffer[MSG_BUF_LEN];</span><br><span class="line">static char *msg_ptr;</span><br><span class="line"></span><br><span class="line">/* This structure points to all of the device <span class="built_in">functions</span> */</span><br><span class="line">static struct file_operations file_ops = &#123;</span><br><span class="line">        .<span class="built_in">read</span> = device_read,</span><br><span class="line">        .write = device_write,</span><br><span class="line">        .open = device_open,</span><br><span class="line">        .release = device_release </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* When a process reads from our device, this gets called. */</span><br><span class="line">static ssize_t device_read(struct file *flip, char *buffer, </span><br><span class="line">                                size_t len, loff_t *offset) &#123;</span><br><span class="line">        int bytes_read = 0;</span><br><span class="line">        /* If we<span class="string">'re at the end, loop back to the beginning */</span></span><br><span class="line"><span class="string">        if (*msg_ptr == 0) &#123;</span></span><br><span class="line"><span class="string">                msg_ptr = msg_buffer;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        /* Put data in the buffer */</span></span><br><span class="line"><span class="string">        while (len &amp;&amp; *msg_ptr) &#123;</span></span><br><span class="line"><span class="string">                /* Buffer is in user data, not kernel, so you can'</span>t just reference</span><br><span class="line">                 * with a pointer. The <span class="keyword">function</span> put_user handles this <span class="keyword">for</span> us */</span><br><span class="line">                put_user(*(msg_ptr++), buffer++);</span><br><span class="line">                len--;</span><br><span class="line">                bytes_read++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">return</span> bytes_read;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* Called when a process tries to write to our device. */</span><br><span class="line">static ssize_t device_write(struct file *flip, const char *buffer, </span><br><span class="line">                                size_t len, loff_t *offset) &#123;</span><br><span class="line">        /* This is a <span class="built_in">read</span>-only device */</span><br><span class="line">        printk(KERN_ALERT <span class="string">"This operation is not supported.\n"</span>);</span><br><span class="line">        <span class="built_in">return</span> -EINVAL;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* Called when a process opens our device. */</span><br><span class="line">static int device_open(struct inode *inode, struct file *file)&#123;</span><br><span class="line">        /* If device is open, <span class="built_in">return</span> busy */</span><br><span class="line">        <span class="keyword">if</span> (device_open_count) &#123;</span><br><span class="line">                <span class="built_in">return</span> -EBUSY;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        device_open_count++;</span><br><span class="line">        try_module_get(THIS_MODULE);</span><br><span class="line">        <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* Called when a process closes our device. */</span><br><span class="line">static int device_release(struct inode *inode, struct file *file)&#123;</span><br><span class="line">        /* Decrement the open counter and usage count. Without this, the</span><br><span class="line">         * module would not unload. */</span><br><span class="line">        device_open_count--;</span><br><span class="line">        module_put(THIS_MODULE);</span><br><span class="line">        <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">static int __init lkm_demo_init(void) &#123;</span><br><span class="line">        /* Fill buffer with our message */</span><br><span class="line">        strncpy(msg_buffer, EXAMPLE_MSG, MSG_BUF_LEN);</span><br><span class="line">        /* Set the msg_ptr to the buffer */</span><br><span class="line">        msg_ptr = msg_buffer;</span><br><span class="line">        /* Try to register character device */</span><br><span class="line">        major_num = register_chrdev(0, <span class="string">"lkm_demo"</span>, &amp;file_ops);</span><br><span class="line">        <span class="keyword">if</span> (major_num &lt; 0)&#123;</span><br><span class="line">                printk(KERN_ALERT <span class="string">"Could not register device: %d\n"</span>, major_num);</span><br><span class="line">                <span class="built_in">return</span> major_num;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                printk(KERN_INFO <span class="string">"lkm_demo module loaded with device major number %d\n"</span>, major_num);</span><br><span class="line">                <span class="built_in">return</span> 0;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">static void __exit lkm_demo_exit(void) &#123;</span><br><span class="line">        /* Remember - we have to clean up after ourselves. Unregister the </span><br><span class="line">         * character device. */</span><br><span class="line">        unregister_chrdev(major_num, DEVICE_NAME);</span><br><span class="line">        printk(KERN_INFO <span class="string">"Goodbye, World!\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* Register module funtions */</span><br><span class="line">module_init(lkm_demo_init);</span><br><span class="line">module_exit(lkm_demo_exit);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>Makefile</code>文件：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">obj-m += lkm_demo.o</span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">        make -C /lib/modules/<span class="variable">$(<span class="built_in">shell</span> uname -r)</span>/build M=<span class="variable">$(PWD)</span> modules</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">        make -C /lib/modules/<span class="variable">$(<span class="built_in">shell</span> uname -r)</span>/build M=<span class="variable">$(PWD)</span> clean</span><br><span class="line"></span><br><span class="line"><span class="section">test:</span></span><br><span class="line">        <span class="comment"># We put a - in front of the rmmod command to tell make to ignore</span></span><br><span class="line">        <span class="comment"># an error in case the module isn't loaded.</span></span><br><span class="line">        -sudo rmmod lkm_demo</span><br><span class="line">        <span class="comment"># Clear the kernel log without echo</span></span><br><span class="line">        sudo dmesg -C</span><br><span class="line">        <span class="comment"># Insert the module </span></span><br><span class="line">        sudo insmod lkm_demo.ko</span><br><span class="line">        <span class="comment"># Display the kernel log</span></span><br><span class="line">        dmesg | tail -5</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="0x03-2-测试运行"><a href="#0x03-2-测试运行" class="headerlink" title="0x03.2 测试运行"></a>0x03.2 测试运行</h3><p><strong>Step 1: 编译</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[bobo@localhost char-device-lkm]$ make</span><br><span class="line">make -C /lib/modules/4.18.0-80.el8.x86_64/build M=/home/bobo/repos/kernel/projects/char-device-lkm modules</span><br><span class="line">make[1]: Entering directory <span class="string">'/usr/src/kernels/4.18.0-80.11.2.el8_0.x86_64'</span></span><br><span class="line">  CC [M]  /home/bobo/repos/kernel/projects/char-device-lkm/lkm_demo.o</span><br><span class="line">  Building modules, stage 2.</span><br><span class="line">  MODPOST 1 modules</span><br><span class="line">  CC      /home/bobo/repos/kernel/projects/char-device-lkm/lkm_demo.mod.o</span><br><span class="line">  LD [M]  /home/bobo/repos/kernel/projects/char-device-lkm/lkm_demo.ko</span><br><span class="line">make[1]: Leaving directory <span class="string">'/usr/src/kernels/4.18.0-80.11.2.el8_0.x86_64'</span></span><br></pre></td></tr></table></figure>
+<p>编译成功后，会生成内核模块相关文件，其中<code>lkm_demo.ko</code>是内核模块的二进制文件，也是加载模块所需要的文件，如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── lkm_demo.c</span><br><span class="line">├── lkm_demo.ko</span><br><span class="line">├── lkm_demo.mod.c</span><br><span class="line">├── lkm_demo.mod.o</span><br><span class="line">├── lkm_demo.o</span><br><span class="line">├── Makefile</span><br><span class="line">├── modules.order</span><br><span class="line">└── Module.symvers</span><br></pre></td></tr></table></figure>
+<p><strong>Step 2: 测试</strong></p>
+<ul>
+<li>执行<code>make test</code>命令后，会看到控制台输出设备的<code>major number</code>，相当于特定设备的唯一ID，是由Linux内核自动分配的。我们需要利用<code>major number</code>创建<code>device</code>。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[bobo@localhost char-device-lkm]$ make <span class="built_in">test</span></span><br><span class="line"><span class="comment"># We put a - in front of the rmmod command to tell make to ignore</span></span><br><span class="line"><span class="comment"># an error in case the module isn't loaded.</span></span><br><span class="line">sudo rmmod lkm_demo</span><br><span class="line">[sudo] password <span class="keyword">for</span> bobo: </span><br><span class="line">rmmod: ERROR: Module lkm_demo is not currently loaded</span><br><span class="line">make: [Makefile:12: <span class="built_in">test</span>] Error 1 (ignored)</span><br><span class="line"><span class="comment"># Clear the kernel log without echo</span></span><br><span class="line">sudo dmesg -C</span><br><span class="line"><span class="comment"># Insert the module </span></span><br><span class="line">sudo insmod lkm_demo.ko</span><br><span class="line"><span class="comment"># Display the kernel log</span></span><br><span class="line">dmesg | tail -5</span><br><span class="line">[98945.480919] lkm_demo module loaded with device major number 241</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用上述得到的<code>major number</code>创建一个设备文件<code>/dev/lkm_demo</code>，然后用户空间的应用就可以通过该设备文件与我们定义的内核模块进行通信了。</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[bobo@localhost char-device-lkm]$ sudo mknod /dev/lkm_demo c 241 0</span><br></pre></td></tr></table></figure>
+<p>​        在上面的案例中，你需要将<code>241</code>替换为从<code>make test</code>中获取的<code>major number</code>值。</p>
+<p>​        <code>mknod</code>命令中的参数<code>c</code>是用来制定要创建一个<code>character device file</code>。</p>
+<ul>
+<li><p>现在可以直接从设备文件中获取内容</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[bobo@localhost char-device-lkm]$ cat /dev/lkm_demo</span><br><span class="line">Hello, World!</span><br><span class="line">Hello, World!</span><br><span class="line">Hello, World!</span><br><span class="line">Hello, World!</span><br><span class="line">Hello, World!</span><br><span class="line">Hello, World!</span><br><span class="line">Hello, World!</span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>或者通过<code>dd</code>命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[bobo@localhost char-device-lkm]$ dd <span class="keyword">if</span>=/dev/lkm_demo of=<span class="built_in">test</span> bs=14 count=100</span><br><span class="line">100+0 records <span class="keyword">in</span></span><br><span class="line">100+0 records out</span><br><span class="line">1400 bytes (1.4 kB, 1.4 KiB) copied, 0.000186468 s, 7.5 MB/s</span><br></pre></td></tr></table></figure>
+<p>也可以通过用户空间应用程序访问该设备文件，以与我们实现的内核模块交互。</p>
+</li>
+<li><p>删除设备文件，并卸载内核模块</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[bobo@localhost char-device-lkm]$ sudo rm /dev/lkm_demo</span><br><span class="line">[bobo@localhost char-device-lkm]$ sudo rmmod lkm_demo</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="0x03-3-References"><a href="#0x03-3-References" class="headerlink" title="0x03.3 References"></a>0x03.3 References</h3><p>[1] The Linux Kernel Module Programming Guide. <a href="http://tldp.org/LDP/lkmpg/2.6/html/lkmpg.html" target="_blank" rel="noopener">http://tldp.org/LDP/lkmpg/2.6/html/lkmpg.html</a>.</p>
+<hr>
+<p>分享人： 黄一博 (复旦大学NiSL）</p>
+
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="/img/alipay.jpeg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="/img/wepay.jpeg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Bobo Huang</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2018/11/18/OpenMPI——基础篇/" class="next-post btn btn-default" title='OpenMPI——基础篇'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">OpenMPI——基础篇</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'DL5693uIDX7fHtjctmTjGuis-gzGzoHsz',
+            appKey: 'OheW0MamYu8xrN4Qw5MJxcIa',
+            placeholder: '说点什么吧',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: ''.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">Table of Contents</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#摘-要"><span class="toc-number">1.</span> <span class="toc-text">摘  要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-A-sample-for-Linux-Loadable-Kernel-Module-LKM"><span class="toc-number">2.</span> <span class="toc-text">0x01. A sample for Linux Loadable Kernel Module (LKM)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-1-先决条件"><span class="toc-number">2.1.</span> <span class="toc-text">0x01.1 先决条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-2-编写LKM"><span class="toc-number">2.2.</span> <span class="toc-text">0x01.2 编写LKM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-3-编译、安装与卸载"><span class="toc-number">2.3.</span> <span class="toc-text">0x01.3 编译、安装与卸载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-4-References"><span class="toc-number">2.4.</span> <span class="toc-text">0x01.4 References</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-编译Linux-Kernel"><span class="toc-number">3.</span> <span class="toc-text">0x02. 编译Linux Kernel</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-1-先决条件"><span class="toc-number">3.1.</span> <span class="toc-text">0x02.1 先决条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-2-编译内核"><span class="toc-number">3.2.</span> <span class="toc-text">0x02.2 编译内核</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-3-References"><span class="toc-number">3.3.</span> <span class="toc-text">0x02.3 References</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-开发相对复杂的Linux内核模块"><span class="toc-number">4.</span> <span class="toc-text">0x03. 开发相对复杂的Linux内核模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03-1-具体实现"><span class="toc-number">4.1.</span> <span class="toc-text">0x03.1 具体实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03-2-测试运行"><span class="toc-number">4.2.</span> <span class="toc-text">0x03.2 测试运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03-3-References"><span class="toc-number">4.3.</span> <span class="toc-text">0x03.3 References</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2019
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>

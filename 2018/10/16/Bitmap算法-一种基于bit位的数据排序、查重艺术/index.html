@@ -227,23 +227,23 @@
 <ul>
 <li>申请一个int型（根据需要也可以申请long型或short型）的内存空间，则有4个Byte，共32bit。然后根据数组下标<code>int[] b = {5,2,11,3}</code>依次遍历5,2,11,3， 把相应的bit位置为1，表示该元素存在。其中，bit区域从低bit位到高bit位，对应的位置索引<code>i</code>即代表要标识的数组<code>int[] b</code>中元素值，bit位为1表示该元素存在数组中，默认为0表示元素不存在：</li>
 </ul>
-<p><img src="/img/bitmap1.png" alt="步骤1"></p>
+<p><img src="/2018/10/16/Bitmap算法-一种基于bit位的数据排序、查重艺术/bitmap1.png" alt="步骤1"></p>
 <ul>
 <li>输入5，将相应的第 6 bit置为1：</li>
 </ul>
-<p><img src="/img/bitmap2.png" alt="步骤2"></p>
+<p><img src="/2018/10/16/Bitmap算法-一种基于bit位的数据排序、查重艺术/bitmap2.png" alt="步骤2"></p>
 <ul>
 <li>输入2，将相应的第 3 bit置为1:</li>
 </ul>
-<p><img src="/img/bitmap3.png" alt="步骤3"></p>
+<p><img src="/2018/10/16/Bitmap算法-一种基于bit位的数据排序、查重艺术/bitmap3.png" alt="步骤3"></p>
 <ul>
 <li>输入11，将相应的第 12 bit置为1:</li>
 </ul>
-<p><img src="/img/bitmap4.png" alt="步骤4"></p>
+<p><img src="/2018/10/16/Bitmap算法-一种基于bit位的数据排序、查重艺术/bitmap4.png" alt="步骤4"></p>
 <ul>
 <li>输入3，将相应的第 4 bit置为1:</li>
 </ul>
-<p><img src="/img/bitmap5.png" alt="步骤5"></p>
+<p><img src="/2018/10/16/Bitmap算法-一种基于bit位的数据排序、查重艺术/bitmap5.png" alt="步骤5"></p>
 <p>Bitmap算法的基本原理很简单巧妙，关键是十进制和二进制bit之间的转换需要一个映射表，一方面在数据组装初始化时，需要将10进制数据映射到相应的bit位上；另一方面，在遍历一片bit区域时，需要将bit位信息解析为10进制数据及状态（有或无）。</p>
 <h4 id="Map映射表"><a href="#Map映射表" class="headerlink" title="Map映射表"></a>Map映射表</h4><p>假设需要排序或者查重的整型数的总数<code>N=10000000=10^7</code>, 那么我们需要申请内存空间的大小为<code>int a[1 + N/32]</code>(或者<code>long long a[1 + N/64]</code>),其中<code>a[0]</code>在内存中占用<code>32bit</code>，依次类推<strong>bitmap</strong>表如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a[0]  --------&gt;  0 ~ 31</span><br><span class="line">a[1]  --------&gt;  32 ~ 63</span><br><span class="line">a[2]  --------&gt;  64 ~ 95</span><br><span class="line">a[3]  --------&gt;  96 ~ 127</span><br><span class="line">......</span><br><span class="line">a[312500]  --------&gt;  (10^7) ~ (10^7 + 31)</span><br><span class="line">......</span><br><span class="line">a[N/32]  --------&gt;   (N/32)*32 ~ ((N/32) * 32 + 31)</span><br></pre></td></tr></table></figure>
