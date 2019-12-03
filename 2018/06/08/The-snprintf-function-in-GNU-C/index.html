@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>提高程序员编程效率的好习惯 | Bobo Huang写字的地方</title>
+<title>C语言中snprintf()函数 | Bobo Huang写字的地方</title>
 
 
     <link rel="alternate" href="/atom.xml" title="Bobo Huang写字的地方" type="application/atom+xml">
@@ -157,9 +157,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="提高程序员编程效率的好习惯">
+        <h1 id="C语言中snprintf()函数">
             
-	            提高程序员编程效率的好习惯
+	            C语言中snprintf()函数
             
         </h1>
         <div class="post-meta">
@@ -167,8 +167,8 @@
     
     <span class="categories-meta fa-wrap">
         <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/闲思碎语">
-            闲思碎语
+        <a href="/categories/C/C++编程">
+            C/C++编程
         </a>
     </span>
     
@@ -179,8 +179,8 @@
         <span class="tags-meta">
             
                 
-                    <a href="/tags/程序猿" title='程序猿'>
-                        程序猿
+                    <a href="/tags/C/C++编程" title='C/C++编程'>
+                        C/C++编程
                     </a>
                 
             
@@ -192,7 +192,7 @@
         
         <span class="fa-wrap">
             <i class="fa fa-clock-o"></i>
-            <span class="date-meta">2016/08/04</span>
+            <span class="date-meta">2018/06/08</span>
         </span>
         
     
@@ -201,39 +201,18 @@
             
             
             <p class="fa fa-exclamation-triangle warning">
-                本文于<strong>1209</strong>天之前发表，文中内容可能已经过时。
+                本文于<strong>543</strong>天之前发表，文中内容可能已经过时。
             </p>
         
     </div>
     
     <div class="post-body post-content">
-        <h3 id="只做需要做的工作"><a href="#只做需要做的工作" class="headerlink" title="只做需要做的工作"></a>只做需要做的工作</h3><p>使用敏捷方法；</p>
-<p>全心全意做UX设计；</p>
-<p>沟通第一；</p>
-<p>编码也许不是解决问题的办法；</p>
-<p>过早的优化是一切罪恶的根源；</p>
-<p>选择最简单的解决方案。</p>
-<h3 id="站在巨人的肩膀上"><a href="#站在巨人的肩膀上" class="headerlink" title="站在巨人的肩膀上"></a>站在巨人的肩膀上</h3><p>使用开源框架；</p>
-<p>使用简洁语言；</p>
-<p>不要做重复的事情（不要重新发明轮子）；</p>
-<p>利用包管理器来进行公共和私有代码分配；</p>
-<p>不要任凭巨头（如微软）的摆布而修复库中的一个Bug；</p>
-<p>不要让你的雇主逼你学习；</p>
-<p>自主学习并为自己设定新的目标。</p>
-<h3 id="了解数据结构和算法"><a href="#了解数据结构和算法" class="headerlink" title="了解数据结构和算法"></a>了解数据结构和算法</h3><p>如果你不知道什么时候应该使用快速排序、不懂辨认O(n2)程序、不会写递归函数，你将无法成为10倍效率的开发者。使用多种语言你才能清楚不同的框架是如何解决相同问题的。尽可能去了解底层命令（plumbing），以便能够作出明智的决定（Web框架是怎么存储session状态的？Cookie到底是什么？）。</p>
-<h3 id="不要怕买工具，它可以节省你的时间"><a href="#不要怕买工具，它可以节省你的时间" class="headerlink" title="不要怕买工具，它可以节省你的时间"></a>不要怕买工具，它可以节省你的时间</h3><p>Ben说：“昨天我花50美元买了一个位图字体工具，它帮我节省的时间成本绝对超过200美元。”</p>
-<h3 id="集中注意力"><a href="#集中注意力" class="headerlink" title="集中注意力"></a>集中注意力</h3><p>不要整天开着你的电子邮件、Twitter、Facebook等，在工作时将它们最小化或关掉它们，戴上耳机。Tiny hack说：“即使不听音乐我也戴着耳机工作，这样便不会有人打扰到我。”</p>
-<h3 id="尽早并且经常性地进行代码重构"><a href="#尽早并且经常性地进行代码重构" class="headerlink" title="尽早并且经常性地进行代码重构"></a>尽早并且经常性地进行代码重构</h3><p>有时，你不得不放弃漂亮的代码转而去寻找真正对项目有用的代码，但没关系，如果你的现有项目中有这样的代码，最好的方式便是不要看它，并重构。</p>
-<h3 id="只管去做"><a href="#只管去做" class="headerlink" title="只管去做"></a>只管去做</h3><p>将你的业余项目分享到Startup Weekend中。在我开始转到Unix和Ruby on Rails上之前，我买了一台Mac，使用Windows虚拟机花了一年时间做.NET项目。</p>
-<h3 id="挑选一个编辑器，并掌握它"><a href="#挑选一个编辑器，并掌握它" class="headerlink" title="挑选一个编辑器，并掌握它"></a>挑选一个编辑器，并掌握它</h3><p>高效开发者喜欢用文本编辑器胜过IDE编辑器，因为这样可以学到更多东西。无论什么情况，尽量使用键盘快捷键，因为熟练使用一件工具的前提是熟悉它。</p>
-<p>在选择编辑器时，认真考虑并挑选最好的（Emacs或Vim），因为它们是通用的。其次，挑选你的首选平台最支持的。使用宏，不断地写代码；使用Mac上的TextExpander为整个段落创建快捷方式；使用Visual Studio或SublimeText的自动补齐功能；使用支持按行/列分割窗口的编辑器，这样你便能同时看到单元测试和代码（或模型、视图）。</p>
-<p>一定要想清楚后再写代码。Adam说，“我有朋友在一个大项目组里工作，他们组里最高效的程序员是一个高位截瘫用嘴叼着棍子敲代码的人，他总是在写代码之前想得很仔细且很少出错。”</p>
-<h3 id="整洁的代码胜过巧妙的代码"><a href="#整洁的代码胜过巧妙的代码" class="headerlink" title="整洁的代码胜过巧妙的代码"></a>整洁的代码胜过巧妙的代码</h3><p>要想让其他人能够读懂你的代码，尽量使用最少的代码来完成任务。遵循DRY（Don’t repeat yourself）的原则，使用明确定义的对象和库，将任务分解成小而简单的代码段。</p>
-<h3 id="潜意识是强大的工具"><a href="#潜意识是强大的工具" class="headerlink" title="潜意识是强大的工具"></a>潜意识是强大的工具</h3><p>离开10分钟往往就可以解决一个问题。控制编程时间，给自己一个多姿多彩的生活，劳逸结合能让你在工作时更高效、更愉悦。当然，即便是上了年纪的程序员也知道，以最少的时间完成最高效的工作是成为10倍效率开发者的必要条件。</p>
-<p>作为一个程序员，我觉得在职业生涯中最好的一件事儿就是从电脑前站起来，去拜访那些在某一领域有所建树的人们。</p>
-<h3 id="推动自身和团队进步"><a href="#推动自身和团队进步" class="headerlink" title="推动自身和团队进步"></a>推动自身和团队进步</h3><p>重视批评，以包容的态度接受批评并提升自己是非常重要的事情。没有这个基础，你不可能成为一个高效的开发者。一位智者曾经说过：“聪明的人善于从自己的错误中学习，而智慧的人善于从别人的错误中学习。”</p>
-<hr>
-<p>Bob<br>20160804</p>
+        <ul>
+<li><p><strong>函数原型</strong>：<figure class="highlight plain"><figcaption><span>snprintf(char* dest_str,size_t size,const char* format,...);```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">- **函数功能**：先将可变参数 “...” 按照format的格式格式化为字符串，然后再将其拷贝至dest_str中。</span><br><span class="line">- **头文件**：#include&lt;stdio.h&gt;</span><br><span class="line">- **注意事项**：</span><br><span class="line">  - 如果如果格式化后的字符串长度小于size，则将字符串全部拷贝至dest_str中，并在字符串结尾处加上‘\0’；</span><br><span class="line">  - 如果格式化后的字符串长度大于或等于size，则将字符串的(size-1)拷贝至dest_str中，然后在字符串结尾处加上&apos;\0&apos;.</span><br><span class="line">  - 函数返回值是 格式化字符串的长度。</span><br><span class="line">- **使用示例**：</span><br><span class="line"></span><br><span class="line">``` C</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc, char  *argv[]) &#123;</span><br><span class="line"></span><br><span class="line">  char test_str[4096];</span><br><span class="line">  memset(test_str, 0, sizeof(test_str));</span><br><span class="line"></span><br><span class="line">  char *str_1 = &quot;复旦大学&quot;;</span><br><span class="line">  int size = strlen(str_1);</span><br><span class="line">  char *name = &quot;Bob Huang&quot;;</span><br><span class="line">  int year = 2018;</span><br><span class="line">  int month = 6;</span><br><span class="line">  int day = 8;</span><br><span class="line"></span><br><span class="line">  snprintf(test_str, sizeof(test_str), &quot;学校:%s\n名字:%s\nToday:%d年%d月%d日\n&quot;, str_1, name, year, month, day);</span><br><span class="line"></span><br><span class="line">  printf(&quot;%s\n&quot;, test_str);</span><br><span class="line"></span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p><strong>运行结果</strong>：<br><img src="https://upload-images.jianshu.io/upload_images/2639937-76cefee205c8240a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="运行结果"></p>
+</li>
+</ul>
 
     </div>
     
@@ -271,15 +250,15 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2016/08/04/Web网站高并发量的解决方案/" class="pre-post btn btn-default" title='Web网站高并发量的解决方案'>
+        <a href="/2018/09/18/Google-Protocol-Buffer-pratice/" class="pre-post btn btn-default" title='Google Protocol Buffer 实践'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">Web网站高并发量的解决方案</span>
+            <span class="hidden-xs">Google Protocol Buffer 实践</span>
         </a>
     
     
-        <a href="/2016/08/02/跨域资源共享CORS总结/" class="next-post btn btn-default" title='跨域资源共享CORS总结'>
+        <a href="/2018/06/08/The-usage-of-PHONY-in-Makefile/" class="next-post btn btn-default" title='Makefile中.PHONY的使用'>
             <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">跨域资源共享CORS总结</span><i class="fa fa-angle-right fa-fw"></i>
+            <span class="hidden-xs">Makefile中.PHONY的使用</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
     
 </div>
@@ -322,7 +301,7 @@
     <div class="widget">
         <h3 class="title">Table of Contents</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#只做需要做的工作"><span class="toc-number">1.</span> <span class="toc-text">只做需要做的工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#站在巨人的肩膀上"><span class="toc-number">2.</span> <span class="toc-text">站在巨人的肩膀上</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解数据结构和算法"><span class="toc-number">3.</span> <span class="toc-text">了解数据结构和算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不要怕买工具，它可以节省你的时间"><span class="toc-number">4.</span> <span class="toc-text">不要怕买工具，它可以节省你的时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集中注意力"><span class="toc-number">5.</span> <span class="toc-text">集中注意力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#尽早并且经常性地进行代码重构"><span class="toc-number">6.</span> <span class="toc-text">尽早并且经常性地进行代码重构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#只管去做"><span class="toc-number">7.</span> <span class="toc-text">只管去做</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#挑选一个编辑器，并掌握它"><span class="toc-number">8.</span> <span class="toc-text">挑选一个编辑器，并掌握它</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#整洁的代码胜过巧妙的代码"><span class="toc-number">9.</span> <span class="toc-text">整洁的代码胜过巧妙的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#潜意识是强大的工具"><span class="toc-number">10.</span> <span class="toc-text">潜意识是强大的工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推动自身和团队进步"><span class="toc-number">11.</span> <span class="toc-text">推动自身和团队进步</span></a></li></ol>
+            <p>暂无目录</p>
         
     </div>
 </aside>

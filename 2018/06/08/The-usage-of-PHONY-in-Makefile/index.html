@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>RDMA-Driven Paxos Consistent Algorithm | Bobo Huang写字的地方</title>
+<title>Makefile中.PHONY的使用 | Bobo Huang写字的地方</title>
 
 
     <link rel="alternate" href="/atom.xml" title="Bobo Huang写字的地方" type="application/atom+xml">
@@ -157,9 +157,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="RDMA-Driven Paxos Consistent Algorithm">
+        <h1 id="Makefile中.PHONY的使用">
             
-	            RDMA-Driven Paxos Consistent Algorithm
+	            Makefile中.PHONY的使用
             
         </h1>
         <div class="post-meta">
@@ -167,8 +167,8 @@
     
     <span class="categories-meta fa-wrap">
         <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/每周技术分享">
-            每周技术分享
+        <a href="/categories/C/C++编程">
+            C/C++编程
         </a>
     </span>
     
@@ -179,16 +179,8 @@
         <span class="tags-meta">
             
                 
-                    <a href="/tags/RDMA" title='RDMA'>
-                        RDMA
-                    </a>
-                
-                    <a href="/tags/Paxos" title='Paxos'>
-                        Paxos
-                    </a>
-                
-                    <a href="/tags/算法" title='算法'>
-                        算法
+                    <a href="/tags/C/C++编程" title='C/C++编程'>
+                        C/C++编程
                     </a>
                 
             
@@ -200,7 +192,7 @@
         
         <span class="fa-wrap">
             <i class="fa fa-clock-o"></i>
-            <span class="date-meta">2018/10/15</span>
+            <span class="date-meta">2018/06/08</span>
         </span>
         
     
@@ -209,13 +201,29 @@
             
             
             <p class="fa fa-exclamation-triangle warning">
-                本文于<strong>407</strong>天之前发表，文中内容可能已经过时。
+                本文于<strong>543</strong>天之前发表，文中内容可能已经过时。
             </p>
         
     </div>
     
     <div class="post-body post-content">
-        <p>下周即将分享，敬请期待。<br>Hello WOlrd!</p>
+        <blockquote>
+<p>在C项目构建中，经常在Makefile文件中用到.PHONY配置项。.PHONY配置项的主要作用在于避免指定命令和项目下的同名文件冲突，进行性能优化。.PHONY [command name] 显式指定了一个命令名称【而不是实际文件名】，是为了避免该命令名称与makefile同路径下的文件名重名冲突，以使make [command name]命令可以正确被解析、执行。下面将举例说明。</p>
+</blockquote>
+<h3 id="例-1"><a href="#例-1" class="headerlink" title="例 1"></a>例 1</h3><p>如果编写一个规则名称为<code>clean</code>，不产生目标文件，那么该命令在执行<code>make clean</code>时规则都会被执行，makefile内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">clean:</span><br><span class="line">    rm -f *.o temp</span><br></pre></td></tr></table></figure></p>
+<p> rm 命令不产生任何clean文件。</p>
+<ul>
+<li>如果目录下不存在名为”clean”的文件，则运行<code>make clean</code>时，命令都会正常执行；</li>
+<li>如果目录下存在名为”clean”的文件，则运行<code>make clean</code>时，命令规则会失效，文件”clean”没有依赖文件，始终是最新的，<code>make clean</code>永远不会被执行。<br>为了解决上述问题，可以使用<code>.PHONY clean</code>指明该clean命令。如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.PHONY clean</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    rm -f *.o temp</span><br></pre></td></tr></table></figure>
+<p>这样执行命令<code>make clean</code>会自动忽略名为”clean”文件的存在。已知<code>.PHONY</code>配置项的目标并不是其他文件生成的实际文件，make命令会自动绕过隐含规则搜索过程，因此声明.PHONY配置项会改善性能，bi且不需要担心实际同名文件存在与否。</p>
+<h3 id="例-2"><a href="#例-2" class="headerlink" title="例 2"></a>例 2</h3><p>如果.PHONY目标有依赖关系。当一个目录中存在多个可运行程序，将其配置在同一个makefile文件。由于<code>make [command name/ Default command]</code>默认缺省规则是makefile文件中的第一个规则，一般将这第一个规则称为<strong>“all”</strong>，其依赖文件为多个可运行程序，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">all:  p1 p2 p3</span><br><span class="line">.PHONY: all</span><br><span class="line">p1:  p1.o utils.o</span><br><span class="line">       cc -o p1 p1.o utils.o</span><br><span class="line">p2:  p2.o utils.o</span><br><span class="line">       cc -o p2 p2.o utils.o</span><br><span class="line">p3:  p3.o utils.o</span><br><span class="line">       cc -o p3 p3.o utils.o</span><br></pre></td></tr></table></figure></p>
+<p>  其中p1、p2和p3是三个可执行文件，make把<strong>“all”</strong>作为主要规则，每次执行时都尝试把”all”更新，因此会检查其依赖文件p1、p2和p3是否需要更新，如果需要，就把它们更新，从而达到我们的目的。通过.PHONY指定目标为all，可以避免目录下同名文件的干扰，即不用检查规则”all”是否有同名文件存在，也不需要查询任何隐含规则，直接假定指定的规则”all”需要被更新。</p>
+<hr>
+<p><strong>综上所述，<code>.PHONY</code>是一个伪目标，可以有效防止在Makefile文件中定义的可执行命令的目标规则和工作目录下的实际文件出现名称冲突，并提高了执行Makefile的性能。</strong></p>
+<hr>
+<p>Bob Huang<br>2018.0608</p>
 
     </div>
     
@@ -253,15 +261,15 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2018/10/16/Bitmap算法-一种基于bit位的数据排序、查重艺术/" class="pre-post btn btn-default" title='Bitmap算法:一种基于bit位的数据排序、查重艺术'>
+        <a href="/2018/06/08/The-snprintf-function-in-GNU-C/" class="pre-post btn btn-default" title='C语言中snprintf()函数'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">Bitmap算法:一种基于bit位的数据排序、查重艺术</span>
+            <span class="hidden-xs">C语言中snprintf()函数</span>
         </a>
     
     
-        <a href="/2018/09/18/Google-Protocol-Buffer-实践/" class="next-post btn btn-default" title='Google Protocol Buffer 实践'>
+        <a href="/2016/08/04/Solutions-for-high-concurrent-web-site/" class="next-post btn btn-default" title='Web网站高并发量的解决方案'>
             <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">Google Protocol Buffer 实践</span><i class="fa fa-angle-right fa-fw"></i>
+            <span class="hidden-xs">Web网站高并发量的解决方案</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
     
 </div>
@@ -304,7 +312,7 @@
     <div class="widget">
         <h3 class="title">Table of Contents</h3>
         
-            <p>暂无目录</p>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#例-1"><span class="toc-number">1.</span> <span class="toc-text">例 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例-2"><span class="toc-number">2.</span> <span class="toc-text">例 2</span></a></li></ol>
         
     </div>
 </aside>

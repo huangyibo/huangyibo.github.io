@@ -201,7 +201,7 @@
             
             
             <p class="fa fa-exclamation-triangle warning">
-                本文于<strong>434</strong>天之前发表，文中内容可能已经过时。
+                本文于<strong>441</strong>天之前发表，文中内容可能已经过时。
             </p>
         
     </div>
@@ -217,7 +217,7 @@
 <li>Str，这是一个字符串</li>
 </ul>
 <h3 id="创建编写-proto-文件"><a href="#创建编写-proto-文件" class="headerlink" title="创建编写.proto 文件"></a>创建编写.proto 文件</h3><p>首先我们需要编写一个 proto 文件，定义我们程序中需要处理的结构化数据，在 protobuf 的术语中，结构化数据被称为 Message。proto 文件非常类似 java 或者 C 语言的数据定义。代码清单 1 显示了例子应用中的 proto 文件内容。</p>
-<p><strong>清单1.  lm.helloworld.proto</strong><br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// lm.helloworld.proto</span></span><br><span class="line"><span class="keyword">package</span> lm;</span><br><span class="line"><span class="class"><span class="keyword">message</span> <span class="title">helloworld</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="keyword">required</span> <span class="built_in">int32</span>     id = <span class="number">1</span>;  <span class="comment">// ID</span></span><br><span class="line">   <span class="keyword">required</span> <span class="built_in">string</span>    str = <span class="number">2</span>;  <span class="comment">// str</span></span><br><span class="line">   <span class="keyword">optional</span> <span class="built_in">int32</span>     opt = <span class="number">3</span>;  <span class="comment">//optional field</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>清单1.  lm.helloworld.proto</strong><br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// lm.helloworld.proto</span><br><span class="line">package lm;</span><br><span class="line">message helloworld</span><br><span class="line">&#123;</span><br><span class="line">   required int32     id = 1;  // ID</span><br><span class="line">   required string    str = 2;  // str</span><br><span class="line">   optional int32     opt = 3;  //optional field</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>一个比较好的习惯是认真对待 proto 文件的文件名。比如将命名规则定于如下：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">packageName.MessageName.proto</span><br></pre></td></tr></table></figure>
 <p>在上例中，package 名字叫做 lm，定义了一个消息 helloworld，该消息有三个成员，类型为 int32 的 id，另一个为类型为 string 的成员 str。opt 是一个可选的成员，即消息中可以不包含该成员。</p>
@@ -267,14 +267,14 @@
 <p>代码清单 4 给出一个嵌套 Message 的例子。</p>
 </li>
 </ul>
-<p><em>清单 4. 嵌套 Message 的例子</em><br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">message</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"> <span class="keyword">required</span> <span class="built_in">string</span> name = <span class="number">1</span>;</span><br><span class="line"> <span class="keyword">required</span> <span class="built_in">int32</span> id = <span class="number">2</span>;        <span class="comment">// Unique ID number for this person.</span></span><br><span class="line"> <span class="keyword">optional</span> <span class="built_in">string</span> email = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"> <span class="class"><span class="keyword">enum</span> <span class="title">PhoneType</span> </span>&#123;</span><br><span class="line">   MOBILE = <span class="number">0</span>;</span><br><span class="line">   HOME = <span class="number">1</span>;</span><br><span class="line">   WORK = <span class="number">2</span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="class"><span class="keyword">message</span> <span class="title">PhoneNumber</span> </span>&#123;</span><br><span class="line">   <span class="keyword">required</span> <span class="built_in">string</span> number = <span class="number">1</span>;</span><br><span class="line">   <span class="keyword">optional</span> PhoneType type = <span class="number">2</span> [default = HOME];</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">repeated</span> PhoneNumber phone = <span class="number">4</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><em>清单 4. 嵌套 Message 的例子</em><br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">message Person &#123;</span><br><span class="line"> required string name = 1;</span><br><span class="line"> required int32 id = 2;        // Unique ID number for this person.</span><br><span class="line"> optional string email = 3;</span><br><span class="line"></span><br><span class="line"> enum PhoneType &#123;</span><br><span class="line">   MOBILE = 0;</span><br><span class="line">   HOME = 1;</span><br><span class="line">   WORK = 2;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> message PhoneNumber &#123;</span><br><span class="line">   required string number = 1;</span><br><span class="line">   optional PhoneType type = 2 [default = HOME];</span><br><span class="line"> &#125;</span><br><span class="line"> repeated PhoneNumber phone = 4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>在 Message Person 中，定义了嵌套消息 PhoneNumber，并用来定义 Person 消息中的 phone 域。这使得人们可以定义更加复杂的数据结构。</p>
 <ul>
 <li><p><strong>Import Message</strong></p>
 <p>在一个 .proto 文件中，还可以用 Import 关键字引入在其他 .proto 文件中定义的消息，这可以称做 Import Message，或者 Dependency Message。例子如下所示：<br><strong>清单 5. Import Message</strong></p>
 </li>
 </ul>
-<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> common.header;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">message</span> <span class="title">youMsg</span></span>&#123;</span><br><span class="line"> <span class="keyword">required</span> common.info_header header = <span class="number">1</span>;</span><br><span class="line"> <span class="keyword">required</span> <span class="built_in">string</span> youPrivateData = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import common.header;</span><br><span class="line"></span><br><span class="line">message youMsg&#123;</span><br><span class="line"> required common.info_header header = 1;</span><br><span class="line"> required string youPrivateData = 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其中 ,common.info_header定义在common.header包内。</p>
 <blockquote>
 <p>Import Message 的用处主要在于提供了方便的代码管理机制，类似 C 语言中的头文件。您可以将一些公用的 Message 定义在一个 package 中，然后在别的 .proto 文件中引入该 package，进而使用其中的消息定义。<br>Google Protocol Buffer 可以很好地支持嵌套 Message 和引入 Message，从而让定义复杂的数据结构的工作变得非常轻松愉快。</p>
@@ -337,13 +337,13 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2018/10/15/RDMA-Driven-Paxos-Consistent-Algorithm/" class="pre-post btn btn-default" title='RDMA-Driven Paxos Consistent Algorithm'>
+        <a href="/2018/10/16/Bitmap-althrogithm-bit-based-data-sorting-and-check-art/" class="pre-post btn btn-default" title='Bitmap算法:一种基于bit位的数据排序、查重艺术'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">RDMA-Driven Paxos Consistent Algorithm</span>
+            <span class="hidden-xs">Bitmap算法:一种基于bit位的数据排序、查重艺术</span>
         </a>
     
     
-        <a href="/2018/06/08/C语言中snprintf-函数/" class="next-post btn btn-default" title='C语言中snprintf()函数'>
+        <a href="/2018/06/08/The-snprintf-function-in-GNU-C/" class="next-post btn btn-default" title='C语言中snprintf()函数'>
             <span class="hidden-lg">下一篇</span>
             <span class="hidden-xs">C语言中snprintf()函数</span><i class="fa fa-angle-right fa-fw"></i>
         </a>

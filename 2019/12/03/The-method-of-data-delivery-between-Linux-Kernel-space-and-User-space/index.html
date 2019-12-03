@@ -1,0 +1,481 @@
+<!DOCTYPE HTML>
+<html lang="">
+<head>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Bobo Huang写字的地方">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>Linux内核与用户空间之间传递数据的方法 | Bobo Huang写字的地方</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Bobo Huang写字的地方" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?cd77d5931f412f9cfa483dcfc5fc7ce3";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    
+
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+</head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header"  style="background-image:url(/img/banner.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='Bob Huang'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                <h2> 从未如此简单有趣～ </h2>
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Bobo Huang写字的地方</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa fa-home"></i>  Home</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/tags/算法/"><i class="fa fa-tasks"></i>  算法</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/闲思碎语/"><i class="fa fa-tags"></i>  闲思碎语</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/每周技术分享/"><i class="fa fa-share"></i>  每周技术分享</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/About"><i class="fa fa-user"></i>  About Me</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Linux内核与用户空间之间传递数据的方法">
+            
+	            Linux内核与用户空间之间传递数据的方法
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/每周技术分享">
+            每周技术分享
+        </a>
+    </span>
+    
+
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+                
+                    <a href="/tags/Linux Kernel" title='Linux Kernel'>
+                        Linux Kernel
+                    </a>
+                
+                    <a href="/tags/LKM" title='LKM'>
+                        LKM
+                    </a>
+                
+                    <a href="/tags/Kernel Module" title='Kernel Module'>
+                        Kernel Module
+                    </a>
+                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/12/03</span>
+        </span>
+        
+    
+</div>
+
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <h1 id="Linux内核与用户空间之间传递数据的方法"><a href="#Linux内核与用户空间之间传递数据的方法" class="headerlink" title="Linux内核与用户空间之间传递数据的方法"></a>Linux内核与用户空间之间传递数据的方法</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><blockquote>
+<p>在进行Linux内核驱动或内核模块开发的时候，经常会遇到或需要使用copy_to_user和copy_from_user两个函数。那么这两个函数是什么作用呢？如何在Linux内核模块开发的时候正确地使用copy_to_user和copy_from_user这两个函数？本文围绕上述疑问主要介绍了Linux内存中用户空间和内核空间之间的内存安全隔离性、用户空间和内核空间之间数据传递的相关内核API、Linux内存映射的其他模式、copy_to_user和copy_from_user在内核模块中的实践四个部分。</p>
+</blockquote>
+<h2 id="0x01-Linux内存"><a href="#0x01-Linux内存" class="headerlink" title="0x01. Linux内存"></a>0x01. Linux内存</h2><p>Linux内存分为<strong>用户空间内存</strong>和<strong>内核空间内存</strong>，它们互相独立并且在各自的地址空间实现。地址空间是虚拟的，地址是从物理内存中抽象出来的，并与物理内存存在映射关系。由于地址空间是虚拟的，所以可以存在很多。事实上，内核本身驻留在一个地址空间中，每个进程驻留在自己的地址空间。这些地址空间由虚拟内存地址组成，允许一些带有独立地址空间的进程指向一个相对较小的物理地址空间（在机器的物理内存中）。不仅仅是方便，而且更安全。因为<strong>每个地址空间是独立且隔离的</strong>，因此很安全。</p>
+<p>但是与安全性相关联的成本很高。因为每个进程（和内核）会有相同地址指向不同的物理内存区域，不可能立即共享内存。幸运的是，有一些解决方案。用户进程可以通过 POSIX共享的内存机制（<code>shmem</code>）共享内存，但有一点要特别说明，每个进程可能有一个指向相同物理内存区域的不同虚拟地址。</p>
+<p>虚拟内存到物理内存的映射通过页表完成，这是在底层软件中实现的（见图 1）。硬件本身提供映射，但是内核管理表及其配置。注意这里的显示，进程可能有一个大的地址空间，但是很少见，就是说小的地址空间的区域（页面）通过页表指向物理内存。这允许进程在特殊需要时指定大的地址空间。</p>
+<div align="center"><img src="/2019/12/03/The-method-of-data-delivery-between-Linux-Kernel-space-and-User-space/pagetable.gif" alt="图 1. 页表提供从虚拟地址到物理地址的映射"></div>
+
+<p>由于缺乏为进程定义内存的能力，底层物理内存被过度使用。通过一个称为 <em>paging</em>（然而，在 Linux 中通常称为 <em>swap</em>）的进程，很少使用的页面将自动移到一个速度较慢的存储设备（比如磁盘），来容纳需要被访问的其它页面（见图 2 ）。这一行为允许，在将很少使用的页面迁移到磁盘来提高物理内存使用的同时，计算机中的物理内存为应用程序更容易需要的页面提供服务。注意，一些页面可以指向文件，在这种情况下，如果页面是脏（dirty）的，数据将被冲洗，如果页面是干净的 （clean），直接丢掉。</p>
+<div align="center"><img src="/2019/12/03/The-method-of-data-delivery-between-Linux-Kernel-space-and-User-space/swap_page.gif" alt="图 2. 通过将很少使用的页面迁移到速度慢且便宜的存储器，交换使物理内存空间得到了更好的利用"></div>
+
+<p>选择一个页面来交换存储的过程被称为一个<em>页面置换算法</em>，可以通过使用许多算法来实现。该进程在请求存储位置时发生，存储位置的页面不在存储器中（在存储器管理单元 [MMU] 中无映射）。这个事件被称为一个<em>页面错误</em> 并被硬件（MMU）删除，出现页面错误中断后该事件由防火墙管理。该栈的详细说明见图 3。</p>
+<div align="center"><img src="/2019/12/03/The-method-of-data-delivery-between-Linux-Kernel-space-and-User-space/swap_mmu.gif" alt="图 3. 地址空间和虚拟 - 物理地址映射的元素"></div>
+
+<p>Linux 提供一个有趣的交换实现，该实现提供许多有用的特性。Linux 交换系统允许<strong>创建和使用多个交换分区和优先级</strong>，这支持存储设备上的交换层次结构，这些存储设备提供不同的性能参数（例如，<u>固态磁盘 [SSD] 上的一级交换和速度较慢的存储设备上的较大的二级交换</u>）。为 SSD 交换附加一个更高的优先级使其可以使用直至耗尽；直到那时，页面才能被写入优先级较低的交换分区。</p>
+<p>并不是所有的页面都适合交换。考虑到<strong>响应中断的内核代码</strong>或者<strong>管理页表和交换逻辑的代码</strong>，显然，这些页面决不能被换出，因此它们是<em>固定的，</em>或者是永久地驻留在内存中。尽管内核页面不需要进行交换，然而用户页面需要，但是它们可以被固定，通过 <code>mlock</code>（或 <code>mlockall</code>）函数来锁定页面。这就是用户空间内存访问函数的目的。<u>如果内核假设一个用户传递的地址是有效的且是可访问的，最终可能会出现内核严重错误（kernel panic）</u>（例如，因为用户页面被换出，而导致内核中的页面错误）。因此<strong><u>面向用户空间和内核空间之间的内存数据移动的应用程序编程接口（API）(例如<code>copy_to_user</code>、<code>copy_from_user</code>等)确保这些边界情况被妥善处理（这也是不同于用户空间的内存操作函数的地方，如<code>memcpy()</code>）</u></strong>。</p>
+<h2 id="0x02-相关内核API"><a href="#0x02-相关内核API" class="headerlink" title="0x02. 相关内核API"></a>0x02. 相关内核API</h2><p>现在，我们来研究一下面向用户空间和内核空间之间的内存数据移动(或者称哟用户操作用户内存)的内核API。用户空间内存访问函数在表 1 中列出。</p>
+<div align="center"><b>表 1. 用户空间内存访问 API</b></div>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>access_ok</code></td>
+<td style="text-align:left">检查用户空间内存指针的有效性</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>get_user</code></td>
+<td style="text-align:left">从用户空间获取一个简单变量</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>put_user</code></td>
+<td style="text-align:left">输入一个简单变量到用户空间</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>clear_user</code></td>
+<td style="text-align:left">清除用户空间中的一个块，或者将其归零。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>copy_to_user</code></td>
+<td style="text-align:left">将一个数据块从内核复制到用户空间</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>copy_from_user</code></td>
+<td style="text-align:left">将一个数据块从用户空间复制到内核</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>strnlen_user</code></td>
+<td style="text-align:left">获取内存空间中字符串缓冲区的大小</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>strncpy_from_user</code></td>
+<td style="text-align:left">从用户空间复制一个字符串到内核</td>
+</tr>
+</tbody>
+</table>
+<p>这些函数的实现架构是独立的。例如在 x86 架构中，可以使用 <code>./linux/arch/x86/lib/usercopy_32.c</code>和 <code>usercopy_64.c</code> 中的源代码找到这些函数以及在<code>./linux/arch/x86/include/asm/uaccess.h</code> 中定义的字符串。</p>
+<p>当数据移动函数的规则涉及到复制调用的类型时（简单 VS. 聚集），这些函数的作用如图 4 所示。</p>
+<div align="center"><img src="/2019/12/03/The-method-of-data-delivery-between-Linux-Kernel-space-and-User-space/data_move_api.gif" alt="图 4. 使用 User Space Memory Access API 进行数据移动"></div>
+
+
+
+<h3 id="0x02-1-access-ok-函数"><a href="#0x02-1-access-ok-函数" class="headerlink" title="0x02.1. access_ok 函数"></a>0x02.1. access_ok 函数</h3><p>可以使用 <code>access_ok</code> 函数在您想要访问的用户空间检查指针的有效性。调用函数提供指向数据块的开始的指针、块大小和访问类型（无论这个区域是用来读还是写的）。函数原型定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">access_ok( type, addr, size );</span><br></pre></td></tr></table></figure>
+<p><code>type</code> 参数可以被指定为 <code>VERIFY_READ</code> 或 <code>VERIFY_WRITE</code>。<code>VERIFY_WRITE</code> 也可以识别内存区域是否可读以及可写（尽管访问仍然会生成 <code>-EFAULT</code>）。该函数简单检查地址可能是在用户空间，而不是内核。</p>
+<h3 id="0x02-2-get-user-函数"><a href="#0x02-2-get-user-函数" class="headerlink" title="0x02.2. get_user 函数"></a>0x02.2. get_user 函数</h3><p>要从用户空间读取一个简单变量，可以使用 <code>get_user</code> 函数，该函数适用于简单数据类型，比如，<code>char</code> 和 <code>int</code>，但是像结构体这类较大的数据类型，必须使用 <code>copy_from_user</code> 函数。该原型接受一个变量（存储数据）和一个用户空间地址来进行 Read 操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get_user( x, ptr );</span><br></pre></td></tr></table></figure>
+<p><code>get_user</code> 函数将映射到两个内部函数其中的一个。在系统内部，这个函数决定被访问变量的大小（根据提供的变量存储结果）并通过 <code>__get_user_x</code> 形成一个内部调用。成功时该函数返回 0，一般情况下，<code>get_user</code> 和 <code>put_user</code> 函数比它们的块复制副本 要快一些，如果是小类型被移动的话，应该用它们。</p>
+<h3 id="0x02-3-put-user-函数"><a href="#0x02-3-put-user-函数" class="headerlink" title="0x02.3. put_user 函数"></a>0x02.3. put_user 函数</h3><p>您可以使用 <code>put_user</code> 函数来将一个简单变量从内核写入用户空间。和 <code>get_user</code> 一样，它接受一个变量（包含要写的值）和一个用户空间地址作为写目标：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">put_user( x, ptr );</span><br></pre></td></tr></table></figure>
+<p>和 <code>get_user</code> 一样，<code>put_user</code> 函数被内部映射到 <code>put_user_x</code> 函数 ，成功时，返回 0，出现错误时，返回 <code>-EFAULT</code>。</p>
+<h3 id="0x02-4-clear-user-函数"><a href="#0x02-4-clear-user-函数" class="headerlink" title="0x02.4. clear_user 函数"></a>0x02.4. clear_user 函数</h3><p><code>clear_user</code> 函数被用于将用户空间的内存块清零。该函数采用一个指针（用户空间中）和一个型号进行清零，这是以字节定义的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clear_user( ptr, n );</span><br></pre></td></tr></table></figure>
+<p>在内部，<code>clear_user</code> 函数首先检查用户空间指针是否可写（通过 <code>access_ok</code>），然后调用内部函数（通过内联组装方式编码）来执行 Clear 操作。使用带有 repeat 前缀的字符串指令将该函数优化成一个非常紧密的循环。它将返回不可清除的字节数，如果操作成功，则返回 0。</p>
+<h3 id="0x02-5-copy-to-user-函数"><a href="#0x02-5-copy-to-user-函数" class="headerlink" title="0x02.5. copy_to_user 函数"></a>0x02.5. copy_to_user 函数</h3><p><code>copy_to_user</code> 函数将数据块从内核复制到用户空间。该函数接受一个指向用户空间缓冲区的指针、一个指向内存缓冲区的指针、以及一个以字节定义的长度。该函数在成功时，返回 0，否则返回一个非零数，指出不能发送的字节数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy_to_user( to, from, n );</span><br></pre></td></tr></table></figure>
+<p>检查了向用户缓冲区写入的功能之后（通过 <code>access_ok</code>），内部函数 <code>__copy_to_user</code> 被调用，它反过来调用 <code>__copy_from_user_inatomic</code>（在 ./linux/arch/x86/include/asm/uaccess_<em>XX.</em>h 中。其中 <em>XX</em> 是 32 或者 64 ，具体取决于架构。）在确定了是否执行 1、2 或 4 字节复制之后，该函数调用 <code>__copy_to_user_ll</code>，这就是实际工作进行的地方。在损坏的硬件中（在 i486 之前，WP 位在管理模式下不可用），页表可以随时替换，需要将想要的页面固定到内存，使它们在处理时不被换出。i486 之后，该过程只不过是一个优化的副本。</p>
+<h3 id="0x02-6-copy-from-user-函数"><a href="#0x02-6-copy-from-user-函数" class="headerlink" title="0x02.6. copy_from_user 函数"></a>0x02.6. copy_from_user 函数</h3><p><code>copy_from_user</code> 函数将数据块从用户空间复制到内核缓冲区。它接受一个目的缓冲区（在内核空间）、一个源缓冲区（从用户空间）和一个以字节定义的长度。和 <code>copy_to_user</code> 一样，该函数在成功时，返回 0 ，否则返回一个非零数，指出不能复制的字节数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy_from_user( to, from, n );</span><br></pre></td></tr></table></figure>
+<p>该函数首先检查从用户空间源缓冲区读取的能力（通过 <code>access_ok</code>），然后调用 <code>__copy_from_user</code>，最后调用 <code>__copy_from_user_ll</code>。从此开始，根据构架，为执行从用户缓冲区到内核缓冲区的零拷贝（不可用字节）而进行一个调用。优化组装函数包含管理功能。</p>
+<h3 id="0x02-7-strnlen-user-函数"><a href="#0x02-7-strnlen-user-函数" class="headerlink" title="0x02.7. strnlen_user 函数"></a>0x02.7. strnlen_user 函数</h3><p><code>strnlen_user</code> 函数也能像 <code>strnlen</code> 那样使用，但前提是缓冲区在用户空间可用。<code>strnlen_user</code> 函数带有两个参数：用户空间缓冲区地址和要检查的最大长度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strnlen_user( src, n );</span><br></pre></td></tr></table></figure>
+<p><code>strnlen_user</code> 函数首先通过调用 <code>access_ok</code> 检查用户缓冲区是否可读。如果是 <code>strlen</code> 函数被调用，<code>max length</code> 参数则被忽略。</p>
+<h3 id="0x02-8-strncpy-from-user-函数"><a href="#0x02-8-strncpy-from-user-函数" class="headerlink" title="0x02.8. strncpy_from_user 函数"></a>0x02.8. strncpy_from_user 函数</h3><p><code>strncpy_from_user</code> 函数将一个字符串从用户空间复制到一个内核缓冲区，给定一个用户空间源地址和最大长度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strncpy_from_user( dest, src, n );</span><br></pre></td></tr></table></figure>
+<p>由于从用户空间复制，该函数首先使用 <code>access_ok</code> 检查缓冲区是否可读。和 <code>copy_from_user</code> 一样，该函数作为一个优化组装函数（在<code>./linux/arch/x86/lib/usercopy_*XX.*c</code>中）实现。</p>
+<h2 id="0x03-内存映射的其他模式"><a href="#0x03-内存映射的其他模式" class="headerlink" title="0x03. 内存映射的其他模式"></a>0x03. 内存映射的其他模式</h2><p>上面部分探讨了在内核和用户空间之间移动数据的方法（使用内核初始化操作）。Linux 还提供一些其他的方法，用于在内核和用户空间中移动数据。尽管这些方法未必能够提供与用户空间内存访问函数相同的功能，但是它们在地址空间之间映射内存的功能是相似的。</p>
+<p>在用户空间，注意，由于用户进程出现在单独的地址空间，在它们之间移动数据必须经过某种进程间通信机制。Linux 提供各种模式（比如，消息队列），但是最著名的是 POSIX 共享内存（<code>shmem</code>）。该机制允许进程创建一个内存区域，然后同一个或多个进程共享该区域。注意，每个进程可能在其各自的地址空间中映射共享内存区域到不同地址。因此需要相对的寻址偏移（offset addressing）。</p>
+<p><code>mmap</code> 函数允许一个用户空间应用程序在虚拟地址空间中创建一个映射，该功能在某个设备驱动程序类中是常见的，<strong><u>允许将物理设备内存映射到进程的虚拟地址空间</u></strong>。在一个驱动程序中，<code>mmap</code> 函数通过 <code>remap_pfn_range</code> 内核函数实现，它提供设备内存到用户地址空间的线性映射。</p>
+<h2 id="0x04-copy-to-user和copy-from-user在内核模块中的实践"><a href="#0x04-copy-to-user和copy-from-user在内核模块中的实践" class="headerlink" title="0x04. copy_to_user和copy_from_user在内核模块中的实践"></a>0x04. copy_to_user和copy_from_user在内核模块中的实践</h2><p>经过上述介绍，我们知道<code>copy_to_user</code>是用来把内核驱动的数据拷贝到用户空间，而<code>copy_from_user</code>是用来把用户空间的数据传递到内核驱动中。本节实现一个字符内核驱动模块，通过<code>copy_to_user</code>、<code>copy_from_user</code>与用户空间的应用程序进行数据传递。因此，代码实现分为两个文件<code>copydemo.c</code>、<code>main.c</code>，其中<code>main.c</code>实现了一个用户空间程序通过驱动文件(Driver File)与内核模块(由<code>copydemo.c</code>实现)交互通信。项目目录如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── copydemo.c</span><br><span class="line">├── main.c</span><br><span class="line">└── Makefile</span><br></pre></td></tr></table></figure>
+<h3 id="0x04-1-具体实现"><a href="#0x04-1-具体实现" class="headerlink" title="0x04.1. 具体实现"></a>0x04.1. 具体实现</h3><p><strong><code>Makefile</code>文件：</strong></p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">obj-m += copydemo.o</span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">        make -C /lib/modules/<span class="variable">$(<span class="built_in">shell</span> uname -r)</span>/build M=<span class="variable">$(PWD)</span> modules</span><br><span class="line">        gcc main.c -o copydemo-main</span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">        make -C /lib/modules/<span class="variable">$(<span class="built_in">shell</span> uname -r)</span>/build M=<span class="variable">$(PWD)</span> clean </span><br><span class="line">        rm -rf copydemo-main test</span><br><span class="line"></span><br><span class="line"><span class="section">test:</span></span><br><span class="line">        -sudo rmmod lkm_demo</span><br><span class="line">        sudo dmesg -C</span><br><span class="line">        sudo insmod copydemo.ko</span><br><span class="line">        dmesg</span><br></pre></td></tr></table></figure>
+<p><strong><code>copydemo.c</code>文件：</strong> 内核模块的实现文件。通过<code>device file</code>与内核模块(本案例中实现一个<code>character device</code>)通信需要根据需求自定义实现<code>struct file_operations</code>中对应的<code>open</code>/<code>release</code>/<code>read</code>/<code>write</code> 四种针对设备文件的操作函数，并在内核模块初始化函数中(本例中为<code>static int __init copydemo_init(void);</code>函数)调用<code>register_chrdev</code>将注册的内核模块与自定义的<code>file operations</code>关联起来。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/fs.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/cdev.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/uaccess.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEVICENAME <span class="meta-string">"copydemo"</span></span></span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">"GPL"</span>);</span><br><span class="line">MODULE_AUTHOR(<span class="string">"Bob Huang"</span>);</span><br><span class="line">MODULE_DESCRIPTION(<span class="string">"A char kernel module sample for the usage of copy_to_user and copy_from_user Kernel API functions."</span>);</span><br><span class="line">MODULE_VERSION(<span class="string">"0.1"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> *init_msg = <span class="string">"Hello, World\n"</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> *exit_msg = <span class="string">"Good Bye!\n"</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> major_num;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Called when a process opens our device. */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">copydemo_open</span><span class="params">(struct inode *inode, struct file *file)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        printk(<span class="string">"file open in copydemo_dev_open... finished! \n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Called when a process closes our device. */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">copydemo_release</span><span class="params">(struct inode *inode,  struct file *file)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        printk(<span class="string">"file release in copydemo_dev_release... finished!\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* When a process reads from our device, this gets called. */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> ssize_t <span class="title">copydemo_read</span><span class="params">(struct file *file, <span class="keyword">char</span> __user *buf, <span class="keyword">size_t</span> count, <span class="keyword">loff_t</span> *offset)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">char</span> alpha[<span class="number">27</span>];</span><br><span class="line">        <span class="keyword">int</span> i, cnt;</span><br><span class="line">        <span class="built_in">memset</span>(alpha, <span class="number">0</span>, <span class="number">27</span>);</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">                alpha[i] = <span class="string">'a'</span> + i;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (count &gt; <span class="number">26</span>)</span><br><span class="line">                cnt = <span class="number">26</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                cnt = count;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Copy data from kernel driver to user space via copy_to_user */</span></span><br><span class="line">        <span class="keyword">if</span> (!copy_to_user((<span class="keyword">char</span>*)buf, alpha, cnt))</span><br><span class="line">                        <span class="keyword">return</span> cnt;</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">                        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Called when a process tries to write to our device. */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> ssize_t <span class="title">copydemo_write</span><span class="params">(struct file *file, <span class="keyword">const</span> <span class="keyword">char</span> __user *buf, <span class="keyword">size_t</span> count, <span class="keyword">loff_t</span> *offset)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">char</span> alpha[<span class="number">27</span>];</span><br><span class="line">        <span class="keyword">int</span> cnt;</span><br><span class="line">        <span class="built_in">memset</span>(alpha, <span class="number">0</span>, <span class="number">27</span>);</span><br><span class="line">        <span class="keyword">if</span> (count &gt; <span class="number">26</span>)</span><br><span class="line">                cnt = <span class="number">26</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                cnt = count;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Write data from user space to kernel driver via copy_from_user */</span></span><br><span class="line">        <span class="keyword">if</span>(!copy_from_user((<span class="keyword">char</span>*)alpha, buf, cnt))</span><br><span class="line">        &#123;</span><br><span class="line">                printk(KERN_INFO <span class="string">"Message from user space: %s\n"</span>, alpha);</span><br><span class="line">                <span class="keyword">return</span> cnt;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* This structure points to all of the device functions */</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span> <span class="title">fops</span> = &#123;</span></span><br><span class="line">        .owner = THIS_MODULE,</span><br><span class="line">        .open = copydemo_open,</span><br><span class="line">        .release = copydemo_release,</span><br><span class="line">        .read = copydemo_read,</span><br><span class="line">        .write = copydemo_write </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function">init <span class="title">copydemo_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; count; i++) </span><br><span class="line">                printk(KERN_INFO <span class="string">"%d message: %s\n"</span>, i+<span class="number">1</span>, init_msg);</span><br><span class="line"></span><br><span class="line">        major_num = register_chrdev(<span class="number">0</span>, DEVICENAME, &amp;fops);</span><br><span class="line">        <span class="keyword">if</span> (major_num &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        printk(KERN_ALERT <span class="string">"Could not register device: %d\n"</span>, major_num);</span><br><span class="line">        <span class="keyword">return</span> major_num;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        printk(KERN_INFO <span class="string">"%s module loaded with device major number %d\n"</span>, DEVICENAME, major_num);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __<span class="function"><span class="built_in">exit</span> <span class="title">copydemo_exit</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        printk(KERN_INFO <span class="string">"Exit Message: %s\n"</span>, exit_msg);</span><br><span class="line">        unregister_chrdev(major_num, DEVICENAME);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">copydemo</span><span class="params">(<span class="keyword">void</span>)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        printk(KERN_INFO <span class="string">"Good Morning!\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_param(count, <span class="keyword">int</span>, S_IRUGO);</span><br><span class="line">module_param(init_msg, charp, S_IRUGO);</span><br><span class="line">module_param(exit_msg, charp, S_IRUGO);</span><br><span class="line"></span><br><span class="line">EXPORT_SYMBOL_GPL(copydemo);</span><br><span class="line">module_init(copydemo_init);</span><br><span class="line">module_exit(copydemo_exit);</span><br></pre></td></tr></table></figure>
+<p><strong><code>main.c</code>文件：</strong> 在定义的内核模块<code>copydemo</code>注册到系统内核后，主要逻辑是，定义一个<code>alpha[27]</code>数组, 然后打开注册好的设备文件<code>/dev/copydemo</code>，将<code>alpha[27]</code>中的数据写到内核模块<code>copydemo</code>，接着读设备文件<code>/dev/copydemo</code>的内容。其中，<code>fd = open(DEVNAME, O_RDWR)</code>操作会回调内核<code>copydemo.c</code>文件中的<code>int copydemo_open()</code>函数；<code>write(fd, alpha, 26);</code>会回调<code>copydemo.c</code>文件中的<code>ssize_t copydemo_write()</code>；<code>read(fd, alpha, 26);</code>会回调<code>copydemo.c</code>文件中的<code>ssize_t copydemo_read()</code>；<code>close(fd);</code>会回调<code>copydemo.c</code>文件中的<code>int copydemo_release();</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEVNAME <span class="meta-string">"/dev/copydemo"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">        <span class="keyword">char</span> alpha[<span class="number">27</span>];</span><br><span class="line">        <span class="keyword">int</span> fd, i;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">memset</span>(alpha, <span class="number">0</span> ,<span class="number">27</span>);</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">                alpha[i] = <span class="string">'A'</span> + i;</span><br><span class="line"></span><br><span class="line">        fd = open(DEVNAME, O_RDWR);</span><br><span class="line">        <span class="keyword">if</span>(!fd) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"file %s is opening... failed!\n"</span>, DEVNAME);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"file %s is opening... successfully!\n Its fd is %d.\n"</span>, DEVNAME, fd);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        getchar();</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Write A-Z to Kernel...\n"</span>);</span><br><span class="line">        write(fd, alpha, <span class="number">26</span>);</span><br><span class="line"></span><br><span class="line">        getchar();</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"read data from Kernel...\n"</span>);</span><br><span class="line">        read(fd, alpha, <span class="number">26</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"read message: %s\n"</span>, alpha);</span><br><span class="line"></span><br><span class="line">        getchar();</span><br><span class="line">        close(fd);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>具体代码详见：<a href="https://coding.net/u/bobohuang_sun/p/kernel-explore/git/tree/master/copy-lkm" target="_blank" rel="noopener">https://coding.net/u/bobohuang_sun/p/kernel-explore/git/tree/master/copy-lkm</a></p>
+<h3 id="0x04-2-运行测试"><a href="#0x04-2-运行测试" class="headerlink" title="0x04.2. 运行测试"></a>0x04.2. 运行测试</h3><ul>
+<li><p>编译：执行<code>make</code>直接编译；编译成功后目录如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── copydemo.c</span><br><span class="line">├── copydemo.ko</span><br><span class="line">├── copydemo-main</span><br><span class="line">├── copydemo.mod.c</span><br><span class="line">├── copydemo.mod.o</span><br><span class="line">├── copydemo.o</span><br><span class="line">├── main.c</span><br><span class="line">├── Makefile</span><br><span class="line">├── modules.order</span><br><span class="line">└── Module.symvers</span><br></pre></td></tr></table></figure>
+<p>其中，<code>copydemo.ko</code>就是内核模块的目标文件。</p>
+</li>
+</ul>
+<ul>
+<li><p>向内核注册<code>copydemo</code>内核模块，并观察内核日志，得到<code>copydemo</code>内核模块的<code>major number</code>为240，相当于<code>copydemo</code>内核模块的ID: </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[bobo@localhost copy-lkm]$ sudo rmmod copydemo</span><br><span class="line">[bobo@localhost copy-lkm]$ sudo rm -rf /dev/copydemo</span><br><span class="line"></span><br><span class="line">[bobo@localhost copy-lkm]$ sudo dmesg -C</span><br><span class="line"></span><br><span class="line">[bobo@localhost copy-lkm]$ sudo insmod copydemo.ko </span><br><span class="line"></span><br><span class="line">[bobo@localhost copy-lkm]$ dmesg </span><br><span class="line">[<span class="number">675080.379637</span>] <span class="number">1</span> message: Hello, World</span><br><span class="line"></span><br><span class="line">[<span class="number">675080.379639</span>] <span class="number">2</span> message: Hello, World</span><br><span class="line"></span><br><span class="line">[<span class="number">675080.379639</span>] <span class="number">3</span> message: Hello, World</span><br><span class="line"></span><br><span class="line">[<span class="number">675080.379639</span>] <span class="number">4</span> message: Hello, World</span><br><span class="line"></span><br><span class="line">[<span class="number">675080.379640</span>] <span class="number">5</span> message: Hello, World</span><br><span class="line"></span><br><span class="line">[<span class="number">675080.379640</span>] <span class="number">6</span> message: Hello, World</span><br><span class="line"></span><br><span class="line">[<span class="number">675080.379640</span>] <span class="number">7</span> message: Hello, World</span><br><span class="line"></span><br><span class="line">[<span class="number">675080.379641</span>] <span class="number">8</span> message: Hello, World</span><br><span class="line"></span><br><span class="line">[<span class="number">675080.379641</span>] <span class="number">9</span> message: Hello, World</span><br><span class="line"></span><br><span class="line">[<span class="number">675080.379642</span>] <span class="number">10</span> message: Hello, World</span><br><span class="line"></span><br><span class="line">[<span class="number">675080.379643</span>] copydemo <span class="keyword">module</span> loaded with device major number <span class="number">240</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用上述得到的<code>major number</code>创建一个设备文件<code>/dev/copydemo</code>，然后用户空间的应用就可以通过该设备文件与我们定义的内核模块进行通信了。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[bobo@localhost copy-lkm]$ sudo mknod /dev/copydemo c 240 0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>​        在上面的案例中，你需要将<code>240</code>替换为从上一步中获取的<code>major number</code>值。</p>
+<p>​        <code>mknod</code>命令中的参数<code>c</code>是用来制定要创建一个<code>character device file</code>。</p>
+<ul>
+<li><p>执行<code>copydemo-main</code>对<code>/dev/copydemo</code>设备文件进行<code>open/write/read/close</code>操作，需要注意的是打开设备文件需要<code>sudo</code>权限，因此执行<code>copydemo-main</code>需要<code>sudo</code>权限。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">[bobo@localhost copy-lkm]$ sudo ./copydemo-main </span><br><span class="line">file /dev/copydemo is opening... successfully!</span><br><span class="line"> Its fd is 3.</span><br><span class="line">(输入回车)</span><br><span class="line"></span><br><span class="line">Write A-Z to Kernel...</span><br><span class="line">(输入回车)</span><br><span class="line"></span><br><span class="line"><span class="built_in">read</span> data from Kernel...</span><br><span class="line"><span class="built_in">read</span> message: abcdefghijklmnopqrstuvwxyz</span><br><span class="line">(输入回车)</span><br><span class="line"></span><br><span class="line">[bobo@localhost copy-lkm]$ dmesg</span><br><span class="line">[675080.379637] 1 message: Hello, World</span><br><span class="line"></span><br><span class="line">[675080.379639] 2 message: Hello, World</span><br><span class="line"></span><br><span class="line">[675080.379639] 3 message: Hello, World</span><br><span class="line"></span><br><span class="line">[675080.379639] 4 message: Hello, World</span><br><span class="line"></span><br><span class="line">[675080.379640] 5 message: Hello, World</span><br><span class="line"></span><br><span class="line">[675080.379640] 6 message: Hello, World</span><br><span class="line"></span><br><span class="line">[675080.379640] 7 message: Hello, World</span><br><span class="line"></span><br><span class="line">[675080.379641] 8 message: Hello, World</span><br><span class="line"></span><br><span class="line">[675080.379641] 9 message: Hello, World</span><br><span class="line"></span><br><span class="line">[675080.379642] 10 message: Hello, World</span><br><span class="line"></span><br><span class="line">[675080.379643] copydemo module loaded with device major number 240</span><br><span class="line">[675783.856226] file open <span class="keyword">in</span> copydemo_dev_open... finished! </span><br><span class="line">[675786.275579] Message from user space: ABCDEFGHIJKLMNOPQRSTUVWXYZ</span><br><span class="line">[675792.716330] file release <span class="keyword">in</span> copydemo_dev_release... finished!</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>删除设备文件，并卸载内核模块</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[bobo@localhost copy-lkm]$ sudo rm /dev/copydemo</span><br><span class="line">[bobo@localhost copy-lkm]$ sudo rmmod copydemo</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="0x05-References"><a href="#0x05-References" class="headerlink" title="0x05. References"></a>0x05. References</h2><p>[1] 从 Linux 内核访问用户空间内存. <a href="https://www.ibm.com/developerworks/cn/linux/l-kernel-memory-access/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/linux/l-kernel-memory-access/index.html</a>. </p>
+<hr>
+<p>分享人： 黄一博 (复旦大学NiSL）</p>
+
+    </div>
+    
+        <div class="reward">
+    <div class="reward-wrap">赏
+        <div class="reward-box">
+            
+                <span class="reward-type">
+                    <img class="alipay" src="/img/alipay.jpeg"><b>支付宝打赏</b>
+                </span>
+            
+            
+                <span class="reward-type">
+                    <img class="wechat" src="/img/wepay.jpeg"><b>微信打赏</b>
+                </span>
+            
+        </div>
+    </div>
+    <p class="reward-tip">赞赏是不耍流氓的鼓励</p>
+</div>
+
+
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Bobo Huang</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2019/11/27/Linux-Kernel-Module-Developing/" class="next-post btn btn-default" title='Linux 内核模块开发实践与内核编译'>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">Linux 内核模块开发实践与内核编译</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+    
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'DL5693uIDX7fHtjctmTjGuis-gzGzoHsz',
+            appKey: 'OheW0MamYu8xrN4Qw5MJxcIa',
+            placeholder: '说点什么吧',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: ''.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">Table of Contents</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux内核与用户空间之间传递数据的方法"><span class="toc-number">1.</span> <span class="toc-text">Linux内核与用户空间之间传递数据的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#摘要"><span class="toc-number">1.1.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-Linux内存"><span class="toc-number">1.2.</span> <span class="toc-text">0x01. Linux内存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-相关内核API"><span class="toc-number">1.3.</span> <span class="toc-text">0x02. 相关内核API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-1-access-ok-函数"><span class="toc-number">1.3.1.</span> <span class="toc-text">0x02.1. access_ok 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-2-get-user-函数"><span class="toc-number">1.3.2.</span> <span class="toc-text">0x02.2. get_user 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-3-put-user-函数"><span class="toc-number">1.3.3.</span> <span class="toc-text">0x02.3. put_user 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-4-clear-user-函数"><span class="toc-number">1.3.4.</span> <span class="toc-text">0x02.4. clear_user 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-5-copy-to-user-函数"><span class="toc-number">1.3.5.</span> <span class="toc-text">0x02.5. copy_to_user 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-6-copy-from-user-函数"><span class="toc-number">1.3.6.</span> <span class="toc-text">0x02.6. copy_from_user 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-7-strnlen-user-函数"><span class="toc-number">1.3.7.</span> <span class="toc-text">0x02.7. strnlen_user 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-8-strncpy-from-user-函数"><span class="toc-number">1.3.8.</span> <span class="toc-text">0x02.8. strncpy_from_user 函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-内存映射的其他模式"><span class="toc-number">1.4.</span> <span class="toc-text">0x03. 内存映射的其他模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-copy-to-user和copy-from-user在内核模块中的实践"><span class="toc-number">1.5.</span> <span class="toc-text">0x04. copy_to_user和copy_from_user在内核模块中的实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x04-1-具体实现"><span class="toc-number">1.5.1.</span> <span class="toc-text">0x04.1. 具体实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x04-2-运行测试"><span class="toc-number">1.5.2.</span> <span class="toc-text">0x04.2. 运行测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-References"><span class="toc-number">1.6.</span> <span class="toc-text">0x05. References</span></a></li></ol></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2019
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>

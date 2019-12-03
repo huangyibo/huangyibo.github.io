@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>Makefile中.PHONY的使用 | Bobo Huang写字的地方</title>
+<title>提高程序员编程效率的好习惯 | Bobo Huang写字的地方</title>
 
 
     <link rel="alternate" href="/atom.xml" title="Bobo Huang写字的地方" type="application/atom+xml">
@@ -157,9 +157,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="Makefile中.PHONY的使用">
+        <h1 id="提高程序员编程效率的好习惯">
             
-	            Makefile中.PHONY的使用
+	            提高程序员编程效率的好习惯
             
         </h1>
         <div class="post-meta">
@@ -167,8 +167,8 @@
     
     <span class="categories-meta fa-wrap">
         <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/C/C++编程">
-            C/C++编程
+        <a href="/categories/闲思碎语">
+            闲思碎语
         </a>
     </span>
     
@@ -179,8 +179,8 @@
         <span class="tags-meta">
             
                 
-                    <a href="/tags/C/C++编程" title='C/C++编程'>
-                        C/C++编程
+                    <a href="/tags/程序猿" title='程序猿'>
+                        程序猿
                     </a>
                 
             
@@ -192,7 +192,7 @@
         
         <span class="fa-wrap">
             <i class="fa fa-clock-o"></i>
-            <span class="date-meta">2018/06/08</span>
+            <span class="date-meta">2016/08/04</span>
         </span>
         
     
@@ -201,29 +201,39 @@
             
             
             <p class="fa fa-exclamation-triangle warning">
-                本文于<strong>536</strong>天之前发表，文中内容可能已经过时。
+                本文于<strong>1216</strong>天之前发表，文中内容可能已经过时。
             </p>
         
     </div>
     
     <div class="post-body post-content">
-        <blockquote>
-<p>在C项目构建中，经常在Makefile文件中用到.PHONY配置项。.PHONY配置项的主要作用在于避免指定命令和项目下的同名文件冲突，进行性能优化。.PHONY [command name] 显式指定了一个命令名称【而不是实际文件名】，是为了避免该命令名称与makefile同路径下的文件名重名冲突，以使make [command name]命令可以正确被解析、执行。下面将举例说明。</p>
-</blockquote>
-<h3 id="例-1"><a href="#例-1" class="headerlink" title="例 1"></a>例 1</h3><p>如果编写一个规则名称为<code>clean</code>，不产生目标文件，那么该命令在执行<code>make clean</code>时规则都会被执行，makefile内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">clean:</span><br><span class="line">    rm -f *.o temp</span><br></pre></td></tr></table></figure></p>
-<p> rm 命令不产生任何clean文件。</p>
-<ul>
-<li>如果目录下不存在名为”clean”的文件，则运行<code>make clean</code>时，命令都会正常执行；</li>
-<li>如果目录下存在名为”clean”的文件，则运行<code>make clean</code>时，命令规则会失效，文件”clean”没有依赖文件，始终是最新的，<code>make clean</code>永远不会被执行。<br>为了解决上述问题，可以使用<code>.PHONY clean</code>指明该clean命令。如下：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.PHONY clean</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">    rm -f *.o temp</span><br></pre></td></tr></table></figure>
-<p>这样执行命令<code>make clean</code>会自动忽略名为”clean”文件的存在。已知<code>.PHONY</code>配置项的目标并不是其他文件生成的实际文件，make命令会自动绕过隐含规则搜索过程，因此声明.PHONY配置项会改善性能，bi且不需要担心实际同名文件存在与否。</p>
-<h3 id="例-2"><a href="#例-2" class="headerlink" title="例 2"></a>例 2</h3><p>如果.PHONY目标有依赖关系。当一个目录中存在多个可运行程序，将其配置在同一个makefile文件。由于<code>make [command name/ Default command]</code>默认缺省规则是makefile文件中的第一个规则，一般将这第一个规则称为<strong>“all”</strong>，其依赖文件为多个可运行程序，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">all:  p1 p2 p3</span><br><span class="line">.PHONY: all</span><br><span class="line">p1:  p1.o utils.o</span><br><span class="line">       cc -o p1 p1.o utils.o</span><br><span class="line">p2:  p2.o utils.o</span><br><span class="line">       cc -o p2 p2.o utils.o</span><br><span class="line">p3:  p3.o utils.o</span><br><span class="line">       cc -o p3 p3.o utils.o</span><br></pre></td></tr></table></figure></p>
-<p>  其中p1、p2和p3是三个可执行文件，make把<strong>“all”</strong>作为主要规则，每次执行时都尝试把”all”更新，因此会检查其依赖文件p1、p2和p3是否需要更新，如果需要，就把它们更新，从而达到我们的目的。通过.PHONY指定目标为all，可以避免目录下同名文件的干扰，即不用检查规则”all”是否有同名文件存在，也不需要查询任何隐含规则，直接假定指定的规则”all”需要被更新。</p>
+        <h3 id="只做需要做的工作"><a href="#只做需要做的工作" class="headerlink" title="只做需要做的工作"></a>只做需要做的工作</h3><p>使用敏捷方法；</p>
+<p>全心全意做UX设计；</p>
+<p>沟通第一；</p>
+<p>编码也许不是解决问题的办法；</p>
+<p>过早的优化是一切罪恶的根源；</p>
+<p>选择最简单的解决方案。</p>
+<h3 id="站在巨人的肩膀上"><a href="#站在巨人的肩膀上" class="headerlink" title="站在巨人的肩膀上"></a>站在巨人的肩膀上</h3><p>使用开源框架；</p>
+<p>使用简洁语言；</p>
+<p>不要做重复的事情（不要重新发明轮子）；</p>
+<p>利用包管理器来进行公共和私有代码分配；</p>
+<p>不要任凭巨头（如微软）的摆布而修复库中的一个Bug；</p>
+<p>不要让你的雇主逼你学习；</p>
+<p>自主学习并为自己设定新的目标。</p>
+<h3 id="了解数据结构和算法"><a href="#了解数据结构和算法" class="headerlink" title="了解数据结构和算法"></a>了解数据结构和算法</h3><p>如果你不知道什么时候应该使用快速排序、不懂辨认O(n2)程序、不会写递归函数，你将无法成为10倍效率的开发者。使用多种语言你才能清楚不同的框架是如何解决相同问题的。尽可能去了解底层命令（plumbing），以便能够作出明智的决定（Web框架是怎么存储session状态的？Cookie到底是什么？）。</p>
+<h3 id="不要怕买工具，它可以节省你的时间"><a href="#不要怕买工具，它可以节省你的时间" class="headerlink" title="不要怕买工具，它可以节省你的时间"></a>不要怕买工具，它可以节省你的时间</h3><p>Ben说：“昨天我花50美元买了一个位图字体工具，它帮我节省的时间成本绝对超过200美元。”</p>
+<h3 id="集中注意力"><a href="#集中注意力" class="headerlink" title="集中注意力"></a>集中注意力</h3><p>不要整天开着你的电子邮件、Twitter、Facebook等，在工作时将它们最小化或关掉它们，戴上耳机。Tiny hack说：“即使不听音乐我也戴着耳机工作，这样便不会有人打扰到我。”</p>
+<h3 id="尽早并且经常性地进行代码重构"><a href="#尽早并且经常性地进行代码重构" class="headerlink" title="尽早并且经常性地进行代码重构"></a>尽早并且经常性地进行代码重构</h3><p>有时，你不得不放弃漂亮的代码转而去寻找真正对项目有用的代码，但没关系，如果你的现有项目中有这样的代码，最好的方式便是不要看它，并重构。</p>
+<h3 id="只管去做"><a href="#只管去做" class="headerlink" title="只管去做"></a>只管去做</h3><p>将你的业余项目分享到Startup Weekend中。在我开始转到Unix和Ruby on Rails上之前，我买了一台Mac，使用Windows虚拟机花了一年时间做.NET项目。</p>
+<h3 id="挑选一个编辑器，并掌握它"><a href="#挑选一个编辑器，并掌握它" class="headerlink" title="挑选一个编辑器，并掌握它"></a>挑选一个编辑器，并掌握它</h3><p>高效开发者喜欢用文本编辑器胜过IDE编辑器，因为这样可以学到更多东西。无论什么情况，尽量使用键盘快捷键，因为熟练使用一件工具的前提是熟悉它。</p>
+<p>在选择编辑器时，认真考虑并挑选最好的（Emacs或Vim），因为它们是通用的。其次，挑选你的首选平台最支持的。使用宏，不断地写代码；使用Mac上的TextExpander为整个段落创建快捷方式；使用Visual Studio或SublimeText的自动补齐功能；使用支持按行/列分割窗口的编辑器，这样你便能同时看到单元测试和代码（或模型、视图）。</p>
+<p>一定要想清楚后再写代码。Adam说，“我有朋友在一个大项目组里工作，他们组里最高效的程序员是一个高位截瘫用嘴叼着棍子敲代码的人，他总是在写代码之前想得很仔细且很少出错。”</p>
+<h3 id="整洁的代码胜过巧妙的代码"><a href="#整洁的代码胜过巧妙的代码" class="headerlink" title="整洁的代码胜过巧妙的代码"></a>整洁的代码胜过巧妙的代码</h3><p>要想让其他人能够读懂你的代码，尽量使用最少的代码来完成任务。遵循DRY（Don’t repeat yourself）的原则，使用明确定义的对象和库，将任务分解成小而简单的代码段。</p>
+<h3 id="潜意识是强大的工具"><a href="#潜意识是强大的工具" class="headerlink" title="潜意识是强大的工具"></a>潜意识是强大的工具</h3><p>离开10分钟往往就可以解决一个问题。控制编程时间，给自己一个多姿多彩的生活，劳逸结合能让你在工作时更高效、更愉悦。当然，即便是上了年纪的程序员也知道，以最少的时间完成最高效的工作是成为10倍效率开发者的必要条件。</p>
+<p>作为一个程序员，我觉得在职业生涯中最好的一件事儿就是从电脑前站起来，去拜访那些在某一领域有所建树的人们。</p>
+<h3 id="推动自身和团队进步"><a href="#推动自身和团队进步" class="headerlink" title="推动自身和团队进步"></a>推动自身和团队进步</h3><p>重视批评，以包容的态度接受批评并提升自己是非常重要的事情。没有这个基础，你不可能成为一个高效的开发者。一位智者曾经说过：“聪明的人善于从自己的错误中学习，而智慧的人善于从别人的错误中学习。”</p>
 <hr>
-<p><strong>综上所述，<code>.PHONY</code>是一个伪目标，可以有效防止在Makefile文件中定义的可执行命令的目标规则和工作目录下的实际文件出现名称冲突，并提高了执行Makefile的性能。</strong></p>
-<hr>
-<p>Bob Huang<br>2018.0608</p>
+<p>Bob<br>20160804</p>
 
     </div>
     
@@ -261,15 +271,15 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2018/06/08/C语言中snprintf-函数/" class="pre-post btn btn-default" title='C语言中snprintf()函数'>
+        <a href="/2016/08/04/Solutions-for-high-concurrent-web-site/" class="pre-post btn btn-default" title='Web网站高并发量的解决方案'>
             <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">C语言中snprintf()函数</span>
+            <span class="hidden-xs">Web网站高并发量的解决方案</span>
         </a>
     
     
-        <a href="/2016/08/04/Web网站高并发量的解决方案/" class="next-post btn btn-default" title='Web网站高并发量的解决方案'>
+        <a href="/2016/08/02/CORS-conclusiton-cross-domain-resource-sharing/" class="next-post btn btn-default" title='跨域资源共享CORS总结'>
             <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">Web网站高并发量的解决方案</span><i class="fa fa-angle-right fa-fw"></i>
+            <span class="hidden-xs">跨域资源共享CORS总结</span><i class="fa fa-angle-right fa-fw"></i>
         </a>
     
 </div>
@@ -312,7 +322,7 @@
     <div class="widget">
         <h3 class="title">Table of Contents</h3>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#例-1"><span class="toc-number">1.</span> <span class="toc-text">例 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例-2"><span class="toc-number">2.</span> <span class="toc-text">例 2</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#只做需要做的工作"><span class="toc-number">1.</span> <span class="toc-text">只做需要做的工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#站在巨人的肩膀上"><span class="toc-number">2.</span> <span class="toc-text">站在巨人的肩膀上</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解数据结构和算法"><span class="toc-number">3.</span> <span class="toc-text">了解数据结构和算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不要怕买工具，它可以节省你的时间"><span class="toc-number">4.</span> <span class="toc-text">不要怕买工具，它可以节省你的时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集中注意力"><span class="toc-number">5.</span> <span class="toc-text">集中注意力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#尽早并且经常性地进行代码重构"><span class="toc-number">6.</span> <span class="toc-text">尽早并且经常性地进行代码重构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#只管去做"><span class="toc-number">7.</span> <span class="toc-text">只管去做</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#挑选一个编辑器，并掌握它"><span class="toc-number">8.</span> <span class="toc-text">挑选一个编辑器，并掌握它</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#整洁的代码胜过巧妙的代码"><span class="toc-number">9.</span> <span class="toc-text">整洁的代码胜过巧妙的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#潜意识是强大的工具"><span class="toc-number">10.</span> <span class="toc-text">潜意识是强大的工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推动自身和团队进步"><span class="toc-number">11.</span> <span class="toc-text">推动自身和团队进步</span></a></li></ol>
         
     </div>
 </aside>
