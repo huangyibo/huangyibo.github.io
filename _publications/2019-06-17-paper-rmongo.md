@@ -10,4 +10,19 @@ venue: 'Information Sciences'
 ---
 
 
+- *Citation:*
+```bib
+@article{huang2019bor,
+  title={Bor: Toward high-performance permissioned blockchain in rdma-enabled network},
+  author={Huang, Bobo and Jin, Li and Lu, ZhiHui and Zhou, Xin and Wu, Jie and Tang, Qifeng and Hung, Patrick CK},
+  journal={IEEE Transactions on Services Computing},
+  volume={13},
+  number={2},
+  pages={301--313},
+  year={2019},
+  publisher={IEEE}
+}
+```
+
+
 [Download paper here](http://huangyibo.github.io/files/rmongo-IS-2019.pdf)
