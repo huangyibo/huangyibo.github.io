@@ -9,7 +9,7 @@ redirect_from:
 ---
 
 
-I am currently a Phd.D student in Network and information Security Lab (NiSL), Fudan University, under the co-supervision of Prof. Jie Wu, [Prof. Yang Xu](https://yangxu.info/) and Prof. Zhihui Lv.
+I am currently a Ph.D. student in Network and information Security Lab (NiSL), Fudan University, under the co-supervision of Prof. Jie Wu, [Prof. Yang Xu](https://yangxu.info/) and Prof. Zhihui Lv.
 Prior joining FDU, I received B.S. in Software Engineering from Central South University in 2016.
 
 My research interests mainly lie in the fields of Distributed System, Networked System and Data Center Network.
