@@ -9,18 +9,30 @@ redirect_from:
 ---
 
 
-I am currently a Phd.D. student in Network and information Security Lab (NiSL), Fudan University, under the supervision of Prof. Jie Wu, [Pro. Yang Xu](https://yangxu.info/) and Pro. Zhihui Lv.
-Prior joining FDU, I received B.Eng. in Software Engineering from Central South University in 2016.
+I am currently a Phd.D student in Network and information Security Lab (NiSL), Fudan University, under the supervision of Prof. Jie Wu, [Prof. Yang Xu](https://yangxu.info/) and Prof. Zhihui Lv.
+Prior joining FDU, I received B.S. in Software Engineering from Central South University in 2016.
 
 My research interests mainly lie in the fields of Distributed System, Networked System and Data Center Network.
-In particular, I focus on the system design, development and optimization about RDMA-enhanced datacenter systems, as well as network protocol stack and hybrid heterogeneous computing.
+In particular, I focus on the system design, development and optimization about RDMA-enhanced datacenter systems, as well as network protocol stack and RPC framework.
 
 
-Email: huangbb16@fudan.edu.cn
+- Email: huangbb16@fudan.edu.cn
+- My Resume is [HERE](http://huangyibo.github.io/files/paper1.pdf).
+
+
+Relevant and Interested Areas
+======
+---
+- System enhancement with RDMA.
+- High-performance network protocol stack design.
+- High-performance RPC framework.
+- Hybrid computing framework.
+
 
 
 News
 ======
+---
 - 05/2020 I will join Bytedance High-Speed Network Lab, Network Engineering Group, as a Research Intern.
 
 
