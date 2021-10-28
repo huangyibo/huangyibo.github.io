@@ -17,7 +17,7 @@ In particular, I focus on the system design, development and optimization about 
 
 
 - Email: huangbb16@fudan.edu.cn
-- My Resume is [HERE](http://huangyibo.github.io/files/paper1.pdf).
+<!-- - My Resume is [HERE](http://huangyibo.github.io/files/rmongo-IS-2019.pdf). -->
 
 
 Relevant and Interested Areas
