@@ -69,7 +69,7 @@ Publications
 Selected Awards
 ======
 - The Second Prize in the 8th Asia-Pacific Student RDMA Programming Competition, 2020
-- Fanhai Fellowship Award, Fudan Univeristy, 2020
+- Oceanwide Fellowship Award, Fudan Univeristy, 2020
 - Intel Scholarship, 2020
 - The Second Prize in the 7th Asia-Pacific Student RDMA Programming Competition, 2019
 - Outstanding Teaching Assistant, Fudan University, 2018

@@ -9,8 +9,8 @@ redirect_from:
 ---
 
 
-I am currently a Ph.D. student in Network and information Security Lab (NiSL), Fudan University, under the co-supervision of Prof. Jie Wu, [Prof. Yang Xu](https://yangxu.info/) and Prof. Zhihui Lv.
-Prior joining FDU, I received B.S. in Software Engineering from Central South University in 2016.
+I am currently a Ph.D. student in Network and information Security Lab (NiSL) at Fudan University, under the co-supervision of Prof. Jie Wu, [Prof. Yang Xu](https://yangxu.info/) and Prof. Zhihui Lv.
+Prior to joining FDU, I received B.S. in Software Engineering from Central South University in 2016.
 
 My research interests mainly lie in the fields of Distributed System, Networked System and Data Center Network.
 In particular, I focus on the system design, development and optimization about RDMA-enhanced datacenter systems, as well as network protocol stack and RPC framework.
@@ -33,8 +33,19 @@ Relevant and Interested Areas
 News
 ======
 ---
-- 05/2020 I will join Bytedance High-Speed Network Lab, Network Engineering Group, as a Research Intern.
 
+- 12/2021 I expect to get Ph.D. in Fudan University.
+- 12/2020 I was awarded "The Oceanwide Scholar" at Fudan University in the 2020 year.
+- 11/2020 I was awarded "Intel Scholarship" by Intel.
+- 11/2020 Our **FDU Starry Team** led by me won the **Second Prize** in [the 8th APAC RDMA Programming Competition](http://www.hpcadvisorycouncil.com/events/2020/rdma/) organized by HPC-AI Advisory Council. Congratulations!
+- 05/2020 I joined Bytedance High-Speed Network Lab, Network Engineering Group, as a Research Intern.
+- 05/2020 One research paper is accepted by JPDC 2020.
+- 11/2019 Our **FDU Starry Team** led by me won the **Second Prize** in [the 7th APAC RDMA Programming Competition](http://www.hpcadvisorycouncil.com/events/2019/rdma/) organized by HPC-AI Advisory Council. Congratulations!
+- 10/2019 One research paper is accepted by IEEE TSC 2019.
+- 08/2019 Our **FDU Starry Team** won the **Merit Prize** in [2019 APAC HPC-AI Competition](http://www.hpcadvisorycouncil.com/events/2019/APAC-AI-HPC/index.php) organized by NSCC Singapore & HPC-AI Advisory Council. Congratulations!
+- 06/2019 One research paper is accepted by Information Sciences 2019.
+- 10/2018 Our **FDU Starry Team** was awarded the **Second Prize** in [the 6th APAC RDMA Programming Competition](http://www.hpcadvisorycouncil.com/events/2018/rdma/) organized by HPC-AI Advisory Council. Congratulations!
+- 08/2018 Our **FDU Starry Team** was established, focusing on research and buildup of RDMA-enhanced distributed systems.
 
 
 <!-- This is the front page of a website that is powered by the [academicpages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the respository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. You can fork [this repository](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and markdown files, add your own PDFs and other content, and have your own site for free, with no ads! An older version of this template powers my own personal website at [stuartgeiger.com](http://stuartgeiger.com), which uses [this Github repository](https://github.com/staeiou/staeiou.github.io). -->
