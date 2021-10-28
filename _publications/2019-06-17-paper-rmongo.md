@@ -10,17 +10,17 @@ venue: 'Information Sciences'
 ---
 
 
-- *Citation:*
+**Citation:**
+
 ```bib
-@article{huang2019bor,
-  title={Bor: Toward high-performance permissioned blockchain in rdma-enabled network},
-  author={Huang, Bobo and Jin, Li and Lu, ZhiHui and Zhou, Xin and Wu, Jie and Tang, Qifeng and Hung, Patrick CK},
-  journal={IEEE Transactions on Services Computing},
-  volume={13},
-  number={2},
-  pages={301--313},
+@article{huang2019rdma,
+  title={RDMA-driven MongoDB: An approach of RDMA enhanced NoSQL paradigm for large-Scale data processing},
+  author={Huang, Bobo and Jin, Li and Lu, Zhihui and Yan, Ming and Wu, Jie and Hung, Patrick CK and Tang, Qifeng},
+  journal={Information Sciences},
+  volume={502},
+  pages={376--393},
   year={2019},
-  publisher={IEEE}
+  publisher={Elsevier}
 }
 ```
 
