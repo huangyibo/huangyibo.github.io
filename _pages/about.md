@@ -1,7 +1,7 @@
 ---
 permalink: /
-title: "About Me - Yibo Huang"
-excerpt: "About me"
+title: "About Me"
+excerpt: " - Yibo Huang"
 author_profile: true
 redirect_from: 
   - /about/
