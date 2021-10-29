@@ -21,7 +21,7 @@ Experience
 * 2020.5-present: Research Intern
   * Network Group, Bytedance
   * Project: RDMA-enabled high-performance IO engine and RPC framework for Bytedance online/offline training and storage systems
-  * Supervisor: Yi Cui, Chuanxiong Guo
+  * Supervisor: Dr. Yi Cui, Dr. Chuanxiong Guo
 
 
 * 2020.9-2020.12: Teaching Assistant
@@ -51,7 +51,7 @@ Experience
 * 2015.7-2015.11: Software Engineer Intern
   * Cloud System Department, Intel Asia Pacific R&D Center
   * Project: Development and benchmark for Ceilometer/Neutron component in Openstack
-  * Supervisor: Shane Wang, Lianhao Lu
+  * Supervisor: Dr. Shane Wang, Lianhao Lu
 
 
 * 2015.3-2015.6: Software Engineer Intern
@@ -79,8 +79,11 @@ Selected Awards
 - Ph.D. Candidate Scholarship, Fudan University, 2018
 - The Third Prize in the 14th China Graduate Mathematical Contest in Modeling, 2017
 - Guangyun Innovation Scholarship, Central South University, 2016
+- "10 Distinguished Students" Award in Central South University, 2016
+  - Only 10 winners in Central South University each year, for undergraduate students.
 - Outotec Sustainable Development Award, Central South University, 2015
 - The First Place in the Intel Cup 7th National Software Innovation Competition, China, 2014
+- National Scholarship for undergraduate students, Central South University, 2014
 
 
 
