@@ -35,7 +35,7 @@ News
 ---
 
 - 12/2021 I expect to get Ph.D. in Fudan University.
-- 12/2020 I was awarded "The Oceanwide Scholar" at Fudan University in the 2020 year.
+- 12/2020 I was awarded "The Oceanwide Scholar" for excellent academic performance at Fudan University in the 2020 year, only 10 winners in FDU each year.
 - 11/2020 I was awarded "Intel Scholarship" by Intel in Shanghai.
 - 11/2020 Our **FDU Starry Team** led by me won the **Second Prize** in [the 8th APAC RDMA Programming Competition](http://www.hpcadvisorycouncil.com/events/2020/rdma/) organized by HPC-AI Advisory Council. Congratulations!
 - 05/2020 I joined Bytedance High-Speed Network Lab, Network Engineering Group, as a Research Intern.

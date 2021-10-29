@@ -83,6 +83,7 @@ Selected Awards
   - Only 10 winners in Central South University each year, for undergraduate students.
 - Outotec Sustainable Development Award, Central South University, 2015
 - The First Place in the Intel Cup 7th National Software Innovation Competition, China, 2014
+  - Only 1 winner for National Grand Prize each year.
 - National Scholarship for undergraduate students, Central South University, 2014
 
 
