@@ -72,12 +72,13 @@ Selected Awards
 - Oceanwide Fellowship Award, Fudan Univeristy, 2020
 - Intel Scholarship, 2020
 - The Second Prize in the 7th Asia-Pacific Student RDMA Programming Competition, 2019
+- Merit Prize in the 2nd Asia Pacific HPC-AI Competition, 2019
 - Outstanding Teaching Assistant, Fudan University, 2018
 - Outstanding Student, Fudan University, 2018
-- Merit Prize in the 2nd Asia Pacific HPC-AI Competition, 2019
 - The Second Prize in the 6th Asia-Pacific Student RDMA Programming Competition, 2018
 - Ph.D. Candidate Scholarship, Fudan University, 2018
 - The Third Prize in the 14th China Graduate Mathematical Contest in Modeling, 2017
+- Honored Graduate in CSU, 2016
 - Guangyun Innovation Scholarship, Central South University, 2016
 - "10 Distinguished Students" Award in Central South University, 2016
   - Only 10 winners in Central South University each year, for undergraduate students.
