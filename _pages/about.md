@@ -65,12 +65,12 @@ Some Useful Links
 - [CCF Conference Deadline](https://ccfddl.github.io/)
 - [Computer Security Conference Ranking and Statistic](https://people.engr.tamu.edu/guofei/sec_conf_stat.htm) by Guofei Gu
 - [Cipher Calls for Papers](http://www.ieee-security.org/CFP/Cipher-Call-for-Papers.html) 
-- **Research skills:**[Advice Collection by Tao Xie](http://people.engr.ncsu.edu/txie/advice.htm)
-- **Research skills:**[Advice on Research and Writing](http://www.cs.cmu.edu/afs/cs.cmu.edu/user/mleone/web/how-to.html)
-- **Research skills:**[Paper Reading Check List ](http://bbcr.uwaterloo.ca/~brecht/courses/856/readings/general/jamin-checklist.html)
-- **Research skills:**[Writing Tips from Dr. Kurose](http://www-net.cs.umass.edu/kurose/writing/)
-- **Research skills:**[Networking Conferences Statistics](https://sites.cs.ucsb.edu/~almeroth/conf/stats/)
-- **Research skills:**[An Evaluation of the Ninth SOSP Submissions -or- How (and How Not) to Write a Good Systems Paper](https://www.usenix.org/legacy/events/samples/submit/advice.html) by Roy Levin and David D. Redell. ACM SIGOPS Operating Systems Review 17(3):35-40 (July, 1983). More than 20 years old, but timeless and excellent advice.
+- **Research skills:** [Advice Collection by Tao Xie](http://people.engr.ncsu.edu/txie/advice.htm)
+- **Research skills:** [Advice on Research and Writing](http://www.cs.cmu.edu/afs/cs.cmu.edu/user/mleone/web/how-to.html)
+- **Research skills:** [Paper Reading Check List ](http://bbcr.uwaterloo.ca/~brecht/courses/856/readings/general/jamin-checklist.html)
+- **Research skills:** [Writing Tips from Dr. Kurose](http://www-net.cs.umass.edu/kurose/writing/)
+- **Research skills:** [Networking Conferences Statistics](https://sites.cs.ucsb.edu/~almeroth/conf/stats/)
+- **Research skills:** [An Evaluation of the Ninth SOSP Submissions -or- How (and How Not) to Write a Good Systems Paper](https://www.usenix.org/legacy/events/samples/submit/advice.html) by Roy Levin and David D. Redell. ACM SIGOPS Operating Systems Review 17(3):35-40 (July, 1983). More than 20 years old, but timeless and excellent advice.
 
 
 
