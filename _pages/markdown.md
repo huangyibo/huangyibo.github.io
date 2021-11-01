@@ -1,13 +1,37 @@
 ---
 permalink: /markdown/
-title: "Markdown"
+title: "Resources"
 author_profile: true
 redirect_from: 
   - /md/
   - /markdown.html
 ---
 
-## Locations of key files/directories
+
+Some Useful Links
+======
+---
+- [So long, and thanks for the Ph.D.](https://www.cs.unc.edu/~azuma/hitch4.html) by Ronald T.Azuma
+- [The illustrated guide to a Ph.D.](https://matt.might.net/articles/phd-school-in-pictures/) by Matt Might
+- [A Five-Minute Guide to Ph.D. Program Applications](https://pg.ucsd.edu/PhD-application-tips.htm) by Philip Guo
+- [Establishing Contact with Faculty (For Students)](https://ymmv.tamaradenning.net/blog/2019/08/28/establishing-contact-with-faculty.html) by Tamara Denning
+- [How to Read a Paper](http://blizzard.cs.uwaterloo.ca/keshav/home/Papers/data/07/paper-reading.pdf) by Srinivasan Keshav
+- [How to Have a Bad Career in Research/Academia](https://people.eecs.berkeley.edu/~pattrsn/talks/BadCareer.pdf) by David A. Patterson
+- [CCF Conference Deadline](https://ccfddl.github.io/)
+- [Computer Security Conference Ranking and Statistic](https://people.engr.tamu.edu/guofei/sec_conf_stat.htm) by Guofei Gu
+- [Cipher Calls for Papers](http://www.ieee-security.org/CFP/Cipher-Call-for-Papers.html) 
+- **Research skills:** [Advice Collection by Tao Xie](http://people.engr.ncsu.edu/txie/advice.htm)
+- **Research skills:** [Advice on Research and Writing](http://www.cs.cmu.edu/afs/cs.cmu.edu/user/mleone/web/how-to.html)
+- **Research skills:** [Paper Reading Check List ](http://bbcr.uwaterloo.ca/~brecht/courses/856/readings/general/jamin-checklist.html)
+- **Research skills:** [Writing Tips from Dr. Kurose](http://www-net.cs.umass.edu/kurose/writing/)
+- **Research skills:** [Networking Conferences Statistics](https://sites.cs.ucsb.edu/~almeroth/conf/stats/)
+- **Research skills:** [An Evaluation of the Ninth SOSP Submissions -or- How (and How Not) to Write a Good Systems Paper](https://www.usenix.org/legacy/events/samples/submit/advice.html) by Roy Levin and David D. Redell. ACM SIGOPS Operating Systems Review 17(3):35-40 (July, 1983). More than 20 years old, but timeless and excellent advice.
+
+
+
+
+
+<!-- ## Locations of key files/directories
 
 * Basic config options: _config.yml
 * Top navigation bar config: _data/navigation.yml
@@ -199,4 +223,4 @@ Still sticking with science and Isaac Newton's E = MC<sup>2</sup>, which should 
 
 ### Variable Tag
 
-This allows you to denote <var>variables</var>.
+This allows you to denote <var>variables</var>. -->

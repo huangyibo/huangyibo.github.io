@@ -53,27 +53,6 @@ News
 - 03/2018 I am awarded the honor of the Outstanding Teaching Assistant of Fudan University in the academic session 2017-2018, semester 1.
 
 
-Some Useful Links
-======
----
-- [So long, and thanks for the Ph.D.](https://www.cs.unc.edu/~azuma/hitch4.html) by Ronald T.Azuma
-- [The illustrated guide to a Ph.D.](https://matt.might.net/articles/phd-school-in-pictures/) by Matt Might
-- [A Five-Minute Guide to Ph.D. Program Applications](https://pg.ucsd.edu/PhD-application-tips.htm) by Philip Guo
-- [Establishing Contact with Faculty (For Students)](https://ymmv.tamaradenning.net/blog/2019/08/28/establishing-contact-with-faculty.html) by Tamara Denning
-- [How to Read a Paper](http://blizzard.cs.uwaterloo.ca/keshav/home/Papers/data/07/paper-reading.pdf) by Srinivasan Keshav
-- [How to Have a Bad Career in Research/Academia](https://people.eecs.berkeley.edu/~pattrsn/talks/BadCareer.pdf) by David A. Patterson
-- [CCF Conference Deadline](https://ccfddl.github.io/)
-- [Computer Security Conference Ranking and Statistic](https://people.engr.tamu.edu/guofei/sec_conf_stat.htm) by Guofei Gu
-- [Cipher Calls for Papers](http://www.ieee-security.org/CFP/Cipher-Call-for-Papers.html) 
-- **Research skills:** [Advice Collection by Tao Xie](http://people.engr.ncsu.edu/txie/advice.htm)
-- **Research skills:** [Advice on Research and Writing](http://www.cs.cmu.edu/afs/cs.cmu.edu/user/mleone/web/how-to.html)
-- **Research skills:** [Paper Reading Check List ](http://bbcr.uwaterloo.ca/~brecht/courses/856/readings/general/jamin-checklist.html)
-- **Research skills:** [Writing Tips from Dr. Kurose](http://www-net.cs.umass.edu/kurose/writing/)
-- **Research skills:** [Networking Conferences Statistics](https://sites.cs.ucsb.edu/~almeroth/conf/stats/)
-- **Research skills:** [An Evaluation of the Ninth SOSP Submissions -or- How (and How Not) to Write a Good Systems Paper](https://www.usenix.org/legacy/events/samples/submit/advice.html) by Roy Levin and David D. Redell. ACM SIGOPS Operating Systems Review 17(3):35-40 (July, 1983). More than 20 years old, but timeless and excellent advice.
-
-
-
 
 
 <!-- This is the front page of a website that is powered by the [academicpages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the respository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. You can fork [this repository](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and markdown files, add your own PDFs and other content, and have your own site for free, with no ads! An older version of this template powers my own personal website at [stuartgeiger.com](http://stuartgeiger.com), which uses [this Github repository](https://github.com/staeiou/staeiou.github.io). -->
