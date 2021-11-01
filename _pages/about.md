@@ -35,17 +35,44 @@ News
 ---
 
 - 12/2021 I expect to get Ph.D. in Fudan University.
-- 12/2020 I was awarded "The Oceanwide Scholar" for excellent academic performance at Fudan University in the 2020 year, only 10 winners in FDU each year.
-- 11/2020 I was awarded "Intel Scholarship" by Intel in Shanghai.
-- 11/2020 Our **FDU Starry Team** led by me won the **Second Prize** in [the 8th APAC RDMA Programming Competition](http://www.hpcadvisorycouncil.com/events/2020/rdma/) organized by HPC-AI Advisory Council. Congratulations!
-- 05/2020 I joined Bytedance High-Speed Network Lab, Network Engineering Group, as a Research Intern.
+- 12/2020 I am awarded an honorary title of "The Oceanwide Scholar" for excellent academic performance at Fudan University in the 2020 year, only 10 winners in FDU each year.
+- 11/2020 I am awarded "Intel Fellowship" by Intel in Shanghai.
+- 11/2020 Our **FDU Starry Team** led by me wins the **Second Prize** in [the 8th APAC RDMA Programming Competition](http://www.hpcadvisorycouncil.com/events/2020/rdma/) organized by HPC-AI Advisory Council. Congratulations!
+- 05/2020 I join Bytedance High-Speed Network Lab, Network Engineering Group, as a Research Intern.
 - 05/2020 One research paper is accepted by JPDC 2020.
-- 11/2019 Our **FDU Starry Team** led by me won the **Second Prize** in [the 7th APAC RDMA Programming Competition](http://www.hpcadvisorycouncil.com/events/2019/rdma/) organized by HPC-AI Advisory Council. Congratulations!
+- 12/2019 I am awarded the Award of Outstanding Ph.D. Students at FDU for the academic year 2019-2020.
+- 12/2019 Our project "A Trusted Identity Unified Verification System over Zero-Trust Architecture" wins the 2nd "Fudan-Oceanwide Entrepreneurship Fund" (Exploration Fund) funding.
+- 11/2019 Our **FDU Starry Team** led by me wins the **Second Prize** in [the 7th APAC RDMA Programming Competition](http://www.hpcadvisorycouncil.com/events/2019/rdma/) organized by HPC-AI Advisory Council. Congratulations!
 - 10/2019 One research paper is accepted by IEEE TSC 2019.
-- 08/2019 Our **FDU Starry Team** won the **Merit Prize** in [2019 APAC HPC-AI Competition](http://www.hpcadvisorycouncil.com/events/2019/APAC-AI-HPC/index.php) organized by NSCC Singapore & HPC-AI Advisory Council. Congratulations!
+- 08/2019 Our **FDU Starry Team** wins the **Merit Prize** in [2019 APAC HPC-AI Competition](http://www.hpcadvisorycouncil.com/events/2019/APAC-AI-HPC/index.php) organized by NSCC Singapore & HPC-AI Advisory Council. Congratulations!
+- 06/2019 I win the "Excellent Doctoral Research Promotion Program" funding at FDU.
 - 06/2019 One research paper is accepted by Information Sciences 2019.
-- 10/2018 Our **FDU Starry Team** was awarded the **Second Prize** in [the 6th APAC RDMA Programming Competition](http://www.hpcadvisorycouncil.com/events/2018/rdma/) organized by HPC-AI Advisory Council. Congratulations!
-- 08/2018 Our **FDU Starry Team** was established, focusing on research and buildup of RDMA-enhanced distributed systems.
+- 12/2018 I am awarded the Award for Outstanding Ph.D. Students at FDU for the academic year 2018-2019.
+- 10/2018 Our **FDU Starry Team** is awarded the **Second Prize** in [the 6th APAC RDMA Programming Competition](http://www.hpcadvisorycouncil.com/events/2018/rdma/) organized by HPC-AI Advisory Council. Congratulations!
+- 08/2018 Our **FDU Starry Team** is established, focusing on research and buildup of RDMA-enhanced distributed systems.
+- 03/2018 I am awarded the honor of the Outstanding Teaching Assistant of Fudan University in the academic session 2017-2018, semester 1.
+
+
+Some Useful Links
+======
+---
+- [So long, and thanks for the Ph.D.](https://www.cs.unc.edu/~azuma/hitch4.html) by Ronald T.Azuma
+- [The illustrated guide to a Ph.D.](https://matt.might.net/articles/phd-school-in-pictures/) by Matt Might
+- [A Five-Minute Guide to Ph.D. Program Applications](https://pg.ucsd.edu/PhD-application-tips.htm) by Philip Guo
+- [Establishing Contact with Faculty (For Students)](https://ymmv.tamaradenning.net/blog/2019/08/28/establishing-contact-with-faculty.html) by Tamara Denning
+- [How to Read a Paper](http://blizzard.cs.uwaterloo.ca/keshav/home/Papers/data/07/paper-reading.pdf) by Srinivasan Keshav
+- [How to Have a Bad Career in Research/Academia](https://people.eecs.berkeley.edu/~pattrsn/talks/BadCareer.pdf) by David A. Patterson
+- [CCF Conference Deadline](https://ccfddl.github.io/)
+- [Computer Security Conference Ranking and Statistic](https://people.engr.tamu.edu/guofei/sec_conf_stat.htm) by Guofei Gu
+- [Cipher Calls for Papers](http://www.ieee-security.org/CFP/Cipher-Call-for-Papers.html) 
+- **Research skills:**[Advice Collection by Tao Xie](http://people.engr.ncsu.edu/txie/advice.htm)
+- **Research skills:**[Advice on Research and Writing](http://www.cs.cmu.edu/afs/cs.cmu.edu/user/mleone/web/how-to.html)
+- **Research skills:**[Paper Reading Check List ](http://bbcr.uwaterloo.ca/~brecht/courses/856/readings/general/jamin-checklist.html)
+- **Research skills:**[Writing Tips from Dr. Kurose](http://www-net.cs.umass.edu/kurose/writing/)
+- **Research skills:**[Networking Conferences Statistics](https://sites.cs.ucsb.edu/~almeroth/conf/stats/)
+<!-- - **Research skills:**[How to Read a Research Paper]() -->
+
+
 
 
 <!-- This is the front page of a website that is powered by the [academicpages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the respository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. You can fork [this repository](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and markdown files, add your own PDFs and other content, and have your own site for free, with no ads! An older version of this template powers my own personal website at [stuartgeiger.com](http://stuartgeiger.com), which uses [this Github repository](https://github.com/staeiou/staeiou.github.io). -->
