@@ -70,7 +70,8 @@ Some Useful Links
 - **Research skills:**[Paper Reading Check List ](http://bbcr.uwaterloo.ca/~brecht/courses/856/readings/general/jamin-checklist.html)
 - **Research skills:**[Writing Tips from Dr. Kurose](http://www-net.cs.umass.edu/kurose/writing/)
 - **Research skills:**[Networking Conferences Statistics](https://sites.cs.ucsb.edu/~almeroth/conf/stats/)
-<!-- - **Research skills:**[How to Read a Research Paper]() -->
+- **Research skills:**[An Evaluation of the Ninth SOSP Submissions -or- How (and How Not) to Write a Good Systems Paper](https://www.usenix.org/legacy/events/samples/submit/advice.html) by Roy Levin and David D. Redell. ACM SIGOPS Operating Systems Review 17(3):35-40 (July, 1983). More than 20 years old, but timeless and excellent advice.
+
 
 
 
