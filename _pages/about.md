@@ -16,7 +16,7 @@ My research interests mainly lie in the fields of Distributed System, Networked 
 In particular, I focus on the system design, development and optimization about RDMA-enhanced datacenter systems, as well as network protocol stack and RPC framework.
 
 
-- Email: huangbb16@fudan.edu.cn
+- Email: huangbb16 (at) fudan (dot) edu (dot) cn
 - My Resume is [HERE](http://huangyibo.github.io/files/Yibo-FDU-CV.pdf).
 
 

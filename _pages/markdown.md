@@ -1,6 +1,6 @@
 ---
 permalink: /markdown/
-title: "Resources"
+title: "Some Useful Links"
 author_profile: true
 redirect_from: 
   - /md/
@@ -8,7 +8,7 @@ redirect_from:
 ---
 
 
-Some Useful Links
+
 ======
 ---
 - [So long, and thanks for the Ph.D.](https://www.cs.unc.edu/~azuma/hitch4.html) by Ronald T.Azuma
