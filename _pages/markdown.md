@@ -9,7 +9,6 @@ redirect_from:
 
 
 
-======
 ---
 - [So long, and thanks for the Ph.D.](https://www.cs.unc.edu/~azuma/hitch4.html) by Ronald T.Azuma
 - [The illustrated guide to a Ph.D.](https://matt.might.net/articles/phd-school-in-pictures/) by Matt Might
