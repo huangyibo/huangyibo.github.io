@@ -15,7 +15,7 @@ Education
 * B.S. in Software Engineering, Central South University, 2016
 
 
-Industral Experience
+Industrial Experience
 ======
 
 * 2020.5-present: Research Intern
