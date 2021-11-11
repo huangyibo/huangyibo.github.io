@@ -2,7 +2,7 @@
 title: "RDMA-Driven MongoDB: An Approach of RDMA Enhanced NoSQL Paradigm for Large-Scale Data Processing"
 collection: publications
 permalink: /publication/2019-06-17-paper-rmongo
-excerpt: 'Bobo Huang, Li Jin, Zhihui Lu, Ming Yan, Jie Wu, Patrick CK Hung, Qifeng Tang'
+excerpt: '<u>Bobo Huang</u>, Li Jin, Zhihui Lu, Ming Yan, Jie Wu, Patrick CK Hung, Qifeng Tang'
 date: 2019-06-17
 venue: 'Information Sciences'
 # paperurl: 'http://huangyibo.github.io/files/rmongo-IS-2019.pdf'
