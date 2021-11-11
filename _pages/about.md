@@ -9,7 +9,7 @@ redirect_from:
 ---
 
 
-I am currently a Ph.D. student in Network and information Security Lab (NiSL) at Fudan University, under the co-supervision of Prof. Jie Wu, [Prof. Yang Xu](https://yangxu.info/) and Prof. Zhihui Lv.
+I am currently a Ph.D. student in Network and information Security Lab (NiSL) at Fudan University, co-advised by Prof. Jie Wu, [Prof. Yang Xu](https://yangxu.info/) and Prof. Zhihui Lv.
 Prior to joining FDU, I received B.S. in Software Engineering from Central South University in 2016.
 
 My research interests mainly lie in the fields of Distributed System, Networked System and Data Center Network.
@@ -18,13 +18,14 @@ In particular, I focus on the system design, development and optimization about 
 
 - Email: huangbb16 (at) fudan (dot) edu (dot) cn
 - My Resume is [HERE](http://huangyibo.github.io/files/Yibo-FDU-CV.pdf).
+- Former Name : **Bobo Huang (黄博博)**
 
 
 Relevant and Interested Areas
 ======
 ---
 - System enhancement with RDMA.
-- High-performance network protocol stack design.
+- High-performance network stack design over modern hardware.
 - High-performance RPC framework.
 - Hybrid computing framework.
 

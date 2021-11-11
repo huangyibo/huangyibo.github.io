@@ -7,9 +7,9 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Yibo Huang"
+title                    : "Yibo Huang（黄一博）"
 title_separator          : "-"
-name                     : &name "Yibo Huang"
+name                     : &name "Yibo Huang (黄一博)"
 description              : &description "personal description"
 url                      : https://huangyibo.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"

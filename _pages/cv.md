@@ -15,37 +15,13 @@ Education
 * B.S. in Software Engineering, Central South University, 2016
 
 
-Experience
+Industral Experience
 ======
 
 * 2020.5-present: Research Intern
   * Network Group, Bytedance
   * Project: RDMA-enabled high-performance IO engine and RPC framework for Bytedance online/offline training and storage systems
   * Mentors: [Dr. Yi Cui](https://scholar.google.com/citations?user=Yj8xxeAAAAAJ&hl=en), [Dr. Chuanxiong Guo](http://sysnetome.com/)
-
-
-* 2020.9-2020.12: Teaching Assistant
-  * School of Computer Science and Technology, Fudan University
-  * Course: "Frontier Network Technology" for graduate students
-  * Supervisor: Prof. Jie Wu
-
-
-* 2019.9-2019.12: Teaching Assistant
-  * School of Computer Science and Technology, Fudan University
-  * Course: "Advanced Network" for graduate students
-  * Supervisor: Prof. Zhiui Lv
-
-
-* 2017.9-2018.2: Teaching Assistant
-  * Fudan University
-  * Course: "Calculus" for international students
-  * Supervisor: Prof. Yitong Wang
-
-
-* 2017.9-2018.2: Teaching Assistant
-  * Fudan University
-  * Course: "Introduction to Python Programming" for undergraduate students
-  * Supervisor: Prof. Xueping Wang  
 
 
 * 2015.7-2015.11: Software Engineer Intern
@@ -57,6 +33,36 @@ Experience
 * 2015.3-2015.6: Software Engineer Intern
   * Intel Asia Pacific R&D Center
   * Mentor: Yongkang You
+
+
+
+
+Teaching Experience
+======
+
+* 2018.9-2021.12: Research Assistant
+  * School of Computer Science and Technology, Fudan University
+  * Course: "Frontier Network Technology" for graduate students
+  * Supervisor: Prof. Jie Wu
+
+
+* 2019.9-2019.12: TA
+  * School of Computer Science and Technology, Fudan University
+  * Course: "Advanced Network" for graduate students
+  * Supervisor: Prof. Zhiui Lv
+
+
+* 2017.9-2018.2: TA
+  * Fudan University
+  * Course: "Calculus" for international students
+  * Supervisor: Prof. Yitong Wang
+
+
+* 2017.9-2018.2: TA
+  * Fudan University
+  * Course: "Introduction to Python Programming" for undergraduate students
+  * Supervisor: Prof. Xueping Wang  
+
 
 
 Publications
