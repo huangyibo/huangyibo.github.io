@@ -58,9 +58,6 @@ News
 
 
 ---
-<div style="margin:auto;">
-<a href='https://clustrmaps.com/site/1bl9e'  title='Visit tracker'><img src='//clustrmaps.com/map_v2.png?cl=ffffff&w=398&t=tt&d=KLze7yOvPww8OOApBWjCvydGhEiyz3rsS4IcHCkDMxA'/></a>
-</div>
 
 <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=398&t=tt&d=KLze7yOvPww8OOApBWjCvydGhEiyz3rsS4IcHCkDMxA&co=2d78ad&ct=ffffff&cmo=3acc3a&cmn=ff5353'></script>
 
