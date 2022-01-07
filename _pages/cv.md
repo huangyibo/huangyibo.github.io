@@ -78,7 +78,6 @@ Selected Awards
 - Oceanwide Fellowship Award, Fudan Univeristy, 2020
 - Intel Fellowship Award, 2020
 - The Second Prize in the 7th Asia-Pacific Student RDMA Programming Competition, 2019
-- Merit Prize in the 2nd Asia Pacific HPC-AI Competition, 2019
 - Outstanding Student, Fudan University, 2019 
 - "Excellent Doctoral Research Promotion Program" funding, 2019
 - The Second Prize in the 6th Asia-Pacific Student RDMA Programming Competition, 2018
@@ -94,6 +93,7 @@ Selected Awards
   - Only 1 winner for National Grand Prize each year.
 - National Scholarship for undergraduate students, China Ministry of Education, 2014
 
+<!-- - Merit Prize in the 2nd Asia Pacific HPC-AI Competition, 2019 -->
 
 
 <!-- Talks
