@@ -11,15 +11,19 @@ redirect_from:
 
 Education
 ======
-* Ph.D in Computer Science, Fudan University, 2022.01 (expected)
-* B.S. in Software Engineering, Central South University, 2016
+* Ph.D in Computer Science, Fudan University, 2021.12
+* B.S. in Software Engineering, Central South University, 2016.06
 
 
 Industrial Experience
 ======
 
-* 2020.5-present: Research Intern
-  * Network Group, Bytedance
+* 2022.1-present: Network Engineer
+  * High-speed Network Group, Bytedance
+  * Project: RDMA-enabled high-performance IO engine and RPC framework for Bytedance online/offline training and storage systems
+
+* 2020.5-2021.12: Research Intern
+  * High-speed Network Group, Bytedance
   * Project: RDMA-enabled high-performance IO engine and RPC framework for Bytedance online/offline training and storage systems
   * Mentors: [Dr. Yi Cui](https://scholar.google.com/citations?user=Yj8xxeAAAAAJ&hl=en), [Dr. Chuanxiong Guo](http://sysnetome.com/)
 

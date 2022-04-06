@@ -34,7 +34,7 @@ News
 ======
 ---
 
-- 12/2021 I expect to get Ph.D. in Fudan University.
+- 12/2021 I get my Ph.D. in Fudan University.
 - 12/2020 I am awarded an honorary title of "The Oceanwide Scholar" for excellent academic performance at Fudan University in the 2020 year, only 10 winners in FDU each year.
 - 11/2020 I am awarded "Intel Fellowship" by Intel in Shanghai.
 - 11/2020 Our **FDU Starry Team** led by me wins the **Second Prize** in [the 8th APAC RDMA Programming Competition](http://www.hpcadvisorycouncil.com/events/2020/rdma/). Congratulations!
