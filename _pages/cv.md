@@ -18,7 +18,7 @@ Education
 Industrial Experience
 ======
 
-* 2022.1-present: Network Engineer
+* 2022.1-2022.8: Network Engineer
   * High-speed Network Group, Bytedance
   * Project: RDMA-enabled high-performance IO engine and RPC framework for Bytedance online/offline training and storage systems
 

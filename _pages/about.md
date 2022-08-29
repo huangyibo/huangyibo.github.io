@@ -33,7 +33,7 @@ Relevant and Interested Areas
 News
 ======
 ---
-
+- 09/2022 I will officially join the CS department of RICE University as a Postdoc Associate working closely with [Prof.Ang Chen](https://www.cs.rice.edu/~angchen/). 
 - 01/2022 I officially join ByteDance High-Speed Network Lab, Network Engineering Group, as a Network Engineer.
 - 12/2021 I get my Ph.D. in Fudan University.
 - 12/2020 I am awarded an honorary title of "The Oceanwide Scholar" for excellent academic performance at Fudan University in the 2020 year, only 10 winners in FDU each year.
