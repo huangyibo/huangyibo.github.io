@@ -8,14 +8,14 @@ redirect_from:
   - /about.html
 ---
 
-
+I am a Postdoc Associate in [CS](https://cs.rice.edu/) at [RICE University](https://www.rice.edu/) working closely with [Prof. Ang Chen](https://www.cs.rice.edu/~angchen/).
 I got my Ph.D. in Computer Science at Fudan University, co-advised by Prof. Jie Wu, [Prof. Yang Xu](https://yangxu.info/) and [Prof. Zhihui Lv](https://cs.fudan.edu.cn/3f/5e/c25895a278366/page.htm).
 Prior to joining FDU, I received B.S. in Software Engineering from Central South University in 2016.
 
 My research interests mainly lie in the fields of Distributed System, Networked System and Data Center Network.
 In particular, I focus on the system design, development and optimization about RDMA-enhanced datacenter systems, as well as network protocol stack and RPC framework.
 
-
+- Office: 3011 Duncan Hall
 - Email: huangbb16 (at) fudan (dot) edu (dot) cn
 - Former Name : **Bobo Huang (黄博博)**
 <!-- - My Resume is [HERE](http://huangyibo.github.io/files/Yibo-FDU-CV.pdf). -->
@@ -33,7 +33,7 @@ Relevant and Interested Areas
 News
 ======
 ---
-- 09/2022 I will officially join the CS department of RICE University as a Postdoc Associate working closely with [Prof.Ang Chen](https://www.cs.rice.edu/~angchen/). 
+- 09/2022 I officially join the CS department of RICE University as a Postdoc Associate working closely with [Prof. Ang Chen](https://www.cs.rice.edu/~angchen/). 
 - 01/2022 I officially join ByteDance High-Speed Network Lab, Network Engineering Group, as a Network Engineer.
 - 12/2021 I get my Ph.D. in Fudan University.
 - 12/2020 I am awarded an honorary title of "The Oceanwide Scholar" for excellent academic performance at Fudan University in the 2020 year, only 10 winners in FDU each year.

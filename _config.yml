@@ -82,12 +82,12 @@ analytics:
 author:
   name             : "Yibo Huang"
   avatar           : "bob.jpeg"
-  bio              : "Ph.D., Fudan University."
-  location         : "Shanghai, China"
+  bio              : "Postdoc Associate, CS Dept."
+  location         : "RICE University"
   employer         :
   pubmed           : #"https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "https://scholar.google.com/citations?user=nT2h--YAAAAJ&hl=en"
-  email            :
+  email            : 
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
