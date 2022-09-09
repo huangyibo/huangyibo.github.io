@@ -16,7 +16,7 @@ My research interests mainly lie in the fields of Distributed System, Networked 
 In particular, I focus on the system design, development and optimization about RDMA-enhanced datacenter systems, as well as network protocol stack and RPC framework.
 
 - Office: 3011 Duncan Hall
-- Email: huangbb16 (at) fudan (dot) edu (dot) cn
+- Email: yhuang (at) rice (dot) edu
 - Former Name : **Bobo Huang (黄博博)**
 <!-- - My Resume is [HERE](http://huangyibo.github.io/files/Yibo-FDU-CV.pdf). -->
 
