@@ -8,17 +8,20 @@ redirect_from:
   - /about.html
 ---
 
-I am a Postdoc Associate in [CS](https://cs.rice.edu/) at [RICE University](https://www.rice.edu/) working closely with [Prof. Ang Chen](https://www.cs.rice.edu/~angchen/).
-I got my Ph.D. in Computer Science at Fudan University, co-advised by Prof. Jie Wu, [Prof. Yang Xu](https://yangxu.info/) and [Prof. Zhihui Lv](https://cs.fudan.edu.cn/3f/5e/c25895a278366/page.htm).
-Prior to joining FDU, I received B.S. in Software Engineering from Central South University in 2016.
+I am now a Postdoc Associate in [CS](https://cs.rice.edu/) at [RICE University](https://www.rice.edu/) working closely with [Prof. Ang Chen](https://www.cs.rice.edu/~angchen/).
+I received my Ph.D. degree in Computer Science at Fudan University, co-advised by Prof. Jie Wu, [Prof. Yang Xu](https://yangxu.info/) and [Prof. Zhihui Lv](https://cs.fudan.edu.cn/3f/5e/c25895a278366/page.htm) in Dec. 2021.
+Prior to joining FDU, I received B.S. in Software Engineering from Central South University in Jun. 2016.
 
 My research interests mainly lie in the fields of Distributed System, Networked System and Data Center Network.
 In particular, I focus on the system design, development and optimization about RDMA-enhanced datacenter systems, as well as network protocol stack and RPC framework.
 
 - Office: 3011 Duncan Hall
 - Email: yhuang (at) rice (dot) edu
-- Former Name : **Bobo Huang (黄博博)**
+- Former Name : **Bobo Huang**
 <!-- - My Resume is [HERE](http://huangyibo.github.io/files/Yibo-FDU-CV.pdf). -->
+
+Feel free to reach out me through Email if you are interested in my research work or have any questions.
+
 
 Relevant and Interested Areas
 ======
