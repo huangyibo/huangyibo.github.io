@@ -36,6 +36,7 @@ Relevant and Interested Areas
 News
 ======
 ---
+- 09/2022 Our research work about how to use advanced PCIe interconnect to rearchitect Rack-Scale communication is accepted by CoNEXT 2022. Only 29 papers are accepted out of 151 submitted. Congratulations!
 - 09/2022 I officially join the CS department of RICE University as a Postdoc Associate working closely with [Prof. Ang Chen](https://www.cs.rice.edu/~angchen/). 
 - 01/2022 I officially join ByteDance High-Speed Network Lab, Network Engineering Group, as a Network Engineer.
 - 12/2021 I get my Ph.D. in Fudan University.
