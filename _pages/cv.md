@@ -78,6 +78,7 @@ Publications
 
 Selected Awards
 ======
+- Distinguished RDMA Programming Instructor for APAC RDMA Programming Lecture, 2022
 - The Second Prize in the 8th Asia-Pacific Student RDMA Programming Competition, 2020
 - Oceanwide Fellowship Award, Fudan Univeristy, 2020
 - Intel Fellowship Award, 2020
