@@ -9,20 +9,22 @@ venue: 'The 18th International Conference on emerging Networking EXperiments and
 # citation: 'Test'
 ---
 
+**Github Repo:**
+
+The project has been open project in `github.com/NTSocks/ntsocks`. 
+Pelease refer to our paper and the github repo if you have interests.
 
 **Citation:**
 
-<!-- ```bib
-@article{huang2020bps,
-  title={BPS: A reliable and efficient pub/sub communication model with blockchain-enhanced paradigm in multi-tenant edge cloud},
-  author={Huang, Bobo and Zhang, Rui and Lu, Zhihui and Zhang, Yiming and Wu, Jie and Zhan, Lu and Hung, Patrick CK},
-  journal={Journal of Parallel and Distributed Computing},
-  volume={143},
-  pages={167--178},
-  year={2020},
-  publisher={Elsevier}
+```bib
+@inproceedings{huang2022ultra,
+  title={An ultra-low latency and compatible PCIe interconnect for rack-scale communication},
+  author={Huang, Yibo and Huang, Yukai and Yan, Ming and Hu, Jiayu and Liang, Cunming and Xu, Yang and Zou, Wenxiong and Zhang, Yiming and Zhang, Rui and Huang, Chunpu and others},
+  booktitle={Proceedings of the 18th International Conference on emerging Networking EXperiments and Technologies},
+  pages={232--244},
+  year={2022}
 }
-``` -->
+```
 
 
 <!-- [Download paper here](http://huangyibo.github.io/files/BPS-JPDC-2020.pdf) -->
