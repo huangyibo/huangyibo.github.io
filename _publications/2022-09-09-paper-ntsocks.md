@@ -27,4 +27,4 @@ Pelease refer to our paper and the github repo if you have interests.
 ```
 
 
-<!-- [Download paper here](http://huangyibo.github.io/files/BPS-JPDC-2020.pdf) -->
+ [Download paper here](http://huangyibo.github.io/files/ntsocks-conext-2022.pdf)
