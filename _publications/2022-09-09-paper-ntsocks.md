@@ -2,11 +2,10 @@
 title: "An Ultra-low Latency and Compatible PCIe Interconnect for Rack-Scale Communication"
 collection: publications
 permalink: /publication/2022-09-09-paper-ntsocks
-excerpt: '<u>Yibo Huang</u>, Yukai Huang, Jiayu Hu, Ming Yan, Cunming Liang, Yang Xu, Wenxiong Zou, Yiming Zhang, Rui Zhang, Chunpu Huang, Jie Wu -- <b>Best Paper Award</b>'
+excerpt: '<u>Yibo Huang</u>, Yukai Huang, Jiayu Hu, Ming Yan, Cunming Liang, Yang Xu, Wenxiong Zou, Yiming Zhang, Rui Zhang, Chunpu Huang, Jie Wu. <u><b>Best Paper Award</b></u>'
 date: 2022-09-09
 venue: 'The 18th International Conference on emerging Networking EXperiments and Technologies (CoNEXT 22), Rome, Italy, December 6-9'
-# paperurl: 'http://huangyibo.github.io/files/BPS-JPDC-2020.pdf'
-# citation: 'Test'
+paperurl: 'http://huangyibo.github.io/files/ntsocks-conext-2022.pdf'
 ---
 
 **Github Repo:**
