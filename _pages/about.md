@@ -13,7 +13,7 @@ I received my Ph.D. degree in Computer Science at Fudan University, co-advised b
 Prior to joining FDU, I received B.S. in Software Engineering from Central South University in Jun. 2016.
 
 My research interests mainly lie in the fields of Distributed System, Networked System and Data Center Network.
-In particular, I focus on the system design, development and optimization about RDMA-enhanced datacenter systems, as well as network protocol stack and RPC framework.
+In particular, I focus on the system design, development and optimization about RDMA-enhanced datacenter systems, eBPF systems, OS security, network protocol stack and RPC.
 
 - Office: 3011 Duncan Hall
 - Email: yhuang (at) rice (dot) edu
