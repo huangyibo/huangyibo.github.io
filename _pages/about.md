@@ -36,6 +36,7 @@ Relevant and Interested Areas
 News
 ======
 ---
+- 04/2023 The co-authored work "PFtree: Optimizing Persistent Adaptive Radix Tree for PM Systems on eADR Platform" will be presented on [DASFAA 2023](http://www.tjudb.cn/dasfaa2023/programs).
 - 12/2022 Our paper "An Ultra-Low Latency and Compatible PCIe Interconnect for Rack-scale Communication" is awarded **["Best Paper Award"](https://conferences2.sigcomm.org/co-next/2022/#!/home)** at the CoNEXT 2022 conference. Congratulations!
 - 11/2022 I am awarded "Distinguished RDMA Programming Instructor" by HPC-AI advisory council.
 - 09/2022 Our research work about how to use advanced PCIe interconnect to rearchitect Rack-Scale communication is accepted by CoNEXT 2022. Only 28 papers are accepted out of 151 submitted. Congratulations!
