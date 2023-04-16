@@ -8,7 +8,7 @@ venue: 'The 18th International Conference on emerging Networking EXperiments and
 paperurl: 'http://huangyibo.github.io/files/ntsocks-conext-2022.pdf'
 slidesurl: 'http://huangyibo.github.io/files/CoNEXT22-NTSocks-slides.pdf'
 codeurl: 'https://github.com/NTSocks/ntsocks'
-videourl: 'https://github.com/NTSocks/'
+videourl: 'https://youtu.be/Xk5IF_MCdP4'
 ---
 
 **Github Repo:**
