@@ -4,7 +4,7 @@ collection: publications
 permalink: /publication/2022-09-09-paper-ntsocks
 excerpt: '<u>Yibo Huang</u>, Yukai Huang, Jiayu Hu, Ming Yan, Cunming Liang, Yang Xu, Wenxiong Zou, Yiming Zhang, Rui Zhang, Chunpu Huang, Jie Wu. <u><b>Best Paper Award</b></u>'
 date: 2022-09-09
-venue: 'The 18th International Conference on emerging Networking EXperiments and Technologies (CoNEXT 22), Rome, Italy, December 6-9'
+venue: 'CoNEXT 2022: The 18th International Conference on emerging Networking EXperiments and Technologies, Rome, Italy, December 6-9'
 paperurl: 'http://huangyibo.github.io/files/ntsocks-conext-2022.pdf'
 slidesurl: 'http://huangyibo.github.io/files/CoNEXT22-NTSocks-slides.pdf'
 codeurl: 'https://github.com/NTSocks/ntsocks'
