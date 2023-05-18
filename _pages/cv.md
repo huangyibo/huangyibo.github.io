@@ -14,6 +14,10 @@ Education
 * Ph.D in Computer Science, Fudan University, 2021.12
 * B.S. in Software Engineering, Central South University, 2016.06
 
+Acadamic Award
+======
+* CoNEXT 2022 Best Paper Award
+* APNet 2019 Travel Grant
 
 Industrial Experience
 ======
@@ -81,7 +85,9 @@ Selected Awards
 - Distinguished RDMA Programming Instructor for APAC RDMA Programming Lecture, 2022
 - The Second Prize in the 8th Asia-Pacific Student RDMA Programming Competition, 2020
 - Oceanwide Fellowship Award, Fudan Univeristy, 2020
+  - Only 10 winners in Fudan University each year, for graduate students.
 - Intel Fellowship Award, 2020
+  - Only 10 winners in Shanghai each year, for graduate students.
 - The Second Prize in the 7th Asia-Pacific Student RDMA Programming Competition, 2019
 - Outstanding Student, Fudan University, 2019 
 - "Excellent Doctoral Research Promotion Program" funding, 2019
@@ -97,6 +103,7 @@ Selected Awards
 - The First Place in the Intel Cup 7th National Software Innovation Competition, China, 2014
   - Only 1 winner for National Grand Prize each year.
 - National Scholarship for undergraduate students, China Ministry of Education, 2014
+- China Telecom “Flying Young” Scholarship, 2013
 
 <!-- - Merit Prize in the 2nd Asia Pacific HPC-AI Competition, 2019 -->
 
