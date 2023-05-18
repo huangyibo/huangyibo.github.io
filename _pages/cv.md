@@ -17,7 +17,8 @@ Education
 Acadamic Award
 ======
 * CoNEXT 2022 Best Paper Award
-* APNet 2019 Travel Grant
+* APNet 2019 Student Grant
+
 
 Industrial Experience
 ======
@@ -43,9 +44,29 @@ Industrial Experience
   * Mentor: Yongkang You
 
 
+Publications
+======
+  <ul>{% for post in site.publications %}
+    {% include archive-single-cv.html %}
+  {% endfor %}</ul>
 
 
-Teaching Experience
+Invited Talks
+======
+
+* RDMA-accelerated Data-Intensive Systems
+
+  [10th Student 2022 RDMA Programming Competition](https://www.hpcadvisorycouncil.com/events/2022/rdma/agenda.php)
+
+  Augest. 04, 2022, Virtual
+
+* Deploying RDMA for Large-Scale Inference and Training Systems
+
+  Network System Group in Rice University
+
+  December 16, 2021, Virtual 
+
+Teaching
 ======
 
 * 2018.9-2021.12: Research Assistant
@@ -72,12 +93,6 @@ Teaching Experience
   * Supervisor: Prof. Xueping Wang  
 
 
-
-Publications
-======
-  <ul>{% for post in site.publications %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
   
 
 Selected Awards
