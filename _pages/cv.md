@@ -114,9 +114,14 @@ Selected Awards
 - Guangyun Innovation Scholarship, Central South University, 2016
 - "10 Distinguished Students" Award in Central South University, 2016
   - Only 10 winners in Central South University each year, for undergraduate students.
-- Outotec Sustainable Development Award, Central South University, 2015
-- The First Place in the Intel Cup 7th National Software Innovation Competition, China, 2014
-  - Only 1 winner for National Grand Prize each year.
+- [Outotec Sustainable Development Award](https://news.csu.edu.cn/info/1003/121481.htm), Central South University, 2015
+- [The First Place in the Intel Cup 7th National Software Innovation Competition](https://news.csu.edu.cn/info/1002/65771.htm), China, 2014
+  - [Only 1 winner for National Grand Prize each year.](https://news.csu.edu.cn/info/1002/65779.htm)
+  - 澎湃网 -- [特殊“微信”软件让盲人和聋哑人实现交流：由大三学生设计](https://www.thepaper.cn/newsDetail_forward_1279690)
+  - Intel -- [立足移动应用，英特尔推动软件人才培养](https://newsroom.intel.cn/wp-content/uploads/sites/2/PR_Nov19_2014_01.pdf)
+  - 科学网 -- [第七届英特尔杯全国大学生软件创新大赛落幕 -- 残疾人社交APP斩获特等奖](https://news.sciencenet.cn/htmlnews/2014/11/307371.shtm)
+  - 电子信息产业网 -- [第七届“英特尔杯”全国大学生软件创新大赛落幕](http://www.cena.com.cn/ai/20141118/58915.html)
+  - 
 - National Scholarship for undergraduate students, China Ministry of Education, 2014
 - China Telecom “Flying Young” Scholarship, 2013
 
