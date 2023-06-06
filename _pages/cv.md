@@ -121,7 +121,6 @@ Selected Awards
   - Intel -- [立足移动应用，英特尔推动软件人才培养](https://newsroom.intel.cn/wp-content/uploads/sites/2/PR_Nov19_2014_01.pdf)
   - 科学网 -- [第七届英特尔杯全国大学生软件创新大赛落幕 -- 残疾人社交APP斩获特等奖](https://news.sciencenet.cn/htmlnews/2014/11/307371.shtm)
   - 电子信息产业网 -- [第七届“英特尔杯”全国大学生软件创新大赛落幕](http://www.cena.com.cn/ai/20141118/58915.html)
-  - 
 - National Scholarship for undergraduate students, China Ministry of Education, 2014
 - China Telecom “Flying Young” Scholarship, 2013
 
