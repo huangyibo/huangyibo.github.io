@@ -7,6 +7,13 @@ redirect_from:
   - /markdown.html
 ---
 
+Guidlines for writing a good proposal
+======
+---
+- [Crafting Better Proposals Using the Heilmeier Catechism](https://www.depts.ttu.edu/research/ordc/Resources/heilmeier-catechism.php)
+- [Nine Questions to A Focused Proposal](https://research.utdallas.edu/blog/nine-questions-to-a-focused-proposal)
+- [The Heilmeier Catechism](https://www.darpa.mil/work-with-us/heilmeier-catechism)
+
 
 Advices for Ph.D Study
 ======
