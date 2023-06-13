@@ -54,17 +54,23 @@ Publications
 Invited Talks
 ======
 
+* An Ultra-Low Latency and Compatible PCIe Interconnect for Rack-scale Communication
+
+  [UTNS Lab](https://utns.cs.utexas.edu/) in The University of Texas at Austin
+
+  June 2023, Virtual
+
 * RDMA-accelerated Data-Intensive Systems
 
   [10th Student 2022 RDMA Programming Competition](https://www.hpcadvisorycouncil.com/events/2022/rdma/agenda.php)
 
-  Augest. 04, 2022, Virtual
+  Augest 2022, Virtual
 
 * Deploying RDMA for Large-Scale Inference and Training Systems
 
   Network System Group in Rice University
 
-  December 16, 2021, Virtual 
+  December 2021, Virtual 
 
 Teaching
 ======
