@@ -116,6 +116,7 @@ Selected Awards
   - Only 10 winners in Central South University each year, for undergraduate students.
 - [Outotec Sustainable Development Award](https://news.csu.edu.cn/info/1003/121481.htm), Central South University, 2015
 - [The First Place in the Intel Cup 7th National Software Innovation Competition](https://news.csu.edu.cn/info/1002/65771.htm), China, 2014
+  - [Software video link for ShouHuiXinYu](https://youtu.be/PLGZZaL4f3I)
   - [Only 1 winner for National Grand Prize each year.](https://news.csu.edu.cn/info/1002/65779.htm)
   - 澎湃网 -- [特殊“微信”软件让盲人和聋哑人实现交流：由大三学生设计](https://www.thepaper.cn/newsDetail_forward_1279690)
   - Intel -- [立足移动应用，英特尔推动软件人才培养](https://newsroom.intel.cn/wp-content/uploads/sites/2/PR_Nov19_2014_01.pdf)
