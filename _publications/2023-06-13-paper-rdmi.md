@@ -1,0 +1,20 @@
+---
+title: "Remote Direct Memory Introspection"
+collection: publications
+permalink: /publication/2023-06-13-paper-rdmi.md
+excerpt: Hongyi Liu, Jiarong Xing, and <u>Yibo Huang</u>, Rice University; Danyang Zhuo, Duke University; Srinivas Devadas, Massachusetts Institute of Technology; Ang Chen, Rice University.
+date: 2022-06-13
+venue: 'CoNEXT 2022: The 18th International Conference on emerging Networking EXperiments and Technologies, Rome, Italy, December 6-9'
+paperurl: 'https://www.usenix.org/conference/usenixsecurity23/presentation/liu-hongyi'
+# slidesurl: 'http://huangyibo.github.io/files/CoNEXT22-NTSocks-slides.pdf'
+codeurl: 'https://github.com/'
+# videourl: 'https://youtu.be/Xk5IF_MCdP4'
+---
+
+**Citation:**
+
+```bib
+```
+
+
+ <!-- [Download paper here](http://huangyibo.github.io/files/ntsocks-conext-2022.pdf) -->
