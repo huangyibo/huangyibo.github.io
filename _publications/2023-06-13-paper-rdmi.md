@@ -4,7 +4,7 @@ collection: publications
 permalink: /publication/2023-06-13-paper-rdmi.md
 excerpt: Hongyi Liu, Jiarong Xing, and <u>Yibo Huang</u>, Rice University; Danyang Zhuo, Duke University; Srinivas Devadas, Massachusetts Institute of Technology; Ang Chen, Rice University.
 date: 2022-06-13
-venue: 'CoNEXT 2022: The 18th International Conference on emerging Networking EXperiments and Technologies, Rome, Italy, December 6-9'
+venue: 'Usenix Security 2023: The 32nd USENIX Security Symposium, Anaheim, CA, USA, August 9–11, 2023'
 paperurl: 'https://www.usenix.org/conference/usenixsecurity23/presentation/liu-hongyi'
 # slidesurl: 'http://huangyibo.github.io/files/CoNEXT22-NTSocks-slides.pdf'
 codeurl: 'https://github.com/'
