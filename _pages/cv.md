@@ -56,7 +56,9 @@ Invited Talks
 
 * An Ultra-Low Latency and Compatible PCIe Interconnect for Rack-scale Communication
 
-  [UTNS Lab](https://utns.cs.utexas.edu/) in The University of Texas at Austin, June 2023
+  * [UTNS Lab](https://utns.cs.utexas.edu/) in The University of Texas at Austin, June 2023
+  * [SUCCESS (Secure Communication and Computer Systems) Lab](https://success.cse.tamu.edu/) in Texas A&M University, July 2023
+  * ChinaSys 2023, Wuhan in China, July 2023
 
 * RDMA-accelerated Data-Intensive Systems
 
