@@ -7,7 +7,7 @@ date: 2023-06-13
 venue: 'Usenix Security 2023: The 32nd USENIX Security Symposium, Anaheim, CA, USA, August 9–11'
 paperurl: 'https://www.usenix.org/conference/usenixsecurity23/presentation/liu-hongyi'
 # slidesurl: 'http://huangyibo.github.io/files/CoNEXT22-NTSocks-slides.pdf'
-codeurl: 'https://github.com/'
+codeurl: 'https://github.com/aladinggit/RDMI'
 # videourl: 'https://youtu.be/Xk5IF_MCdP4'
 ---
 
