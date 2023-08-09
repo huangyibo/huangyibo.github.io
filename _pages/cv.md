@@ -16,6 +16,7 @@ Education
 
 Acadamic Award
 ======
+* Usenix Security 2023 Distinguished Paper Award
 * CoNEXT 2022 Best Paper Award
 * APNet 2019 Student Grant
 

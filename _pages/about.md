@@ -36,7 +36,8 @@ Relevant and Interested Areas
 News
 ======
 ---
-- 06/2023 The co-authored work "Remote Direct Memory Introspection" is accepted by [Usenix Security 2023](https://www.usenix.org/conference/usenixsecurity23/presentation/liu-hongyi).
+- 08/2023 Our RDMI work is awarded **[<b style="color:#FF0000">Distinguished Paper</b>]()** at the Usenix Security 2023. Congratulations!
+- 06/2023 Our work "Remote Direct Memory Introspection" (i.e., RDMI) for baremetal cloud security is accepted by [Usenix Security 2023](https://www.usenix.org/conference/usenixsecurity23/presentation/liu-hongyi).
 - 04/2023 The co-authored work "PFtree: Optimizing Persistent Adaptive Radix Tree for PM Systems on eADR Platform" will be presented on [DASFAA 2023](http://www.tjudb.cn/dasfaa2023/programs).
 - 12/2022 Our paper "An Ultra-Low Latency and Compatible PCIe Interconnect for Rack-scale Communication" is awarded **[<b style="color:#FF0000">Best Paper</b>](https://conferences2.sigcomm.org/co-next/2022/#!/home)** at the CoNEXT 2022 conference. Congratulations!
 - 11/2022 I am awarded "Distinguished RDMA Programming Instructor" by HPC-AI advisory council.
