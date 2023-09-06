@@ -8,7 +8,8 @@ redirect_from:
   - /about.html
 ---
 
-I am now a Postdoc Associate in [CS](https://cs.rice.edu/) at RICE University, working closely with [Prof. Ang Chen](https://www.cs.rice.edu/~angchen/).
+Hey there! I am a Research Fellow at [CSE](https://cse.engin.umich.edu/) of University of Michigan working with [Prof. Ang Chen](https://www.cs.rice.edu/~angchen/).
+Prior to that, I was a Postdoc Associate in [CS](https://cs.rice.edu/) at RICE University.
 Before that, I was a high-speed network engineer at ByteDance focusing on developing RDMA middleware and datacenter systems.
 I got my Ph.D. degree in Computer Science at Fudan University, co-advised by [Prof. Jie Wu](https://dblp.org/pid/w/JieWu3.html) and [Prof. Yang Xu](https://yangxu.info/) in Dec. 2021.
 Prior to joining FDU, I got B.S. in Software Engineering from Central South University in Jun. 2016.
@@ -18,10 +19,11 @@ My RDMA engineering work received Distinguished RDMA Programming Instructor priz
 My research interests mainly lie in the fields of Distributed System, Networked System and Data Center Network.
 In particular, I focus on the system design, development and optimization about RDMA-enhanced datacenter systems, eBPF systems, OS security, network protocol stack and RPC.
 
-- Office: 3011 Duncan Hall
-- Email: yhuang (at) rice (dot) edu
+<!-- - Office: 3011 Duncan Hall -->
+<!-- - Email: yhuang (at) rice (dot) edu -->
+- Office: 4844 Bob and Betty Beyster Building Ann Arbor MI, 48109
+- Email: yiboh (at) umich (dot) edu
 - Former Name : **Bobo Huang**
-<!-- - My Resume is [HERE](http://huangyibo.github.io/files/Yibo-FDU-CV.pdf). -->
 
 Feel free to reach out me through Email if you are interested in my research work.
 
@@ -39,6 +41,7 @@ Relevant and Interested Areas
 News
 ======
 ---
+- 09/2023 I start a new journey at the CSE divison of University of Michigan.
 - 08/2023 Our RDMI work is awarded **[<b style="color:#FF0000">Distinguished Paper</b>]()** at the Usenix Security 2023. Congratulations!
 - 06/2023 Our work "Remote Direct Memory Introspection" (i.e., RDMI) for baremetal cloud security is accepted by [Usenix Security 2023](https://www.usenix.org/conference/usenixsecurity23/presentation/liu-hongyi).
 - 04/2023 The co-authored work "PFtree: Optimizing Persistent Adaptive Radix Tree for PM Systems on eADR Platform" will be presented on [DASFAA 2023](http://www.tjudb.cn/dasfaa2023/programs).
