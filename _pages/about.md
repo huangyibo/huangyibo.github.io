@@ -14,7 +14,7 @@ Before that, I was a high-speed network engineer at ByteDance focusing on develo
 I got my Ph.D. degree in Computer Science at Fudan University, co-advised by [Prof. Jie Wu](https://dblp.org/pid/w/JieWu3.html) and [Prof. Yang Xu](https://yangxu.info/) in Dec. 2021.
 Prior to joining FDU, I got B.S. in Software Engineering from Central South University in Jun. 2016.
 My research has received Usenix Security 2023 Distinguished Paper Award and CoNEXT 2022 Best Paper Award.
-My RDMA engineering work received Distinguished RDMA Programming Instructor prize from HPC-AI advisory council.
+I also received Distinguished RDMA Programming Instructor prize from HPC-AI advisory council.
 
 My research interests mainly lie in the fields of Distributed System, Networked System and Data Center Network.
 In particular, I focus on the system design, development and optimization about RDMA-enhanced datacenter systems, eBPF systems, OS security, network protocol stack and RPC.
