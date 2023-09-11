@@ -6,7 +6,7 @@ excerpt: 'Hongyi Liu, Jiarong Xing, and <u>Yibo Huang</u>, Rice University; Dany
 date: 2023-06-13
 venue: 'Usenix Security 2023: The 32nd USENIX Security Symposium, Anaheim, CA, USA, August 9–11'
 paperurl: 'https://www.usenix.org/system/files/usenixsecurity23-liu-hongyi.pdf'
-# slidesurl: 'http://huangyibo.github.io/files/CoNEXT22-NTSocks-slides.pdf'
+slidesurl: 'https://www.usenix.org/system/files/sec23_slides_liu-hongyi.pdf'
 codeurl: 'https://github.com/aladinggit/RDMI'
 # videourl: 'https://youtu.be/Xk5IF_MCdP4'
 ---
@@ -14,8 +14,11 @@ codeurl: 'https://github.com/aladinggit/RDMI'
 **Citation:**
 
 ```bib
-
+@inproceedings{liu2023remote,
+  title={Remote Direct Memory Introspection},
+  author={Liu, Hongyi and Xing, Jiarong and Huang, Yibo and Zhuo, Danyang and Devadas, Srinivas and Chen, Ang},
+  booktitle={32nd USENIX Security Symposium (USENIX Security 23)},
+  pages={6043--6060},
+  year={2023}
+}
 ```
-
-
- <!-- [Download paper here](http://huangyibo.github.io/files/ntsocks-conext-2022.pdf) -->
