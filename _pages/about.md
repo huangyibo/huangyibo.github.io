@@ -12,7 +12,7 @@ Hey there! I am a Research Fellow at [CSE](https://cse.engin.umich.edu/) of Univ
 Prior to that, I was a Postdoc Associate in [CS](https://cs.rice.edu/) at RICE University.
 Before that, I was a high-speed network engineer at ByteDance focusing on developing RDMA middleware and datacenter systems.
 I got my Ph.D. degree in Computer Science at Fudan University, co-advised by [Prof. Jie Wu](https://dblp.org/pid/w/JieWu3.html) and [Prof. Yang Xu](https://yangxu.info/) in Dec. 2021.
-Prior to joining FDU, I got B.S. in Software Engineering from Central South University in Jun. 2016.
+I got B.S. in Software Engineering from Central South University in Jun. 2016.
 My research has received Usenix Security 2023 Distinguished Paper Award and CoNEXT 2022 Best Paper Award.
 I also received Distinguished RDMA Programming Instructor prize from HPC-AI advisory council.
 
@@ -41,6 +41,7 @@ Relevant and Interested Areas
 News
 ======
 ---
+- 09/2023 Our work "Cloudless Computing: Simplifying Cloud Management with Infrastructure Clarity" is accepted by [HotNets 2023](https://conferences.sigcomm.org/hotnets/2023/accepted.html).
 - 09/2023 I start a new journey at the CSE divison of University of Michigan.
 - 08/2023 Our RDMI work is awarded **[<b style="color:#FF0000">Distinguished Paper</b>]()** at the Usenix Security 2023. Congratulations!
 - 06/2023 Our work "Remote Direct Memory Introspection" (i.e., RDMI) for baremetal cloud security is accepted by [Usenix Security 2023](https://www.usenix.org/conference/usenixsecurity23/presentation/liu-hongyi).

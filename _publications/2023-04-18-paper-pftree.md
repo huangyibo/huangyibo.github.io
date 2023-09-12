@@ -2,7 +2,7 @@
 title: "PFtree: Optimizing Persistent Adaptive Radix Tree for PM Systems on eADR Platform"
 collection: publications
 permalink: /publication/2023-04-18-paper-pftree
-excerpt: 'Rui Zhang, Yao Wu, Shangyi Sun, Lulu Chen, <u>Yibo Huang</u>, Ming Yan, Jie Wu.'
+excerpt: 'Rui Zhang, Yao Wu, Shangyi Sun, Lulu Chen, <u><b>Yibo Huang</b></u>, Ming Yan, Jie Wu.'
 date: 2023-04-18
 venue: 'DASFAA 2023: The 28th International Conference on Database Systems for Advanced Applications, Tianjin, China, April 17-20'
 paperurl: 'http://huangyibo.github.io/files/DASFAA23-PFtree-final.pdf'
