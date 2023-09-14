@@ -43,7 +43,7 @@ News
 ---
 - 09/2023 Our work "Cloudless Computing: Simplifying Cloud Management with Infrastructure Clarity" is accepted by [HotNets 2023](https://conferences.sigcomm.org/hotnets/2023/accepted.html).
 - 09/2023 I start a new journey at the CSE divison of University of Michigan.
-- 08/2023 Our RDMI work is awarded **[<b style="color:#FF0000">Distinguished Paper</b>]()** at the Usenix Security 2023. Congratulations!
+- 08/2023 Our RDMI work is awarded **[<b style="color:#FF0000">Distinguished Paper</b>](https://www.usenix.org/conference/usenixsecurity23/presentation/liu-hongyi)** at the Usenix Security 2023. Congratulations!
 - 06/2023 Our work "Remote Direct Memory Introspection" (i.e., RDMI) for baremetal cloud security is accepted by [Usenix Security 2023](https://www.usenix.org/conference/usenixsecurity23/presentation/liu-hongyi).
 - 04/2023 The co-authored work "PFtree: Optimizing Persistent Adaptive Radix Tree for PM Systems on eADR Platform" will be presented on [DASFAA 2023](http://www.tjudb.cn/dasfaa2023/programs).
 - 12/2022 Our paper "An Ultra-Low Latency and Compatible PCIe Interconnect for Rack-scale Communication" is awarded **[<b style="color:#FF0000">Best Paper</b>](https://conferences2.sigcomm.org/co-next/2022/#!/home)** at the CoNEXT 2022 conference. Congratulations!
