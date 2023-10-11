@@ -84,7 +84,7 @@ author:
   avatar           : "bob.jpeg"
   bio              : "Research Fellow, CSE."
   location         : "University of Michigan"
-  employer         :
+  employer         : "https://cse.engin.umich.edu/people/postdocs/"
   pubmed           : #"https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "https://scholar.google.com/citations?user=nT2h--YAAAAJ&hl=en"
   email            : "yiboh (at) umich (dot) edu"

@@ -8,7 +8,7 @@ redirect_from:
   - /about.html
 ---
 
-Hey there! I am a Research Fellow at [CSE](https://cse.engin.umich.edu/) of University of Michigan working with [Prof. Ang Chen](https://www.cs.rice.edu/~angchen/).
+Hey there! I am a Research Fellow at [CSE](https://cse.engin.umich.edu/people/postdocs/) of University of Michigan working with [Prof. Ang Chen](https://www.cs.rice.edu/~angchen/).
 Prior to that, I was a Postdoc Associate in [CS](https://cs.rice.edu/) at RICE University.
 Before that, I was a high-speed network engineer at ByteDance focusing on developing RDMA middleware and datacenter systems.
 I got my Ph.D. degree in Computer Science at Fudan University, co-advised by [Prof. Jie Wu](https://dblp.org/pid/w/JieWu3.html) and [Prof. Yang Xu](https://yangxu.info/) in Dec. 2021.
