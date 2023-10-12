@@ -18,6 +18,7 @@ Acadamic Award
 ======
 * Usenix Security 2023 Distinguished Paper Award
 * CoNEXT 2022 Best Paper Award
+* Distinguished RDMA Programming Instructor Award by HPC-AI advisory council
 * APNet 2019 Student Grant
 
 
