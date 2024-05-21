@@ -7,6 +7,12 @@ redirect_from:
   - /markdown.html
 ---
 
+Research Taste: Elegance and Insight
+======
+---
+- [Research Taste](https://home.ie.cuhk.edu.hk/~dmchiu/research_taste.pdf)
+
+
 Guidlines for writing a good proposal
 ======
 ---
