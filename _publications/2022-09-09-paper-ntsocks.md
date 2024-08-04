@@ -9,6 +9,7 @@ paperurl: 'http://huangyibo.github.io/files/ntsocks-conext-2022.pdf'
 slidesurl: 'http://huangyibo.github.io/files/CoNEXT22-NTSocks-slides.pdf'
 codeurl: 'https://github.com/NTSocks/ntsocks'
 videourl: 'https://youtu.be/Xk5IF_MCdP4'
+shortpaperurl: 'http://huangyibo.github.io/files/NTSocks_Chinasys-short-paper.pdf'
 ---
 
 **Github Repo:**
