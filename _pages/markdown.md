@@ -25,6 +25,9 @@ Advices for Ph.D Study
 ======
 ---
 - [So long, and thanks for the Ph.D.](https://www.cs.unc.edu/~azuma/hitch4.html) by Ronald T.Azuma
+- [Jennifer Rexford: https://freedom-to-tinker.com/2010/09/27/advice-new-graduate-students/](https://freedom-to-tinker.com/2010/09/27/advice-new-graduate-students/)
+- [http://www.cs.princeton.edu/~jrex/advice.html](http://www.cs.princeton.edu/~jrex/advice.html)
+- [Contains must-reads from Ivan Sutherland and David Patterson](http://caesar.web.engr.illinois.edu/advice.html)
 - [The illustrated guide to a Ph.D.](https://matt.might.net/articles/phd-school-in-pictures/) by Matt Might
 - [A Five-Minute Guide to Ph.D. Program Applications](https://pg.ucsd.edu/PhD-application-tips.htm) by Philip Guo
 - [Establishing Contact with Faculty (For Students)](https://ymmv.tamaradenning.net/blog/2019/08/28/establishing-contact-with-faculty.html) by Tamara Denning
@@ -37,6 +40,39 @@ Advices for Ph.D Study
 - **Research skills:** [Writing Tips from Dr. Kurose](http://www-net.cs.umass.edu/kurose/writing/)
 - **Research skills:** [Networking Conferences Statistics](https://sites.cs.ucsb.edu/~almeroth/conf/stats/)
 - **Research skills:** [An Evaluation of the Ninth SOSP Submissions -or- How (and How Not) to Write a Good Systems Paper](https://www.usenix.org/legacy/events/samples/submit/advice.html) by Roy Levin and David D. Redell. ACM SIGOPS Operating Systems Review 17(3):35-40 (July, 1983). More than 20 years old, but timeless and excellent advice.
+
+- [HOW (AND HOW NOT) TO WRITE A GOOD SYSTEMS PAPER](https://www.usenix.org/conferences/author-resources/how-and-how-not-write-good-systems-paper)
+
+
+Giving a talk
+======
+---
+- [How to give a great research talk](https://www.microsoft.com/en-us/research/academic-program/give-great-research-talk/)
+- [Book: Even a Geek Can Speak]()
+
+
+Time management
+======
+---
+- [Getting Things Done, David Allen.]()
+
+
+Faculty job search
+=======
+---
+- [Philip Guo: http://www.pgbovine.net/faculty-job-search.htm](http://www.pgbovine.net/faculty-job-search.htm)
+- [Philip Guo: http://www.pgbovine.net/guo-faculty-job-search.pdf](http://www.pgbovine.net/guo-faculty-job-search.pdf)
+- [Matt Welsh: https://www.nyu.edu/projects/rzhang/Matt-Welsh-Advice.pdf](https://www.nyu.edu/projects/rzhang/Matt-Welsh-Advice.pdf)
+- [Michael Ernst: https://homes.cs.washington.edu/~mernst/advice/academic-job.html](https://homes.cs.washington.edu/~mernst/advice/academic-job.html)
+- [Matt Might http://matt.might.net/articles/advice-for-academic-job-hunt/](http://matt.might.net/articles/advice-for-academic-job-hunt/)
+
+
+Research Blogs
+======
+---
+- [Nick Feamster: https://greatresearch.org/](https://greatresearch.org/)
+- [Matt Might: http://matt.might.net ](http://matt.might.net)
+- [The Awesome-research project provides all tools that you will need in your research projects.](https://github.com/emptymalei/awesome-research)
 
 
 Deadlines of CS Conferences
