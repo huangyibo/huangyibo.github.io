@@ -4,7 +4,7 @@ collection: publications
 permalink: /publication/2024-09-28-paper-flexemr
 excerpt: '<u><b>Yibo Huang</b></u>, Zhenning Yang, Jiarong Xing, Yi Dai, Yiming Qiu, Dingming Wu, Fan Lai, Ang Chen'
 date: 2024-09-28
-venue: ''
+venue: 'arXiv preprint arXiv:2410.12794'
 paperurl: 'http://huangyibo.github.io/files/flexemr.pdf'
 # slidesurl: 'https://www.usenix.org/system/files/sec23_slides_liu-hongyi.pdf'
 # codeurl: 'https://github.com/aladinggit/RDMI'
