@@ -2,7 +2,7 @@
 title: "Disaggregating Embedding Recommendation Systems with FlexEMR"
 collection: publications
 permalink: /publication/2024-09-28-paper-flexemr
-excerpt: '<u><b>Yibo Huang</b></u>, Zhenning Yang, Jiarong Xing, Yi Dai, Yiming Qiu, Dingming Wu, Fan Lai, Ang Chen'
+excerpt: '<u><b>Yibo Huang</b></u>, Zhenning Yang (University of Michigan); Jiarong Xing (Rice University); Yi Dai (Fudan University), Yiming Qiu (University of Michigan), Dingming Wu (Unaffiliated), Fan Lai (University of Illinois Urbana-Champaign), Ang Chen (University of Michigan)'
 date: 2024-09-28
 venue: 'arXiv preprint arXiv:2410.12794'
 paperurl: 'http://huangyibo.github.io/files/flexemr.pdf'
