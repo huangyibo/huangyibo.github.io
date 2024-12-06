@@ -13,8 +13,8 @@ Prior to that, I was a Postdoc Associate in [CS](https://cs.rice.edu/) at RICE U
 Before that, I was a high-speed network engineer at ByteDance focusing on developing RDMA middleware and datacenter systems.
 I got my Ph.D. degree in Computer Science at Fudan University, co-advised by [Prof. Jie Wu](https://dblp.org/pid/w/JieWu3.html) and [Prof. Yang Xu](https://yangxu.info/) in Dec. 2021.
 I got B.S. in Software Engineering from Central South University in Jun. 2016.
-My research has received Usenix Security 2023 Distinguished Paper Award and CoNEXT 2022 Best Paper Award.
-I also received Distinguished RDMA Programming Instructor prize from HPC-AI advisory council.
+My research has received Usenix Security 2023 Distinguished Paper Award and ACM CoNEXT 2022 Best Paper Award.
+I also received Distinguished RDMA Programming Instructor prize from the [HPC-AI advisory council](https://www.hpcadvisorycouncil.com/).
 
 My research interests mainly lie in the fields of Distributed System, Networked System and Data Center Network.
 In particular, I focus on the system design, development and optimization about RDMA-enhanced datacenter systems, eBPF systems, OS security, network protocol stack and RPC.
@@ -46,9 +46,9 @@ News
 - 08/2023 Our RDMI work is awarded **[<b style="color:#FF0000">Distinguished Paper</b>](https://www.usenix.org/conference/usenixsecurity23/presentation/liu-hongyi)** at the Usenix Security 2023. Congratulations!
 - 06/2023 Our work "Remote Direct Memory Introspection" (i.e., RDMI) for baremetal cloud security is accepted by [Usenix Security 2023](https://www.usenix.org/conference/usenixsecurity23/presentation/liu-hongyi).
 - 04/2023 The co-authored work "PFtree: Optimizing Persistent Adaptive Radix Tree for PM Systems on eADR Platform" will be presented on [DASFAA 2023](http://www.tjudb.cn/dasfaa2023/programs).
-- 12/2022 Our paper "An Ultra-Low Latency and Compatible PCIe Interconnect for Rack-scale Communication" is awarded **[<b style="color:#FF0000">Best Paper</b>](https://conferences2.sigcomm.org/co-next/2022/#!/home)** at the CoNEXT 2022 conference. Congratulations!
+- 12/2022 Our paper "An Ultra-Low Latency and Compatible PCIe Interconnect for Rack-scale Communication" is awarded **[<b style="color:#FF0000">Best Paper</b>](https://conferences2.sigcomm.org/co-next/2022/#!/home)** at the ACM CoNEXT 2022 conference. Congratulations!
 - 11/2022 I am awarded "Distinguished RDMA Programming Instructor" by HPC-AI advisory council.
-- 09/2022 Our research work about how to use advanced PCIe interconnect to rearchitect Rack-Scale communication is accepted by CoNEXT 2022. Only 28 papers are accepted out of 151 submitted. Congratulations!
+- 09/2022 Our research work about how to use advanced PCIe interconnect to rearchitect Rack-Scale communication is accepted by ACM CoNEXT 2022. Only 28 papers are accepted out of 151 submitted. Congratulations!
 - 09/2022 I officially join the CS department of RICE University as a Postdoc Associate working closely with [Prof. Ang Chen](https://www.cs.rice.edu/~angchen/). 
 - 01/2022 I officially join ByteDance High-Speed Network Lab, Network Engineering Group, as a Network Engineer.
 - 12/2021 I get my Ph.D. in Fudan University.
