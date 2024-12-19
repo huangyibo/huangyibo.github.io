@@ -41,6 +41,8 @@ Relevant and Interested Areas
 News
 ======
 ---
+- 12/2024 Our work "Automated Lifting for Cloud Infrastructure-as-Code Programs" is accepted by [AIOps 2025](https://cloudintelligenceworkshop.org/index.html).
+- 11/2024 I am selected as a PC member of the [USENIX Security 2025 Artifact Evaluation Committee (AEC)](https://www.usenix.org/conference/usenixsecurity25/call-for-artifacts), and will help the community do availability verification + functionality/reproducibility assessments for accepted papers. 
 - 09/2023 Our work "Cloudless Computing: Simplifying Cloud Management with Infrastructure Clarity" is accepted by [HotNets 2023](https://conferences.sigcomm.org/hotnets/2023/accepted.html).
 - 09/2023 I start a new journey at the CSE divison of University of Michigan.
 - 08/2023 Our RDMI work is awarded **[<b style="color:#FF0000">Distinguished Paper</b>](https://www.usenix.org/conference/usenixsecurity23/presentation/liu-hongyi)** at the Usenix Security 2023. Congratulations!
