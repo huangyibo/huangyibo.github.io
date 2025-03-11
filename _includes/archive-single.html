@@ -62,6 +62,10 @@
       <p>Recommended citation: {{ post.citation }} </p>
     {% elsif post.paperurl %}
       <p>
+        {% if post.venuelink %}
+          [ <a href=" {{ post.venuelink }} ">{{ post.venuename }}</a> ]
+        {% endif %}
+
         [ <a href=" {{ post.paperurl }} ">pdf</a> ]
         
         {% if post.slidesurl %}
@@ -83,6 +87,10 @@
         {% if post.shortpaperurl %} 
         [ <a href=" {{ post.shortpaperurl }} ">short paper</a> ]
         {% endif %}
+      </p>
+    {% else %}
+      <p>
+        [ <a href="">To Appear</a> ]
       </p>
     {% endif %}
 
