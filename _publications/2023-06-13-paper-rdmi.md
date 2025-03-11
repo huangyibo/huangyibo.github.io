@@ -9,6 +9,8 @@ paperurl: 'https://www.usenix.org/system/files/usenixsecurity23-liu-hongyi.pdf'
 slidesurl: 'https://www.usenix.org/system/files/sec23_slides_liu-hongyi.pdf'
 codeurl: 'https://github.com/huangyibo/RDMI'
 # videourl: 'https://youtu.be/Xk5IF_MCdP4'
+venuename: "USENIX Security 2022"
+venuelink: https://www.usenix.org/conference/usenixsecurity23
 ---
 
 **Citation:**

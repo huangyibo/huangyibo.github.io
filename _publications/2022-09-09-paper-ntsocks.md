@@ -10,6 +10,8 @@ slidesurl: 'http://huangyibo.github.io/files/CoNEXT22-NTSocks-slides.pdf'
 codeurl: 'https://github.com/NTSocks/ntsocks'
 videourl: 'https://youtu.be/Xk5IF_MCdP4'
 shortpaperurl: 'http://huangyibo.github.io/files/NTSocks_Chinasys-short-paper.pdf'
+venuename: 'CoNEXT 2022'
+venuelink: https://conferences2.sigcomm.org/co-next/2022/#!/home
 ---
 
 **Github Repo:**

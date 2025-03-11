@@ -10,6 +10,8 @@ paperurl: 'http://huangyibo.github.io/files/hotnets2023-cloudless.pdf'
 # codeurl: 'https://github.com/aladinggit/RDMI'
 # videourl: 'https://youtu.be/Xk5IF_MCdP4'
 posterurl: 'http://huangyibo.github.io/files/Cloudless-Google_Networking_Research_Summit_Poster.pdf'
+venuename: 'HotNets 2023'
+venuelink: https://conferences.sigcomm.org/hotnets/2023/
 ---
 
 **Citation:**
