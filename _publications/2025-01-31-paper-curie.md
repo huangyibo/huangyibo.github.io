@@ -7,5 +7,5 @@ excerpt: 'Patrick Tser Jern Kon, Jiachen Liu, Qiuyi Ding, Yiming Qiu, Zhenning Y
 venue: 'arxiv.org 2025'
 paperurl: https://arxiv.org/pdf/2502.16069
 codeurl: https://github.com/Just-Curieous/Curie
-venuename: 'arxiv.org 2025'
+venuename: 'arXiv 2025'
 ---
