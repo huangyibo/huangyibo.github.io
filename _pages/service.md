@@ -11,13 +11,18 @@ Reviewer
 ======
 ---
 - IEEE/ACM Transactions on Networking
-- IEEE Journal on Selected Areas in Communications, TPC member
+- Transactions on Computers
 - IEEE Transactions on Mobile Computing
-- Transactions on Computer Systems
+- ACM Transactions on Computer Systems
+- IEEE Transactions on Cloud Computing
 - Computer Networks
+- Journal of Supercomputing
+- Cluster Computing
 
 
 TPC Member
 ======
 ---
+- [USENIX Security 2025 Artificat Evaluation Committee (AEC)](https://www.usenix.org/conference/usenixsecurity25/call-for-artifacts)  
 - IFIP NPC 2024 ([the 20th IFIP International Conference on Network and Parallel Computing](https://www.npc-conference.com/#/npc2024/committees))
+
