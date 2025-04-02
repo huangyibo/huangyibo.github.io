@@ -23,7 +23,7 @@ In particular, I focus on the system design, development and optimization about 
 <!-- - Email: yhuang (at) rice (dot) edu -->
 - Office: 4844 Bob and Betty Beyster Building Ann Arbor MI, 48109
 - Email: yiboh (at) umich (dot) edu
-- Former Name : **Bobo Huang**
+<!-- - Former Name : **Bobo Huang** -->
 
 <!-- Feel free to reach out me through Email if you are interested in my research work. -->
 
@@ -46,57 +46,31 @@ News
 
 - 12/2024 Our work "Automated Lifting for Cloud Infrastructure-as-Code Programs" is accepted by [AIOps 2025](https://cloudintelligenceworkshop.org/index.html).
 - 11/2024 I am selected as a PC member of the [USENIX Security 2025 Artifact Evaluation Committee (AEC)](https://www.usenix.org/conference/usenixsecurity25/call-for-artifacts), and will help the community do availability verification + functionality/reproducibility assessments for accepted papers. 
-
 - 09/2023 Our work "Cloudless Computing: Simplifying Cloud Management with Infrastructure Clarity" is accepted by [HotNets 2023](https://conferences.sigcomm.org/hotnets/2023/accepted.html).
-
 - 09/2023 I start a new journey at the CSE divison of University of Michigan.
-
 - 08/2023 Our RDMI work is awarded **[<b style="color:#FF0000">Distinguished Paper</b>](https://www.usenix.org/conference/usenixsecurity23/presentation/liu-hongyi)** at the Usenix Security 2023. Congratulations!
-
 - 06/2023 Our work "Remote Direct Memory Introspection" (i.e., RDMI) for baremetal cloud security is accepted by [Usenix Security 2023](https://www.usenix.org/conference/usenixsecurity23/presentation/liu-hongyi).
-
 - 04/2023 The co-authored work "PFtree: Optimizing Persistent Adaptive Radix Tree for PM Systems on eADR Platform" will be presented on [DASFAA 2023](http://www.tjudb.cn/dasfaa2023/programs).
-
 - 12/2022 Our paper "An Ultra-Low Latency and Compatible PCIe Interconnect for Rack-scale Communication" is awarded **[<b style="color:#FF0000">Best Paper</b>](https://conferences2.sigcomm.org/co-next/2022/#!/home)** at the ACM CoNEXT 2022 conference. Congratulations!
-
 - 11/2022 I am awarded "Distinguished RDMA Programming Instructor" by HPC-AI advisory council.
-
 - 09/2022 Our research work about how to use advanced PCIe interconnect to rearchitect Rack-Scale communication is accepted by ACM CoNEXT 2022. Only 28 papers are accepted out of 151 submitted. Congratulations!
-
 - 09/2022 I officially join the CS department of RICE University as a Postdoc Associate working closely with [Prof. Ang Chen](https://www.cs.rice.edu/~angchen/). 
-
 - 01/2022 I officially join ByteDance High-Speed Network Lab, Network Engineering Group, as a Network Engineer.
-
 - 12/2021 I get my Ph.D. in Fudan University.
-
 - 12/2020 I am awarded an honorary title of "The Oceanwide Scholar" for excellent academic performance at Fudan University in the 2020 year, only 10 winners in FDU each year.
-
 - 11/2020 I am awarded "Intel Fellowship" by Intel in Shanghai.
-
 - 11/2020 Our **FDU Starry Team** led by me wins the **Second Prize** in [the 8th APAC RDMA Programming Competition](http://www.hpcadvisorycouncil.com/events/2020/rdma/). Congratulations!
-
 - 05/2020 I join Bytedance High-Speed Network Lab, Network Engineering Group, as a Research Intern.
-
 - 05/2020 One research paper is accepted by JPDC 2020.
-
 - 12/2019 I am awarded the Award of Outstanding Ph.D. Students at FDU for the academic year 2019-2020.
-
 - 12/2019 I win the 2nd "Fudan-Oceanwide Entrepreneurship Fund" (Exploration Fund) funding.
-
 - 11/2019 Our **FDU Starry Team** led by me wins the **Second Prize** in [the 7th APAC RDMA Programming Competition](http://www.hpcadvisorycouncil.com/events/2019/rdma/). Congratulations!
-
 - 10/2019 One research paper is accepted by IEEE TSC 2019.
-
 - 06/2019 I win the "Excellent Doctoral Research Promotion Program" funding at FDU.
-
 - 06/2019 One research paper is accepted by Information Sciences 2019.
-
 - 12/2018 I am awarded the Award for Outstanding Ph.D. Students at FDU for the academic year 2018-2019.
-
 - 10/2018 Our **FDU Starry Team** is awarded the **Second Prize** in [the 6th APAC RDMA Programming Competition](http://www.hpcadvisorycouncil.com/events/2018/rdma/). Congratulations!
-
 - 08/2018 Our **FDU Starry Team** is established, focusing on research and buildup of RDMA-enhanced distributed systems.
-
 - 03/2018 I am awarded the honor of the Outstanding Teaching Assistant of Fudan University in the academic session 2017-2018, semester 1.
 
 </div>
