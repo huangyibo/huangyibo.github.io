@@ -25,15 +25,15 @@ In particular, I focus on the system design, development and optimization about 
 - Email: yiboh (at) umich (dot) edu
 - Former Name : **Bobo Huang**
 
-Feel free to reach out me through Email if you are interested in my research work.
+<!-- Feel free to reach out me through Email if you are interested in my research work. -->
 
 
-Relevant and Interested Areas
+<!-- Relevant and Interested Areas
 ======
 ---
 - System enhancement with RDMA.
 - High-performance network stack design.
-- High-performance RPC framework.
+- High-performance RPC framework. -->
 <!-- - Hybrid computing framework. over modern hardware -->
 
 
@@ -45,7 +45,6 @@ News
 <div style="height:250px;overflow-y:scroll" markdown="1">
 
 - 12/2024 Our work "Automated Lifting for Cloud Infrastructure-as-Code Programs" is accepted by [AIOps 2025](https://cloudintelligenceworkshop.org/index.html).
-
 - 11/2024 I am selected as a PC member of the [USENIX Security 2025 Artifact Evaluation Committee (AEC)](https://www.usenix.org/conference/usenixsecurity25/call-for-artifacts), and will help the community do availability verification + functionality/reproducibility assessments for accepted papers. 
 
 - 09/2023 Our work "Cloudless Computing: Simplifying Cloud Management with Infrastructure Clarity" is accepted by [HotNets 2023](https://conferences.sigcomm.org/hotnets/2023/accepted.html).
