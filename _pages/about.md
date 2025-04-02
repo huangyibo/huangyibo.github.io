@@ -41,6 +41,9 @@ Relevant and Interested Areas
 News
 ======
 ---
+
+<div style="height:250px;overflow-y:scroll">
+
 - 12/2024 Our work "Automated Lifting for Cloud Infrastructure-as-Code Programs" is accepted by [AIOps 2025](https://cloudintelligenceworkshop.org/index.html).
 - 11/2024 I am selected as a PC member of the [USENIX Security 2025 Artifact Evaluation Committee (AEC)](https://www.usenix.org/conference/usenixsecurity25/call-for-artifacts), and will help the community do availability verification + functionality/reproducibility assessments for accepted papers. 
 - 09/2023 Our work "Cloudless Computing: Simplifying Cloud Management with Infrastructure Clarity" is accepted by [HotNets 2023](https://conferences.sigcomm.org/hotnets/2023/accepted.html).
@@ -69,6 +72,8 @@ News
 - 10/2018 Our **FDU Starry Team** is awarded the **Second Prize** in [the 6th APAC RDMA Programming Competition](http://www.hpcadvisorycouncil.com/events/2018/rdma/). Congratulations!
 - 08/2018 Our **FDU Starry Team** is established, focusing on research and buildup of RDMA-enhanced distributed systems.
 - 03/2018 I am awarded the honor of the Outstanding Teaching Assistant of Fudan University in the academic session 2017-2018, semester 1.
+
+</div>
 
 <!-- Our project "A Trusted Identity Unified Verification System over Zero-Trust Architecture" -->
 <!-- organized by HPC-AI Advisory Council -->
