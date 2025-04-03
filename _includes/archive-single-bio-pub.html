@@ -44,9 +44,9 @@
           {% endif %}
 
       {% if post.excerpt and site.read_more != 'enabled' %}
-      <p class="archive__item-excerpt" itemprop="description" style="margin-top: -18px; margin-left:10px; font-size:16px">{{ post.excerpt | markdownify }}</p>
+      <p class="archive__item-excerpt" itemprop="description" style="margin-top: -18px; margin-left:20px; font-size:16px">{{ post.excerpt | markdownify }}</p>
       {% elsif post.excerpt and site.read_more == 'enabled' %}
-      <p class="archive__item-excerpt" itemprop="description" style="margin-top: -18px; margin-left:10px; font-size:16px"><p>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></p></p>
+      <p class="archive__item-excerpt" itemprop="description" style="margin-top: -18px; margin-left:20px; font-size:16px"><p>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></p></p>
       {% endif %}
 
       <!-- {% if post.collection == 'publications' %}
@@ -58,7 +58,7 @@
       {% elsif post.citation %}
         <p>Recommended citation: {{ post.citation }} </p>
       {% elsif post.paperurl %}
-        <p style="font-size:-18px; margin-left:10px;">
+        <p style="font-size:16px; margin-left:20px; margin-top: -18px;">
           {% if post.venuename %}
             [ <a href=" {{ post.venuelink }} " style="color:#3498db">{{ post.venuename }}</a> ]
           {% endif %}
@@ -86,7 +86,7 @@
           {% endif %}
         </p>
       {% else %}
-        <p style="font-size:-18px; margin-left:10px;">
+        <p style="font-size:16px; margin-left:20px; margin-top: -18px;">
           [ <a href="">To Appear</a> ]
         </p>
       {% endif %}

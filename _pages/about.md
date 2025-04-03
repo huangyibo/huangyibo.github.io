@@ -57,7 +57,7 @@ Awards & Honors
 * UMPDA Conference Travel Award, University of Michigan <span style="float:right">2025</span>
 * Usenix Security Distinguished Paper Award <span style="float:right">2023</span>
 * ACM CoNEXT Best Paper Award  <span style="float:right">2022</span>
-* Distinguished RDMA Programming Instructor Award by HPC-AI advisory council  <span style="float:right">2022</span>
+* Distinguished RDMA Programming Instructor, HPC-AI advisory council  <span style="float:right">2022</span>
 * Intel PhD Fellowship, Intel <span style="float:right">2020</span>
 * APNet Student Travel Grant <span style="float:right">2019</span>
 
@@ -65,7 +65,6 @@ Awards & Honors
 
 Service
 ======
----
 
 ## Conference commitee
 
