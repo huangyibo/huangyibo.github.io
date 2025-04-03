@@ -17,7 +17,9 @@ I got B.S. in Software Engineering from Central South University in Jun. 2016.
 My research has received **Usenix Security 2023 Distinguished Paper Award** and **ACM CoNEXT 2022 Best Paper Award**.
 I also received Distinguished RDMA Programming Instructor prize from the [HPC-AI advisory council](https://www.hpcadvisorycouncil.com/).
 
-My research interests mainly lie in the general fields of systems, networking, and security, with a particular focus on applying hardware-software co-design, system-network co-design, and disaggregation techniques to improve system performance, efficiency, scalability and security. My PhD thesis is on "Building Fast, Compatible and Efficient Datacenter Systems with Kernel-bypass Networks".
+My research interests mainly lie in the general fields of systems, networking, and security, with a particular focus on applying hardware-software co-design, system-network co-design, and ML techniques to improve system performance, efficiency, and security. 
+
+<!-- My PhD thesis is on "Building Fast, Compatible and Efficient Datacenter Systems with Kernel-bypass Networks". -->
 
 <!-- In particular, I focus on the system design, development and optimization about RDMA-enhanced datacenter systems, eBPF systems, OS security, network protocol stack and RPC. -->
 
@@ -28,7 +30,6 @@ My research interests mainly lie in the general fields of systems, networking, a
 <!-- - Former Name : **Bobo Huang** -->
 
 <!-- Feel free to reach out me through Email if you are interested in my research work. -->
-
 
 <!-- Relevant and Interested Areas
 ======
@@ -44,7 +45,7 @@ Publications
 ---
 
 {% for post in site.publications reversed %}
-  {% include archive-single.html %}
+  {% include archive-single-bio-pub.html %}
 {% endfor %}
 
 
