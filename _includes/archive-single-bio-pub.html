@@ -44,9 +44,9 @@
           {% endif %}
 
       {% if post.excerpt and site.read_more != 'enabled' %}
-      <p class="archive__item-excerpt" itemprop="description" style="margin-top: -15px;">{{ post.excerpt | markdownify }}</p>
+      <span class="archive__item-excerpt" itemprop="description" style="margin-top: -18px;">{{ post.excerpt | markdownify }}</span>
       {% elsif post.excerpt and site.read_more == 'enabled' %}
-      <p class="archive__item-excerpt" itemprop="description" style="margin-top: -15px;"><p>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></p></p>
+      <span class="archive__item-excerpt" itemprop="description" style="margin-top: -18px;"><span>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></span></span>
       {% endif %}
 
       <!-- {% if post.collection == 'publications' %}
@@ -58,7 +58,7 @@
       {% elsif post.citation %}
         <p>Recommended citation: {{ post.citation }} </p>
       {% elsif post.paperurl %}
-        <p style="margin-top: -15px;">
+        <span style="margin-top: -18px;">
           {% if post.venuename %}
             [ <a href=" {{ post.venuelink }} " style="color:#3498db">{{ post.venuename }}</a> ]
           {% endif %}
@@ -84,11 +84,11 @@
           {% if post.shortpaperurl %} 
           [ <a href=" {{ post.shortpaperurl }}" style="color:#5d6be2">short paper</a> ]
           {% endif %}
-        </p>
+        </span>
       {% else %}
-        <p>
+        <span>
           [ <a href="">To Appear</a> ]
-        </p>
+        </span>
       {% endif %}
 
     </li>
