@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Biography"
+title: "About Me"
 excerpt: " - Yibo Huang"
 author_profile: true
 redirect_from: 
@@ -10,19 +10,21 @@ redirect_from:
 
 Hey there! I am a Research Fellow at [CSE](https://cse.engin.umich.edu/people/postdocs/) of University of Michigan working with [Prof. Ang Chen](https://web.eecs.umich.edu/~chenang/).
 Prior to that, I was a Postdoc Associate in [CS](https://cs.rice.edu/) at RICE University.
-Before that, I was a high-speed network engineer at ByteDance focusing on developing RDMA middleware and datacenter systems.
+I was a high-speed network engineer at ByteDance focusing on developing RDMA middleware and datacenter systems during May. 2020 ~ Aug. 2022.
 I got my Ph.D. degree in Computer Science at Fudan University, co-advised by [Prof. Jie Wu](https://dblp.org/pid/w/JieWu3.html) and [Prof. Yang Xu](https://yangxu.info/) in Dec. 2021.
 I got B.S. in Software Engineering from Central South University in Jun. 2016.
+
 My research has received **Usenix Security 2023 Distinguished Paper Award** and **ACM CoNEXT 2022 Best Paper Award**.
 I also received Distinguished RDMA Programming Instructor prize from the [HPC-AI advisory council](https://www.hpcadvisorycouncil.com/).
 
-My research interests mainly lie in the fields of Distributed System, Networked System and Data Center Network.
-In particular, I focus on the system design, development and optimization about RDMA-enhanced datacenter systems, eBPF systems, OS security, network protocol stack and RPC.
+My research interests mainly lie in the general fields of systems, networking, and security, with a particular focus on applying hardware-software co-design, system-network co-design, and disaggregation techniques to improve system performance, efficiency, scalability and security. My PhD thesis is on "Building Fast, Compatible and Efficient Datacenter Systems with Kernel-bypass Networks".
+
+<!-- In particular, I focus on the system design, development and optimization about RDMA-enhanced datacenter systems, eBPF systems, OS security, network protocol stack and RPC. -->
 
 <!-- - Office: 3011 Duncan Hall -->
 <!-- - Email: yhuang (at) rice (dot) edu -->
-- Office: 4844 Bob and Betty Beyster Building Ann Arbor MI, 48109
-- Email: yiboh (at) umich (dot) edu
+<!-- - Office: 4844 Bob and Betty Beyster Building Ann Arbor MI, 48109 -->
+<!-- - Email: yiboh (at) umich (dot) edu -->
 <!-- - Former Name : **Bobo Huang** -->
 
 <!-- Feel free to reach out me through Email if you are interested in my research work. -->
@@ -35,6 +37,15 @@ In particular, I focus on the system design, development and optimization about 
 - High-performance network stack design.
 - High-performance RPC framework. -->
 <!-- - Hybrid computing framework. over modern hardware -->
+
+
+Publications
+======
+---
+
+{% for post in site.publications reversed %}
+  {% include archive-single.html %}
+{% endfor %}
 
 
 
