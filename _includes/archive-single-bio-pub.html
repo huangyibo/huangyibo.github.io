@@ -26,9 +26,9 @@
       </div>
     {% endif %}
 
-    <li class="archive__item-title" style="list-style-type: '👉 ';">
+    <li style="list-style-type: '👉 ';">
       <!-- <p class="archive__item-title" itemprop="headline" style="font-size:16px;"> -->
-         <b style="font-size: 18px; margin-left:0px"> {{ title }} </b>
+         <b style="font-size: 18px; margin-left:0px"> {{ title }} </b> <br>
       <!-- </p> -->
 
       {% if post.read_time %}
@@ -43,7 +43,6 @@
           <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ post.date | default: "1900-01-01" | date_to_xmlschema }}">{{ post.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
           {% endif %}
 
-      <br>
       {% if post.excerpt and site.read_more != 'enabled' %}
       <p class="archive__item-excerpt" itemprop="description" style="margin-top: -18px; margin-left:10px; font-size:16px">{{ post.excerpt | markdownify }}</p>
       {% elsif post.excerpt and site.read_more == 'enabled' %}
@@ -54,7 +53,6 @@
       <p style="margin: -12px auto"><i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }}</p>
       {% endif %} -->
       
-      <br> 
       {% if post.citation and post.paperurl %}
         <p>Recommended citation: {{ post.citation }} <a href="{{ post.paperurl }}"><u>{{ post.paperurl }}</u></a></p>
       {% elsif post.citation %}
