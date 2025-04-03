@@ -26,7 +26,7 @@
       </div>
     {% endif %}
 
-    <li style="list-style-type: '👉 ';">
+    <li class="archive__item-title" style="list-style-type: '👉 ';">
       <!-- <p class="archive__item-title" itemprop="headline" style="font-size:16px;"> -->
          <b style="font-size: 18px; margin-left:0px"> {{ title }} </b>
       <!-- </p> -->
@@ -45,9 +45,9 @@
 
       <br>
       {% if post.excerpt and site.read_more != 'enabled' %}
-      <span class="archive__item-excerpt" itemprop="description" style="margin-top: -18px; margin-left:10px; font-size:16px">{{ post.excerpt | markdownify }}</span>
+      <p class="archive__item-excerpt" itemprop="description" style="margin-top: -18px; margin-left:10px; font-size:16px">{{ post.excerpt | markdownify }}</p>
       {% elsif post.excerpt and site.read_more == 'enabled' %}
-      <span class="archive__item-excerpt" itemprop="description" style="margin-top: -18px; margin-left:10px; font-size:16px"><span>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></span></span>
+      <p class="archive__item-excerpt" itemprop="description" style="margin-top: -18px; margin-left:10px; font-size:16px"><p>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></p></p>
       {% endif %}
 
       <!-- {% if post.collection == 'publications' %}
@@ -60,7 +60,7 @@
       {% elsif post.citation %}
         <p>Recommended citation: {{ post.citation }} </p>
       {% elsif post.paperurl %}
-        <span style="font-size:-18px; margin-left:10px;">
+        <p style="font-size:-18px; margin-left:10px;">
           {% if post.venuename %}
             [ <a href=" {{ post.venuelink }} " style="color:#3498db">{{ post.venuename }}</a> ]
           {% endif %}
@@ -86,11 +86,11 @@
           {% if post.shortpaperurl %} 
           [ <a href=" {{ post.shortpaperurl }}" style="color:#5d6be2">short paper</a> ]
           {% endif %}
-        </span>
+        </p>
       {% else %}
-        <span style="font-size:-18px; margin-left:10px;">
+        <p style="font-size:-18px; margin-left:10px;">
           [ <a href="">To Appear</a> ]
-        </span>
+        </p>
       {% endif %}
 
     </li>

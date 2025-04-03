@@ -49,6 +49,43 @@ Publications
 {% endfor %}
 
 
+Awards & Honors
+======
+---
+
+* UMPDA Professional Development Award, University of Michigan <span style="float:right">2025</span>
+* UMPDA Conference Travel Award, University of Michigan <span style="float:right">2025</span>
+* Usenix Security Distinguished Paper Award <span style="float:right">2023</span>
+* ACM CoNEXT Best Paper Award  <span style="float:right">2022</span>
+* Distinguished RDMA Programming Instructor Award by HPC-AI advisory council  <span style="float:right">2022</span>
+* Intel PhD Fellowship, Intel <span style="float:right">2020</span>
+* APNet Student Travel Grant <span style="float:right">2019</span>
+
+
+
+Service
+======
+---
+
+## Conference commitee
+
+- [USENIX Security 2025 AEC](https://www.usenix.org/conference/usenixsecurity25/call-for-artifacts)
+- [IFIP NPC 2024](https://www.npc-conference.com/#/npc2024/committees)
+
+<!-- the 20th IFIP International Conference on Network and Parallel Computing -->
+
+
+## Journal Reviewer
+
+- IEEE/ACM Transactions on Networking
+- Transactions on Computers
+- IEEE Transactions on Mobile Computing
+- ACM Transactions on Computer Systems
+- IEEE Transactions on Cloud Computing
+- Computer Networks
+- Journal of Supercomputing
+- Cluster Computing
+
 
 News
 ======
