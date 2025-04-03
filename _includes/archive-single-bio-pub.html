@@ -26,9 +26,9 @@
       </div>
     {% endif %}
 
-    <h2 class="archive__item-title" itemprop="headline">
-        <li style="font-size: 4;"> {{ title }}</li>
-    </h2>
+    <p class="archive__item-title" itemprop="headline" style="font-size:16px;">
+        <li> {{ title }} </li>
+    </p>
     
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
@@ -43,9 +43,9 @@
         {% endif %}
 
     {% if post.excerpt and site.read_more != 'enabled' %}
-    <p class="archive__item-excerpt" itemprop="description" style="margin: top 5px;">{{ post.excerpt | markdownify }}</p>
+    <p class="archive__item-excerpt" itemprop="description" style="margin-top: -3px;">{{ post.excerpt | markdownify }}</p>
     {% elsif post.excerpt and site.read_more == 'enabled' %}
-    <p class="archive__item-excerpt" itemprop="description"><p>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></p></p>
+    <p class="archive__item-excerpt" itemprop="description" style="margin-top: -3px;"><p>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></p></p>
     {% endif %}
 
     <!-- {% if post.collection == 'publications' %}
@@ -57,7 +57,7 @@
     {% elsif post.citation %}
       <p>Recommended citation: {{ post.citation }} </p>
     {% elsif post.paperurl %}
-      <p>
+      <p style="margin-top: -3px;">
         {% if post.venuename %}
           [ <a href=" {{ post.venuelink }} " style="color:#3498db">{{ post.venuename }}</a> ]
         {% endif %}
