@@ -44,9 +44,9 @@
           {% endif %}
 
       {% if post.excerpt and site.read_more != 'enabled' %}
-      <p class="archive__item-excerpt" itemprop="description" style="margin-top: -18px; margin-left:20px; font-size:16px">{{ post.excerpt | markdownify }}</p>
+      <p class="archive__item-excerpt" itemprop="description" style="margin-top: -18px; font-size:16px"><span style=" margin-left:20px;">{{ post.excerpt | markdownify }}</span></p>
       {% elsif post.excerpt and site.read_more == 'enabled' %}
-      <p class="archive__item-excerpt" itemprop="description" style="margin-top: -18px; margin-left:20px; font-size:16px"><p>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></p></p>
+      <p class="archive__item-excerpt" itemprop="description" style="margin-top: -18px; font-size:16px"><p style="margin-left:20px;">{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></p></p>
       {% endif %}
 
       <!-- {% if post.collection == 'publications' %}
