@@ -42,7 +42,6 @@ My research interests mainly lie in the general fields of systems, networking, a
 
 Publications
 ======
----
 
 {% for post in site.publications reversed %}
   {% include archive-single-bio-pub.html %}
@@ -51,7 +50,6 @@ Publications
 
 Awards & Honors
 ======
----
 
 * UMPDA Professional Development Award, University of Michigan <span style="float:right">2025</span>
 * UMPDA Conference Travel Award, University of Michigan <span style="float:right">2025</span>
@@ -62,17 +60,15 @@ Awards & Honors
 * APNet Student Travel Grant <span style="float:right">2019</span>
 
 
-
+<br>
 Service
 ======
-
 ## Conference commitee
 
 - [USENIX Security 2025 AEC](https://www.usenix.org/conference/usenixsecurity25/call-for-artifacts)
 - [IFIP NPC 2024](https://www.npc-conference.com/#/npc2024/committees)
 
 <!-- the 20th IFIP International Conference on Network and Parallel Computing -->
-
 
 ## Journal Reviewer
 
@@ -88,7 +84,6 @@ Service
 
 News
 ======
----
 
 <div style="height:250px;overflow-y:scroll" markdown="1">
 
