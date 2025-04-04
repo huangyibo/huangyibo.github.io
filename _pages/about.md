@@ -11,8 +11,9 @@ redirect_from:
 Hey there! I am a Research Fellow at [CSE](https://cse.engin.umich.edu/people/postdocs/) of University of Michigan working with [Prof. Ang Chen](https://web.eecs.umich.edu/~chenang/).
 Prior to that, I was a Postdoc Associate in [CS](https://cs.rice.edu/) at RICE University.
 I was a high-speed network engineer at ByteDance focusing on developing RDMA middleware and datacenter systems during May. 2020 ~ Aug. 2022.
-I got my Ph.D. degree in Computer Science at Fudan University, co-advised by [Prof. Jie Wu](https://dblp.org/pid/w/JieWu3.html) and [Prof. Yang Xu](https://yangxu.info/) in Dec. 2021.
-I got B.S. in Software Engineering from Central South University in Jun. 2016.
+
+I got my Ph.D. degree in Computer Science at Fudan University, co-advised by Prof. Jie Wu and [Prof. Yang Xu](https://yangxu.info/) in Dec. 2021.
+<!-- I got B.S. in Software Engineering from Central South University in Jun. 2016. -->
 
 My research has received **Usenix Security 2023 Distinguished Paper Award** and **ACM CoNEXT 2022 Best Paper Award**.
 I also received Distinguished RDMA Programming Instructor prize from the [HPC-AI advisory council](https://www.hpcadvisorycouncil.com/).
