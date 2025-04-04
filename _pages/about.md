@@ -10,8 +10,7 @@ redirect_from:
 
 Hey there! I am a Research Fellow at [CSE](https://cse.engin.umich.edu/people/postdocs/) of University of Michigan working with [Prof. Ang Chen](https://web.eecs.umich.edu/~chenang/).
 Prior to that, I was a Postdoc Associate in [CS](https://cs.rice.edu/) at RICE University.
-I was a high-speed network engineer at ByteDance focusing on developing RDMA middleware and datacenter systems during May. 2020 ~ Aug. 2022.
-
+I was a high-speed network engineer at ByteDance focusing on developing RDMA systems during May. 2020 ~ Aug. 2022.
 I got my Ph.D. degree in Computer Science at Fudan University, co-advised by Prof. Jie Wu and [Prof. Yang Xu](https://yangxu.info/) in Dec. 2021.
 <!-- I got B.S. in Software Engineering from Central South University in Jun. 2016. -->
 
