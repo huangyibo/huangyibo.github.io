@@ -59,8 +59,8 @@ Awards & Honors
 * Intel PhD Fellowship, Intel <span style="float:right">2020</span>
 * APNet Student Travel Grant <span style="float:right">2019</span>
 
-
 <br>
+
 Service
 ======
 
