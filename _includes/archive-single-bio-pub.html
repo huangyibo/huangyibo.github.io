@@ -46,29 +46,30 @@
       {% elsif post.paperurl %}
         <p style="font-size:16px; margin-left:20px; margin-top: -18px;">
           {% if post.venuename %}
-            [ <a href=" {{ post.venuelink }} " style="color:#3498db">{{ post.venuename }}</a> ]
+            [<a href=" {{ post.venuelink }} " style="color:#3498db">{{ post.venuename }}</a>]
           {% endif %}
 
-          [ <a href=" {{ post.paperurl }} " style="color:#3498db">pdf</a> ]
+          [<a href=" {{ post.paperurl }} " style="color:#3498db">pdf</a>]
           
           {% if post.slidesurl %}
-            [ <a href=" {{ post.slidesurl }} " style="color:#e74c3c">slides</a> ]
-          {% endif %}
-
-          {% if post.codeurl %}
-          [ <a href=" {{ post.codeurl }} " style="color:#28b463">code</a> ] 
+            [<a href=" {{ post.slidesurl }} " style="color:#e74c3c">slides</a>]
           {% endif %}
 
           {% if post.videourl %} 
-          [ <a href=" {{ post.videourl }} " style="color:#9b59b6">video</a> ]
+          [<a href=" {{ post.videourl }} " style="color:#9b59b6">video</a>]
           {% endif %}
 
           {% if post.posterurl %} 
-          [ <a href=" {{ post.posterurl }} " style="color:#d35400">poster</a> ]
+          [<a href=" {{ post.posterurl }} " style="color:#d35400">poster</a>]
           {% endif %}
 
           {% if post.shortpaperurl %} 
-          [ <a href=" {{ post.shortpaperurl }}" style="color:#5d6be2">short paper</a> ]
+          [<a href=" {{ post.shortpaperurl }}" style="color:#5d6be2">short paper</a>]
+          {% endif %}
+
+          {% if post.codeurl %}
+          [<a href=" {{ post.codeurl }} " style="color:#28b463">code</a>]
+          <span>{{ post.codestar }}</span> 
           {% endif %}
         </p>
       {% else %}
@@ -82,3 +83,6 @@
 
   </article>
 </div>
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
