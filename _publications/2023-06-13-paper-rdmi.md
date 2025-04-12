@@ -8,7 +8,7 @@ venue: 'Usenix Security 2023: The 32nd USENIX Security Symposium, Anaheim, CA, U
 paperurl: 'https://www.usenix.org/system/files/usenixsecurity23-liu-hongyi.pdf'
 slidesurl: 'https://www.usenix.org/system/files/sec23_slides_liu-hongyi.pdf'
 codeurl: 'https://github.com/huangyibo/RDMI'
-codestar: '<a class="github-button" href="https://github.com/Just-Curieous/RDMI" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-show-count="true" aria-label="Star Just-Curieous/RDMI on GitHub">Star</a>'
+codestar: '<a class="github-button" href="https://github.com/huangyibo/RDMI" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-show-count="true" aria-label="Star huangyibo/RDMI on GitHub">Star</a>'
 # videourl: 'https://youtu.be/Xk5IF_MCdP4'
 venuename: "USENIX Security 2022"
 venuelink: https://www.usenix.org/conference/usenixsecurity23
