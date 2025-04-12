@@ -8,7 +8,7 @@ venue: 'CoNEXT 2022: The 18th International Conference on emerging Networking EX
 paperurl: 'http://huangyibo.github.io/files/ntsocks-conext-2022.pdf'
 slidesurl: 'http://huangyibo.github.io/files/CoNEXT22-NTSocks-slides.pdf'
 codeurl: 'https://github.com/NTSocks/ntsocks'
-codestar: '<a class="github-button" href="https://github.com/NTSocks/ntsocks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star NTSocks/ntsocks on GitHub">Star</a>'
+codestar: '<a class="github-button" href="https://github.com/NTSocks/ntsocks" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-show-count="true" aria-label="Star NTSocks/ntsocks on GitHub">Star</a>'
 videourl: 'https://youtu.be/Xk5IF_MCdP4'
 shortpaperurl: 'http://huangyibo.github.io/files/NTSocks_Chinasys-short-paper.pdf'
 venuename: 'CoNEXT 2022'
