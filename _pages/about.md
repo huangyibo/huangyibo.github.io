@@ -85,6 +85,8 @@ News
 
 <div style="height:250px;overflow-y:scroll" markdown="1">
 
+- 04/2025 I am selected as a PC member of the ACM CoNEXT 2025 [Artifact Evaluation Committee](https://conferences.sigcomm.org/co-next/2025/#!/artifact-committee).
+- 04/2025 I am selected as a PC member of the OSDI 2025 [Artifact Evaluation Committee](https://www.usenix.org/conference/osdi25/call-for-artifacts), validating the availability, functionality and reproducibility of artifacts associated with the accepted OSDI'25 papers.
 - 12/2024 Our work "Automated Lifting for Cloud Infrastructure-as-Code Programs" is accepted by [AIOps 2025](https://cloudintelligenceworkshop.org/index.html).
 - 11/2024 I am selected as a PC member of the [USENIX Security 2025 Artifact Evaluation Committee (AEC)](https://www.usenix.org/conference/usenixsecurity25/call-for-artifacts), and will help the community do availability verification + functionality/reproducibility assessments for accepted papers. 
 - 09/2023 Our work "Cloudless Computing: Simplifying Cloud Management with Infrastructure Clarity" is accepted by [HotNets 2023](https://conferences.sigcomm.org/hotnets/2023/accepted.html).
