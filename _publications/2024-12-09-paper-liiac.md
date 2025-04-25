@@ -6,5 +6,7 @@ excerpt: 'Jingjia Peng, Yiming Qiu, Patrick Tser Jern Kon, Pinhan Zhao, <u><b>Yi
 date: 2024-12-09
 venue: '6th International Workshop on Cloud Intelligence - AIOps (AIOps 2025)'
 venuelink: https://cloudintelligenceworkshop.org/
-venuename: 'AIOps 2025'
+venuename: 'AIOps 2025 (ICSE Workshop)'
+codeurl: 'https://github.com/jingjia-peng/Lilac-v0'
+paperurl: 'https://www.cs-pk.com/lilac-aiops-2025.pdf'
 ---
