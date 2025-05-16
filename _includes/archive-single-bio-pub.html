@@ -78,6 +78,10 @@
       {% else %}
         <p style="font-size:16px; margin-left:20px; margin-top: -18px;">
           [ <a href="">To Appear</a> ]
+
+          {% if post.venuename %}
+            [ <a href=" {{ post.venuelink }} " style="color:#3498db">{{ post.venuename }}</a> ]
+          {% endif %}
         </p>
       {% endif %}
 
