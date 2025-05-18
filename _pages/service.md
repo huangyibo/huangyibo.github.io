@@ -23,6 +23,7 @@ Reviewer
 PC Member
 ======
 ---
+- FAST 2026 [Artifact Evaluations Committee](https://www.usenix.org/conference/fast26)
 - OSDI 2025 [Artifact Evaluations Committee](https://www.usenix.org/conference/osdi25/call-for-artifacts)
 - ACM CoNEXT 2025 [Artifact Evaluations Committee](https://conferences.sigcomm.org/co-next/2025/#!/artifact-committee)
 - USENIX Security 2025 [Artificat Evaluation Committee (AEC)](https://www.usenix.org/conference/usenixsecurity25/call-for-artifacts)  
