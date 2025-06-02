@@ -2,7 +2,7 @@
 title: "EXP-Bench: Can AI Conduct AI Research Experiments?"
 collection: publications
 permalink: /publication/2025-06-02-paper-exp-bench
-excerpt: 'Patrick Tser Jern Kon, Jiachen Liu, Xinyi Zhu, Qiuyi Ding, Jingjia Peng, Jiarong Xing, Yibo Huang, Yiming Qiu, Jayanth Srinivasa, Myungjin Lee, Mosharaf Chowdhury, Matei Zaharia, Ang Chen'
+excerpt: 'Patrick Tser Jern Kon, Jiachen Liu, Xinyi Zhu, Qiuyi Ding, Jingjia Peng, Jiarong Xing, <u><b>Yibo Huang</b></u>, Yiming Qiu, Jayanth Srinivasa, Myungjin Lee, Mosharaf Chowdhury, Matei Zaharia, Ang Chen'
 # date: 2024-12-10
 venue: 'arxiv.org 2025'
 paperurl: https://arxiv.org/pdf/2505.24785
