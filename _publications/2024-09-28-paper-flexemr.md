@@ -9,7 +9,7 @@ venuename: 'arXiv 2024'
 paperurl: 'http://huangyibo.github.io/files/flexemr.pdf'
 codestar: '<a class="github-button" href="https://github.com/huangyibo/SnowRDMA" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-show-count="true" aria-label="Star huangyibo/SnowRDMA on GitHub">Star</a>'
 # slidesurl: 'https://www.usenix.org/system/files/sec23_slides_liu-hongyi.pdf'
-# codeurl: 'https://github.com/aladinggit/RDMI'
+codeurl: https://github.com/huangyibo/SnowRDMA
 # videourl: 'https://youtu.be/Xk5IF_MCdP4'
 ---
 
