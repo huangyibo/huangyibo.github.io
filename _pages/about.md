@@ -87,7 +87,9 @@ News
 ======
 
 <div style="height:250px;overflow-y:scroll" markdown="1">
-
+- 06/2025 I am selected as a PC member of EuroSys 2026 [Shadow Program Committee](https://2026.eurosys.org/pc.html#pc).
+- 05/2025 I am selected as a PC member of the USENIX FAST 2026 [Artifact Evaluation Committee](https://www.usenix.org/conference/fast26).
+- 04/2025 Our work "Exposing RDMA NIC Resources for Software-Defined Scheduling" is accepted by [APNet 2025](https://conferences.sigcomm.org/events/apnet2025/index.php).
 - 04/2025 I am selected as a PC member of the ACM CoNEXT 2025 [Artifact Evaluation Committee](https://conferences.sigcomm.org/co-next/2025/#!/artifact-committee).
 - 04/2025 I am selected as a PC member of the OSDI 2025 [Artifact Evaluation Committee](https://www.usenix.org/conference/osdi25/call-for-artifacts), validating the availability, functionality and reproducibility of artifacts associated with the accepted OSDI'25 papers.
 - 12/2024 Our work "Automated Lifting for Cloud Infrastructure-as-Code Programs" is accepted by [AIOps 2025](https://cloudintelligenceworkshop.org/index.html).
