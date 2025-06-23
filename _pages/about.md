@@ -64,11 +64,13 @@ Service
 ======
 
 **Conference commitee**
+- EuroSys 2026 [Shadow Program Committee](https://2026.eurosys.org/pc.html#pc)
 - FAST 2026 [Artifact Evaluations Committee](https://www.usenix.org/conference/fast26)
 - OSDI 2025 [Artifact Evaluations Committee](https://www.usenix.org/conference/osdi25/call-for-artifacts)
 - ACM CoNEXT 2025 [Artifact Evaluations Committee](https://conferences.sigcomm.org/co-next/2025/#!/artifact-committee)
-- USENIX Security 2025 [AEC](https://www.usenix.org/conference/usenixsecurity25/call-for-artifacts)
-- [IFIP NPC 2024](https://www.npc-conference.com/#/npc2024/committees)
+- IFIP NPC 2025 [Program Committee](https://npc-2025.github.io/committees.html)
+- USENIX Security 2025 [Artifact Evaluations Committee](https://www.usenix.org/conference/usenixsecurity25/call-for-artifacts)
+- IFIP NPC 2024 [Program Committee](https://www.npc-conference.com/#/npc2024/committees)
 
 <!-- the 20th IFIP International Conference on Network and Parallel Computing -->
 
