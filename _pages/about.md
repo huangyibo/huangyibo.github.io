@@ -65,6 +65,7 @@ Service
 
 **Conference commitee**
 - EuroSys 2026 [Shadow Program Committee](https://2026.eurosys.org/pc.html#pc)
+- ICSC 2025 [Program Committee](http://www.ieeesatellite.org/index.html)
 - FAST 2026 [Artifact Evaluations Committee](https://www.usenix.org/conference/fast26)
 - OSDI 2025 [Artifact Evaluations Committee](https://www.usenix.org/conference/osdi25/call-for-artifacts)
 - ACM CoNEXT 2025 [Artifact Evaluations Committee](https://conferences.sigcomm.org/co-next/2025/#!/artifact-committee)
@@ -89,6 +90,7 @@ News
 ======
 
 <div style="height:250px;overflow-y:scroll" markdown="1">
+- 07/2025 I am invited as a PC member of International Conference on Satellite Computing (ICSC) 2025 [Program Committee](http://www.ieeesatellite.org/index.html).
 - 06/2025 I am selected as a PC member of EuroSys 2026 [Shadow Program Committee](https://2026.eurosys.org/pc.html#pc).
 - 05/2025 I am selected as a PC member of the USENIX FAST 2026 [Artifact Evaluation Committee](https://www.usenix.org/conference/fast26).
 - 04/2025 Our work "Exposing RDMA NIC Resources for Software-Defined Scheduling" is accepted by [APNet 2025](https://conferences.sigcomm.org/events/apnet2025/index.php).
