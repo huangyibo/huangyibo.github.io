@@ -14,7 +14,7 @@ I was a high-speed network engineer at ByteDance focusing on developing RDMA sys
 I got my Ph.D. degree in Computer Science at Fudan University, co-advised by Prof. Jie Wu and [Prof. Yang Xu](https://yangxu.info/) in Dec. 2021.
 <!-- I got B.S. in Software Engineering from Central South University in Jun. 2016. -->
 
-My research has received **Usenix Security 2023 Distinguished Paper Award** and **ACM CoNEXT 2022 Best Paper Award**.
+My research has received **APNet 2025 Best Paper Award**, **Usenix Security 2023 Distinguished Paper Award** and **ACM CoNEXT 2022 Best Paper Award**.
 I also received Distinguished RDMA Programming Instructor prize from the [HPC-AI advisory council](https://www.hpcadvisorycouncil.com/).
 
 My research interests mainly lie in the general fields of systems, networking, and security, with a particular focus on applying hardware-software co-design, system-network co-design, and ML techniques to improve system performance, efficiency, and security. 
@@ -51,6 +51,7 @@ Publications
 Awards & Honors
 ======
 
+* APNet Best Paper Award  <span style="float:right">2025</span>
 * UMPDA Professional Development Award, University of Michigan <span style="float:right">2025</span>
 * UMPDA Conference Travel Award, University of Michigan <span style="float:right">2025</span>
 * Usenix Security Distinguished Paper Award <span style="float:right">2023</span>
@@ -90,6 +91,7 @@ News
 ======
 
 <div style="height:250px;overflow-y:scroll" markdown="1">
+- 08/2025 Our work "Exposing RDMA NIC Resources for Software-Defined Scheduling" is awarded **APNet 2025 Best Paper**. Congratulations!
 - 07/2025 I am invited as a PC member of International Conference on Satellite Computing (ICSC) 2025 [Program Committee](http://www.ieeesatellite.org/index.html).
 - 06/2025 I am selected as a PC member of EuroSys 2026 [Shadow Program Committee](https://2026.eurosys.org/pc.html#pc).
 - 05/2025 I am selected as a PC member of the USENIX FAST 2026 [Artifact Evaluation Committee](https://www.usenix.org/conference/fast26).
