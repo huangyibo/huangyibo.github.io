@@ -91,6 +91,8 @@ News
 ======
 
 <div style="height:250px;overflow-y:scroll" markdown="1">
+- 08/2025 Our work "Cloud Infrastructure Management in the Age of AI Agents" is accepted by [ACM OSR 2025](https://dl.acm.org/doi/10.1145/3759441.3759443). Congratulations!
+- 08/2025 Our work "Towards Fully Disaggregated Recommendation Model Serving" is accepted by [ACM APSys 2025](https://apsys2025.github.io/index.html). Congratulations!
 - 08/2025 Our work "Exposing RDMA NIC Resources for Software-Defined Scheduling" is awarded **APNet 2025 Best Paper**. Congratulations!
 - 07/2025 I am invited as a PC member of International Conference on Satellite Computing (ICSC) 2025 [Program Committee](http://www.ieeesatellite.org/index.html).
 - 06/2025 I am selected as a PC member of EuroSys 2026 [Shadow Program Committee](https://2026.eurosys.org/pc.html#pc).
