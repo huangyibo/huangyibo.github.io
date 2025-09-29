@@ -95,7 +95,7 @@ News
 
 - 09/2025 Our vision work "A Case for Remote Direct Code Execution" is accepted by [ACM HotNets 2025](https://conferences.sigcomm.org/hotnets/2025/). Congratulations!
 - 09/2025 I am invited as a PC member of [ACM CoNEXT 2026](). Your submission is very welcome!
-- 09/2025 I am invited as a PC member of [ACM IMC 2026](). Your submission is very welcome!
+- 09/2025 I am invited as a PC member of [ACM IMC 2026](https://conferences.sigcomm.org/imc/2026/). Your submission is very welcome!
 - 08/2025 I receive ["⭐ Noteworthy Reviewer Recognition"](https://secartifacts.github.io/usenixsec2025/awards#-noteworthy-reviewer-recognition) from Usenix Security 2025 due to the artifact review service.
 - 08/2025 Our work "Cloud Infrastructure Management in the Age of AI Agents" is accepted by [ACM OSR 2025](https://dl.acm.org/doi/10.1145/3759441.3759443). Congratulations!
 - 08/2025 Our work "Towards Fully Disaggregated Recommendation Model Serving" is accepted by [ACM APSys 2025](https://apsys2025.github.io/index.html). Congratulations!
