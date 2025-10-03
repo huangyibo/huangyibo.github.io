@@ -66,6 +66,8 @@ Service
 ======
 
 **Conference commitee**
+- ACM IMC 2026 [Program Committee]()
+- ACM CoNEXT 2026 [Program Committee]()
 - EuroSys 2026 [Shadow Program Committee](https://2026.eurosys.org/pc.html#pc)
 - ICSC 2025 [Program Committee](http://www.ieeesatellite.org/index.html)
 - FAST 2026 [Artifact Evaluations Committee](https://www.usenix.org/conference/fast26)
@@ -78,6 +80,7 @@ Service
 <!-- the 20th IFIP International Conference on Network and Parallel Computing -->
 
 **Journal Reviewer**
+- ACM Transaction on Storage
 - IEEE/ACM Transactions on Networking
 - Transactions on Computers
 - IEEE Transactions on Mobile Computing
