@@ -3,7 +3,7 @@ title: "Cloud Infrastructure Management in the Age of AI Agents"
 collection: publications
 permalink: /publication/2025-06-17-paper-cloudagent
 excerpt: 'Zhenning Yang, Archit Bhatnagar, Yiming Qiu, Tongyuan Miao, Patrick Tser Jern Kon, Yunming Xiao, <u><b>Yibo Huang</b></u>, Martin Casado, Ang Chen'
-# date: 2024-12-10
+date: 2025-06-17
 venue: 'ACM SIGOPS Operating Systems Review'
 paperurl: https://dl.acm.org/doi/10.1145/3759441.3759443
 # codeurl:
