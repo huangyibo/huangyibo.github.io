@@ -6,7 +6,7 @@ excerpt: '<u><b>Yibo Huang</b></u>, Yiming Qiu, Daqian Ding, Patrick Tser Jern K
 date: 2025-11-18
 venue: 'HotNets 2025: Twenty-Fourth ACM Workshop on Hot Topics in Networks, November 17-18, 2025 — College Park, Maryland, USA'
 venuename: 'ACM HotNets 2025'
-paperurl: ''
+paperurl: 'http://huangyibo.github.io/files/hotnets25-RDX-final.pdf'
 # codestar: '<a class="github-button" href="https://github.com/huangyibo/SnowRDMA" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-show-count="true" aria-label="Star huangyibo/SnowRDMA on GitHub">Star</a>'
 # codeurl: https://github.com/huangyibo/SnowRDMA
 # videourl: 'https://youtu.be/Xk5IF_MCdP4'
