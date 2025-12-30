@@ -95,7 +95,7 @@ News
 ======
 
 <div style="height:250px;overflow-y:scroll" markdown="1">
-
+- 12/2025 Our work "Skyline: A Cloud Centric Internet Monitoring Engine" is accepted by [NSDI 2026](https://www.usenix.org/conference/nsdi26). Congratulations!
 - 09/2025 Our vision work "A Case for Remote Direct Code Execution" is accepted by [ACM HotNets 2025](https://conferences.sigcomm.org/hotnets/2025/). Congratulations!
 - 09/2025 I am invited as a PC member of [ACM CoNEXT 2026](). Your submission is very welcome!
 - 09/2025 I am invited as a PC member of [ACM IMC 2026](https://conferences.sigcomm.org/imc/2026/). Your submission is very welcome!
