@@ -17,7 +17,7 @@ I got my Ph.D. degree in Computer Science at Fudan University, co-advised by Pro
 My research has received **ACM APNet 2025 Best Paper Award**, **Usenix Security 2023 Distinguished Paper Award** and **ACM CoNEXT 2022 Best Paper Award**.
 I also received Distinguished RDMA Programming Instructor prize from the [HPC-AI advisory council](https://www.hpcadvisorycouncil.com/).
 
-My research interests mainly lie in the general fields of systems, networking, and security, with a particular focus on applying hardware-software co-design, system-network co-design, and ML techniques to improve system performance, efficiency, and security. 
+My research interests mainly lie in ML systems, AI networking (RDMA), and distributed systems with a particular focus on applying hardware-software co-design, and ML techniques to improve system performance, efficiency, and scalability.
 
 <!-- My PhD thesis is on "Building Fast, Compatible and Efficient Datacenter Systems with Kernel-bypass Networks". -->
 
@@ -65,17 +65,11 @@ Awards & Honors
 Service
 ======
 
-**Conference commitee**
-- ACM IMC 2026 [Program Committee]()
-- ACM CoNEXT 2026 [Program Committee]()
-- EuroSys 2026 [Shadow Program Committee](https://2026.eurosys.org/pc.html#pc)
-- ICSC 2025 [Program Committee](http://www.ieeesatellite.org/index.html)
-- FAST 2026 [Artifact Evaluations Committee](https://www.usenix.org/conference/fast26)
-- OSDI 2025 [Artifact Evaluations Committee](https://www.usenix.org/conference/osdi25/call-for-artifacts)
-- ACM CoNEXT 2025 [Artifact Evaluations Committee](https://conferences.sigcomm.org/co-next/2025/#!/artifact-committee)
-- IFIP NPC 2025 [Program Committee](https://npc-2025.github.io/committees.html)
-- USENIX Security 2025 [Artifact Evaluations Committee](https://www.usenix.org/conference/usenixsecurity25/call-for-artifacts)
-- IFIP NPC 2024 [Program Committee](https://www.npc-conference.com/#/npc2024/committees)
+**Program Committee Member**
+- IEEE/ACM IWQoS 2026, ACM IMC 2026, ACM CoNEXT 2026, EuroSys 2026 Shadow PC, FAST 2026 AEC
+- [ICSC 2025](http://www.ieeesatellite.org/index.html), [OSDI 2025 AEC](https://www.usenix.org/conference/osdi25/call-for-artifacts)
+[ACM CoNEXT 2025 AEC](https://conferences.sigcomm.org/co-next/2025/#!/artifact-committee), [IFIP NPC 2025](https://npc-2025.github.io/committees.html), [USENIX Security 2025 AEC](https://www.usenix.org/conference/usenixsecurity25/call-for-artifacts)
+- [IFIP NPC 2024](https://www.npc-conference.com/#/npc2024/committees)
 
 <!-- the 20th IFIP International Conference on Network and Parallel Computing -->
 
@@ -95,6 +89,7 @@ News
 ======
 
 <div style="height:250px;overflow-y:scroll" markdown="1">
+- 01/2026 Excited to see that my first ML/AI work "EXP-Bench: Can AI Conduct AI Research Experiments?" is accepted by [ICLR 2026](https://iclr.cc/Conferences/2026). Congratulations!
 - 12/2025 Our work "Skyline: A Cloud Centric Internet Monitoring Engine" is accepted by [NSDI 2026](https://www.usenix.org/conference/nsdi26). Congratulations!
 - 09/2025 Our vision work "A Case for Remote Direct Code Execution" is accepted by [ACM HotNets 2025](https://conferences.sigcomm.org/hotnets/2025/). Congratulations!
 - 09/2025 I am invited as a PC member of [ACM CoNEXT 2026](). Your submission is very welcome!
