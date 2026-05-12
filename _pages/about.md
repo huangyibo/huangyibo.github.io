@@ -89,6 +89,8 @@ News
 ======
 
 <div style="height:250px;overflow-y:scroll" markdown="1">
+- 05/2026 Our work "DistDPU: A Disaggregated DPU Architecture for High-Performance and Cost-Efficient AI Clouds" is accepted by [SIGCOMM 2026](https://conferences.sigcomm.org/sigcomm/2026/). Congratulations!
+- 05/2026 Our work "XFir: Accelerating New-Flow Setup on Host Servers of a Large Cloud Network" is accepted by [SIGCOMM 2026](https://conferences.sigcomm.org/sigcomm/2026/). Congratulations!
 - 01/2026 Excited to see that my first ML/AI work "EXP-Bench: Can AI Conduct AI Research Experiments?" is accepted by [ICLR 2026](https://iclr.cc/Conferences/2026). Congratulations!
 - 12/2025 Our work "Skyline: A Cloud Centric Internet Monitoring Engine" is accepted by [NSDI 2026](https://www.usenix.org/conference/nsdi26). Congratulations!
 - 09/2025 Our vision work "A Case for Remote Direct Code Execution" is accepted by [ACM HotNets 2025](https://conferences.sigcomm.org/hotnets/2025/). Congratulations!
