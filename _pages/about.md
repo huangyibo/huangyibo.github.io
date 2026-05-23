@@ -74,15 +74,7 @@ Service
 <!-- the 20th IFIP International Conference on Network and Parallel Computing -->
 
 **Journal Reviewer**
-- ACM Transaction on Storage
-- IEEE/ACM Transactions on Networking
-- Transactions on Computers
-- IEEE Transactions on Mobile Computing
-- ACM Transactions on Computer Systems
-- IEEE Transactions on Cloud Computing
-- Computer Networks
-- Journal of Supercomputing
-- Cluster Computing
+- ACM Transaction on Storage, IEEE/ACM Transactions on Networking, Transactions on Computers, IEEE Transactions on Mobile Computing, ACM Transactions on Computer Systems, IEEE Transactions on Cloud Computing, Computer Networks, Journal of Supercomputing, Cluster Computing
 
 
 News
