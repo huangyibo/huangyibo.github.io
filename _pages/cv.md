@@ -22,7 +22,7 @@ Acadamic Award
 * APNet 2019 Student Grant
 
 
-Industrial Experience
+<!-- Industrial Experience
 ======
 
 * 2022.1-2022.8: Network Engineer
@@ -43,7 +43,7 @@ Industrial Experience
 
 * 2015.3-2015.6: Software Engineer Intern
   * Intel Asia Pacific R&D Center
-  * Mentor: Yongkang You
+  * Mentor: Yongkang You -->
 
 
 Publications

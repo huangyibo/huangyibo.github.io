@@ -1,5 +1,5 @@
 ---
-title: "A Case for Remote Direct Code Execution"
+title: "Remote Direct Code Execution"
 collection: publications
 permalink: /publication/2025-09-18-paper-rdx
 excerpt: '<u><b>Yibo Huang</b></u>, Yiming Qiu, Daqian Ding, Patrick Tser Jern Kon, Yiwen Zhang, Yuzhou Mao, Archit Bhatnagar, Mosharaf Chowdhury, Srinivas Devadas, Jiarong Xing, and Ang Chen'

@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "About Me"
+title: "Biography"
 excerpt: " - Yibo Huang"
 author_profile: true
 redirect_from: 
@@ -8,16 +8,29 @@ redirect_from:
   - /about.html
 ---
 
-Hey there! I am a Research Fellow at [CSE](https://cse.engin.umich.edu/people/postdocs/) of University of Michigan working with [Prof. Ang Chen](https://web.eecs.umich.edu/~chenang/).
+I am currently a Senior Member of Technical Staff at Oracle. 
+My R&D focuses on building next-generation AI infrastructure, with a special focus on AI networking, RDMA systems, GPU-centric storage, and high-performance ML systems. 
+Previously, I was a Research Fellow at the University of Michigan and a Postdoctoral Associate at Rice University, advised by [Prof. Ang Chen](https://web.eecs.umich.edu/~chenang/). 
+I received my Ph.D. in Computer Science from Fudan University in 2021, advised by Prof. Jie Wu and [Prof. Yang Xu](https://yangxu.info/).
+
+
+<!-- Hey there! I am a Research Fellow at [CSE](https://cse.engin.umich.edu/people/postdocs/) of University of Michigan working with [Prof. Ang Chen](https://web.eecs.umich.edu/~chenang/).
 Prior to that, I was a Postdoc Associate in [CS](https://cs.rice.edu/) at RICE University.
 I was a high-speed network engineer at ByteDance focusing on developing RDMA systems during May. 2020 ~ Aug. 2022.
-I got my Ph.D. degree in Computer Science at Fudan University, co-advised by Prof. Jie Wu and [Prof. Yang Xu](https://yangxu.info/) in Dec. 2021.
+I got my Ph.D. degree in Computer Science at Fudan University, co-advised by Prof. Jie Wu and [Prof. Yang Xu](https://yangxu.info/) in Dec. 2021. -->
 <!-- I got B.S. in Software Engineering from Central South University in Jun. 2016. -->
+
+Research
+======
+
+I am broadly interested in building high-performance infrastructure for the AI era, with a special focus on datacenter networking, RDMA/Infiniband, distributed storage, hardware-software codesign, and scalable ML systems.
+
 
 My research has received **ACM APNet 2025 Best Paper Award**, **Usenix Security 2023 Distinguished Paper Award** and **ACM CoNEXT 2022 Best Paper Award**.
 I also received Distinguished RDMA Programming Instructor prize from the [HPC-AI advisory council](https://www.hpcadvisorycouncil.com/).
 
-My research interests mainly lie in ML systems, AI networking (RDMA), and distributed systems with a particular focus on applying hardware-software co-design, and ML techniques to improve system performance, efficiency, and scalability.
+
+<!-- My research interests mainly lie in ML systems, AI networking (RDMA), and distributed systems with a particular focus on applying hardware-software co-design, and ML techniques to improve system performance, efficiency, and scalability. -->
 
 <!-- My PhD thesis is on "Building Fast, Compatible and Efficient Datacenter Systems with Kernel-bypass Networks". -->
 
@@ -48,6 +61,36 @@ Publications
 {% endfor %}
 
 
+Invited Talks
+======
+
+* Remote Direct Code Execution
+
+  * [ACM HotNets 2025](https://conferences.sigcomm.org/hotnets/2025/program.html), November 2025
+
+* Towards Fully Disaggregated Recommendation Model Serving
+
+  * [ACM APSys 2025](https://apsys2025.github.io/program.html), October 2025
+
+* Exposing RDMA NIC Resources for Software-Defined Scheduling
+
+  * [ACM APNet 2025](https://conferences.sigcomm.org/events/apnet2025/index.php), August 2025
+
+* An Ultra-Low Latency and Compatible PCIe Interconnect for Rack-scale Communication
+
+  * [UTNS Lab](https://utns.cs.utexas.edu/) in The University of Texas at Austin, June 2023
+  * [SUCCESS (Secure Communication and Computer Systems) Lab](https://success.cse.tamu.edu/) in Texas A&M University, July 2023
+  * ChinaSys 2023, Wuhan in China, July 2023
+
+* RDMA-accelerated Data-Intensive Systems
+
+  [10th Student 2022 RDMA Programming Competition](https://www.hpcadvisorycouncil.com/events/2022/rdma/agenda.php), Augest 2022
+
+* Deploying RDMA for Large-Scale Inference and Training Systems
+
+  Network System Group in Rice University, December 2021
+
+
 Awards & Honors
 ======
 
@@ -59,7 +102,6 @@ Awards & Honors
 * ACM CoNEXT Best Paper Award  <span style="float:right">2022</span>
 * Distinguished RDMA Programming Instructor, HPC-AI advisory council  <span style="float:right">2022</span>
 * Intel PhD Fellowship, Intel <span style="float:right">2020</span>
-* APNet Student Travel Grant <span style="float:right">2019</span>
 
 
 Service
