@@ -65,30 +65,24 @@ Invited Talks
 ======
 
 * Remote Direct Code Execution
-
   * [ACM HotNets 2025](https://conferences.sigcomm.org/hotnets/2025/program.html), November 2025
 
 * Towards Fully Disaggregated Recommendation Model Serving
-
   * [ACM APSys 2025](https://apsys2025.github.io/program.html), October 2025
 
 * Exposing RDMA NIC Resources for Software-Defined Scheduling
-
   * [ACM APNet 2025](https://conferences.sigcomm.org/events/apnet2025/index.php), August 2025
 
 * An Ultra-Low Latency and Compatible PCIe Interconnect for Rack-scale Communication
-
   * [UTNS Lab](https://utns.cs.utexas.edu/) in The University of Texas at Austin, June 2023
   * [SUCCESS (Secure Communication and Computer Systems) Lab](https://success.cse.tamu.edu/) in Texas A&M University, July 2023
   * ChinaSys 2023, Wuhan in China, July 2023
 
 * RDMA-accelerated Data-Intensive Systems
-
-  [10th Student 2022 RDMA Programming Competition](https://www.hpcadvisorycouncil.com/events/2022/rdma/agenda.php), Augest 2022
+  * [10th Student 2022 RDMA Programming Competition](https://www.hpcadvisorycouncil.com/events/2022/rdma/agenda.php), Augest 2022
 
 * Deploying RDMA for Large-Scale Inference and Training Systems
-
-  Network System Group in Rice University, December 2021
+  * Network System Group in Rice University, December 2021
 
 
 Awards & Honors
