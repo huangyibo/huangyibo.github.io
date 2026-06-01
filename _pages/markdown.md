@@ -1,6 +1,6 @@
 ---
 permalink: /resource/
-title: "Some Useful Links"
+title:
 author_profile: true
 redirect_from: 
   - /md/
