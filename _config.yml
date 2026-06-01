@@ -84,7 +84,7 @@ author:
   avatar           : "bob.jpeg"
   bio              : "Senior Hyperscalar@Oracle"
   location         :
-  employer         : ""
+  employer         : 
   pubmed           : #"https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "https://scholar.google.com/citations?user=nT2h--YAAAAJ&hl=en"
   email            : "yibo.rdma (at) gmail (dot) com"
