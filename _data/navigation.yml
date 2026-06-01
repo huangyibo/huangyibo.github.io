@@ -18,6 +18,6 @@ main:
   - title: "Resources"
     url: /resource/
 
-  - title: "Academic Service"
-    url: /service/
+  # - title: "Academic Service"
+  #   url: /service/
   
