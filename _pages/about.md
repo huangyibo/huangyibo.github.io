@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Biography"
+title:
 excerpt: " - Yibo Huang"
 author_profile: true
 redirect_from: 
@@ -8,11 +8,13 @@ redirect_from:
   - /about.html
 ---
 
-I am currently a Senior Member of Technical Staff at Oracle. 
-My R&D focuses on building next-generation AI infrastructure, with a special focus on AI networking, RDMA systems, GPU-centric storage, and high-performance ML systems. 
+<h1 id="about" class="about-section-heading">Biography</h1>
+
+
+I am currently a Senior Member of Technical Staff at Oracle.
+My R&D focuses on building next-generation AI infrastructure, with a special focus on AI networking (RDMA), ML systems, AI-native GPU-centric object storage, and hardware-software co-design. 
 Previously, I was a Research Fellow at the University of Michigan and a Postdoctoral Associate at Rice University, advised by [Prof. Ang Chen](https://web.eecs.umich.edu/~chenang/). 
 I received my Ph.D. in Computer Science from Fudan University in 2021, advised by Prof. Jie Wu and [Prof. Yang Xu](https://yangxu.info/).
-
 
 <!-- Hey there! I am a Research Fellow at [CSE](https://cse.engin.umich.edu/people/postdocs/) of University of Michigan working with [Prof. Ang Chen](https://web.eecs.umich.edu/~chenang/).
 Prior to that, I was a Postdoc Associate in [CS](https://cs.rice.edu/) at RICE University.
@@ -20,10 +22,12 @@ I was a high-speed network engineer at ByteDance focusing on developing RDMA sys
 I got my Ph.D. degree in Computer Science at Fudan University, co-advised by Prof. Jie Wu and [Prof. Yang Xu](https://yangxu.info/) in Dec. 2021. -->
 <!-- I got B.S. in Software Engineering from Central South University in Jun. 2016. -->
 
-Research
-======
+<h2 id="work" class="about-section-heading">Work & Research</h2>
 
-I am broadly interested in building high-performance infrastructure for the AI era, with a special focus on datacenter networking, RDMA/Infiniband, distributed storage, hardware-software codesign, and scalable ML systems.
+I am broadly interested in building high-performance infrastructure for the AI era, with a special focus on datacenter networking, RDMA/Infiniband, storage, hardware-software codesign, and ML systems.
+I maintain and contribute to open-source projects including:
+- ML systems: [vLLM](https://github.com/vllm-project/vllm), [vime](https://github.com/vllm-project/vime), [Mooncake](https://github.com/kvcache-ai/Mooncake), and [Transfer Queue](https://github.com/Ascend/TransferQueue)
+- Networking: [SwiftRDMA](https://github.com/huangyibo/SwiftRDMA), [NTSocks](https://github.com/NTSocks/ntsocks), [SnowRDMA](https://github.com/huangyibo/SnowRDMA), [brpc RDMA](https://github.com/apache/brpc), [RDMI](https://github.com/huangyibo/RDMI), and [SkyGDR](https://github.com/huangyibo/SkyGDR)
 
 
 My research has received **ACM APNet 2025 Best Paper Award**, **Usenix Security 2023 Distinguished Paper Award** and **ACM CoNEXT 2022 Best Paper Award**.
@@ -53,16 +57,14 @@ I also received Distinguished RDMA Programming Instructor prize from the [HPC-AI
 <!-- - Hybrid computing framework. over modern hardware -->
 
 
-Publications
-======
+<h2 id="publications" class="about-section-heading">Publications</h2>
 
 {% for post in site.publications reversed %}
   {% include archive-single-bio-pub.html %}
 {% endfor %}
 
 
-Invited Talks
-======
+<h2 id="talks" class="about-section-heading">Invited Talks</h2>
 
 * Remote Direct Code Execution
   * [ACM HotNets 2025](https://conferences.sigcomm.org/hotnets/2025/program.html), November 2025
@@ -85,21 +87,29 @@ Invited Talks
   * Network System Group in Rice University, December 2021
 
 
-Awards & Honors
-======
+<h2 id="awards" class="about-section-heading">Awards & Honors</h2>
 
 * ⭐ Noteworthy Reviewer Recognition, Usenix Security 2025 <span style="float:right">2025</span>
-* ACM APNet Best Paper Award  <span style="float:right">2025</span>
+* ⭐ ACM APNet Best Paper Award  <span style="float:right">2025</span>
 * UMPDA Professional Development Award, University of Michigan <span style="float:right">2025</span>
 * UMPDA Conference Travel Award, University of Michigan <span style="float:right">2025</span>
-* Usenix Security Distinguished Paper Award <span style="float:right">2023</span>
-* ACM CoNEXT Best Paper Award  <span style="float:right">2022</span>
+* ⭐ Usenix Security Distinguished Paper Award <span style="float:right">2023</span>
+* ⭐ ACM CoNEXT Best Paper Award  <span style="float:right">2022</span>
 * Distinguished RDMA Programming Instructor, HPC-AI advisory council  <span style="float:right">2022</span>
-* Intel PhD Fellowship, Intel <span style="float:right">2020</span>
+* ⭐ Intel PhD Fellowship, Intel (Only 10 winners in Shanghai) <span style="float:right">2020</span>
+* 2nd Prize, 8th Asia-Pacific RDMA Programming Competition  <span style="float:right">2020</span>
+* Oceanwide Fellowship Award (Only 10 winners in Fudan Univ.) <span style="float:right">2020</span>
+* 2nd Prize, 7th Asia-Pacific RDMA Programming Competition  <span style="float:right">2019</span>
+* 2nd Prize, 6th Asia-Pacific RDMA Programming Competition  <span style="float:right">2018</span>
+* Outstanding Teaching Assistant in Fudan Univ. <span style="float:right">2018</span>
+* Guangyun Innovation Scholarship <span style="float:right">2016</span>
+* "10 Distinguished Students" Award (Only 10 winners in Central South Univ.)  <span style="float:right">2016</span>
+* National scholarship  <span style="float:right">2014</span>
+* ⭐ 1st Price, 7th "Intel Cup" National Software Innovation Competition in China <span style="float:right">2014</span>
+  * Our product: ["手绘心语" -- (Sketches from the Heart)](https://youtu.be/PLGZZaL4f3I)
 
 
-Service
-======
+<h2 id="service" class="about-section-heading">Service</h2>
 
 **Program Committee Member**
 - IEEE/ACM IWQoS 2026, ACM IMC 2026, ACM CoNEXT 2026, EuroSys 2026 Shadow PC, FAST 2026 AEC
@@ -110,13 +120,56 @@ Service
 <!-- the 20th IFIP International Conference on Network and Parallel Computing -->
 
 **Journal Reviewer**
-- ACM Transaction on Storage, IEEE/ACM Transactions on Networking, Transactions on Computers, IEEE Transactions on Mobile Computing, ACM Transactions on Computer Systems, IEEE Transactions on Cloud Computing, Computer Networks, Journal of Supercomputing, Cluster Computing
+- ACM Transaction on Storage, IEEE/ACM Transactions on Networking
+- Transactions on Computers, IEEE Transactions on Mobile Computing
+- ACM Transactions on Computer Systems, IEEE Transactions on Cloud Computing
+- Computer Networks, Journal of Supercomputing, Cluster Computing
 
 
-News
-======
+<h2 id="news" class="about-section-heading">News</h2>
 
-<div style="height:250px;overflow-y:scroll" markdown="1">
+<style>
+  .news-list {
+    margin-top: 0.5rem;
+  }
+
+  .news-list ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  .news-list li {
+    border-bottom: 1px solid #e6e6e6;
+    line-height: 1.45;
+    padding: 0.55rem 0;
+  }
+
+  .news-list.is-collapsible:not(.is-expanded) li:nth-child(n+9) {
+    display: none;
+  }
+
+  .news-toggle {
+    appearance: none;
+    background: none;
+    border: 0;
+    color: #0066cc;
+    cursor: pointer;
+    font: inherit;
+    padding: 0.75rem 0 0;
+  }
+
+  .news-toggle:hover,
+  .news-toggle:focus {
+    text-decoration: underline;
+  }
+
+  .news-toggle[hidden] {
+    display: none;
+  }
+</style>
+
+<div id="news-list" class="news-list" markdown="1">
 - 05/2026 Our work "DistDPU: A Disaggregated DPU Architecture for High-Performance and Cost-Efficient AI Clouds" is accepted by [SIGCOMM 2026](https://conferences.sigcomm.org/sigcomm/2026/). Congratulations!
 - 05/2026 Our work "XFir: Accelerating New-Flow Setup on Host Servers of a Large Cloud Network" is accepted by [SIGCOMM 2026](https://conferences.sigcomm.org/sigcomm/2026/). Congratulations!
 - 01/2026 Excited to see that my first ML/AI work "EXP-Bench: Can AI Conduct AI Research Experiments?" is accepted by [ICLR 2026](https://iclr.cc/Conferences/2026). Congratulations!
@@ -165,11 +218,45 @@ News
 
 </div>
 
+<button id="news-toggle" class="news-toggle" type="button" aria-expanded="false" aria-controls="news-list" hidden>Show more...</button>
+
+<script>
+  (function () {
+    function setupNewsToggle() {
+      var newsList = document.getElementById('news-list');
+      var toggle = document.getElementById('news-toggle');
+
+      if (!newsList || !toggle) {
+        return;
+      }
+
+      var items = newsList.querySelectorAll('li');
+
+      if (items.length <= 8) {
+        return;
+      }
+
+      newsList.classList.add('is-collapsible');
+      toggle.hidden = false;
+
+      toggle.addEventListener('click', function () {
+        var expanded = newsList.classList.toggle('is-expanded');
+        toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        toggle.textContent = expanded ? 'Show less...' : 'Show more...';
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupNewsToggle);
+    } else {
+      setupNewsToggle();
+    }
+  }());
+</script>
+
 <!-- Our project "A Trusted Identity Unified Verification System over Zero-Trust Architecture" -->
 <!-- organized by HPC-AI Advisory Council -->
  <!-- organized by NSCC Singapore & HPC-AI Advisory Council -->
  <!-- - 08/2019 Our **FDU Starry Team** wins the **Merit Prize** in [2019 APAC HPC-AI Competition](http://www.hpcadvisorycouncil.com/events/2019/APAC-AI-HPC/index.php). Congratulations! -->
 
 ---
-
-<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=398&t=tt&d=KLze7yOvPww8OOApBWjCvydGhEiyz3rsS4IcHCkDMxA&co=2d78ad&ct=ffffff&cmo=3acc3a&cmn=ff5353'></script>
