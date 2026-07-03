@@ -7,10 +7,10 @@ date: 2025-08-07
 venue: '9th Asia-Pacific Workshop on Networking (APNet’25)'
 venuelink: https://conferences.sigcomm.org/events/apnet2025/index.php
 paperurl: http://huangyibo.github.io/files/apnet2025-SwiftRDMA.pdf
-codeurl: https://github.com/huangyibo/SnowRDMA
+codeurl: https://github.com/huangyibo/SwiftRDMA
 slidesurl: https://conferences.sigcomm.org/events/apnet2025/slides/Session1/1-1.pdf
 videourl: 'https://hkustconnect-my.sharepoint.com/:v:/g/personal/xhuangci_connect_ust_hk/ETRm8ruuqntLmRTzNVVAiLMBzBpu37C6xtfJ56Pmh6-MHA?e=1sQEgA'
-codestar: '<a class="github-button" href="https://github.com/huangyibo/SnowRDMA" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-show-count="true" aria-label="Star huangyibo/SnowRDMA on GitHub">Star</a>'
+codestar: '<a class="github-button" href="https://github.com/huangyibo/SwiftRDMA" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-show-count="true" aria-label="Star huangyibo/SwiftRDMA on GitHub">Star</a>'
 venuename: 'APNet 2025'
 ---
 
