@@ -22,7 +22,7 @@ I was a high-speed network engineer at ByteDance focusing on developing RDMA sys
 I got my Ph.D. degree in Computer Science at Fudan University, co-advised by Prof. Jie Wu and [Prof. Yang Xu](https://yangxu.info/) in Dec. 2021. -->
 <!-- I got B.S. in Software Engineering from Central South University in Jun. 2016. -->
 
-<h2 id="work" class="about-section-heading">Work & Research</h2>
+<h2 id="work" class="about-section-heading">Work & Research Focus</h2>
 
 I am broadly interested in building high-performance infrastructure for the AI era, with a special focus on datacenter networking, RDMA/Infiniband, storage, hardware-software codesign, and ML systems.
 I maintain and contribute to open-source projects including:
