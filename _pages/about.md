@@ -170,6 +170,8 @@ I also received Distinguished RDMA Programming Instructor prize from the [HPC-AI
 </style>
 
 <div id="news-list" class="news-list" markdown="1">
+- 07/2026 GPUWeaver is accepted by [APSys 2026](https://apsys26.github.io/). Congratulations!
+- 07/2026 "SkyRDMA: Fully Offloaded Cloud RDMA Virtualization" is accepted by [NSDI 2027](https://www.usenix.org/conference/nsdi27). Congratulations!
 - 05/2026 Our work "DistDPU: A Disaggregated DPU Architecture for High-Performance and Cost-Efficient AI Clouds" is accepted by [SIGCOMM 2026](https://conferences.sigcomm.org/sigcomm/2026/). Congratulations!
 - 05/2026 Our work "XFir: Accelerating New-Flow Setup on Host Servers of a Large Cloud Network" is accepted by [SIGCOMM 2026](https://conferences.sigcomm.org/sigcomm/2026/). Congratulations!
 - 01/2026 Excited to see that my first ML/AI work "EXP-Bench: Can AI Conduct AI Research Experiments?" is accepted by [ICLR 2026](https://iclr.cc/Conferences/2026). Congratulations!
