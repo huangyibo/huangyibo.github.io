@@ -170,6 +170,7 @@ I also received Distinguished RDMA Programming Instructor prize from the [HPC-AI
 </style>
 
 <div id="news-list" class="news-list" markdown="1">
+- 09/2026 AdaBool is accepted by [SIGMOD 2027](https://2027.sigmod.org/). Congratulations!
 - 07/2026 GPUWeaver is accepted by [APSys 2026](https://apsys26.github.io/). Congratulations!
 - 07/2026 "SkyRDMA: Fully Offloaded Cloud RDMA Virtualization" is accepted by [NSDI 2027](https://www.usenix.org/conference/nsdi27). Congratulations!
 - 05/2026 Our work "DistDPU: A Disaggregated DPU Architecture for High-Performance and Cost-Efficient AI Clouds" is accepted by [SIGCOMM 2026](https://conferences.sigcomm.org/sigcomm/2026/). Congratulations!
