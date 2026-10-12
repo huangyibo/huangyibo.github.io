@@ -57,7 +57,7 @@ I also received Distinguished RDMA Programming Instructor prize from the [HPC-AI
 <!-- - Hybrid computing framework. over modern hardware -->
 
 
-<h2 id="publications" class="about-section-heading">Publications/Preprints</h2>
+<h2 id="publications" class="about-section-heading">Publications & Preprints</h2>
 
 {% for post in site.publications reversed %}
   {% include archive-single-bio-pub.html %}
