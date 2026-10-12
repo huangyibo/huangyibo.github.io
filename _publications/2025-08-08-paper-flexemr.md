@@ -7,6 +7,7 @@ date: 2025-10-12
 venue: '16th ACM SIGOPS Asia-Pacific Workshop on Systems (APSys 2025)'
 venuename: 'ACM APSys 2025'
 paperurl: 'https://dl.acm.org/doi/10.1145/3725783.3764389'
+slidesurl: 'http://huangyibo.github.io/files/APSys25-FlexEMR-slides.pdf'
 codestar: '<a class="github-button" href="https://github.com/huangyibo/SnowRDMA" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-show-count="true" aria-label="Star huangyibo/SnowRDMA on GitHub">Star</a>'
 codeurl: https://github.com/huangyibo/SnowRDMA
 ---

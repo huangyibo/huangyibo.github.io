@@ -8,6 +8,7 @@ venue: 'HotNets 2025: Twenty-Fourth ACM Workshop on Hot Topics in Networks, Nove
 venuename: 'ACM HotNets 2025'
 venuelink: https://conferences.sigcomm.org/hotnets/2025/program.html
 paperurl: 'http://huangyibo.github.io/files/hotnets25-RDX-final.pdf'
+slidesurl: 'http://huangyibo.github.io/files/HotNets25-RDX-slides.pdf'
 # codestar: '<a class="github-button" href="https://github.com/huangyibo/SnowRDMA" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-show-count="true" aria-label="Star huangyibo/SnowRDMA on GitHub">Star</a>'
 # codeurl: https://github.com/huangyibo/SnowRDMA
 # videourl: 'https://youtu.be/Xk5IF_MCdP4'

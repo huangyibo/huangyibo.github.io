@@ -8,6 +8,7 @@ venue: 'NSDI 2026: 23rd USENIX Symposium on Networked Systems Design and Impleme
 venuename: 'NSDI 2026'
 venuelink: https://www.usenix.org/conference/nsdi26
 paperurl: 'https://www.usenix.org/system/files/nsdi26-guo-shixian.pdf'
+slidesurl: 'https://www.usenix.org/system/files/nsdi26_slides-guo-shixian.pdf'
 # videourl: 'https://youtu.be/Xk5IF_MCdP4'
 ---
 
