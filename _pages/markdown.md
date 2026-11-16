@@ -7,9 +7,8 @@ redirect_from:
   - /markdown.html
 ---
 
-Research Taste: Elegance and Insight
-======
----
+<h1 id="taste" class="about-section-heading">Research Taste: Elegance and Insight</h1>
+
 - [Research Taste](https://home.ie.cuhk.edu.hk/~dmchiu/research_taste.pdf)
 
 
@@ -23,7 +22,7 @@ Guidlines for writing a good proposal
 
 Research Artifact Websites
 ======
-
+---
 - [Systems Research Artifacts](https://sysartifacts.github.io/)
 - [Security Research Artifacts](https://secartifacts.github.io/)
 
